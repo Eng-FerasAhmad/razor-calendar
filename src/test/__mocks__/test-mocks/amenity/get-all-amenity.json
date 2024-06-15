@@ -1,0 +1,91 @@
+{
+    "totalResultCount": 11,
+    "lastItemOnPage": 10,
+    "firstItemOnPage": 1,
+    "pageNumber": 1,
+    "pageCount": 2,
+    "pagedResults": [
+        {
+            "id": "a961220b-ff5c-4866-88d4-2e539ada67f1",
+            "name": "ABC",
+            "icon": "ABC",
+            "status": 3,
+            "createdDateTime": "2024-03-29T21:12:27.543887",
+            "updatedDateTime": "2024-03-30T16:15:27.4529034"
+        },
+        {
+            "id": "08caae3f-d8e6-443b-9bdb-649a4e25ea09",
+            "name": "Air Condition",
+            "icon": "Air",
+            "status": 1,
+            "createdDateTime": "2024-03-26T16:24:03.1771649",
+            "updatedDateTime": "2024-04-06T15:15:41.5703834"
+        },
+        {
+            "id": "94c6fd93-22a7-4f11-b87d-a2e57560b3e1",
+            "name": "Air Water",
+            "icon": "Ai W",
+            "status": 1,
+            "createdDateTime": "2024-03-29T21:14:47.6338313",
+            "updatedDateTime": "0001-01-01T00:00:00"
+        },
+        {
+            "id": "a3ccc484-1a16-4d8f-b026-8238fe558113",
+            "name": "Coffee & Tea",
+            "icon": "drinks",
+            "status": 4,
+            "createdDateTime": "2024-03-26T16:25:29.7895408",
+            "updatedDateTime": "2024-04-06T16:07:07.7951165"
+        },
+        {
+            "id": "438d5815-12e4-42b4-bed5-df3d839bdded",
+            "name": "new",
+            "icon": "one",
+            "status": 4,
+            "createdDateTime": "2024-04-03T20:56:44.3057039",
+            "updatedDateTime": "2024-04-03T20:57:00.0066018"
+        },
+        {
+            "id": "c2403308-7757-4151-b39f-1c04826a5ad2",
+            "name": "newspaper",
+            "icon": "paper",
+            "status": 4,
+            "createdDateTime": "2024-03-26T16:26:20.9066733",
+            "updatedDateTime": "2024-03-29T21:11:16.8775037"
+        },
+        {
+            "id": "56cdac80-69ac-42e0-b07f-ba0befc8afc3",
+            "name": "Parking",
+            "icon": "car",
+            "status": 1,
+            "createdDateTime": "2024-03-26T16:25:53.2116474",
+            "updatedDateTime": "0001-01-01T00:00:00"
+        },
+        {
+            "id": "fd6b05ff-fd45-4867-8f4e-1bb16a511a27",
+            "name": "Test 2",
+            "icon": "Test 2",
+            "status": 2,
+            "createdDateTime": "2024-03-26T16:27:31.1773575",
+            "updatedDateTime": "2024-03-29T21:11:10.0203177"
+        },
+        {
+            "id": "4a1bec5c-13b2-41aa-91c4-6553f9f99e4d",
+            "name": "Test 3",
+            "icon": "Test 3",
+            "status": 1,
+            "createdDateTime": "2024-03-26T16:27:41.6482842",
+            "updatedDateTime": "0001-01-01T00:00:00"
+        },
+        {
+            "id": "c8b2eefa-bab9-476e-872f-de3b26b18305",
+            "name": "TV",
+            "icon": "tv",
+            "status": 1,
+            "createdDateTime": "2024-03-26T16:24:16.7624214",
+            "updatedDateTime": "0001-01-01T00:00:00"
+        }
+    ],
+    "hasPreviousPage": false,
+    "hasNextPage": true
+}
