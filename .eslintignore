@@ -1,0 +1,9 @@
+node_module
+.idea
+target
+static
+vite.config.ts
+*.css
+*.svg
+*.yml
+*.yaml
