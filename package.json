@@ -6,7 +6,7 @@
     "author": {
         "email": "feras.ahmad@gmx.de",
         "name": "Feras Ahmad",
-        "url": "feras.ahmad.net"
+        "url": "https://www.feras.ahmad.net"
     },
     "scripts": {
         "dev": "vite",

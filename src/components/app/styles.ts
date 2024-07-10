@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
 export const AppContainer = styled.div`
-    width: fit-content;
+    width: 100%;
+    height: 100%;
 `;
