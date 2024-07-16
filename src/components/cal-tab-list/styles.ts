@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const CalTabListContainer = styled.div`
-    background-color: #96a13a;
-    color: #fff;
     width: 50px;
+    border-left: 1px solid #6b6b6b;
 `;
