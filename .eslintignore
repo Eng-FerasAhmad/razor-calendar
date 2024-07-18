@@ -1,4 +1,8 @@
-node_module
+node_modules
+dist
+dist-ssr
+jest-reports
+*.local
 .idea
 target
 static

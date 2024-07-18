@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CalMonthDays from 'components/cal-main/cal-month/CalMonthDays';
 import CalMonthHeader from 'components/cal-main/cal-month/CalMonthHeader';
@@ -11,21 +11,27 @@ import { commonState } from 'src/store/common/commonSlice';
 export default function CalMonth(): ReactElement {
     const { dateMetaData } = useSelector(commonState);
 
-    console.log('dateMetaData-comp', dateMetaData);
+    useEffect(() => {
+        console.log('dateMetaData-comp', dateMetaData);
+    }, [dateMetaData]);
 
     return (
         <CalMonthContainer data-testid="cal-main">
             {dateMetaData && (
-                <CalMonthHeader days={dateMetaData.weeks[0].days} />
+                <>
+                    <CalMonthHeader days={dateMetaData.weeks[0].days} />
+                    {dateMetaData.weeks.map((week, index) => {
+                        return (
+                            <WeekRowContainer
+                                key={index}
+                                data-testid="week-row"
+                            >
+                                <CalMonthDays days={week.days} />
+                            </WeekRowContainer>
+                        );
+                    })}
+                </>
             )}
-            {dateMetaData &&
-                dateMetaData.weeks.map((week, index) => {
-                    return (
-                        <WeekRowContainer key={index} data-testid="week-row">
-                            <CalMonthDays days={week.days} />
-                        </WeekRowContainer>
-                    );
-                })}
         </CalMonthContainer>
     );
 }

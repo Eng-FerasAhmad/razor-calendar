@@ -17,10 +17,14 @@ export default function CalMonthDays({ days }: Props): ReactElement {
                 return (
                     <DaysRowContainer key={idx} data-testid="days-row">
                         <DayWrapper data-testid="day-wrapper">
-                            <DayContentHeadWrapper>
+                            <DayContentHeadWrapper
+                                isCurrentMonth={day.currentMonth}
+                            >
                                 {day.dayNumber}
                             </DayContentHeadWrapper>
-                            <DayContentContentWrapper>
+                            <DayContentContentWrapper
+                                isCurrentMonth={day.currentMonth}
+                            >
                                 Termin
                             </DayContentContentWrapper>
                         </DayWrapper>

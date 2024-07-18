@@ -12,6 +12,7 @@ const initialState: CommonState = {
     selectedYear: new Date().getFullYear(),
     selectedStartDay: 1,
     dateMetaData: undefined,
+    sidebarCollapsed: true,
 };
 
 const commonSlice = createSlice({
@@ -47,8 +48,10 @@ const commonSlice = createSlice({
                 state.selectedYear,
                 state.selectedStartDay
             );
-
             return { ...state, dateMetaData: meta[state.selectedMonth - 1] };
+        },
+        setSidebarCollapsed(state, action) {
+            return { ...state, sidebarCollapsed: action.payload };
         },
     },
 });
@@ -62,6 +65,7 @@ export const {
     setSelectedYear,
     setSelectedStartDay,
     setDateMetaData,
+    setSidebarCollapsed,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

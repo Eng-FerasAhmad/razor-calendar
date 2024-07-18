@@ -29,7 +29,7 @@
             "style/*": ["./src/style/*"],
             "types/*": ["./src/types/*"],
             "utils/*": ["./src/utils/*"],
-            "test/*": ["./src/test/*"],
+            "test/*": ["./src/test/*"]
         }
     },
     "include": ["src"],

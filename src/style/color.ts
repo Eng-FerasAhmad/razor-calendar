@@ -4,8 +4,8 @@ export const color = {
     darkOpacity80: '#00000080',
 
     /* fonts */
-    fontPrimaryDark: '#242e30',
-    fontPrimaryLight: '#f0f3f4',
+    fontPrimaryDark: '#4d4d4d',
+    fontPrimaryLight: '#b3b3b3',
 
     /* borders */
     border: '#a6a6a6',

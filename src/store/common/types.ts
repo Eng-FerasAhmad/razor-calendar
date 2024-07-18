@@ -8,4 +8,5 @@ export interface CommonState {
     selectedMonth: number;
     selectedStartDay: number;
     dateMetaData: DateMetaData | undefined;
+    sidebarCollapsed: boolean;
 }
