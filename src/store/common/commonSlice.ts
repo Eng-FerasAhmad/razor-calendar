@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 import { weekAdapter } from 'src/date-service/dateService';
 import { WeekStartDay } from 'src/date-service/types';
-import { CommonState } from 'src/store/common/types';
+import { CalenderTask, CommonState } from 'src/store/common/types';
 import { RootState, SliceName } from 'src/store/types';
 import { CalendarType } from 'types/calendar';
 
@@ -14,6 +14,7 @@ const initialState: CommonState = {
     selectedStartDay: WeekStartDay.Monday,
     selectedWeeks: undefined,
     sidebarCollapsed: false,
+    calenderTask: CalenderTask.Calender,
 };
 
 const commonSlice = createSlice({
@@ -60,6 +61,9 @@ const commonSlice = createSlice({
         setSidebarCollapsed(state, action) {
             return { ...state, sidebarCollapsed: action.payload };
         },
+        setCalenderTask(state, action) {
+            return { ...state, calenderTask: action.payload };
+        },
         resetToCurrentMonth(state) {
             const year = moment().year();
             const month = moment().month() + 1;
@@ -71,6 +75,7 @@ const commonSlice = createSlice({
                 selectedYear: year,
                 selectedMonth: month,
                 selectedWeeks: weeks,
+                calenderTask: CalenderTask.Calender,
             };
         },
     },
@@ -84,6 +89,7 @@ export const {
     setSelectedStartDay,
     setSidebarCollapsed,
     resetToCurrentMonth,
+    setCalenderTask,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

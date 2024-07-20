@@ -14,7 +14,10 @@ export default function CalMonthHeader({ days }: Props): ReactElement {
             {days.map((day, idx) => {
                 return (
                     <DaysRowContainer key={idx} data-testid="days-header-row">
-                        <DayHeaderWrapper data-testid="day-header-wrapper">
+                        <DayHeaderWrapper
+                            data-testid="day-header-wrapper"
+                            isLastItem={idx === 6}
+                        >
                             {day.slice(0, 2).toUpperCase()}
                         </DayHeaderWrapper>
                     </DaysRowContainer>

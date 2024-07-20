@@ -5,6 +5,11 @@ interface Props {
     isCurrentMonth: boolean;
     isToday?: boolean;
 }
+
+interface DayProps {
+    isLastItem: boolean;
+}
+
 export const CalMonthContainer = styled.div`
     flex-grow: 9;
 `;
@@ -25,10 +30,12 @@ export const DaysRowContainer = styled.div`
     font-size: 12px;
 `;
 
-export const DayWrapper = styled.div`
+export const DayWrapper = styled.div<DayProps>`
     width: 100%;
     height: 155px;
     border-left: 1px solid ${color.borderLight};
+    border-right: ${(props) =>
+        props.isLastItem ? `1px solid ${color.borderLight}` : ''};
     border-bottom: 1px solid ${color.borderLight};
 `;
 
@@ -65,11 +72,13 @@ export const CalMonthHeaderContainer = styled.div`
     justify-content: center;
 `;
 
-export const DayHeaderWrapper = styled.div`
+export const DayHeaderWrapper = styled.div<DayProps>`
     width: 100%;
     height: 15px;
     display: flex;
-    border-left: 1px solid #e6e6e6;
+    border-left: 1px solid ${color.borderLight};
+    border-right: ${(props) =>
+        props.isLastItem ? `1px solid ${color.borderLight}` : ''};
     justify-content: center;
     padding-top: 5px;
 `;

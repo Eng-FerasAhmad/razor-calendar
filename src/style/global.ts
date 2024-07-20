@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     height: 100%;
     background-color: ${color.light};
-    margin: 0;
+    margin: 0 5px;
     border: none;
     outline: 0;
     font-weight: 200;

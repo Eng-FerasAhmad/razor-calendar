@@ -1,6 +1,11 @@
 import { Week } from 'src/date-service/types';
 import { CalendarType } from 'types/calendar';
 
+export enum CalenderTask {
+    Calender,
+    Task,
+}
+
 export interface CommonState {
     calendarType: CalendarType;
     selectedYear: number;
@@ -8,4 +13,5 @@ export interface CommonState {
     selectedStartDay: number;
     selectedWeeks: Week[] | undefined;
     sidebarCollapsed: boolean;
+    calenderTask: CalenderTask;
 }

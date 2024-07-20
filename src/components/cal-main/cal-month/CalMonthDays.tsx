@@ -21,7 +21,10 @@ export default function CalMonthDays({ days }: Props): ReactElement {
             {days.map((day, idx) => {
                 return (
                     <DaysRowContainer key={idx} data-testid="days-row">
-                        <DayWrapper data-testid="day-wrapper">
+                        <DayWrapper
+                            data-testid="day-wrapper"
+                            isLastItem={idx === 6}
+                        >
                             <DayContentHeadWrapper
                                 data-testid="day-head-wrapper"
                                 isCurrentMonth={day.isCurrentMonth}
