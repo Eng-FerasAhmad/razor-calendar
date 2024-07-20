@@ -43,7 +43,7 @@ export const color = {
         darker: '#18239a',
     },
     green: {
-        light: '',
+        light: '#c3efdd',
         primary: '#5ed4a5',
         dark: '#36c98e',
         darker: '#1b6547',

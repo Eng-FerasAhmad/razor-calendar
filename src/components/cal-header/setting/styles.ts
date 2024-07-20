@@ -1,9 +1,9 @@
 import { styled } from 'styled-components';
 import { color } from 'style/color';
 
-export const HelpContainer = styled.div`
+export const SettingContainer = styled.div`
     width: fit-content;
-    height: 28px;
+    height: 24px;
     margin: 0 5px;
 
     &:hover {

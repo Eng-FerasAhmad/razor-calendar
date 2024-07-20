@@ -17,7 +17,8 @@ export const TodayButtonWrapper = styled.div`
     margin: 0 10px;
 
     &:hover {
-        background-color: ${color.borderLight};
+        background-color: ${color.green.light};
+        border: 1px solid ${color.green.light};
         cursor: pointer;
     }
 `;
@@ -26,7 +27,7 @@ export const CurrentDateWrapper = styled.div`
     margin-left: 15px;
     display: flex;
     align-items: center;
-    font-size: 22px;
+    font-size: 20px;
 `;
 
 export const LeftButtonWrapper = styled.div`
@@ -36,7 +37,7 @@ export const LeftButtonWrapper = styled.div`
     height: 18px;
 
     &:hover {
-        background-color: ${color.borderLight};
+        background-color: ${color.green.light};
         cursor: pointer;
     }
 `;
@@ -48,7 +49,7 @@ export const RightButtonWrapper = styled.div`
     height: 18px;
 
     &:hover {
-        background-color: ${color.borderLight};
+        background-color: ${color.green.light};
         cursor: pointer;
     }
 `;

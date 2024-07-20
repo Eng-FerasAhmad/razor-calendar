@@ -18,3 +18,29 @@ export const NavigatorWrapper = styled.div`
     width: 100%;
     height: 100%;
 `;
+
+export const ProfileWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+`;
+
+export const TaskCalendarWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid ${color.borderLight};
+    margin: 0 15px;
+    overflow: hidden;
+`;
+
+export const SearchHelpWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 15px;
+    padding: 5px 0px;
+`;

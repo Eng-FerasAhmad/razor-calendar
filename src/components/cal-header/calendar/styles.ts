@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { color } from 'style/color';
 
-export const CalTaskViewContainer = styled.div`
+export const CalendarContainer = styled.div`
     height: 24px;
     width: 24px;
     padding: 5px 10px;

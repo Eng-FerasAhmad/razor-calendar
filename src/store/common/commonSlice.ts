@@ -1,57 +1,77 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import moment from 'moment';
+import { weekAdapter } from 'src/date-service/dateService';
+import { WeekStartDay } from 'src/date-service/types';
 import { CommonState } from 'src/store/common/types';
 import { RootState, SliceName } from 'src/store/types';
 import { CalendarType } from 'types/calendar';
-import { getMonthAndWeeks } from 'utils/dateGenerator';
 
 const initialState: CommonState = {
-    appName: undefined,
     calendarType: CalendarType.MONTH,
     selectedMonth: new Date().getMonth() + 1,
     selectedYear: new Date().getFullYear(),
-    selectedStartDay: 1,
-    dateMetaData: undefined,
-    sidebarCollapsed: true,
+    selectedStartDay: WeekStartDay.Monday,
+    selectedWeeks: undefined,
+    sidebarCollapsed: false,
 };
 
 const commonSlice = createSlice({
     name: SliceName.COMMON,
     initialState,
     reducers: {
-        setAppName(state, action) {
-            return { ...state, appName: action.payload };
-        },
         setCalendarType(state, action) {
             return { ...state, calendarType: action.payload };
         },
         setSelectedMonth(state, action) {
-            const meta = getMonthAndWeeks(
+            let month = action.payload;
+            let year = state.selectedYear;
+
+            if (month < 1) {
+                month = 12;
+                year -= 1;
+            }
+
+            if (month > 12) {
+                month = 1;
+                year += 1;
+            }
+            const weeks = weekAdapter(year, month, state.selectedStartDay);
+            return {
+                ...state,
+                selectedMonth: month,
+                selectedYear: year,
+                selectedWeeks: weeks,
+            };
+        },
+        setSelectedStartDay(state, action) {
+            const weeks = weekAdapter(
                 state.selectedYear,
+                state.selectedStartDay,
                 state.selectedStartDay
             );
 
             return {
                 ...state,
-                selectedMonth: action.payload,
-                dateMetaData: meta[action.payload - 1],
+                selectedStartDay: action.payload,
+                selectedWeeks: weeks,
             };
-        },
-        setSelectedYear(state, action) {
-            return { ...state, selectedYear: action.payload };
-        },
-        setSelectedStartDay(state, action) {
-            return { ...state, selectedStartDay: action.payload };
-        },
-        setDateMetaData(state) {
-            const meta = getMonthAndWeeks(
-                state.selectedYear,
-                state.selectedStartDay
-            );
-            return { ...state, dateMetaData: meta[state.selectedMonth - 1] };
         },
         setSidebarCollapsed(state, action) {
             return { ...state, sidebarCollapsed: action.payload };
+        },
+        resetToCurrentMonth(state) {
+            const year = moment().year();
+            const month = moment().month() + 1;
+
+            const weeks = weekAdapter(year, month, state.selectedStartDay);
+
+            return {
+                ...state,
+                selectedYear: year,
+                selectedMonth: month,
+                selectedWeeks: weeks,
+            };
         },
     },
 });
@@ -59,13 +79,11 @@ const commonSlice = createSlice({
 export const commonState = (state: RootState): CommonState => state.common;
 
 export const {
-    setAppName,
     setCalendarType,
     setSelectedMonth,
-    setSelectedYear,
     setSelectedStartDay,
-    setDateMetaData,
     setSidebarCollapsed,
+    resetToCurrentMonth,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

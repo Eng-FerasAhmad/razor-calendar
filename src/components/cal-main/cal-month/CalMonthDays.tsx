@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { ReactElement } from 'react';
 import {
     DayContentContentWrapper,
@@ -5,12 +6,16 @@ import {
     DaysRowContainer,
     DayWrapper,
 } from 'components/cal-main/cal-month/styles';
-import { DaysMetaData } from 'utils/dateGenerator';
+import { Week } from 'src/date-service/types';
 
 interface Props {
-    days: Array<DaysMetaData>;
+    days: Week;
 }
 export default function CalMonthDays({ days }: Props): ReactElement {
+    const isToday = (dayShort: string): boolean => {
+        return dayShort === moment().format('yyyy-MM-DD');
+    };
+
     return (
         <>
             {days.map((day, idx) => {
@@ -18,14 +23,17 @@ export default function CalMonthDays({ days }: Props): ReactElement {
                     <DaysRowContainer key={idx} data-testid="days-row">
                         <DayWrapper data-testid="day-wrapper">
                             <DayContentHeadWrapper
-                                isCurrentMonth={day.currentMonth}
+                                data-testid="day-head-wrapper"
+                                isCurrentMonth={day.isCurrentMonth}
+                                isToday={isToday(day.date.short)}
                             >
-                                {day.dayNumber}
+                                {day.day.number}
                             </DayContentHeadWrapper>
                             <DayContentContentWrapper
-                                isCurrentMonth={day.currentMonth}
+                                data-testid="day-content-wrapper"
+                                isCurrentMonth={day.isCurrentMonth}
                             >
-                                Termin
+                                termin
                             </DayContentContentWrapper>
                         </DayWrapper>
                     </DaysRowContainer>

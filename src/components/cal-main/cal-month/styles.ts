@@ -3,6 +3,7 @@ import { color } from 'style/color';
 
 interface Props {
     isCurrentMonth: boolean;
+    isToday?: boolean;
 }
 export const CalMonthContainer = styled.div`
     flex-grow: 9;
@@ -32,12 +33,17 @@ export const DayWrapper = styled.div`
 `;
 
 export const DayContentHeadWrapper = styled.div<Props>`
-    width: fit-content;
-    height: 20px;
-    margin: auto;
-    padding-top: 7px;
+    width: 25px;
+    height: 25px;
+    margin: 2px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     color: ${(props) =>
         props.isCurrentMonth ? color.fontPrimaryDark : color.fontPrimaryLight};
+    background-color: ${(props) => (props.isToday ? color.green.primary : '')};
+    font-weight: ${(props) => (props.isToday ? 700 : 400)};
 `;
 
 export const DayContentContentWrapper = styled.div<Props>`
