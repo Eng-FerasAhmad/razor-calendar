@@ -44,6 +44,34 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
         selectedDate.endOf('week')
     );
 
+    // Calculate event height and position based on time and interval
+    const calculateEventStyle = (start: DateTime, end: DateTime) => {
+        const totalMinutes = end.diff(start, 'minutes').minutes;
+        const slotHeight = Math.max(30, 60 / (60 / interval)); // Ensure minimum height
+        const height = (totalMinutes / interval) * slotHeight; // Scale by interval
+        const offsetMinutes = start.diff(
+            start.startOf('day'),
+            'minutes'
+        ).minutes;
+        const top = (offsetMinutes / interval) * slotHeight;
+
+        return {
+            top: `${top}px`,
+            height: `${height}px`,
+            position: 'absolute',
+            left: '5px',
+            right: '5px',
+            backgroundColor: '#007bff',
+            color: '#fff',
+            padding: '2px 5px',
+            borderRadius: '4px',
+            fontSize: '10px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+        };
+    };
+
     return (
         <div>
             {/* Week Header */}
@@ -73,7 +101,7 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            padding: '1px',
+                            padding: '5px',
                             borderBottom: '1px solid #ddd',
                         }}
                     >
@@ -136,6 +164,7 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                             borderLeft: '1px solid #ccc',
                             display: 'flex',
                             flexDirection: 'column',
+                            position: 'relative',
                         }}
                     >
                         {/* Header for each day */}
@@ -153,61 +182,39 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                         </div>
 
                         {/* Hours for each day */}
-                        {timeSlots.map(({ hour, minute }) => {
-                            // Filter events for the current time slot
-                            const hourEvents = events.filter((event) => {
-                                const eventStart = DateTime.fromISO(
-                                    event.start
-                                );
-                                const eventEnd = DateTime.fromISO(event.end);
-                                return (
-                                    eventStart.hasSame(day, 'day') &&
-                                    eventStart.hour === hour &&
-                                    eventStart.minute >= minute &&
-                                    eventEnd.minute < minute + interval
-                                );
-                            });
+                        {timeSlots.map(({ hour, minute }) => (
+                            <div
+                                key={`${day.toISO()}-${hour}:${minute}`}
+                                style={{
+                                    minHeight: '30px',
+                                    height: `${Math.max(30, 60 / (60 / interval))}px`,
+                                    position: 'relative',
+                                    backgroundColor:
+                                        hour >= startWorkHour &&
+                                        hour < endWorkHour
+                                            ? '#ffffff' // Working hours: White
+                                            : '#f0f0f0', // Non-working hours: Gray
+                                    borderBottom: '1px solid #ddd',
+                                }}
+                            />
+                        ))}
+
+                        {/* Display events */}
+                        {events.map((event) => {
+                            const eventStart = DateTime.fromISO(event.start);
+                            const eventEnd = DateTime.fromISO(event.end);
+
+                            if (!eventStart.hasSame(day, 'day')) return null;
 
                             return (
                                 <div
-                                    key={`${day.toISO()}-${hour}:${minute}`}
-                                    style={{
-                                        minHeight: '30px',
-                                        height: `${Math.max(
-                                            30,
-                                            60 / (60 / interval)
-                                        )}px`,
-                                        position: 'relative',
-                                        backgroundColor:
-                                            hour >= startWorkHour &&
-                                            hour < endWorkHour
-                                                ? '#ffffff' // Working hours: White
-                                                : '#f0f0f0', // Non-working hours: Gray
-                                        borderBottom: '1px solid #ddd',
-                                    }}
+                                    key={event.id}
+                                    style={calculateEventStyle(
+                                        eventStart,
+                                        eventEnd
+                                    )}
                                 >
-                                    {/* Display events */}
-                                    {hourEvents.map((event) => (
-                                        <div
-                                            key={event.id}
-                                            style={{
-                                                position: 'absolute',
-                                                top: '5px',
-                                                left: '5px',
-                                                right: '5px',
-                                                backgroundColor: '#007bff',
-                                                color: '#fff',
-                                                padding: '2px 5px',
-                                                borderRadius: '4px',
-                                                fontSize: '10px',
-                                                whiteSpace: 'nowrap',
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                            }}
-                                        >
-                                            {event.title}
-                                        </div>
-                                    ))}
+                                    {event.title}
                                 </div>
                             );
                         })}

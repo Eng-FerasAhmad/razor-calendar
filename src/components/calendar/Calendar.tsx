@@ -5,7 +5,7 @@ import Agenda from './Agenda';
 import Day from './Day';
 import Month from './Month';
 import Toolbar from './Toolbar';
-import Week from './Week';
+import Week from './week/Week';
 import { RootState } from 'src/store/types';
 import { setDate, setView } from 'src/store/ui/uiSlice';
 import { navigate, NavigateAction } from 'utils/constants';
