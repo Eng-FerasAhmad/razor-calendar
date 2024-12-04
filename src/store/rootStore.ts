@@ -12,7 +12,9 @@ import storage from 'redux-persist/lib/storage';
 import { thunk } from 'redux-thunk';
 
 import commonReducer from './common/commonSlice';
+import eventsReducer from './events/eventsSlice';
 import { RootState } from './types';
+import uiReducer from './ui/uiSlice';
 
 const persistConfig = {
     key: 'root',
@@ -24,6 +26,8 @@ const persistConfig = {
 
 const appReducer = combineReducers({
     common: commonReducer,
+    events: eventsReducer,
+    ui: uiReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, appReducer);
