@@ -1,20 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import moment from 'moment';
-import { weekAdapter } from 'src/date-service/dateService';
-import { WeekStartDay } from 'src/date-service/types';
-import { CalenderTask, CommonState } from 'src/store/common/types';
+import { CommonState } from 'src/store/common/types';
 import { RootState, SliceName } from 'src/store/types';
 import { CalendarType } from 'types/calendar';
 
 const initialState: CommonState = {
     calendarType: CalendarType.MONTH,
-    selectedMonth: new Date().getMonth() + 1,
-    selectedYear: new Date().getFullYear(),
-    selectedStartDay: WeekStartDay.Monday,
-    selectedWeeks: undefined,
-    sidebarCollapsed: false,
-    calenderTask: CalenderTask.Calender,
 };
 
 const commonSlice = createSlice({
@@ -24,72 +15,11 @@ const commonSlice = createSlice({
         setCalendarType(state, action) {
             return { ...state, calendarType: action.payload };
         },
-        setSelectedMonth(state, action) {
-            let month = action.payload;
-            let year = state.selectedYear;
-
-            if (month < 1) {
-                month = 12;
-                year -= 1;
-            }
-
-            if (month > 12) {
-                month = 1;
-                year += 1;
-            }
-            const weeks = weekAdapter(year, month, state.selectedStartDay);
-            return {
-                ...state,
-                selectedMonth: month,
-                selectedYear: year,
-                selectedWeeks: weeks,
-            };
-        },
-        setSelectedStartDay(state, action) {
-            const weeks = weekAdapter(
-                state.selectedYear,
-                state.selectedStartDay,
-                state.selectedStartDay
-            );
-
-            return {
-                ...state,
-                selectedStartDay: action.payload,
-                selectedWeeks: weeks,
-            };
-        },
-        setSidebarCollapsed(state, action) {
-            return { ...state, sidebarCollapsed: action.payload };
-        },
-        setCalenderTask(state, action) {
-            return { ...state, calenderTask: action.payload };
-        },
-        resetToCurrentMonth(state) {
-            const year = moment().year();
-            const month = moment().month() + 1;
-
-            const weeks = weekAdapter(year, month, state.selectedStartDay);
-
-            return {
-                ...state,
-                selectedYear: year,
-                selectedMonth: month,
-                selectedWeeks: weeks,
-                calenderTask: CalenderTask.Calender,
-            };
-        },
     },
 });
 
 export const commonState = (state: RootState): CommonState => state.common;
 
-export const {
-    setCalendarType,
-    setSelectedMonth,
-    setSelectedStartDay,
-    setSidebarCollapsed,
-    resetToCurrentMonth,
-    setCalenderTask,
-} = commonSlice.actions;
+export const { setCalendarType } = commonSlice.actions;
 
 export default commonSlice.reducer;
