@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Agenda from './Agenda';
 import Day from './Day';
-import Month from './Month';
+import Month from './month/Month';
 import Toolbar from './Toolbar';
 import Week from './week/Week';
 import { RootState } from 'src/store/types';

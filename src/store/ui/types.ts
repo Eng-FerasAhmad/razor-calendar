@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon';
 
 export interface UIState {
-    view: 'month' | 'week' | 'day' | 'agenda';
+    view: string;
     date: DateTime;
+    language: string;
+    firstDayOfWeek: number;
 }

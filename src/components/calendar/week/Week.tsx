@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'src/store/types';
-import { getDateRange, formatDate } from 'utils/dates';
+import { setDate, setView } from 'src/store/ui/uiSlice';
+import { getDateRange, getLocalizedWeekdays, formatDate } from 'utils/dates';
 
 interface WeekProps {
     startWorkHour: number; // Start of working hours (0-23)
@@ -10,7 +11,10 @@ interface WeekProps {
 }
 
 const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
-    const selectedDate = useSelector((state: RootState) => state.ui.date);
+    const dispatch = useDispatch();
+    const { date: selectedDate, language } = useSelector(
+        (state: RootState) => state.ui
+    );
     const events = useSelector((state: RootState) => state.events.events);
 
     // Interval options and state
@@ -19,6 +23,9 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
     const [is24HourFormat, setIs24HourFormat] = useState(true);
 
     const interval = intervalOptions[intervalIndex]; // Current interval
+
+    // Generate localized weekday names
+    const localizedWeekdays = getLocalizedWeekdays(language, 1); // Start from Monday by default
 
     // Generate time slots based on interval
     const generateTimeSlots = () => {
@@ -70,6 +77,12 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
         };
+    };
+
+    // Navigate to the day view
+    const handleDayClick = (day: DateTime) => {
+        dispatch(setDate(day));
+        dispatch(setView('day'));
     };
 
     return (
@@ -156,7 +169,7 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                 </div>
 
                 {/* Days Columns */}
-                {days.map((day) => (
+                {days.map((day, index) => (
                     <div
                         key={day.toISO()}
                         style={{
@@ -169,6 +182,7 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                     >
                         {/* Header for each day */}
                         <div
+                            onClick={() => handleDayClick(day)}
                             style={{
                                 height: '30px',
                                 textAlign: 'center',
@@ -176,9 +190,11 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                                 backgroundColor: '#f9f9f9',
                                 borderBottom: '1px solid #ddd',
                                 lineHeight: '30px',
+                                cursor: 'pointer',
                             }}
+                            title={`Go to ${formatDate(day, 'EEEE, MMM d')}`}
                         >
-                            {formatDate(day, 'EEE, MMM d')}
+                            {localizedWeekdays[index]}
                         </div>
 
                         {/* Hours for each day */}
