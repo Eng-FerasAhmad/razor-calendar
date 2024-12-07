@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/types';
 import { formatDate } from 'utils/dates';
 
-const Day: React.FC = () => {
+export default function Day(): ReactElement {
     // Get the selected date from Redux
     const selectedDate = useSelector((state: RootState) => state.ui.date);
 
@@ -50,6 +50,4 @@ const Day: React.FC = () => {
             </div>
         </div>
     );
-};
-
-export default Day;
+}

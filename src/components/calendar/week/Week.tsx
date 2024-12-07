@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React, { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { WeekContainer, WeekHeaderRow, WeekDayHeader } from './styles';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
@@ -9,12 +9,15 @@ import { RootState } from 'src/store/types';
 import { setView, setDate } from 'src/store/ui/uiSlice';
 import { getDateRange, formatDate } from 'utils/dates';
 
-interface WeekProps {
+interface Props {
     startWorkHour: number;
     endWorkHour: number;
 }
 
-const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
+export default function Week({
+    startWorkHour,
+    endWorkHour,
+}: Props): ReactElement {
     const dispatch = useDispatch();
     const selectedDate = useSelector((state: RootState) => state.ui.date);
     const events = useSelector((state: RootState) => state.events.events);
@@ -31,15 +34,8 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
         selectedDate.endOf('week')
     );
 
-    // Handle interval change
-    const handleIntervalChange = (newIndex: number) => {
-        setIntervalIndex(
-            Math.max(0, Math.min(intervalOptions.length - 1, newIndex))
-        );
-    };
-
     // Navigate to Day View
-    const navigateToDay = (day: DateTime) => {
+    const navigateToDay = (day: DateTime): void => {
         dispatch(setDate(day)); // Pass DateTime object directly
         dispatch(setView('day')); // Change view to 'day'
     };
@@ -76,7 +72,6 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
                 <TimeColumn
                     interval={interval}
                     is24HourFormat={is24HourFormat}
-                    onIntervalChange={handleIntervalChange}
                     startWorkHour={startWorkHour}
                     endWorkHour={endWorkHour}
                 />
@@ -95,6 +90,4 @@ const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
             </div>
         </WeekContainer>
     );
-};
-
-export default Week;
+}

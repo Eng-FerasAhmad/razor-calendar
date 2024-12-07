@@ -1,13 +1,13 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import { ReactElement } from 'react';
 import DisplayEvents from 'components/calendar/month/month-day-events/MonthDayEvents';
 
-interface DaysInTheWeekProps {
+interface Props {
     week: DateTime[];
     events: any[]; // Replace `any` with the appropriate event type
 }
 
-const DaysInTheWeek: React.FC<DaysInTheWeekProps> = ({ week, events }) => {
+export default function DaysInTheWeek({ week, events }: Props): ReactElement {
     const currentDay = DateTime.now();
 
     const getEventsForDay = (day: DateTime) =>
@@ -46,6 +46,4 @@ const DaysInTheWeek: React.FC<DaysInTheWeekProps> = ({ week, events }) => {
             })}
         </>
     );
-};
-
-export default DaysInTheWeek;
+}

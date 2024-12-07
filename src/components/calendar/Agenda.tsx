@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/types';
 import { formatDate } from 'utils/dates';
 
-const Agenda: React.FC = () => {
+export default function Agenda(): ReactElement {
     // Get the selected date and events from Redux
     const selectedDate = useSelector((state: RootState) => state.ui.date);
     const events = useSelector((state: RootState) => state.events.events);
@@ -78,6 +78,4 @@ const Agenda: React.FC = () => {
             </div>
         </div>
     );
-};
-
-export default Agenda;
+}

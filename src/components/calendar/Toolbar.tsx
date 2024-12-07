@@ -1,9 +1,9 @@
-import React from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'src/store/types';
 import { setFirstDayOfWeek, setLanguage } from 'src/store/ui/uiSlice';
 
-interface ToolbarProps {
+interface Props {
     view: string;
     views: string[];
     label: React.ReactNode;
@@ -19,14 +19,14 @@ interface ToolbarProps {
     onView: (view: string) => void;
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({
+export default function Toolbar({
     view,
     views,
     label,
     localizer: { messages },
     onNavigate,
     onView,
-}) => {
+}: Props): ReactElement {
     const dispatch = useDispatch();
     const { language, firstDayOfWeek } = useSelector(
         (state: RootState) => state.ui
@@ -46,20 +46,20 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
     // Handlers
     const handleLanguageChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
+        event: ChangeEvent<HTMLSelectElement>
+    ): void => {
         const selectedLanguage = event.target.value;
         dispatch(setLanguage(selectedLanguage));
     };
 
     const handleFirstDayChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
+        event: ChangeEvent<HTMLSelectElement>
+    ): void => {
         const selectedFirstDay = Number(event.target.value);
         dispatch(setFirstDayOfWeek(selectedFirstDay));
     };
 
-    const handleNavigate = (action: string) => {
+    const handleNavigate = (action: string): void => {
         onNavigate(action);
     };
 
@@ -125,6 +125,4 @@ const Toolbar: React.FC<ToolbarProps> = ({
             <span className="rbc-btn-group">{renderViewNames()}</span>
         </div>
     );
-};
-
-export default Toolbar;
+}

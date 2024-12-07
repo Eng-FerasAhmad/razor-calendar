@@ -1,23 +1,25 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
-export interface TimeColumnProps {
+export interface Props {
     interval: number; // Interval in minutes (e.g., 60, 30, 15)
     is24HourFormat: boolean; // Whether to use 24-hour format
-    onIntervalChange: (newInterval: number) => void; // Callback for changing the interval
     startWorkHour: number; // Start of working hours (0–23)
     endWorkHour: number; // End of working hours (0–23)
 }
 
-const TimeColumn: React.FC<TimeColumnProps> = ({
+export default function TimeColumn({
     interval,
     is24HourFormat,
-    onIntervalChange,
     startWorkHour,
     endWorkHour,
-}) => {
-    const generateTimeSlots = () => {
+}: Props): ReactElement {
+    const generateTimeSlots = (): {
+        hour: number;
+        minute: number;
+        label: string;
+    }[] => {
         const slots: { hour: number; minute: number; label: string }[] = [];
-        for (let hour = 0; hour < 24; hour++) {
+        for (let hour = 0; hour < 24; hour += 1) {
             for (let minute = 0; minute < 60; minute += interval) {
                 const label = is24HourFormat
                     ? `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
@@ -55,6 +57,4 @@ const TimeColumn: React.FC<TimeColumnProps> = ({
             ))}
         </div>
     );
-};
-
-export default TimeColumn;
+}

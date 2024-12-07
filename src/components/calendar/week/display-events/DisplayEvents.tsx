@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-interface EventProps {
+interface Props {
     title: string;
     style: React.CSSProperties;
 }
 
-const Event: React.FC<EventProps> = ({ title, style }) => {
+export default function Event({ title, style }: Props): ReactElement {
     return (
         <div
             style={{
@@ -23,6 +23,4 @@ const Event: React.FC<EventProps> = ({ title, style }) => {
             {title}
         </div>
     );
-};
-
-export default Event;
+}

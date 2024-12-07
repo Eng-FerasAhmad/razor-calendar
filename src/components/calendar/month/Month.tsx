@@ -9,7 +9,7 @@ import {
     getLocalizedMonths,
 } from 'utils/dates';
 
-const Month: React.FC = () => {
+export default function Month(): React.ReactElement {
     const { date: selectedDate, language } = useSelector(
         (state: RootState) => state.ui
     );
@@ -40,6 +40,4 @@ const Month: React.FC = () => {
             <MonthGrid weeks={weeks} events={events} />
         </div>
     );
-};
-
-export default Month;
+}

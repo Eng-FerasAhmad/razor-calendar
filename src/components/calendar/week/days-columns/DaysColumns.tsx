@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import { ReactElement } from 'react';
 import Event from 'components/calendar/week/display-events/DisplayEvents';
 
-interface DayColumnProps {
+interface Props {
     day: DateTime;
     events: Array<{ id: string; title: string; start: string; end: string }>;
     interval: number; // Interval in minutes
@@ -10,13 +10,13 @@ interface DayColumnProps {
     endWorkHour: number;
 }
 
-const DayColumn: React.FC<DayColumnProps> = ({
+export default function DayColumn({
     day,
     events,
     interval,
     startWorkHour,
     endWorkHour,
-}) => {
+}: Props): ReactElement {
     // Generate time slots
     const timeSlots = Array.from(
         { length: (24 * 60) / interval },
@@ -81,6 +81,4 @@ const DayColumn: React.FC<DayColumnProps> = ({
             ))}
         </div>
     );
-};
-
-export default DayColumn;
+}

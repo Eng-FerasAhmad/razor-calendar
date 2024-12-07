@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import { ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Agenda from './Agenda';
 import Day from './Day';
@@ -10,11 +10,11 @@ import { RootState } from 'src/store/types';
 import { setDate, setView } from 'src/store/ui/uiSlice';
 import { navigate, NavigateAction } from 'utils/constants';
 
-const Calendar: React.FC = () => {
+export default function Calendar(): ReactElement {
     const dispatch = useDispatch();
     const { view, date } = useSelector((state: RootState) => state.ui);
 
-    const renderView = () => {
+    const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
                 return <Month />;
@@ -29,7 +29,10 @@ const Calendar: React.FC = () => {
         }
     };
 
-    const handleNavigate = (action: NavigateAction, newDate?: DateTime) => {
+    const handleNavigate = (
+        action: NavigateAction,
+        newDate?: DateTime
+    ): void => {
         const updatedDate = navigate(
             view,
             date,
@@ -39,7 +42,7 @@ const Calendar: React.FC = () => {
         dispatch(setDate(updatedDate)); // Update the date in Redux
     };
 
-    const handleViewChange = (newView: string) => {
+    const handleViewChange = (newView: string): void => {
         dispatch(setView(newView as 'month' | 'week' | 'day' | 'agenda'));
     };
 
@@ -66,6 +69,4 @@ const Calendar: React.FC = () => {
             {renderView()}
         </div>
     );
-};
-
-export default Calendar;
+}
