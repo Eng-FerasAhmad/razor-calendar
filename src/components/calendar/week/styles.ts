@@ -1,21 +1,26 @@
 import styled from 'styled-components';
 
 export const WeekContainer = styled.div`
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 `;
 
-export const WeekHeader = styled.div`
+export const WeekHeaderRow = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+`;
 
-    h3 {
-        margin: 0;
-    }
+export const WeekDayHeader = styled.div`
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
 
-    button {
-        padding: 5px 10px;
-        font-size: 12px;
+    &:first-child {
+        border-left: none;
     }
 `;

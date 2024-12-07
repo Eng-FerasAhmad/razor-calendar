@@ -1,243 +1,99 @@
 import { DateTime } from 'luxon';
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { WeekContainer, WeekHeaderRow, WeekDayHeader } from './styles';
+import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
+import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
+import WeekHeader from 'components/calendar/week/week-header/WeekHeader';
 import { RootState } from 'src/store/types';
-import { setDate, setView } from 'src/store/ui/uiSlice';
-import { getDateRange, getLocalizedWeekdays, formatDate } from 'utils/dates';
+import { setView, setDate } from 'src/store/ui/uiSlice';
+import { getDateRange, formatDate } from 'utils/dates';
 
 interface WeekProps {
-    startWorkHour: number; // Start of working hours (0-23)
-    endWorkHour: number; // End of working hours (0-23)
+    startWorkHour: number;
+    endWorkHour: number;
 }
 
 const Week: React.FC<WeekProps> = ({ startWorkHour, endWorkHour }) => {
     const dispatch = useDispatch();
-    const { date: selectedDate, language } = useSelector(
-        (state: RootState) => state.ui
-    );
+    const selectedDate = useSelector((state: RootState) => state.ui.date);
     const events = useSelector((state: RootState) => state.events.events);
 
-    // Interval options and state
-    const intervalOptions = [60, 30, 15, 10, 5]; // Available intervals in minutes
-    const [intervalIndex, setIntervalIndex] = useState(0); // Default interval: 60 minutes
+    // Interval options
+    const intervalOptions = [60, 30, 15, 10, 5];
+    const [intervalIndex, setIntervalIndex] = useState(0);
     const [is24HourFormat, setIs24HourFormat] = useState(true);
+    const interval = intervalOptions[intervalIndex];
 
-    const interval = intervalOptions[intervalIndex]; // Current interval
-
-    // Generate localized weekday names
-    const localizedWeekdays = getLocalizedWeekdays(language, 1); // Start from Monday by default
-
-    // Generate time slots based on interval
-    const generateTimeSlots = () => {
-        const slots: { hour: number; minute: number; label: string }[] = [];
-        for (let hour = 0; hour < 24; hour++) {
-            for (let minute = 0; minute < 60; minute += interval) {
-                const time = DateTime.fromObject({ hour, minute });
-                slots.push({
-                    hour,
-                    minute,
-                    label: is24HourFormat
-                        ? time.toFormat('HH:mm')
-                        : time.toFormat('hh:mm a'),
-                });
-            }
-        }
-        return slots;
-    };
-
-    const timeSlots = generateTimeSlots();
+    // Days of the week
     const days = getDateRange(
         selectedDate.startOf('week'),
         selectedDate.endOf('week')
     );
 
-    // Calculate event height and position based on time and interval
-    const calculateEventStyle = (start: DateTime, end: DateTime) => {
-        const totalMinutes = end.diff(start, 'minutes').minutes;
-        const slotHeight = Math.max(30, 60 / (60 / interval)); // Ensure minimum height
-        const height = (totalMinutes / interval) * slotHeight; // Scale by interval
-        const offsetMinutes = start.diff(
-            start.startOf('day'),
-            'minutes'
-        ).minutes;
-        const top = (offsetMinutes / interval) * slotHeight;
-
-        return {
-            top: `${top}px`,
-            height: `${height}px`,
-            position: 'absolute',
-            left: '5px',
-            right: '5px',
-            backgroundColor: '#007bff',
-            color: '#fff',
-            padding: '2px 5px',
-            borderRadius: '4px',
-            fontSize: '10px',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-        };
+    // Handle interval change
+    const handleIntervalChange = (newIndex: number) => {
+        setIntervalIndex(
+            Math.max(0, Math.min(intervalOptions.length - 1, newIndex))
+        );
     };
 
-    // Navigate to the day view
-    const handleDayClick = (day: DateTime) => {
-        dispatch(setDate(day));
-        dispatch(setView('day'));
+    // Navigate to Day View
+    const navigateToDay = (day: DateTime) => {
+        dispatch(setDate(day)); // Pass DateTime object directly
+        dispatch(setView('day')); // Change view to 'day'
     };
 
     return (
-        <div>
+        <WeekContainer>
             {/* Week Header */}
-            <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>
-                Week {selectedDate.startOf('week').weekNumber} -{' '}
-                {formatDate(selectedDate.startOf('week'), 'MMMM yyyy')}
-            </h3>
+            <WeekHeader
+                selectedDate={selectedDate}
+                intervalOptions={intervalOptions}
+                setIntervalIndex={setIntervalIndex}
+                is24HourFormat={is24HourFormat}
+                setIs24HourFormat={setIs24HourFormat}
+            />
 
-            <button
-                type="button"
-                onClick={() => setIs24HourFormat((prev) => !prev)}
-                style={{
-                    padding: '5px 10px',
-                    fontSize: '12px',
-                    marginBottom: '10px',
-                }}
-            >
-                {is24HourFormat ? 'Switch to 12h' : 'Switch to 24h'}
-            </button>
-
-            <div style={{ display: 'flex' }}>
-                {/* Time Column */}
-                <div style={{ width: '120px', borderRight: '1px solid #ccc' }}>
-                    {/* Time Column Controls */}
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            padding: '5px',
-                            borderBottom: '1px solid #ddd',
-                        }}
-                    >
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setIntervalIndex((prev) =>
-                                    Math.min(
-                                        intervalOptions.length - 1,
-                                        prev + 1
-                                    )
-                                )
-                            }
-                            style={{ padding: '5px 10px', fontSize: '12px' }}
-                        >
-                            -
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setIntervalIndex((prev) =>
-                                    Math.max(0, prev - 1)
-                                )
-                            }
-                            style={{ padding: '5px 10px', fontSize: '12px' }}
-                        >
-                            +
-                        </button>
-                    </div>
-
-                    {/* Time Slots */}
-                    {timeSlots.map(({ hour, minute, label }) => (
-                        <div
-                            key={`${hour}:${minute}`}
-                            style={{
-                                minHeight: '30px',
-                                height: `${Math.max(30, 60 / (60 / interval))}px`,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                backgroundColor:
-                                    hour >= startWorkHour && hour < endWorkHour
-                                        ? '#ffffff' // Working hours: White
-                                        : '#f0f0f0', // Non-working hours: Gray
-                                borderBottom: '1px solid #ddd',
-                            }}
-                        >
-                            {label}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Days Columns */}
-                {days.map((day, index) => (
-                    <div
+            {/* Week Day Names */}
+            <WeekHeaderRow>
+                <div style={{ width: '100px' }} />{' '}
+                {/* Empty space for TimeColumn */}
+                {days.map((day) => (
+                    <WeekDayHeader
                         key={day.toISO()}
-                        style={{
-                            flex: 1,
-                            borderLeft: '1px solid #ccc',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            position: 'relative',
-                        }}
+                        onClick={() => navigateToDay(day)} // Click to navigate
+                        style={{ cursor: 'pointer' }}
                     >
-                        {/* Header for each day */}
-                        <div
-                            onClick={() => handleDayClick(day)}
-                            style={{
-                                height: '30px',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                backgroundColor: '#f9f9f9',
-                                borderBottom: '1px solid #ddd',
-                                lineHeight: '30px',
-                                cursor: 'pointer',
-                            }}
-                            title={`Go to ${formatDate(day, 'EEEE, MMM d')}`}
-                        >
-                            {localizedWeekdays[index]}
-                        </div>
+                        {formatDate(day, 'EEE, MMM d')}
+                    </WeekDayHeader>
+                ))}
+            </WeekHeaderRow>
 
-                        {/* Hours for each day */}
-                        {timeSlots.map(({ hour, minute }) => (
-                            <div
-                                key={`${day.toISO()}-${hour}:${minute}`}
-                                style={{
-                                    minHeight: '30px',
-                                    height: `${Math.max(30, 60 / (60 / interval))}px`,
-                                    position: 'relative',
-                                    backgroundColor:
-                                        hour >= startWorkHour &&
-                                        hour < endWorkHour
-                                            ? '#ffffff' // Working hours: White
-                                            : '#f0f0f0', // Non-working hours: Gray
-                                    borderBottom: '1px solid #ddd',
-                                }}
-                            />
-                        ))}
+            {/* Week Grid */}
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                {/* Time Column */}
+                <TimeColumn
+                    interval={interval}
+                    is24HourFormat={is24HourFormat}
+                    onIntervalChange={handleIntervalChange}
+                    startWorkHour={startWorkHour}
+                    endWorkHour={endWorkHour}
+                />
 
-                        {/* Display events */}
-                        {events.map((event) => {
-                            const eventStart = DateTime.fromISO(event.start);
-                            const eventEnd = DateTime.fromISO(event.end);
-
-                            if (!eventStart.hasSame(day, 'day')) return null;
-
-                            return (
-                                <div
-                                    key={event.id}
-                                    style={calculateEventStyle(
-                                        eventStart,
-                                        eventEnd
-                                    )}
-                                >
-                                    {event.title}
-                                </div>
-                            );
-                        })}
-                    </div>
+                {/* Day Columns */}
+                {days.map((day) => (
+                    <DayColumn
+                        key={day.toISO()}
+                        day={day}
+                        events={events}
+                        interval={interval}
+                        startWorkHour={startWorkHour}
+                        endWorkHour={endWorkHour}
+                    />
                 ))}
             </div>
-        </div>
+        </WeekContainer>
     );
 };
 

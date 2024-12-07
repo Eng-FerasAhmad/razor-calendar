@@ -15,17 +15,16 @@ const TimeColumn: React.FC<TimeColumnProps> = ({
     startWorkHour,
     endWorkHour,
 }) => {
-    // Generate time slots
     const generateTimeSlots = () => {
         const slots: { hour: number; minute: number; label: string }[] = [];
         for (let hour = 0; hour < 24; hour++) {
             for (let minute = 0; minute < 60; minute += interval) {
-                const timeLabel = is24HourFormat
+                const label = is24HourFormat
                     ? `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
-                    : `${(hour % 12 || 12).toString()}:${String(minute).padStart(2, '0')} ${
+                    : `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${
                           hour < 12 ? 'AM' : 'PM'
                       }`;
-                slots.push({ hour, minute, label: timeLabel });
+                slots.push({ hour, minute, label });
             }
         }
         return slots;
@@ -35,41 +34,19 @@ const TimeColumn: React.FC<TimeColumnProps> = ({
 
     return (
         <div style={{ width: '100px', borderRight: '1px solid #ccc' }}>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    padding: '5px',
-                }}
-            >
-                {/* Interval Adjustment Buttons */}
-                <button
-                    onClick={() => onIntervalChange(interval - 15)}
-                    disabled={interval <= 15}
-                    style={{ padding: '2px 5px' }}
-                >
-                    -
-                </button>
-                <button
-                    onClick={() => onIntervalChange(interval + 15)}
-                    disabled={interval >= 60}
-                    style={{ padding: '2px 5px' }}
-                >
-                    +
-                </button>
-            </div>
+            {/* Time Slots */}
             {timeSlots.map(({ hour, minute, label }) => (
                 <div
                     key={`${hour}:${minute}`}
                     style={{
-                        height: `${60 / (60 / interval)}px`,
+                        height: '30px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         backgroundColor:
                             hour >= startWorkHour && hour < endWorkHour
-                                ? '#fff' // Working hours
-                                : '#f0f0f0', // Non-working hours
+                                ? '#ffffff'
+                                : '#f0f0f0',
                         borderBottom: '1px solid #ddd',
                     }}
                 >
