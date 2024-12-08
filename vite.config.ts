@@ -11,6 +11,12 @@ export default defineConfig({
         alias: {
             src: '/src',
             components: '/src/components',
+            calendar: '/src/components/calendar',
+            month: '/src/components/calendar/month',
+            week: '/src/components/calendar/week',
+            day: '/src/components/calendar/day',
+            toolbar: '/src/components/calendar/toolbar',
+            agenda: '/src/components/calendar/agenda',
             style: '/src/style',
             library: '/src/library',
             store: '/src/store',

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DateTime } from 'luxon';
+import { RootState } from 'src/store/types';
 import { UIState } from 'src/store/ui/types';
 
 const initialState: UIState = {
@@ -27,6 +28,8 @@ const uiSlice = createSlice({
         },
     },
 });
+
+export const uiState = (state: RootState): UIState => state.ui;
 
 export const { setView, setDate, setLanguage, setFirstDayOfWeek } =
     uiSlice.actions;
