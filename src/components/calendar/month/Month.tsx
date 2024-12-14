@@ -1,8 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useCalendarContext } from 'calendar/context/CalendarContext';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
-import { RootState } from 'src/store/types';
 import {
     getDateRange,
     getLocalizedWeekdays,
@@ -10,14 +9,11 @@ import {
 } from 'utils/dates';
 
 export default function Month(): React.ReactElement {
-    const { date: selectedDate, language } = useSelector(
-        (state: RootState) => state.ui
-    );
-    const events = useSelector((state: RootState) => state.events.events);
+    const { selectedDate, events } = useCalendarContext();
 
     // Localized weekdays and months
-    const localizedWeekdays = getLocalizedWeekdays(language, 1); // Start on Monday
-    const localizedMonths = getLocalizedMonths(language);
+    const localizedWeekdays = getLocalizedWeekdays('en', 1); // Start on Monday
+    const localizedMonths = getLocalizedMonths('en');
 
     const startOfMonth = selectedDate.startOf('month');
     const endOfMonth = selectedDate.endOf('month');

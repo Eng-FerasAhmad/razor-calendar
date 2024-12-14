@@ -1,15 +1,10 @@
 import { DateTime } from 'luxon';
-import { ReactElement } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/types';
+import { ReactElement, useContext } from 'react';
+import { CalendarContext } from 'calendar/context/CalendarContext';
 import { formatDate } from 'utils/dates';
 
 export default function Day(): ReactElement {
-    // Get the selected date from Redux
-    const selectedDate = useSelector((state: RootState) => state.ui.date);
-
-    // Fetch events from Redux
-    const events = useSelector((state: RootState) => state.events.events);
+    const { selectedDate, events } = useContext(CalendarContext);
 
     // Filter events for the selected day
     const filteredEvents = events.filter((event) => {

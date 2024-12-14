@@ -1,13 +1,10 @@
 import { DateTime } from 'luxon';
-import { ReactElement } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/types';
+import { ReactElement, useContext } from 'react';
+import { CalendarContext } from 'calendar/context/CalendarContext';
 import { formatDate } from 'utils/dates';
 
 export default function Agenda(): ReactElement {
-    // Get the selected date and events from Redux
-    const selectedDate = useSelector((state: RootState) => state.ui.date);
-    const events = useSelector((state: RootState) => state.events.events);
+    const { selectedDate, events } = useContext(CalendarContext);
 
     // Calculate the first and last day of the month for the current selected date
     const startOfMonth = selectedDate.startOf('month');

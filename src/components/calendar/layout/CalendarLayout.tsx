@@ -1,14 +1,13 @@
-import { ReactElement } from 'react';
-import { useSelector } from 'react-redux';
+import { ReactElement, useContext } from 'react';
 import Agenda from 'agenda/Agenda';
+import { CalendarContext } from 'calendar/context/CalendarContext';
 import Day from 'day/Day';
 import Month from 'month/Month';
-import { uiState } from 'src/store/ui/uiSlice';
 import Toolbar from 'toolbar/Toolbar';
 import Week from 'week/Week';
 
 export default function CalendarLayout(): ReactElement {
-    const { view } = useSelector(uiState);
+    const { view } = useContext(CalendarContext);
 
     const renderView = (): ReactElement => {
         switch (view) {

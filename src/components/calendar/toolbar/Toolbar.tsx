@@ -1,20 +1,21 @@
 import { DateTime } from 'luxon';
 import { ChangeEvent, ReactElement } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    setDate,
-    setFirstDayOfWeek,
-    setLanguage,
-    setView,
-    uiState,
-} from 'src/store/ui/uiSlice';
+
+import { useCalendarContext } from 'calendar/context/CalendarContext';
 import { navigate, NavigateAction } from 'utils/constants';
 
 type ViewType = 'month' | 'week' | 'day' | 'agenda';
 
 export default function Toolbar(): ReactElement {
-    const { view, date, language, firstDayOfWeek } = useSelector(uiState);
-    const dispatch = useDispatch();
+    const {
+        view,
+        selectedDate: date,
+        language,
+        firstDayOfWeek,
+        onViewChange,
+        onDateChange,
+        onChangeLanguage,
+    } = useCalendarContext();
 
     // Views and labels
     const label = date.toFormat('MMMM yyyy');
@@ -41,25 +42,25 @@ export default function Toolbar(): ReactElement {
             action,
             newDate || DateTime.now()
         );
-        dispatch(setDate(updatedDate));
+        onDateChange(updatedDate);
     };
 
     const handleViewChange = (newView: string): void => {
-        dispatch(setView(newView as 'month' | 'week' | 'day' | 'agenda'));
+        onViewChange(newView);
     };
 
     const handleLanguageChange = (
         event: ChangeEvent<HTMLSelectElement>
     ): void => {
         const selectedLanguage = event.target.value;
-        dispatch(setLanguage(selectedLanguage));
+        onChangeLanguage(selectedLanguage);
     };
 
     const handleFirstDayChange = (
         event: ChangeEvent<HTMLSelectElement>
     ): void => {
         const selectedFirstDay = Number(event.target.value);
-        dispatch(setFirstDayOfWeek(selectedFirstDay));
+        console.log('selectedFirstDay', selectedFirstDay);
     };
 
     const renderViewNames = () => {

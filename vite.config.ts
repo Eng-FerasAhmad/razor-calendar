@@ -19,7 +19,7 @@ export default defineConfig({
             agenda: '/src/components/calendar/agenda',
             style: '/src/style',
             library: '/src/library',
-            store: '/src/store',
+            context: '/src/calendar/context',
             utils: '/src/utils',
             test: '/src/test',
             types: '/src/types',

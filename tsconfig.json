@@ -31,7 +31,7 @@
             "toolbar/*": ["./src/components/calendar/toolbar/*"],
             "agenda/*": ["./src/components/calendar/agenda/*"],
             "library/*": ["./src/library*/"],
-            "store/*": ["./src/store*/"],
+            "context/*": ["./src/calendar/context*/"],
             "style/*": ["./src/style/*"],
             "types/*": ["./src/types/*"],
             "utils/*": ["./src/utils/*"],

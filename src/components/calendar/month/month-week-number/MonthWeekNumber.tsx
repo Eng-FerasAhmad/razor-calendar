@@ -1,18 +1,17 @@
 import { DateTime } from 'luxon';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setDate, setView } from 'src/store/ui/uiSlice';
+import { useCalendarContext } from 'calendar/context/CalendarContext';
 
 interface WeekNumberProps {
     weekStart: DateTime;
 }
 
 const WeekNumber: React.FC<WeekNumberProps> = ({ weekStart }) => {
-    const dispatch = useDispatch();
+    const { onViewChange, onDateChange } = useCalendarContext();
 
-    const handleWeekClick = () => {
-        dispatch(setDate(weekStart));
-        dispatch(setView('week'));
+    const handleWeekClick = (): void => {
+        onDateChange(weekStart);
+        onViewChange('week');
     };
 
     return (

@@ -1,12 +1,10 @@
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { WeekContainer, WeekHeaderRow, WeekDayHeader } from './styles';
+import { useCalendarContext } from 'calendar/context/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import WeekHeader from 'components/calendar/week/week-header/WeekHeader';
-import { RootState } from 'src/store/types';
-import { setView, setDate } from 'src/store/ui/uiSlice';
 import { getDateRange, formatDate } from 'utils/dates';
 
 interface Props {
@@ -18,9 +16,8 @@ export default function Week({
     startWorkHour,
     endWorkHour,
 }: Props): ReactElement {
-    const dispatch = useDispatch();
-    const selectedDate = useSelector((state: RootState) => state.ui.date);
-    const events = useSelector((state: RootState) => state.events.events);
+    const { selectedDate, events, onDateChange, onViewChange } =
+        useCalendarContext();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
@@ -36,8 +33,8 @@ export default function Week({
 
     // Navigate to Day View
     const navigateToDay = (day: DateTime): void => {
-        dispatch(setDate(day)); // Pass DateTime object directly
-        dispatch(setView('day')); // Change view to 'day'
+        onDateChange(day); // Pass DateTime object directly
+        onViewChange('day'); // Change view to 'day'
     };
 
     return (
