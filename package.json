@@ -1,13 +1,44 @@
 {
     "name": "razor-calendar",
-    "private": true,
+    "private": false,
     "version": "0.0.1",
     "type": "module",
     "author": {
         "email": "feras.ahmad@gmx.de",
-        "name": "Feras Ahmad",
-        "url": "https://www.feras.ahmad.net"
+        "name": "Feras Ahmad"
     },
+    "main": "dist/index.umd.js",
+    "module": "dist/index.es.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.es.js",
+            "require": "./dist/index.umd.js"
+        }
+    },
+    "files": [
+        "/dist"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Eng-FerasAhmad/razor-calendar.git"
+    },
+    "keywords": [
+        "react",
+        "calendar",
+        "vite",
+        "razor",
+        "storybook"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Eng-FerasAhmad/razor-calendar/issues"
+    },
+    "homepage": "https://github.com/Eng-FerasAhmad/razor-calendar/blob/master/README.md",
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
@@ -69,6 +100,8 @@
         "stylelint-config-standard": "^36.0.0",
         "ts-jest": "^29.1.4",
         "typescript": "^5.2.2",
-        "vite": "^5.2.0"
+        "vite": "^5.2.0",
+        "vite-plugin-dts": "^4.2.3",
+        "vite-tsconfig-paths": "^4.3.1"
     }
 }
