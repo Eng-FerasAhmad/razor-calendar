@@ -28,6 +28,10 @@ export function CalendarIndex(): ReactElement {
         console.log('Date changed to:', date.toISO());
     };
 
+    const handleLanguageChange = (): void => {
+        console.log('lang changed to:');
+    };
+
     return (
         <CalendarProvider
             events={events}
@@ -35,6 +39,9 @@ export function CalendarIndex(): ReactElement {
             view={'week'}
             onDateChange={handleDateChange}
             onViewChange={handleViewChange}
+            language={'en'}
+            onChangeLanguage={handleLanguageChange}
+            firstDayOfWeek={0}
         >
             <StyleSheetManager shouldForwardProp={shouldForwardProp}>
                 <CalendarLayout />

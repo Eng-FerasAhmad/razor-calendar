@@ -5,6 +5,8 @@ import {
     ReactElement,
     useContext,
     useMemo,
+    useState,
+    useCallback,
 } from 'react';
 import { CalendarContextProps } from 'calendar/context/types';
 
@@ -20,16 +22,33 @@ export const CalendarContext = createContext<CalendarContextProps>({
 });
 
 export function CalendarProvider({
-    view,
-    selectedDate,
-    language,
+    view: initialView = 'week',
+    selectedDate: initialSelectedDate = DateTime.now(),
+    language: initialLanguage = 'en',
     events,
     firstDayOfWeek,
-    onViewChange,
-    onDateChange,
-    onChangeLanguage,
     children,
-}: PropsWithChildren<CalendarContextProps>): ReactElement {
+}: PropsWithChildren<Partial<CalendarContextProps>>): ReactElement {
+    const [view, setView] = useState<string>(initialView);
+    const [selectedDate, setSelectedDate] =
+        useState<DateTime>(initialSelectedDate);
+    const [language, setLanguage] = useState<string>(initialLanguage);
+
+    // Callback to update view
+    const onViewChange = useCallback((newView: string) => {
+        setView(newView);
+    }, []);
+
+    // Callback to update date
+    const onDateChange = useCallback((newDate: DateTime) => {
+        setSelectedDate(newDate);
+    }, []);
+
+    // Callback to update language
+    const onChangeLanguage = useCallback((newLanguage: string) => {
+        setLanguage(newLanguage);
+    }, []);
+
     const contextValue = useMemo(
         () => ({
             view,

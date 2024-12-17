@@ -9,6 +9,7 @@ import Week from 'week/Week';
 export default function CalendarLayout(): ReactElement {
     const { view } = useContext(CalendarContext);
 
+    console.log('view', view);
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
