@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon';
+import { Event } from 'types/calendar';
 
 export interface CalendarContextProps {
     view: string;
@@ -9,11 +10,4 @@ export interface CalendarContextProps {
     onViewChange: (view: string) => void;
     onDateChange: (date: DateTime) => void;
     onChangeLanguage: (lang: string) => void;
-}
-
-export interface Event {
-    id: string;
-    title: string;
-    start: string; // ISO string
-    end: string; // ISO string
 }

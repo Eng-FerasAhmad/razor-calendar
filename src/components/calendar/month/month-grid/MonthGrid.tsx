@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { Event } from 'calendar/context/types';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
+import { Event } from 'types/calendar';
 
 interface Props {
     weeks: DateTime[][];

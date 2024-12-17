@@ -5,3 +5,10 @@ export enum CalendarType {
     MONTH = 'month',
     DAY = 'day',
 }
+
+export interface Event {
+    id: string;
+    title: string;
+    start: string; // ISO string
+    end: string; // ISO string
+}
