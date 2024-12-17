@@ -7,7 +7,7 @@ export default function Day(): ReactElement {
     const { selectedDate, events } = useContext(CalendarContext);
 
     // Filter events for the selected day
-    const filteredEvents = events.filter((event) => {
+    const filteredEvents = events!.filter((event) => {
         const start = DateTime.fromISO(event.start);
         const end = DateTime.fromISO(event.end);
         return (

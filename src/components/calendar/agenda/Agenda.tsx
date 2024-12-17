@@ -11,7 +11,7 @@ export default function Agenda(): ReactElement {
     const endOfMonth = selectedDate.endOf('month');
 
     // Filter events that fall within the current month
-    const monthEvents = events.filter((event) => {
+    const monthEvents = events!.filter((event) => {
         const eventStart = DateTime.fromISO(event.start);
         const eventEnd = DateTime.fromISO(event.end);
         return eventStart >= startOfMonth && eventEnd <= endOfMonth;

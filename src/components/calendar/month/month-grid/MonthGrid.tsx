@@ -1,11 +1,12 @@
 import { DateTime } from 'luxon';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
+import { Event } from 'calendar/context/types';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
 
 interface Props {
     weeks: DateTime[][];
-    events: any[]; // Replace `any` with the appropriate event type
+    events: Event[];
 }
 
 export default function MonthGrid({ weeks, events }: Props): ReactElement {

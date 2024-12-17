@@ -78,7 +78,7 @@ export default function Week({
                     <DayColumn
                         key={day.toISO()}
                         day={day}
-                        events={events}
+                        events={events!}
                         interval={interval}
                         startWorkHour={startWorkHour}
                         endWorkHour={endWorkHour}

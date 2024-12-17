@@ -33,7 +33,7 @@ export default function Month(): React.ReactElement {
                 localizedMonths={localizedMonths}
                 localizedWeekdays={localizedWeekdays}
             />
-            <MonthGrid weeks={weeks} events={events} />
+            <MonthGrid weeks={weeks} events={events!} />
         </div>
     );
 }
