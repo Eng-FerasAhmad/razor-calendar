@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { ChangeEvent, ReactElement, useState } from 'react';
 
-import { CalendarIndex } from 'calendar/index';
+import { RazorCalendar } from 'calendar/index';
 import { ViewType } from 'types/calendar';
 import { navigate, NavigateAction } from 'utils/constants';
 
@@ -116,7 +116,7 @@ export default function Toolbar(): ReactElement {
             {/* View Buttons */}
             <span className="rbc-btn-group">{renderViewNames()}</span>
 
-            <CalendarIndex
+            <RazorCalendar
                 events={events}
                 view={currentView}
                 language={currentLang}

@@ -13,20 +13,14 @@ export interface Props {
     language: string;
 }
 
-export function CalendarIndex({
+export function RazorCalendar({
     events,
     view,
     selectedDate,
     language,
 }: Props): ReactElement {
     return (
-        <CalendarProvider
-            events={events}
-            selectedDate={selectedDate}
-            view={view}
-            language={language}
-            firstDayOfWeek={0}
-        >
+        <CalendarProvider>
             <StyleSheetManager shouldForwardProp={shouldForwardProp}>
                 <CalendarLayout
                     view={view}
