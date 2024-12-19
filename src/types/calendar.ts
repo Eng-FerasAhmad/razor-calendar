@@ -1,10 +1,4 @@
-export enum CalendarType {
-    OVERVIEW = 'overview',
-    WEEK = 'week',
-    YEAR = 'year',
-    MONTH = 'month',
-    DAY = 'day',
-}
+export type ViewType = 'month' | 'week' | 'day' | 'agenda';
 
 export interface Event {
     id: string;

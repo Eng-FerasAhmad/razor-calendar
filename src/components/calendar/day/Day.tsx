@@ -1,11 +1,14 @@
 import { DateTime } from 'luxon';
-import { ReactElement, useContext } from 'react';
-import { CalendarContext } from 'calendar/context/CalendarContext';
+import { ReactElement } from 'react';
+import { Event } from 'types/calendar';
 import { formatDate } from 'utils/dates';
 
-export default function Day(): ReactElement {
-    const { selectedDate, events } = useContext(CalendarContext);
+interface Props {
+    events: Event[];
+    selectedDate: DateTime;
+}
 
+export default function Day({ selectedDate, events }: Props): ReactElement {
     // Filter events for the selected day
     const filteredEvents = events!.filter((event) => {
         const start = DateTime.fromISO(event.start);

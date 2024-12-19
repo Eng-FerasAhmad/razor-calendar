@@ -1,16 +1,23 @@
+import { DateTime } from 'luxon';
 import React from 'react';
-import { useCalendarContext } from 'calendar/context/CalendarContext';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
+import { Event } from 'types/calendar';
 import {
     getDateRange,
     getLocalizedWeekdays,
     getLocalizedMonths,
 } from 'utils/dates';
 
-export default function Month(): React.ReactElement {
-    const { selectedDate, events } = useCalendarContext();
+interface Props {
+    events: Event[];
+    selectedDate: DateTime;
+}
 
+export default function Month({
+    selectedDate,
+    events,
+}: Props): React.ReactElement {
     // Localized weekdays and months
     const localizedWeekdays = getLocalizedWeekdays('en', 1); // Start on Monday
     const localizedMonths = getLocalizedMonths('en');

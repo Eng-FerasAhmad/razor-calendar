@@ -1,34 +1,44 @@
-import { ReactElement, useContext } from 'react';
+import { DateTime } from 'luxon';
+import { ReactElement } from 'react';
 import Agenda from 'agenda/Agenda';
-import { CalendarContext } from 'calendar/context/CalendarContext';
 import Day from 'day/Day';
 import Month from 'month/Month';
-import Toolbar from 'toolbar/Toolbar';
+import { Event, ViewType } from 'types/calendar';
 import Week from 'week/Week';
 
-export default function CalendarLayout(): ReactElement {
-    const { view } = useContext(CalendarContext);
+interface Props {
+    events: Event[];
+    view: ViewType;
+    selectedDate: DateTime;
+    language: string;
+}
 
-    console.log('view', view);
+export default function CalendarLayout({
+    view,
+    selectedDate,
+    events,
+}: Props): ReactElement {
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
-                return <Month />;
+                return <Month events={events} selectedDate={selectedDate} />;
             case 'week':
-                return <Week endWorkHour={9} startWorkHour={17} />;
+                return (
+                    <Week
+                        endWorkHour={9}
+                        startWorkHour={17}
+                        events={events}
+                        selectedDate={selectedDate}
+                    />
+                );
             case 'day':
-                return <Day />;
+                return <Day events={events} selectedDate={selectedDate} />;
             case 'agenda':
                 return <Agenda />;
             default:
-                return <Month />;
+                return <Month events={events} selectedDate={selectedDate} />;
         }
     };
 
-    return (
-        <div className="calendar">
-            <Toolbar />
-            {renderView()}
-        </div>
-    );
+    return <div className="calendar">{renderView()}</div>;
 }

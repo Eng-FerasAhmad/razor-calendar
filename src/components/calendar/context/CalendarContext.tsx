@@ -39,6 +39,8 @@ export function CalendarProvider({
         setView(newView);
     }, []);
 
+    // add a function to handle on update the date
+
     // Callback to update date
     const onDateChange = useCallback((newDate: DateTime) => {
         setSelectedDate(newDate);

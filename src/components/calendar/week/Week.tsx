@@ -5,19 +5,23 @@ import { useCalendarContext } from 'calendar/context/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import WeekHeader from 'components/calendar/week/week-header/WeekHeader';
+import { Event } from 'types/calendar';
 import { getDateRange, formatDate } from 'utils/dates';
 
 interface Props {
     startWorkHour: number;
     endWorkHour: number;
+    events: Event[];
+    selectedDate: DateTime;
 }
 
 export default function Week({
     startWorkHour,
     endWorkHour,
+    events,
+    selectedDate,
 }: Props): ReactElement {
-    const { selectedDate, events, onDateChange, onViewChange } =
-        useCalendarContext();
+    const { onDateChange, onViewChange } = useCalendarContext();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];

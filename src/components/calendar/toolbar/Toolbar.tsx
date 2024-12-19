@@ -1,35 +1,51 @@
 import { DateTime } from 'luxon';
-import { ChangeEvent, ReactElement } from 'react';
+import { ChangeEvent, ReactElement, useState } from 'react';
 
-import { useCalendarContext } from 'calendar/context/CalendarContext';
+import { CalendarIndex } from 'calendar/index';
+import { ViewType } from 'types/calendar';
 import { navigate, NavigateAction } from 'utils/constants';
 
-type ViewType = 'month' | 'week' | 'day' | 'agenda';
-
 export default function Toolbar(): ReactElement {
-    const {
-        view,
-        selectedDate: date,
-        language,
-        firstDayOfWeek,
-        onViewChange,
-        onDateChange,
-        onChangeLanguage,
-    } = useCalendarContext();
+    const events = [
+        {
+            id: '1',
+            title: 'Meeting',
+            start: '2024-12-04T09:00',
+            end: '2024-12-04T10:00',
+        },
+        {
+            id: '2',
+            title: 'Lunch',
+            start: '2024-12-04T12:00',
+            end: '2024-12-04T13:00',
+        },
+    ];
+    const [currentView, setCurrentView] = useState<ViewType>('week');
+    const [currentLang, setCurrentLang] = useState<string>('en');
+    const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
+
+    const handleViewChange = (view: ViewType): void => {
+        console.log(view);
+        setCurrentView(view);
+    };
+
+    const handleLanguageChange = (): void => {
+        setCurrentLang('en');
+    };
 
     // Views and labels
-    const label = date.toFormat('MMMM yyyy');
+    const label = 'date label'; // date.toFormat('MMMM yyyy');
     const views: ViewType[] = ['month', 'week', 'day', 'agenda'];
 
     // Localized messages
     const messages: Record<string, string> = {
-        today: language === 'de' ? 'Heute' : 'Today',
-        previous: language === 'de' ? 'Zurück' : 'Previous',
-        next: language === 'de' ? 'Weiter' : 'Next',
-        month: language === 'de' ? 'Monat' : 'Month',
-        week: language === 'de' ? 'Woche' : 'Week',
-        day: language === 'de' ? 'Tag' : 'Day',
-        agenda: language === 'de' ? 'Agenda' : 'Agenda',
+        today: 'Today',
+        previous: 'Previous',
+        next: 'Next',
+        month: 'Month',
+        week: 'Week',
+        day: 'Day',
+        agenda: 'Agenda',
     };
 
     const handleNavigate = (
@@ -37,23 +53,12 @@ export default function Toolbar(): ReactElement {
         newDate?: DateTime
     ): void => {
         const updatedDate = navigate(
-            view,
-            date,
+            currentView,
+            currentDate,
             action,
             newDate || DateTime.now()
         );
-        onDateChange(updatedDate);
-    };
-
-    const handleViewChange = (newView: string): void => {
-        onViewChange(newView);
-    };
-
-    const handleLanguageChange = (
-        event: ChangeEvent<HTMLSelectElement>
-    ): void => {
-        const selectedLanguage = event.target.value;
-        onChangeLanguage(selectedLanguage);
+        setCurrentDate(updatedDate);
     };
 
     const handleFirstDayChange = (
@@ -69,7 +74,7 @@ export default function Toolbar(): ReactElement {
                 key={name}
                 type="button"
                 onClick={() => handleViewChange(name)}
-                className={view === name ? 'rbc-active' : ''}
+                className={'rbc-active'}
             >
                 {messages[name]}
             </button>
@@ -80,19 +85,15 @@ export default function Toolbar(): ReactElement {
         <div className="rbc-toolbar">
             <div className="rbc-toolbar-controls">
                 {/* Language Selector */}
-                <select value={language} onChange={handleLanguageChange}>
+                <select value={'en'} onChange={handleLanguageChange}>
                     <option value="en">English</option>
                     <option value="de">Deutsch</option>
                 </select>
 
                 {/* First Day of Week Selector */}
-                <select value={firstDayOfWeek} onChange={handleFirstDayChange}>
-                    <option value={0}>
-                        {language === 'de' ? 'Sonntag' : 'Sunday'}
-                    </option>
-                    <option value={1}>
-                        {language === 'de' ? 'Montag' : 'Monday'}
-                    </option>
+                <select value={0} onChange={handleFirstDayChange}>
+                    <option value={0}>{'Sunday'}</option>
+                    <option value={1}>{'Monday'}</option>
                 </select>
             </div>
 
@@ -114,6 +115,13 @@ export default function Toolbar(): ReactElement {
 
             {/* View Buttons */}
             <span className="rbc-btn-group">{renderViewNames()}</span>
+
+            <CalendarIndex
+                events={events}
+                view={currentView}
+                language={currentLang}
+                selectedDate={currentDate}
+            />
         </div>
     );
 }
