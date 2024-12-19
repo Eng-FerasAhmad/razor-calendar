@@ -1,10 +1,9 @@
 import { DateTime } from 'luxon';
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { WeekContainer, WeekHeaderRow, WeekDayHeader } from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
-import WeekHeader from 'components/calendar/week/week-header/WeekHeader';
 import { Appointment } from 'types/calendar';
 import { getDateRange, formatDate } from 'utils/dates';
 
@@ -13,6 +12,8 @@ interface Props {
     endWorkHour: number;
     appointments: Appointment[];
     selectedDate: DateTime;
+    intervalIndex: number;
+    is24HourFormat: boolean;
 }
 
 export default function Week({
@@ -20,13 +21,13 @@ export default function Week({
     endWorkHour,
     appointments,
     selectedDate,
+    intervalIndex,
+    is24HourFormat,
 }: Props): ReactElement {
     const { onDateChange, onViewChange } = useCalendarContext();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
-    const [intervalIndex, setIntervalIndex] = useState(0);
-    const [is24HourFormat, setIs24HourFormat] = useState(true);
     const interval = intervalOptions[intervalIndex];
 
     // Days of the week
@@ -43,15 +44,6 @@ export default function Week({
 
     return (
         <WeekContainer>
-            {/* Week Header */}
-            <WeekHeader
-                selectedDate={selectedDate}
-                intervalOptions={intervalOptions}
-                setIntervalIndex={setIntervalIndex}
-                is24HourFormat={is24HourFormat}
-                setIs24HourFormat={setIs24HourFormat}
-            />
-
             {/* Week Day Names */}
             <WeekHeaderRow>
                 <div style={{ width: '100px' }} />{' '}

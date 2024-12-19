@@ -18,7 +18,6 @@ export default function CalendarLayout({
     selectedDate,
     appointments,
 }: Props): ReactElement {
-    // const { view: newView } = useContext(CalendarContext);
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
@@ -31,8 +30,10 @@ export default function CalendarLayout({
             case 'week':
                 return (
                     <Week
-                        endWorkHour={9}
-                        startWorkHour={17}
+                        endWorkHour={17}
+                        startWorkHour={9}
+                        is24HourFormat={true}
+                        intervalIndex={0}
                         appointments={appointments}
                         selectedDate={selectedDate}
                     />

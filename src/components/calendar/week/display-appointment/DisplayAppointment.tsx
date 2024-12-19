@@ -1,11 +1,21 @@
+import { DateTime } from 'luxon';
 import React, { ReactElement } from 'react';
 
 interface Props {
     title: string;
+    from: string;
+    to: string;
     style: React.CSSProperties;
 }
 
-export default function Event({ title, style }: Props): ReactElement {
+export default function DisplayAppointment({
+    title,
+    from,
+    to,
+    style,
+}: Props): ReactElement {
+    const start = DateTime.fromISO(from).hour;
+    const end = DateTime.fromISO(to).hour;
     return (
         <div
             style={{
@@ -20,7 +30,7 @@ export default function Event({ title, style }: Props): ReactElement {
                 ...style,
             }}
         >
-            {title}
+            {title} {start}-{end}
         </div>
     );
 }

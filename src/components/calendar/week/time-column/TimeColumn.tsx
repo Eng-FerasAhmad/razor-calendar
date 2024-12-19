@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { isWorkTime } from 'utils/dateTime';
 
 export interface Props {
     interval: number; // Interval in minutes (e.g., 60, 30, 15)
@@ -35,7 +36,7 @@ export default function TimeColumn({
     const timeSlots = generateTimeSlots();
 
     return (
-        <div style={{ width: '100px', borderRight: '1px solid #ccc' }}>
+        <div style={{ width: '100px' }}>
             {/* Time Slots */}
             {timeSlots.map(({ hour, minute, label }) => (
                 <div
@@ -45,10 +46,13 @@ export default function TimeColumn({
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor:
-                            hour >= startWorkHour && hour < endWorkHour
-                                ? '#ffffff'
-                                : '#f0f0f0',
+                        backgroundColor: isWorkTime(
+                            hour,
+                            startWorkHour,
+                            endWorkHour
+                        )
+                            ? '#ffffff'
+                            : '#f0f0f0',
                         borderBottom: '1px solid #ddd',
                     }}
                 >

@@ -1,7 +1,12 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import Event from 'components/calendar/week/display-events/DisplayEvents';
 import { Appointment } from 'types/calendar';
+import { isWorkTime } from 'utils/dateTime';
+import {
+    DaysColumnsContainer,
+    TimeSlotWrapper,
+} from 'week/days-columns/styles';
+import DisplayAppointment from 'week/display-appointment/DisplayAppointment';
 
 interface Props {
     day: DateTime;
@@ -49,39 +54,27 @@ export default function DayColumn({
     };
 
     return (
-        <div
-            style={{
-                flex: 1,
-                position: 'relative',
-                borderLeft: '1px solid #ccc',
-            }}
-        >
-            {/* Time Slots */}
+        <DaysColumnsContainer data-testid="days-columns-container">
             {timeSlots.map((_, index) => {
                 const hour = Math.floor((index * interval) / 60);
                 return (
-                    <div
+                    <TimeSlotWrapper
+                        data-testid="time-slot"
                         key={index}
-                        style={{
-                            height: '30px',
-                            borderBottom: '1px solid #ddd',
-                            backgroundColor:
-                                hour >= startWorkHour && hour < endWorkHour
-                                    ? '#fff'
-                                    : '#f0f0f0',
-                        }}
+                        workTime={isWorkTime(hour, startWorkHour, endWorkHour)}
                     />
                 );
             })}
 
-            {/* Events */}
             {dayEvents.map((event) => (
-                <Event
+                <DisplayAppointment
                     key={event.id}
                     title={event.title}
+                    from={event.start}
+                    to={event.end}
                     style={calculateEventStyle(event)}
                 />
             ))}
-        </div>
+        </DaysColumnsContainer>
     );
 }

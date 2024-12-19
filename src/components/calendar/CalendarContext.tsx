@@ -35,12 +35,10 @@ export function CalendarProvider({ children }: Props): ReactElement {
     const [firstDayOfWeek, setFirstDayOfWeek] = useState<number>(1);
 
     const onViewChange = useCallback((newView: string) => {
-        console.log('newView:', newView);
         setView(newView);
     }, []);
 
     const onDateChange = useCallback((newDate: DateTime) => {
-        console.log('newDate:', newDate);
         setSelectedDate(newDate);
     }, []);
 
