@@ -9,7 +9,7 @@ import { ViewType } from 'types/calendar';
 import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
-    const events = [
+    const appointments = [
         {
             id: '1',
             title: 'Meeting',
@@ -66,7 +66,7 @@ export default function App(): ReactElement {
 
             {/* Pass updated values to RazorCalendar */}
             <RazorCalendar
-                events={events}
+                appointments={appointments}
                 view={currentView}
                 language={currentLang}
                 selectedDate={currentDate}

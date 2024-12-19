@@ -1,18 +1,22 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import DisplayEvents from 'components/calendar/month/month-day-events/MonthDayEvents';
+import { Appointment } from 'types/calendar';
 
 interface Props {
     week: DateTime[];
-    events: any[]; // Replace `any` with the appropriate event type
+    appointments: Appointment[]; // Replace `any` with the appropriate event type
 }
 
-export default function DaysInTheWeek({ week, events }: Props): ReactElement {
+export default function DaysInTheWeek({
+    week,
+    appointments,
+}: Props): ReactElement {
     const currentDay = DateTime.now();
 
     const getEventsForDay = (day: DateTime) =>
-        events.filter((event) =>
-            DateTime.fromISO(event.start).hasSame(day, 'day')
+        appointments.filter((appointment) =>
+            DateTime.fromISO(appointment.start).hasSame(day, 'day')
         );
 
     return (

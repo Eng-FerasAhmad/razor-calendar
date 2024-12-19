@@ -1,20 +1,20 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { StyleSheetManager } from 'styled-components';
-import { CalendarProvider } from 'calendar/context/CalendarContext';
-import CalendarLayout from 'calendar/layout/CalendarLayout';
-import { Event, ViewType } from 'types/calendar';
+import { CalendarProvider } from 'calendar/CalendarContext';
+import CalendarLayout from 'calendar/CalendarLayout';
+import { Appointment, ViewType } from 'types/calendar';
 import { shouldForwardProp } from 'utils/common';
 
 export interface Props {
-    events: Event[];
+    appointments: Appointment[];
     view: ViewType;
     selectedDate: DateTime;
     language: string;
 }
 
 export function RazorCalendar({
-    events,
+    appointments,
     view,
     selectedDate,
     language,
@@ -26,7 +26,7 @@ export function RazorCalendar({
                     view={view}
                     language={language}
                     selectedDate={selectedDate}
-                    events={events}
+                    appointments={appointments}
                 />
             </StyleSheetManager>
         </CalendarProvider>

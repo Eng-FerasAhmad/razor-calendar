@@ -1,10 +1,11 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Event from 'components/calendar/week/display-events/DisplayEvents';
+import { Appointment } from 'types/calendar';
 
 interface Props {
     day: DateTime;
-    events: Array<{ id: string; title: string; start: string; end: string }>;
+    appointments: Appointment[];
     interval: number; // Interval in minutes
     startWorkHour: number;
     endWorkHour: number;
@@ -12,7 +13,7 @@ interface Props {
 
 export default function DayColumn({
     day,
-    events,
+    appointments,
     interval,
     startWorkHour,
     endWorkHour,
@@ -24,9 +25,11 @@ export default function DayColumn({
     );
 
     // Filter events for the current day
-    const dayEvents = events.filter((event) =>
-        DateTime.fromISO(event.start).hasSame(day, 'day')
-    );
+    const dayEvents =
+        appointments &&
+        appointments.filter((appointment) =>
+            DateTime.fromISO(appointment.start).hasSame(day, 'day')
+        );
 
     // Helper to calculate event position
     const calculateEventStyle = (event: { start: string; end: string }) => {

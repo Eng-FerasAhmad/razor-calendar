@@ -1,18 +1,21 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { Event } from 'types/calendar';
+import { Appointment } from 'types/calendar';
 import { formatDate } from 'utils/dates';
 
 interface Props {
-    events: Event[];
+    appointments: Appointment[];
     selectedDate: DateTime;
 }
 
-export default function Day({ selectedDate, events }: Props): ReactElement {
+export default function Day({
+    selectedDate,
+    appointments,
+}: Props): ReactElement {
     // Filter events for the selected day
-    const filteredEvents = events!.filter((event) => {
-        const start = DateTime.fromISO(event.start);
-        const end = DateTime.fromISO(event.end);
+    const filteredEvents = appointments!.filter((appointment) => {
+        const start = DateTime.fromISO(appointment.start);
+        const end = DateTime.fromISO(appointment.end);
         return (
             start.hasSame(selectedDate, 'day') ||
             end.hasSame(selectedDate, 'day')

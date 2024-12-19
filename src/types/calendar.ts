@@ -1,6 +1,6 @@
 export type ViewType = 'month' | 'week' | 'day' | 'agenda';
 
-export interface Event {
+export interface Appointment {
     id: string;
     title: string;
     start: string; // ISO string

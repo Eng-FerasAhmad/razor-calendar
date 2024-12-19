@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import React from 'react';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
-import { Event } from 'types/calendar';
+import { Appointment } from 'types/calendar';
 import {
     getDateRange,
     getLocalizedWeekdays,
@@ -10,13 +10,13 @@ import {
 } from 'utils/dates';
 
 interface Props {
-    events: Event[];
+    appointments: Appointment[];
     selectedDate: DateTime;
 }
 
 export default function Month({
     selectedDate,
-    events,
+    appointments,
 }: Props): React.ReactElement {
     // Localized weekdays and months
     const localizedWeekdays = getLocalizedWeekdays('en', 1); // Start on Monday
@@ -40,7 +40,7 @@ export default function Month({
                 localizedMonths={localizedMonths}
                 localizedWeekdays={localizedWeekdays}
             />
-            <MonthGrid weeks={weeks} events={events!} />
+            <MonthGrid weeks={weeks} appointments={appointments!} />
         </div>
     );
 }

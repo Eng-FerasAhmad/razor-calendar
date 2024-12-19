@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import React from 'react';
-import { useCalendarContext } from 'calendar/context/CalendarContext';
+import { useCalendarContext } from 'calendar/CalendarContext';
 
 interface WeekNumberProps {
     weekStart: DateTime;

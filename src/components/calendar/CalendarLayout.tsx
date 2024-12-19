@@ -3,11 +3,11 @@ import { ReactElement } from 'react';
 import Agenda from 'agenda/Agenda';
 import Day from 'day/Day';
 import Month from 'month/Month';
-import { Event, ViewType } from 'types/calendar';
+import { Appointment, ViewType } from 'types/calendar';
 import Week from 'week/Week';
 
 interface Props {
-    events: Event[];
+    appointments: Appointment[];
     view: ViewType;
     selectedDate: DateTime;
     language: string;
@@ -16,27 +16,43 @@ interface Props {
 export default function CalendarLayout({
     view,
     selectedDate,
-    events,
+    appointments,
 }: Props): ReactElement {
+    // const { view: newView } = useContext(CalendarContext);
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
-                return <Month events={events} selectedDate={selectedDate} />;
+                return (
+                    <Month
+                        appointments={appointments}
+                        selectedDate={selectedDate}
+                    />
+                );
             case 'week':
                 return (
                     <Week
                         endWorkHour={9}
                         startWorkHour={17}
-                        events={events}
+                        appointments={appointments}
                         selectedDate={selectedDate}
                     />
                 );
             case 'day':
-                return <Day events={events} selectedDate={selectedDate} />;
+                return (
+                    <Day
+                        appointments={appointments}
+                        selectedDate={selectedDate}
+                    />
+                );
             case 'agenda':
                 return <Agenda />;
             default:
-                return <Month events={events} selectedDate={selectedDate} />;
+                return (
+                    <Month
+                        appointments={appointments}
+                        selectedDate={selectedDate}
+                    />
+                );
         }
     };
 

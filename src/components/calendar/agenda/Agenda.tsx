@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { ReactElement, useContext } from 'react';
-import { CalendarContext } from 'calendar/context/CalendarContext';
+import { CalendarContext } from 'calendar/CalendarContext';
 import { formatDate } from 'utils/dates';
 
 export default function Agenda(): ReactElement {

@@ -1,24 +1,24 @@
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 import { WeekContainer, WeekHeaderRow, WeekDayHeader } from './styles';
-import { useCalendarContext } from 'calendar/context/CalendarContext';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import WeekHeader from 'components/calendar/week/week-header/WeekHeader';
-import { Event } from 'types/calendar';
+import { Appointment } from 'types/calendar';
 import { getDateRange, formatDate } from 'utils/dates';
 
 interface Props {
     startWorkHour: number;
     endWorkHour: number;
-    events: Event[];
+    appointments: Appointment[];
     selectedDate: DateTime;
 }
 
 export default function Week({
     startWorkHour,
     endWorkHour,
-    events,
+    appointments,
     selectedDate,
 }: Props): ReactElement {
     const { onDateChange, onViewChange } = useCalendarContext();
@@ -82,7 +82,7 @@ export default function Week({
                     <DayColumn
                         key={day.toISO()}
                         day={day}
-                        events={events!}
+                        appointments={appointments!}
                         interval={interval}
                         startWorkHour={startWorkHour}
                         endWorkHour={endWorkHour}
