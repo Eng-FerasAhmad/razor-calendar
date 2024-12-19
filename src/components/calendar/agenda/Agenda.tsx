@@ -4,16 +4,16 @@ import { CalendarContext } from 'calendar/CalendarContext';
 import { formatDate } from 'utils/dates';
 
 export default function Agenda(): ReactElement {
-    const { selectedDate, events } = useContext(CalendarContext);
+    const { selectedDate, appointments } = useContext(CalendarContext);
 
     // Calculate the first and last day of the month for the current selected date
     const startOfMonth = selectedDate.startOf('month');
     const endOfMonth = selectedDate.endOf('month');
 
     // Filter events that fall within the current month
-    const monthEvents = events!.filter((event) => {
-        const eventStart = DateTime.fromISO(event.start);
-        const eventEnd = DateTime.fromISO(event.end);
+    const monthEvents = appointments!.filter((appointment) => {
+        const eventStart = DateTime.fromISO(appointment.start);
+        const eventEnd = DateTime.fromISO(appointment.end);
         return eventStart >= startOfMonth && eventEnd <= endOfMonth;
     });
 

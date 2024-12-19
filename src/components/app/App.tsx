@@ -3,7 +3,7 @@ import { ReactElement, useState } from 'react';
 
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
-import Toolbar from 'components/toolbar/Toolbar';
+import CalendarToolbar from 'components/toolbar/CalendarToolbar';
 import { GlobalStyle } from 'style/global';
 import { ViewType } from 'types/calendar';
 import { navigate, NavigateAction } from 'utils/constants';
@@ -24,7 +24,7 @@ export default function App(): ReactElement {
         },
     ];
 
-    // State for Toolbar and Calendar
+    // State for CalendarToolbar and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('week');
     const [currentLang, setCurrentLang] = useState<string>('en');
     const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
@@ -54,8 +54,8 @@ export default function App(): ReactElement {
     return (
         <AppContainer data-testid="app">
             <GlobalStyle />
-            {/* Pass handlers and state to Toolbar */}
-            <Toolbar
+            {/* Pass handlers and state to CalendarToolbar */}
+            <CalendarToolbar
                 currentView={currentView}
                 onViewChange={handleViewChange}
                 currentLang={currentLang}

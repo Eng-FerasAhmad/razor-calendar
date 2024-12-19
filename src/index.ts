@@ -1,2 +1,2 @@
 export { RazorCalendar } from './components/calendar/index';
-export type { Event } from './types/calendar';
+export type { Appointment } from './types/calendar';

@@ -12,7 +12,7 @@ interface ToolbarProps {
     onNavigate: (action: NavigateAction, newDate?: DateTime) => void;
 }
 
-export default function Toolbar({
+export default function CalendarToolbar({
     currentView,
     onViewChange,
     currentLang,
