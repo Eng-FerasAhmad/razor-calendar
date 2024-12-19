@@ -1,6 +1,14 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { WeekContainer, WeekHeaderRow, WeekDayHeader } from './styles';
+import {
+    WeekContainer,
+    WeekHeaderRow,
+    TimeDayWrapper,
+    WeekDayHeaderWrapper,
+    WidthSpaceWrapper,
+    DayShortNameWrapper,
+    DayNumberWrapper,
+} from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
@@ -43,25 +51,26 @@ export default function Week({
     };
 
     return (
-        <WeekContainer>
-            {/* Week Day Names */}
-            <WeekHeaderRow>
-                <div style={{ width: '100px' }} />{' '}
-                {/* Empty space for TimeColumn */}
+        <WeekContainer data-testid="week-container">
+            <WeekHeaderRow data-testid="week-header-row">
+                <WidthSpaceWrapper data-testid="width-space-wrapper" />
                 {days.map((day) => (
-                    <WeekDayHeader
+                    <WeekDayHeaderWrapper
+                        data-testid="week-day-header-wrapper"
                         key={day.toISO()}
-                        onClick={() => navigateToDay(day)} // Click to navigate
-                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigateToDay(day)}
                     >
-                        {formatDate(day, 'EEE, MMM d')}
-                    </WeekDayHeader>
+                        <DayShortNameWrapper>
+                            {formatDate(day, 'ccc')}
+                        </DayShortNameWrapper>
+                        <DayNumberWrapper>
+                            {formatDate(day, 'dd')}
+                        </DayNumberWrapper>
+                    </WeekDayHeaderWrapper>
                 ))}
             </WeekHeaderRow>
 
-            {/* Week Grid */}
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                {/* Time Column */}
+            <TimeDayWrapper data-testud="time-day-wrapper">
                 <TimeColumn
                     interval={interval}
                     is24HourFormat={is24HourFormat}
@@ -69,7 +78,6 @@ export default function Week({
                     endWorkHour={endWorkHour}
                 />
 
-                {/* Day Columns */}
                 {days.map((day) => (
                     <DayColumn
                         key={day.toISO()}
@@ -80,7 +88,7 @@ export default function Week({
                         endWorkHour={endWorkHour}
                     />
                 ))}
-            </div>
+            </TimeDayWrapper>
         </WeekContainer>
     );
 }
