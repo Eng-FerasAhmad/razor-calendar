@@ -15,6 +15,7 @@ interface Props {
     startWorkHour: number;
     endWorkHour: number;
     intervalIndex: number;
+    primaryColor: string;
 }
 
 export default function DayColumn({
@@ -24,6 +25,7 @@ export default function DayColumn({
     startWorkHour,
     endWorkHour,
     intervalIndex,
+    primaryColor,
 }: Props): ReactElement {
     // Generate time slots
     const timeSlots = Array.from(
@@ -50,8 +52,8 @@ export default function DayColumn({
             eventEnd.diff(eventStart, 'minutes').minutes / interval;
 
         return {
-            top: `${(startMinutes / totalMinutes) * 100}%`,
-            height: `${(duration / totalMinutes) * 100}%`,
+            top: `calc(${(startMinutes / totalMinutes) * 100}% + 1px)`,
+            height: `calc(${(duration / totalMinutes) * 100}% - 7px)`,
         };
     };
 
@@ -84,6 +86,7 @@ export default function DayColumn({
                     title={event.title}
                     from={event.start}
                     to={event.end}
+                    primaryColor={primaryColor}
                     style={calculateEventStyle(event)}
                 />
             ))}

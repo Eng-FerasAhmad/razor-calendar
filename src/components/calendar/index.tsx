@@ -11,6 +11,7 @@ export interface Props {
     view: ViewType;
     selectedDate: DateTime;
     language: string;
+    primaryColor: string;
 }
 
 export function RazorCalendar({
@@ -18,6 +19,7 @@ export function RazorCalendar({
     view,
     selectedDate,
     language,
+    primaryColor,
 }: Props): ReactElement {
     return (
         <CalendarProvider>
@@ -27,6 +29,7 @@ export function RazorCalendar({
                     language={language}
                     selectedDate={selectedDate}
                     appointments={appointments}
+                    primaryColor={primaryColor}
                 />
             </StyleSheetManager>
         </CalendarProvider>

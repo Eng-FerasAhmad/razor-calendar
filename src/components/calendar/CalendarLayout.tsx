@@ -12,12 +12,14 @@ interface Props {
     view: ViewType;
     selectedDate: DateTime;
     language: string;
+    primaryColor: string;
 }
 
 export default function CalendarLayout({
     view,
     selectedDate,
     appointments,
+    primaryColor,
 }: Props): ReactElement {
     const renderView = (): ReactElement => {
         switch (view) {
@@ -33,10 +35,11 @@ export default function CalendarLayout({
                     <Week
                         endWorkHour={17}
                         startWorkHour={9}
-                        is24HourFormat={true}
-                        intervalIndex={3}
+                        is24HourFormat={false}
+                        intervalIndex={1}
                         appointments={appointments}
                         selectedDate={selectedDate}
+                        primaryColor={primaryColor}
                     />
                 );
             case 'day':

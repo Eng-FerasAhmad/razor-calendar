@@ -29,12 +29,10 @@ export const TimeDayWrapper = styled.div`
     display: flex;
     flex-direction: row;
     overflow-y: auto;
-    /* Adjust dynamically */
-    /* this height is the combined height of the header and toolbar */
 `;
 
 export const WidthSpaceWrapper = styled.div`
-    width: 100px;
+    width: 80px;
 `;
 
 export const DayShortNameWrapper = styled.div`

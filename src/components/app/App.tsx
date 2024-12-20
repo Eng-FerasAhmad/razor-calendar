@@ -14,7 +14,7 @@ export default function App(): ReactElement {
             id: '1',
             title: 'Meeting',
             start: '2024-12-16T07:00',
-            end: '2024-12-16T07:30',
+            end: '2024-12-16T07:35',
         },
         {
             id: '2',
@@ -82,6 +82,7 @@ export default function App(): ReactElement {
                 view={currentView}
                 language={currentLang}
                 selectedDate={currentDate}
+                primaryColor="#2ba172"
             />
         </AppContainer>
     );

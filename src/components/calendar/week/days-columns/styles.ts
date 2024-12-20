@@ -44,7 +44,6 @@ const calcColumnHeight = (props: Props): string => {
     }
 
     const height = props.timSlotsCount! * slotHeight + offset;
-    console.log('height', height);
     return `${height}px`;
 };
 

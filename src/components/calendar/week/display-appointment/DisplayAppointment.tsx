@@ -6,6 +6,7 @@ interface Props {
     title: string;
     from: string;
     to: string;
+    primaryColor: string;
     style: React.CSSProperties;
 }
 
@@ -13,6 +14,7 @@ export default function DisplayAppointment({
     title,
     from,
     to,
+    primaryColor,
     style,
 }: Props): ReactElement {
     const start = DateTime.fromISO(from).hour;
@@ -21,6 +23,7 @@ export default function DisplayAppointment({
         <DisplayAppointmentContainer
             style={{
                 ...style,
+                backgroundColor: primaryColor,
             }}
         >
             {title} {start}-{end}

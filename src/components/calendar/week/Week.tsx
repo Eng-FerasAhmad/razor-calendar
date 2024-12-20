@@ -22,6 +22,7 @@ interface Props {
     selectedDate: DateTime;
     intervalIndex: number;
     is24HourFormat: boolean;
+    primaryColor: string;
 }
 
 export default function Week({
@@ -31,6 +32,7 @@ export default function Week({
     selectedDate,
     intervalIndex,
     is24HourFormat,
+    primaryColor,
 }: Props): ReactElement {
     const { onDateChange, onViewChange } = useCalendarContext();
 
@@ -88,6 +90,7 @@ export default function Week({
                         intervalIndex={intervalIndex}
                         startWorkHour={startWorkHour}
                         endWorkHour={endWorkHour}
+                        primaryColor={primaryColor}
                     />
                 ))}
             </TimeDayWrapper>
