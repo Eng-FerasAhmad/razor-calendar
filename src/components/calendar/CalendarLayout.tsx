@@ -34,7 +34,7 @@ export default function CalendarLayout({
                         endWorkHour={17}
                         startWorkHour={9}
                         is24HourFormat={true}
-                        intervalIndex={0}
+                        intervalIndex={3}
                         appointments={appointments}
                         selectedDate={selectedDate}
                     />

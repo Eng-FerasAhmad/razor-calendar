@@ -64,12 +64,9 @@ export default function DayColumn({
             {timeSlots.map((_, index) => {
                 const hour = Math.floor((index * interval) / 60);
                 const minute = (index * interval) % 60;
-
-                console.log('minute === 0', minute === 0);
-                console.log('minute', minute);
                 return (
                     <TimeSlotWrapper
-                        data-testid="time-slot"
+                        data-testid="time-slot-wrapper"
                         id={`${hour}:${minute}`}
                         key={index}
                         isFullHour={minute === 0}
