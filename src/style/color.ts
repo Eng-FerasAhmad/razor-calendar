@@ -57,6 +57,6 @@ export const color = {
 };
 
 export const calendarColors = {
-    outOfWork: '#f2f2f2',
+    outOfWork: '#fff',
     workTime: '#fff',
 };

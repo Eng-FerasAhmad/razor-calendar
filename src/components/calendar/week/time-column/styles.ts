@@ -4,7 +4,8 @@ import { calendarColors } from 'style/color';
 import { pixelToRem } from 'utils/common';
 
 interface Props {
-    workTime: boolean;
+    workTime?: boolean;
+    intervalIndex?: number;
 }
 
 export const TimeColumnContainer = styled.div`

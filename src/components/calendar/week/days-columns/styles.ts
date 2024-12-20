@@ -6,10 +6,16 @@ import { pixelToRem } from 'utils/common';
 interface Props {
     workTime?: boolean;
     timSlotsCount?: number;
+    isFullHour?: boolean;
+    intervalIndex?: number;
 }
 
 const calcColumnHeight = (props: Props): string => {
     return `calc(${props.timSlotsCount} * ${pixelToRem(calendarConfig.timeSlotHeight)} + 24px)`;
+};
+
+const calcTimeSlotHeight = (props: Props): string => {
+    return pixelToRem(calendarConfig.timeSlotHeight);
 };
 
 export const DaysColumnsContainer = styled.div<Props>`
@@ -20,8 +26,9 @@ export const DaysColumnsContainer = styled.div<Props>`
 `;
 
 export const TimeSlotWrapper = styled.div<Props>`
-    height: ${pixelToRem(calendarConfig.timeSlotHeight)};
-    border-bottom: 1px solid #ddd;
+    height: ${calcTimeSlotHeight};
+    border-bottom: 1px solid
+        ${(props) => (!props.isFullHour ? '#ddd' : '#f0f0f0')};
     background-color: ${(props) =>
         props.workTime ? calendarColors.workTime : calendarColors.outOfWork};
 `;

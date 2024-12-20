@@ -47,7 +47,7 @@ export default function TimeColumn({
                     key={`${hour}:${minute}`}
                     workTime={isWorkTime(hour, startWorkHour, endWorkHour)}
                 >
-                    {hour !== 0 && (
+                    {hour !== 0 && minute === 0 && (
                         <TimeLabelTextWrapper>{label}</TimeLabelTextWrapper>
                     )}
                 </TimeLabelWrapper>
