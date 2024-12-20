@@ -76,6 +76,7 @@ export default function Week({
                     is24HourFormat={is24HourFormat}
                     startWorkHour={startWorkHour}
                     endWorkHour={endWorkHour}
+                    intervalIndex={intervalIndex}
                 />
 
                 {days.map((day) => (
@@ -84,6 +85,7 @@ export default function Week({
                         day={day}
                         appointments={appointments!}
                         interval={interval}
+                        intervalIndex={intervalIndex}
                         startWorkHour={startWorkHour}
                         endWorkHour={endWorkHour}
                     />

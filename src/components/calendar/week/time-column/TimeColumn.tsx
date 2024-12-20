@@ -11,6 +11,7 @@ export interface Props {
     is24HourFormat: boolean; // Whether to use 24-hour format
     startWorkHour: number; // Start of working hours (0–23)
     endWorkHour: number; // End of working hours (0–23)
+    intervalIndex: number; // Index of the interval
 }
 
 export default function TimeColumn({
@@ -18,6 +19,7 @@ export default function TimeColumn({
     is24HourFormat,
     startWorkHour,
     endWorkHour,
+    intervalIndex,
 }: Props): ReactElement {
     const generateTimeSlots = (): {
         hour: number;
@@ -46,6 +48,7 @@ export default function TimeColumn({
                 <TimeLabelWrapper
                     key={`${hour}:${minute}`}
                     workTime={isWorkTime(hour, startWorkHour, endWorkHour)}
+                    intervalIndex={intervalIndex}
                 >
                     {hour !== 0 && minute === 0 && (
                         <TimeLabelTextWrapper>{label}</TimeLabelTextWrapper>

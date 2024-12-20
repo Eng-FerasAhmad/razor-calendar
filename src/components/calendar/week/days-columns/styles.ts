@@ -2,20 +2,54 @@ import styled from 'styled-components';
 import { calendarConfig } from 'calendar/config';
 import { calendarColors } from 'style/color';
 import { pixelToRem } from 'utils/common';
+import { TimeSlotOffset } from 'week/time-column/styles';
 
 interface Props {
     workTime?: boolean;
     timSlotsCount?: number;
     isFullHour?: boolean;
     intervalIndex?: number;
+    isFirstRow?: boolean;
+    isLastRow?: boolean;
 }
 
 const calcColumnHeight = (props: Props): string => {
-    return `calc(${props.timSlotsCount} * ${pixelToRem(calendarConfig.timeSlotHeight)} + 24px)`;
+    let offset = 0;
+    switch (props.intervalIndex) {
+        case 0:
+            offset = 24;
+            break;
+        case 1:
+            offset = props.intervalIndex! * 24 + 24;
+            break;
+        case 2:
+            offset = props.intervalIndex! * 36 + 24;
+            break;
+        case 3:
+            offset = props.intervalIndex! * 40 + 24;
+            break;
+        case 4:
+            offset = props.intervalIndex! * 66 + 24;
+            break;
+        default:
+            offset = 0;
+            break;
+    }
+    return `calc(${props.timSlotsCount} * ${pixelToRem(calendarConfig.timeSlotHeight)} + ${offset}px)`;
 };
 
 const calcTimeSlotHeight = (props: Props): string => {
-    return pixelToRem(calendarConfig.timeSlotHeight);
+    const offset = props.intervalIndex! * TimeSlotOffset;
+    return pixelToRem(calendarConfig.timeSlotHeight - offset);
+};
+
+const calcBorder = (props: Props): string => {
+    const color = props.isFullHour ? '#ddd' : '#f0f0f0';
+    return !props.isFirstRow ? `1px solid ${color}` : 'none';
+};
+
+const calcBorderBottom = (props: Props): string => {
+    return props.isLastRow ? `1px solid #ddd` : 'none';
 };
 
 export const DaysColumnsContainer = styled.div<Props>`
@@ -27,8 +61,9 @@ export const DaysColumnsContainer = styled.div<Props>`
 
 export const TimeSlotWrapper = styled.div<Props>`
     height: ${calcTimeSlotHeight};
-    border-bottom: 1px solid
-        ${(props) => (!props.isFullHour ? '#ddd' : '#f0f0f0')};
+    min-height: ${pixelToRem(20)};
+    border-top: ${calcBorder};
+    border-bottom: ${calcBorderBottom};
     background-color: ${(props) =>
         props.workTime ? calendarColors.workTime : calendarColors.outOfWork};
 `;

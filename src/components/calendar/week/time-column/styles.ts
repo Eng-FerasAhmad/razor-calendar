@@ -3,6 +3,8 @@ import { calendarConfig } from 'calendar/config';
 import { calendarColors } from 'style/color';
 import { pixelToRem } from 'utils/common';
 
+export const TimeSlotOffset = 10;
+
 interface Props {
     workTime?: boolean;
     intervalIndex?: number;
@@ -12,10 +14,15 @@ export const TimeColumnContainer = styled.div`
     width: '100px';
 `;
 
+const calcTimeSlotHeight = (props: Props): string => {
+    const offset = props.intervalIndex! * TimeSlotOffset;
+    return pixelToRem(calendarConfig.timeSlotHeight - offset);
+};
+
 export const TimeLabelWrapper = styled.div<Props>`
-    height: ${pixelToRem(
-        calendarConfig.timeSlotHeight + 1
-    )}; // 1px beacuse it do not have a border not like the days columns
+    height: ${calcTimeSlotHeight};
+    min-height: 20px;
+    border-top: 1px solid transparent;
     width: 60px;
     margin: auto;
     padding-left: 20px;
@@ -26,5 +33,5 @@ export const TimeLabelWrapper = styled.div<Props>`
 
 export const TimeLabelTextWrapper = styled.span`
     position: relative;
-    top: -11px;
+    top: -14px;
 `;

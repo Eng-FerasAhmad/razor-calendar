@@ -14,6 +14,7 @@ interface Props {
     interval: number; // Interval in minutes
     startWorkHour: number;
     endWorkHour: number;
+    intervalIndex: number;
 }
 
 export default function DayColumn({
@@ -22,6 +23,7 @@ export default function DayColumn({
     interval,
     startWorkHour,
     endWorkHour,
+    intervalIndex,
 }: Props): ReactElement {
     // Generate time slots
     const timeSlots = Array.from(
@@ -57,16 +59,23 @@ export default function DayColumn({
         <DaysColumnsContainer
             data-testid="days-columns-container"
             timSlotsCount={timeSlots.length}
+            intervalIndex={intervalIndex}
         >
             {timeSlots.map((_, index) => {
                 const hour = Math.floor((index * interval) / 60);
                 const minute = (index * interval) % 60;
 
+                console.log('minute === 0', minute === 0);
+                console.log('minute', minute);
                 return (
                     <TimeSlotWrapper
                         data-testid="time-slot"
+                        id={`${hour}:${minute}`}
                         key={index}
                         isFullHour={minute === 0}
+                        isFirstRow={index === 0}
+                        intervalIndex={intervalIndex}
+                        isLastRow={index === timeSlots.length - 1}
                         workTime={isWorkTime(hour, startWorkHour, endWorkHour)}
                     />
                 );
