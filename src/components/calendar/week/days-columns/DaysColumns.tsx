@@ -47,6 +47,8 @@ export default function DayColumn({
         const duration =
             eventEnd.diff(eventStart, 'minutes').minutes / interval;
 
+        console.log('startMinutes', startMinutes);
+        console.log('totalMinutes', totalMinutes);
         return {
             top: `${(startMinutes / totalMinutes) * 100}%`,
             height: `${(duration / totalMinutes) * 100}%`,
@@ -54,7 +56,10 @@ export default function DayColumn({
     };
 
     return (
-        <DaysColumnsContainer data-testid="days-columns-container">
+        <DaysColumnsContainer
+            data-testid="days-columns-container"
+            timSlotsCount={timeSlots.length}
+        >
             {timeSlots.map((_, index) => {
                 const hour = Math.floor((index * interval) / 60);
                 return (

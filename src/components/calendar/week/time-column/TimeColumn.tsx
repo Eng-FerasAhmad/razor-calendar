@@ -1,5 +1,10 @@
 import { ReactElement } from 'react';
 import { isWorkTime } from 'utils/dateTime';
+import {
+    TimeColumnContainer,
+    TimeLabelTextWrapper,
+    TimeLabelWrapper,
+} from 'week/time-column/styles';
 
 export interface Props {
     interval: number; // Interval in minutes (e.g., 60, 30, 15)
@@ -36,29 +41,17 @@ export default function TimeColumn({
     const timeSlots = generateTimeSlots();
 
     return (
-        <div style={{ width: '100px' }}>
-            {/* Time Slots */}
+        <TimeColumnContainer>
             {timeSlots.map(({ hour, minute, label }) => (
-                <div
+                <TimeLabelWrapper
                     key={`${hour}:${minute}`}
-                    style={{
-                        height: '30px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: isWorkTime(
-                            hour,
-                            startWorkHour,
-                            endWorkHour
-                        )
-                            ? '#ffffff'
-                            : '#f0f0f0',
-                        borderBottom: '1px solid #ddd',
-                    }}
+                    workTime={isWorkTime(hour, startWorkHour, endWorkHour)}
                 >
-                    {label}
-                </div>
+                    {hour !== 0 && (
+                        <TimeLabelTextWrapper>{label}</TimeLabelTextWrapper>
+                    )}
+                </TimeLabelWrapper>
             ))}
-        </div>
+        </TimeColumnContainer>
     );
 }

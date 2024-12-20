@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { ReactElement } from 'react';
+import { DisplayAppointmentContainer } from 'week/display-appointment/styles';
 
 interface Props {
     title: string;
@@ -17,20 +18,12 @@ export default function DisplayAppointment({
     const start = DateTime.fromISO(from).hour;
     const end = DateTime.fromISO(to).hour;
     return (
-        <div
+        <DisplayAppointmentContainer
             style={{
-                position: 'absolute',
-                left: '5px',
-                right: '5px',
-                backgroundColor: '#007bff',
-                color: '#fff',
-                borderRadius: '4px',
-                fontSize: '10px',
-                padding: '2px',
                 ...style,
             }}
         >
             {title} {start}-{end}
-        </div>
+        </DisplayAppointmentContainer>
     );
 }

@@ -55,3 +55,8 @@ export const color = {
         darker: '#595959',
     },
 };
+
+export const calendarColors = {
+    outOfWork: '#f2f2f2',
+    workTime: '#fff',
+};

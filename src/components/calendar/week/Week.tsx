@@ -46,8 +46,8 @@ export default function Week({
 
     // Navigate to Day View
     const navigateToDay = (day: DateTime): void => {
-        onDateChange(day); // Pass DateTime object directly
-        onViewChange('day'); // Change view to 'day'
+        onDateChange(day);
+        onViewChange('day');
     };
 
     return (
@@ -70,7 +70,7 @@ export default function Week({
                 ))}
             </WeekHeaderRow>
 
-            <TimeDayWrapper data-testud="time-day-wrapper">
+            <TimeDayWrapper data-testid="time-day-wrapper">
                 <TimeColumn
                     interval={interval}
                     is24HourFormat={is24HourFormat}

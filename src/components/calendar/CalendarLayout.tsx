@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Agenda from 'agenda/Agenda';
+import { LayoutContainer } from 'calendar/styles';
 import Day from 'day/Day';
 import Month from 'month/Month';
 import { Appointment, ViewType } from 'types/calendar';
@@ -57,5 +58,9 @@ export default function CalendarLayout({
         }
     };
 
-    return <div className="calendar">{renderView()}</div>;
+    return (
+        <LayoutContainer data-testid="calendar-layout">
+            {renderView()}
+        </LayoutContainer>
+    );
 }

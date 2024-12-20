@@ -22,6 +22,18 @@ export default function App(): ReactElement {
             start: '2024-12-04T12:00',
             end: '2024-12-04T13:00',
         },
+        {
+            id: '3',
+            title: 'Meeting',
+            start: '2024-11-21T09:00',
+            end: '2024-11-21T10:00',
+        },
+        {
+            id: '4',
+            title: 'Lunch',
+            start: '2024-12-20T10:00',
+            end: '2024-12-20T13:00',
+        },
     ];
 
     // State for CalendarToolbar and Calendar
