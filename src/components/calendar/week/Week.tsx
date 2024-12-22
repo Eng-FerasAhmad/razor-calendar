@@ -13,6 +13,7 @@ import {
     GmtWrapper,
 } from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
+import { calendarConfig } from 'calendar/config';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import { Appointment } from 'types/calendar';
@@ -46,7 +47,8 @@ export default function Week({
     // Days of the week
     const days = getDateRange(
         selectedDate.startOf('week'),
-        selectedDate.endOf('week')
+        selectedDate.endOf('week'),
+        calendarConfig.showWeekend
     );
 
     // Navigate to Day View
