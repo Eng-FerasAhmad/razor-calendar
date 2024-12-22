@@ -71,7 +71,10 @@ export default function Week({
                             <DayShortNameWrapper>
                                 {formatDate(day, 'ccc')}
                             </DayShortNameWrapper>
-                            <DayNumberWrapper>
+                            <DayNumberWrapper
+                                primaryColor={primaryColor}
+                                isToday={day.hasSame(DateTime.now(), 'day')}
+                            >
                                 {formatDate(day, 'dd')}
                             </DayNumberWrapper>
                         </WeekDayHeaderWrapper>

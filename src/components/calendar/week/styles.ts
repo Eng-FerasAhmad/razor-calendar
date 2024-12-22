@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+interface Props {
+    isToday: boolean;
+    primaryColor: string;
+}
+
 export const WeekContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -59,7 +64,7 @@ export const DayShortNameWrapper = styled.div`
     font-weight: normal;
 `;
 
-export const DayNumberWrapper = styled.div`
+export const DayNumberWrapper = styled.div<Props>`
     font-size: 26px;
     font-weight: normal;
     width: 45px;
@@ -69,6 +74,9 @@ export const DayNumberWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 auto 5px auto;
+    background-color: ${(props) =>
+        props.isToday ? props.primaryColor : 'transparent'};
+    color: ${(props) => (props.isToday ? '#fff' : '')};
     &:hover {
         cursor: pointer;
         background-color: #e6e6e6;
