@@ -2,8 +2,12 @@ import { DateTime } from 'luxon';
 import React, { ReactElement } from 'react';
 import {
     DisplayAppointmentContainer,
-    ShortLabelWrapper,
-    ShortTimerWrapper,
+    ShortLabelView2Wrapper,
+    ShortLabelView1Wrapper,
+    ShortTimerView2Wrapper,
+    ShortTimerView1Wrapper,
+    ShortTimerViewWrapper,
+    ShortLabelViewWrapper,
 } from 'week/display-appointment/styles';
 
 interface Props {
@@ -41,10 +45,10 @@ export default function DisplayAppointment({
                 height: '100%',
             }}
         >
-            <ShortTimerWrapper>
+            <ShortTimerView1Wrapper>
                 {start} - {end}
-            </ShortTimerWrapper>
-            <ShortLabelWrapper>{title}</ShortLabelWrapper>
+            </ShortTimerView1Wrapper>
+            <ShortLabelView1Wrapper>{title}</ShortLabelView1Wrapper>
         </div>
     );
 
@@ -60,10 +64,10 @@ export default function DisplayAppointment({
                 height: '100%',
             }}
         >
-            <ShortTimerWrapper>
+            <ShortTimerView2Wrapper>
                 {start} - {end}
-            </ShortTimerWrapper>
-            <ShortLabelWrapper>{title}</ShortLabelWrapper>
+            </ShortTimerView2Wrapper>
+            <ShortLabelView2Wrapper>{title}</ShortLabelView2Wrapper>
         </div>
     );
 
@@ -79,10 +83,10 @@ export default function DisplayAppointment({
                 height: '100%',
             }}
         >
-            <div>
+            <ShortTimerViewWrapper>
                 {start} - {end}
-            </div>
-            <ShortLabelWrapper>{title}</ShortLabelWrapper>
+            </ShortTimerViewWrapper>
+            <ShortLabelViewWrapper>{title}</ShortLabelViewWrapper>
         </div>
     );
 
@@ -91,7 +95,7 @@ export default function DisplayAppointment({
             case 0:
                 return diffInMinutes! <= 45 ? view1() : view();
             case 1:
-                return diffInMinutes! <= 45 ? view1() : view();
+                return diffInMinutes! <= 45 ? view2() : view();
             case 2:
                 return diffInMinutes! < 30 ? view1() : view();
             case 3:

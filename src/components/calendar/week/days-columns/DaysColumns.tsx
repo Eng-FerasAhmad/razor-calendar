@@ -70,7 +70,6 @@ export default function DayColumn({
         return {
             top: `calc(${(startMinutes / totalMinutes) * 100}% + 1px)`,
             height: `calc(${calcMinHeight(height)}% - 3px)`,
-            fontSize: height < 1.5 ? '9px' : '0.75rem',
         };
     };
 

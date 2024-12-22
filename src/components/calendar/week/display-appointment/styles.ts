@@ -12,58 +12,56 @@ export const DisplayAppointmentContainer = styled.div`
     overflow: hidden;
 `;
 
-export const TimerWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 20px;
-`;
-
-export const LabelWrapper = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 14px;
-`;
-
-export const FullViewWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-`;
-
-export const FullViewOneHourWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 40px;
-`;
-
-export const ShortViewWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 20px;
-`;
-
-export const ShortLabelWrapper = styled.div`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    max-width: 100px;
-    font-size: 11px;
-    height: 20px;
-`;
-
-export const ShortTimerWrapper = styled.div`
-    font-size: 10px;
-    height: 20px;
-    padding-top: 4px;
+// view
+export const ShortTimerViewWrapper = styled.div`
     box-sizing: border-box;
     white-space: nowrap;
     overflow: hidden;
     display: inline-block;
+    font-size: 13px;
+`;
+
+export const ShortLabelViewWrapper = styled.div`
+    white-space: wrap;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 13px;
+`;
+
+// view1
+export const ShortTimerView1Wrapper = styled.div`
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 9px;
+`;
+
+export const ShortLabelView1Wrapper = styled.div`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 90px;
+    font-size: 10px;
+`;
+
+// view 2
+export const ShortTimerView2Wrapper = styled.div`
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 60px;
+    font-size: 9px;
+`;
+
+export const ShortLabelView2Wrapper = styled.div`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 90px;
+    font-size: 10px;
 `;
