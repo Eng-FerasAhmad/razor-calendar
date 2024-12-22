@@ -41,6 +41,24 @@ export const WeekDayHeaderWrapper = styled.div`
     padding: 0;
 `;
 
+export const FullDaysEventHeaderWrapper = styled.div`
+    text-align: center;
+    font-weight: bold;
+    background-color: #66995e;
+    padding: 0;
+`;
+
+export const FullDaysEventHeaderContainer = styled.div`
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 4px;
+    border-radius: 4px;
+`;
+
 export const TimeDayWrapper = styled.div`
     display: flex;
     flex-direction: row;

@@ -16,6 +16,7 @@ interface Props {
     endWorkHour: number;
     intervalIndex: number;
     primaryColor: string;
+    fullDayAppointments: Appointment[];
 }
 
 export default function DayColumn({
@@ -26,6 +27,7 @@ export default function DayColumn({
     endWorkHour,
     intervalIndex,
     primaryColor,
+    fullDayAppointments,
 }: Props): ReactElement {
     // Generate time slots
     const timeSlots = Array.from(
@@ -33,11 +35,18 @@ export default function DayColumn({
         (_, i) => i * interval
     );
 
-    // Filter events for the current day
+    // Get fullDayAppointment IDs for exclusion
+    const fullDayAppointmentIds = fullDayAppointments.map(
+        (appointment) => appointment.id
+    );
+
+    // Filter events for the current day, excluding full-day appointments
     const dayEvents =
         appointments &&
-        appointments.filter((appointment) =>
-            DateTime.fromISO(appointment.start).hasSame(day, 'day')
+        appointments.filter(
+            (appointment) =>
+                DateTime.fromISO(appointment.start).hasSame(day, 'day') &&
+                !fullDayAppointmentIds.includes(appointment.id)
         );
 
     const calcMinHeight = (height: number): number => {

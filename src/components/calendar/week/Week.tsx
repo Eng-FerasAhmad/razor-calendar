@@ -11,6 +11,8 @@ import {
     WeekHeaderDaysRow,
     WeekHeaderFullDaysRow,
     GmtWrapper,
+    FullDaysEventHeaderWrapper,
+    FullDaysEventHeaderContainer,
 } from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
 import { calendarConfig } from 'calendar/config';
@@ -51,6 +53,25 @@ export default function Week({
         calendarConfig.showWeekend
     );
 
+    // Filter all-day or multi-day appointments
+    const fullDayAppointments = appointments.filter((appointment) => {
+        const start = DateTime.fromISO(appointment.start).startOf('day');
+        const end = DateTime.fromISO(appointment.end).startOf('day');
+        const weekStart = selectedDate.startOf('week'); // Start of the current week
+        const weekEnd = selectedDate.endOf('week'); // End of the current week
+
+        // Check if the appointment spans multiple days or is marked as full-day
+        const isFullDay = start < end || appointment.isFullDay;
+
+        // Ensure the appointment is within the range of the current week
+        const isInWeekRange =
+            (start >= weekStart && start <= weekEnd) ||
+            (end >= weekStart && end <= weekEnd) ||
+            (start < weekStart && end > weekEnd);
+
+        return isFullDay && isInWeekRange;
+    });
+
     // Navigate to Day View
     const navigateToDay = (day: DateTime): void => {
         onDateChange(day);
@@ -82,6 +103,13 @@ export default function Week({
                 </WeekHeaderDaysRow>
                 <WeekHeaderFullDaysRow>
                     <GmtWrapper>GMT +{DateTime.now().offset / 60}</GmtWrapper>
+                    <FullDaysEventHeaderContainer>
+                        {fullDayAppointments.map((appointment) => (
+                            <FullDaysEventHeaderWrapper key={appointment.id}>
+                                <div>{appointment.title}</div>
+                            </FullDaysEventHeaderWrapper>
+                        ))}
+                    </FullDaysEventHeaderContainer>
                 </WeekHeaderFullDaysRow>
             </WeekHeaderRow>
 
@@ -104,6 +132,7 @@ export default function Week({
                         startWorkHour={startWorkHour}
                         endWorkHour={endWorkHour}
                         primaryColor={primaryColor}
+                        fullDayAppointments={fullDayAppointments}
                     />
                 ))}
             </TimeDayWrapper>
