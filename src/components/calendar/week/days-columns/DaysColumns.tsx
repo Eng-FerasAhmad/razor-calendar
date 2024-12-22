@@ -40,6 +40,21 @@ export default function DayColumn({
             DateTime.fromISO(appointment.start).hasSame(day, 'day')
         );
 
+    const calcMinHeight = (height: number): number => {
+        switch (intervalIndex) {
+            case 0:
+                return height < 1.5 ? 1.7 : height;
+            case 1:
+                return height < 1.3 ? 1 : height;
+            case 2:
+                return height < 0.7 ? 0.9 : height;
+            case 3:
+                return height < 0.4 ? 0.6 : height;
+            default:
+                return height;
+        }
+    };
+
     // Helper to calculate event position
     const calculateEventStyle = (event: { start: string; end: string }) => {
         const eventStart = DateTime.fromISO(event.start);
@@ -51,9 +66,11 @@ export default function DayColumn({
         const duration =
             eventEnd.diff(eventStart, 'minutes').minutes / interval;
 
+        const height = (duration / totalMinutes) * 100;
         return {
             top: `calc(${(startMinutes / totalMinutes) * 100}% + 1px)`,
-            height: `calc(${(duration / totalMinutes) * 100}% - 7px)`,
+            height: `calc(${calcMinHeight(height)}% - 3px)`,
+            fontSize: height < 1.5 ? '9px' : '0.75rem',
         };
     };
 
@@ -87,6 +104,7 @@ export default function DayColumn({
                     from={event.start}
                     to={event.end}
                     primaryColor={primaryColor}
+                    intervalIndex={intervalIndex}
                     style={calculateEventStyle(event)}
                 />
             ))}

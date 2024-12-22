@@ -12,13 +12,13 @@ export default function App(): ReactElement {
     const appointments = [
         {
             id: '1',
-            title: 'Meeting',
+            title: 'Meeting at these times are very important',
             start: '2024-12-16T07:00',
             end: '2024-12-16T07:35',
         },
         {
             id: '2',
-            title: 'Lunch',
+            title: 'Lunch but also long long text',
             start: '2024-12-18T05:00',
             end: '2024-12-18T10:00',
         },
@@ -30,9 +30,57 @@ export default function App(): ReactElement {
         },
         {
             id: '4',
-            title: 'Lunch',
-            start: '2024-12-20T10:00',
-            end: '2024-12-20T13:00',
+            title: 'Lunch: how about more longer text like this one hier, what you say',
+            start: '2024-12-19T09:00',
+            end: '2024-12-19T13:00',
+        },
+        {
+            id: '5',
+            title: 'View 1',
+            start: '2024-12-16T09:00',
+            end: '2024-12-16T09:05',
+        },
+        {
+            id: '6',
+            title: 'View 2',
+            start: '2024-12-16T10:00',
+            end: '2024-12-16T10:10',
+        },
+        {
+            id: '7',
+            title: 'View 3',
+            start: '2024-12-16T11:00',
+            end: '2024-12-16T11:15',
+        },
+        {
+            id: '8',
+            title: 'View 4',
+            start: '2024-12-16T12:00',
+            end: '2024-12-16T12:30',
+        },
+        {
+            id: '9',
+            title: 'View 5',
+            start: '2024-12-16T13:00',
+            end: '2024-12-16T13:20',
+        },
+        {
+            id: '10',
+            title: 'View 5 aber also long long text aber also long long text ',
+            start: '2024-12-21T11:00',
+            end: '2024-12-21T13:00',
+        },
+        {
+            id: '11',
+            title: 'View 5 aber also long long text',
+            start: '2024-12-21T13:00',
+            end: '2024-12-21T14:30',
+        },
+        {
+            id: '12',
+            title: 'View 5 aber also long long text',
+            start: '2024-12-16T14:10',
+            end: '2024-12-16T16:30',
         },
     ];
 
