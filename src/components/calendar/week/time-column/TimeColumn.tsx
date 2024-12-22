@@ -27,16 +27,18 @@ export default function TimeColumn({
         label: string;
     }[] => {
         const slots: { hour: number; minute: number; label: string }[] = [];
+
         for (let hour = 0; hour < 24; hour += 1) {
             for (let minute = 0; minute < 60; minute += interval) {
                 const label = is24HourFormat
                     ? `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
-                    : `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${
+                    : `${String(hour % 12 || 12).padStart(2, '0')}:${String(minute).padStart(2, '0')} ${
                           hour < 12 ? 'AM' : 'PM'
                       }`;
                 slots.push({ hour, minute, label });
             }
         }
+
         return slots;
     };
 
