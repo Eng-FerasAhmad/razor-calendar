@@ -8,6 +8,9 @@ import {
     WidthSpaceWrapper,
     DayShortNameWrapper,
     DayNumberWrapper,
+    WeekHeaderDaysRow,
+    WeekHeaderFullDaysRow,
+    GmtWrapper,
 } from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
@@ -55,21 +58,26 @@ export default function Week({
     return (
         <WeekContainer data-testid="week-container">
             <WeekHeaderRow data-testid="week-header-row">
-                <WidthSpaceWrapper data-testid="width-space-wrapper" />
-                {days.map((day) => (
-                    <WeekDayHeaderWrapper
-                        data-testid="week-day-header-wrapper"
-                        key={day.toISO()}
-                        onClick={() => navigateToDay(day)}
-                    >
-                        <DayShortNameWrapper>
-                            {formatDate(day, 'ccc')}
-                        </DayShortNameWrapper>
-                        <DayNumberWrapper>
-                            {formatDate(day, 'dd')}
-                        </DayNumberWrapper>
-                    </WeekDayHeaderWrapper>
-                ))}
+                <WeekHeaderDaysRow>
+                    <WidthSpaceWrapper data-testid="width-space-wrapper" />
+                    {days.map((day) => (
+                        <WeekDayHeaderWrapper
+                            data-testid="week-day-header-wrapper"
+                            key={day.toISO()}
+                            onClick={() => navigateToDay(day)}
+                        >
+                            <DayShortNameWrapper>
+                                {formatDate(day, 'ccc')}
+                            </DayShortNameWrapper>
+                            <DayNumberWrapper>
+                                {formatDate(day, 'dd')}
+                            </DayNumberWrapper>
+                        </WeekDayHeaderWrapper>
+                    ))}
+                </WeekHeaderDaysRow>
+                <WeekHeaderFullDaysRow>
+                    <GmtWrapper>GMT +{DateTime.now().offset / 60}</GmtWrapper>
+                </WeekHeaderFullDaysRow>
             </WeekHeaderRow>
 
             <TimeDayWrapper data-testid="time-day-wrapper">

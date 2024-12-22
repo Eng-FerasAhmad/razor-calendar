@@ -9,12 +9,23 @@ export const WeekContainer = styled.div`
 
 export const WeekHeaderRow = styled.div`
     display: flex;
+    flex-direction: column;
     width: 100%;
     border-bottom: 1px solid #ccc;
     background-color: #fff;
     position: sticky;
-    top: 0; /* Stick to the top */
-    z-index: 10; /* Keep it above other content */
+    top: 0;
+    z-index: 10;
+`;
+
+export const WeekHeaderDaysRow = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
+export const WeekHeaderFullDaysRow = styled.div`
+    display: flex;
+    width: 100%;
 `;
 
 export const WeekDayHeaderWrapper = styled.div`
@@ -33,6 +44,14 @@ export const TimeDayWrapper = styled.div`
 
 export const WidthSpaceWrapper = styled.div`
     width: 80px;
+`;
+
+export const GmtWrapper = styled.div`
+    width: 80px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const DayShortNameWrapper = styled.div`
