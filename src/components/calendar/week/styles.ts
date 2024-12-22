@@ -44,19 +44,24 @@ export const WeekDayHeaderWrapper = styled.div`
 export const FullDaysEventHeaderWrapper = styled.div`
     text-align: center;
     font-weight: bold;
-    background-color: #66995e;
     padding: 0;
 `;
 
 export const FullDaysEventHeaderContainer = styled.div`
-    position: relative;
-    text-align: center;
-    font-size: 12px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding: 4px;
-    border-radius: 4px;
+    display: flex;
+    width: 100%;
+    font-size: 10px;
+    color: #fff;
+`;
+
+export const FullDayTitleWrapper = styled.div<{ color: string }>`
+    height: 18px;
+    padding: 5px;
+    background-color: ${(props) => props.color};
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
 `;
 
 export const TimeDayWrapper = styled.div`
@@ -70,7 +75,7 @@ export const WidthSpaceWrapper = styled.div`
 `;
 
 export const GmtWrapper = styled.div`
-    width: 80px;
+    width: 87px;
     font-size: 12px;
     display: flex;
     align-items: center;

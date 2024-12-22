@@ -71,7 +71,7 @@ export default function App(): ReactElement {
             title: 'View 5',
             start: '2024-12-16T13:00',
             end: '2024-12-16T13:20',
-            isFullDay: false,
+            isFullDay: true,
         },
         {
             id: '10',
@@ -89,7 +89,7 @@ export default function App(): ReactElement {
         },
         {
             id: '12',
-            title: 'View full day',
+            title: 'View full day with long long text',
             start: '2024-12-16T14:10',
             end: '2024-12-16T16:30',
             isFullDay: true,

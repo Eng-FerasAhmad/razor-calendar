@@ -13,6 +13,7 @@ import {
     GmtWrapper,
     FullDaysEventHeaderWrapper,
     FullDaysEventHeaderContainer,
+    FullDayTitleWrapper,
 } from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
 import { calendarConfig } from 'calendar/config';
@@ -103,11 +104,37 @@ export default function Week({
                 </WeekHeaderDaysRow>
                 <WeekHeaderFullDaysRow>
                     <GmtWrapper>GMT +{DateTime.now().offset / 60}</GmtWrapper>
-                    <FullDaysEventHeaderContainer>
-                        {fullDayAppointments.map((appointment) => (
-                            <FullDaysEventHeaderWrapper key={appointment.id}>
-                                <div>{appointment.title}</div>
-                            </FullDaysEventHeaderWrapper>
+                    <FullDaysEventHeaderContainer data-testid="full-days-event-header-container">
+                        {days.map((day) => (
+                            <WeekDayHeaderWrapper key={day.toISO()}>
+                                {fullDayAppointments.map((appointment) => {
+                                    const start = DateTime.fromISO(
+                                        appointment.start
+                                    ).startOf('day');
+                                    const end = DateTime.fromISO(
+                                        appointment.end
+                                    ).startOf('day');
+
+                                    // Check if the appointment spans the current day
+                                    const isOnDay = day >= start && day <= end;
+
+                                    if (!isOnDay) {
+                                        return null;
+                                    }
+
+                                    return (
+                                        <FullDaysEventHeaderWrapper
+                                            key={appointment.id}
+                                        >
+                                            <FullDayTitleWrapper
+                                                color={primaryColor}
+                                            >
+                                                {appointment.title}
+                                            </FullDayTitleWrapper>
+                                        </FullDaysEventHeaderWrapper>
+                                    );
+                                })}
+                            </WeekDayHeaderWrapper>
                         ))}
                     </FullDaysEventHeaderContainer>
                 </WeekHeaderFullDaysRow>
