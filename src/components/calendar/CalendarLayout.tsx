@@ -13,6 +13,7 @@ interface Props {
     selectedDate: DateTime;
     language: string;
     primaryColor: string;
+    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function CalendarLayout({
@@ -21,6 +22,7 @@ export default function CalendarLayout({
     appointments,
     primaryColor,
     language,
+    handleChangeAppointment,
 }: Props): ReactElement {
     const renderView = (): ReactElement => {
         switch (view) {
@@ -31,6 +33,7 @@ export default function CalendarLayout({
                         selectedDate={selectedDate}
                         primaryColor={primaryColor}
                         language={language}
+                        handleChangeAppointment={handleChangeAppointment}
                     />
                 );
             case 'week':
@@ -61,6 +64,7 @@ export default function CalendarLayout({
                         selectedDate={selectedDate}
                         primaryColor={primaryColor}
                         language={language}
+                        handleChangeAppointment={handleChangeAppointment}
                     />
                 );
         }

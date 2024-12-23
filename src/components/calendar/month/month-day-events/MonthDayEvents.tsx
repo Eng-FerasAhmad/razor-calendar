@@ -1,10 +1,48 @@
+import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
 import { MonthEventContainer } from 'month/month-day-events/styles';
 import { Appointment } from 'types/calendar';
 
 interface Props {
     primaryColor: string;
-    appointments: Appointment[]; // Replace `any` with the appropriate event type
+    appointments: Appointment[];
+}
+
+function DraggableEvent({
+    id,
+    title,
+    primaryColor,
+}: {
+    id: string;
+    title: string;
+    primaryColor: string;
+}): ReactElement {
+    const { attributes, listeners, setNodeRef, transform, isDragging } =
+        useDraggable({
+            id,
+        });
+
+    const style = {
+        transform: transform
+            ? `translate(${transform.x}px, ${transform.y}px)`
+            : undefined,
+        zIndex: isDragging ? 2 : 'auto',
+        backgroundColor: primaryColor,
+        opacity: isDragging ? 0.8 : 1,
+    };
+
+    return (
+        <MonthEventContainer
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+            color={primaryColor}
+            data-testid="draggable-event"
+        >
+            {title}
+        </MonthEventContainer>
+    );
 }
 
 export default function DisplayEvents({
@@ -18,13 +56,12 @@ export default function DisplayEvents({
     return (
         <>
             {visibleAppointments.map((appointment) => (
-                <MonthEventContainer
+                <DraggableEvent
                     key={appointment.id}
-                    color={primaryColor}
-                    data-testid="month-event-container"
-                >
-                    {appointment.title}
-                </MonthEventContainer>
+                    id={appointment.id}
+                    title={appointment.title}
+                    primaryColor={primaryColor}
+                />
             ))}
 
             {/* Show remaining events count if applicable */}

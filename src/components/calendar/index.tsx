@@ -12,6 +12,7 @@ export interface Props {
     selectedDate: DateTime;
     language: string;
     primaryColor: string;
+    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export function RazorCalendar({
@@ -20,6 +21,7 @@ export function RazorCalendar({
     selectedDate,
     language,
     primaryColor,
+    handleChangeAppointment,
 }: Props): ReactElement {
     return (
         <CalendarProvider>
@@ -30,6 +32,7 @@ export function RazorCalendar({
                     selectedDate={selectedDate}
                     appointments={appointments}
                     primaryColor={primaryColor}
+                    handleChangeAppointment={handleChangeAppointment}
                 />
             </StyleSheetManager>
         </CalendarProvider>

@@ -1,16 +1,12 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import DisplayEvents from 'components/calendar/month/month-day-events/MonthDayEvents';
-import {
-    DayNumberContainer,
-    MonthDayWrapper,
-} from 'month/month-days-in-week/styles';
+import DayCell from './DayCell';
 import { Appointment } from 'types/calendar';
 
 interface Props {
     week: DateTime[];
     primaryColor: string;
-    appointments: Appointment[]; // Replace `any` with the appropriate event type
+    appointments: Appointment[];
 }
 
 export default function DaysInTheWeek({
@@ -20,9 +16,11 @@ export default function DaysInTheWeek({
 }: Props): ReactElement {
     const currentDay = DateTime.now();
 
-    const getEventsForDay = (day: DateTime) =>
-        appointments.filter((appointment) =>
-            DateTime.fromISO(appointment.start).hasSame(day, 'day')
+    const getEventsForDay = (day: DateTime): Appointment[] =>
+        appointments.filter(
+            (appointment) =>
+                typeof appointment.start === 'string' &&
+                DateTime.fromISO(appointment.start).hasSame(day, 'day')
         );
 
     return (
@@ -32,21 +30,13 @@ export default function DaysInTheWeek({
                 const isToday = day.hasSame(currentDay, 'day');
 
                 return (
-                    <MonthDayWrapper
-                        data-testid="month-day-wrapper"
+                    <DayCell
                         key={day.toISO()}
-                    >
-                        <DayNumberContainer
-                            isToday={isToday}
-                            color={primaryColor}
-                        >
-                            {day.day}
-                        </DayNumberContainer>
-                        <DisplayEvents
-                            appointments={dailyEvents}
-                            primaryColor={primaryColor}
-                        />
-                    </MonthDayWrapper>
+                        day={day}
+                        dailyEvents={dailyEvents}
+                        isToday={isToday}
+                        primaryColor={primaryColor}
+                    />
                 );
             })}
         </>

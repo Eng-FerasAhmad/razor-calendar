@@ -5,7 +5,7 @@ import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
 import CalendarToolbar from 'components/toolbar/CalendarToolbar';
 import { GlobalStyle } from 'style/global';
-import { ViewType } from 'types/calendar';
+import { Appointment, ViewType } from 'types/calendar';
 import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
@@ -123,6 +123,10 @@ export default function App(): ReactElement {
         setCurrentDate(updatedDate);
     };
 
+    const handleChangeAppointment = (appointment: Appointment): void => {
+        console.log('Changed Appointment:', appointment);
+    };
+
     return (
         <AppContainer data-testid="app">
             <GlobalStyle />
@@ -143,6 +147,7 @@ export default function App(): ReactElement {
                 language={currentLang}
                 selectedDate={currentDate}
                 primaryColor="#2ba172"
+                handleChangeAppointment={handleChangeAppointment}
             />
         </AppContainer>
     );

@@ -11,6 +11,7 @@ interface Props {
     selectedDate: DateTime;
     primaryColor: string;
     language: string;
+    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function Month({
@@ -18,6 +19,7 @@ export default function Month({
     appointments,
     primaryColor,
     language,
+    handleChangeAppointment,
 }: Props): React.ReactElement {
     // Localized weekdays and months
     const localizedWeekdays = getLocalizedWeekdays(language, 1); // Start on Monday
@@ -40,6 +42,7 @@ export default function Month({
                 weeks={weeks}
                 appointments={appointments!}
                 primaryColor={primaryColor}
+                handleChangeAppointment={handleChangeAppointment}
             />
         </MonthContainer>
     );
