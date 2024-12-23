@@ -1,29 +1,26 @@
 import { ReactElement } from 'react';
+import { MonthEventContainer } from 'month/month-day-events/styles';
+import { Appointment } from 'types/calendar';
 
 interface Props {
-    events: any[]; // Replace `any` with the appropriate event type
+    primaryColor: string;
+    appointments: Appointment[]; // Replace `any` with the appropriate event type
 }
 
-export default function DisplayEvents({ events }: Props): ReactElement {
+export default function DisplayEvents({
+    appointments,
+    primaryColor,
+}: Props): ReactElement {
     return (
         <>
-            {events.map((event) => (
-                <div
-                    key={event.id}
-                    style={{
-                        backgroundColor: '#007bff',
-                        color: '#fff',
-                        padding: '2px',
-                        borderRadius: '4px',
-                        fontSize: '10px',
-                        marginTop: '2px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                    }}
+            {appointments.map((appointment) => (
+                <MonthEventContainer
+                    key={appointment.id}
+                    color={primaryColor}
+                    data-testid="month-event-container"
                 >
-                    {event.title}
-                </div>
+                    {appointment.title}
+                </MonthEventContainer>
             ))}
         </>
     );

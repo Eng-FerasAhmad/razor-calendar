@@ -28,6 +28,7 @@ export default function CalendarLayout({
                     <Month
                         appointments={appointments}
                         selectedDate={selectedDate}
+                        primaryColor={primaryColor}
                     />
                 );
             case 'week':
@@ -56,6 +57,7 @@ export default function CalendarLayout({
                     <Month
                         appointments={appointments}
                         selectedDate={selectedDate}
+                        primaryColor={primaryColor}
                     />
                 );
         }

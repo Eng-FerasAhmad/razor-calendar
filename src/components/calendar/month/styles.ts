@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
 export const MonthContainer = styled.div`
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 `;

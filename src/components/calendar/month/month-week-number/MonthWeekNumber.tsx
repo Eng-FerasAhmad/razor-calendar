@@ -16,15 +16,16 @@ const WeekNumber: React.FC<WeekNumberProps> = ({ weekStart }) => {
 
     return (
         <div
+            data-testid="month-week-number"
             onClick={handleWeekClick}
             style={{
                 width: '40px',
                 textAlign: 'center',
                 fontWeight: 'bold',
-                backgroundColor: '#f9f9f9',
-                borderRight: '1px solid #ccc',
+                backgroundColor: '#fff',
                 lineHeight: '30px',
                 cursor: 'pointer',
+                fontSize: '12px',
             }}
             title={`Go to week ${weekStart.weekNumber}`}
         >

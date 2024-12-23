@@ -1,15 +1,21 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import DisplayEvents from 'components/calendar/month/month-day-events/MonthDayEvents';
+import {
+    DayNumberContainer,
+    MonthDayWrapper,
+} from 'month/month-days-in-week/styles';
 import { Appointment } from 'types/calendar';
 
 interface Props {
     week: DateTime[];
+    primaryColor: string;
     appointments: Appointment[]; // Replace `any` with the appropriate event type
 }
 
 export default function DaysInTheWeek({
     week,
+    primaryColor,
     appointments,
 }: Props): ReactElement {
     const currentDay = DateTime.now();
@@ -26,26 +32,21 @@ export default function DaysInTheWeek({
                 const isToday = day.hasSame(currentDay, 'day');
 
                 return (
-                    <div
+                    <MonthDayWrapper
+                        data-testid="month-day-wrapper"
                         key={day.toISO()}
-                        style={{
-                            flex: 1,
-                            minHeight: '100px',
-                            padding: '5px',
-                            border: '1px solid #ccc',
-                            backgroundColor: isToday ? '#d4edda' : '#ffffff',
-                        }}
                     >
-                        <span
-                            style={{
-                                fontWeight: 'bold',
-                                marginBottom: '5px',
-                            }}
+                        <DayNumberContainer
+                            isToday={isToday}
+                            color={primaryColor}
                         >
                             {day.day}
-                        </span>
-                        <DisplayEvents events={dailyEvents} />
-                    </div>
+                        </DayNumberContainer>
+                        <DisplayEvents
+                            appointments={dailyEvents}
+                            primaryColor={primaryColor}
+                        />
+                    </MonthDayWrapper>
                 );
             })}
         </>
