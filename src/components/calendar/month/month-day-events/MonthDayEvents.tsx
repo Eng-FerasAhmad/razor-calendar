@@ -11,9 +11,13 @@ export default function DisplayEvents({
     appointments,
     primaryColor,
 }: Props): ReactElement {
+    // Limit to first 3 events
+    const visibleAppointments = appointments.slice(0, 3);
+    const remainingCount = appointments.length - visibleAppointments.length;
+
     return (
         <>
-            {appointments.map((appointment) => (
+            {visibleAppointments.map((appointment) => (
                 <MonthEventContainer
                     key={appointment.id}
                     color={primaryColor}
@@ -22,6 +26,16 @@ export default function DisplayEvents({
                     {appointment.title}
                 </MonthEventContainer>
             ))}
+
+            {/* Show remaining events count if applicable */}
+            {remainingCount > 0 && (
+                <MonthEventContainer
+                    color={primaryColor}
+                    data-testid="month-event-container-more"
+                >
+                    {`${remainingCount} more events`}
+                </MonthEventContainer>
+            )}
         </>
     );
 }

@@ -20,6 +20,7 @@ export default function CalendarLayout({
     selectedDate,
     appointments,
     primaryColor,
+    language,
 }: Props): ReactElement {
     const renderView = (): ReactElement => {
         switch (view) {
@@ -29,6 +30,7 @@ export default function CalendarLayout({
                         appointments={appointments}
                         selectedDate={selectedDate}
                         primaryColor={primaryColor}
+                        language={language}
                     />
                 );
             case 'week':
@@ -58,6 +60,7 @@ export default function CalendarLayout({
                         appointments={appointments}
                         selectedDate={selectedDate}
                         primaryColor={primaryColor}
+                        language={language}
                     />
                 );
         }
