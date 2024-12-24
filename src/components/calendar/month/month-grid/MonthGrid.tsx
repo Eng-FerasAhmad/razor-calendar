@@ -7,6 +7,7 @@ import {
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
+import { calendarConfig } from 'calendar/config';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
 import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
@@ -102,7 +103,9 @@ export default function MonthGrid({
                         data-testid="month-grid-content-container"
                         key={weekIndex}
                     >
-                        <WeekNumber weekStart={week[0]} />
+                        {calendarConfig.showWeekNumbers && (
+                            <WeekNumber weekStart={week[0]} />
+                        )}
                         <DaysInTheWeek
                             week={week}
                             appointments={updatedAppointments}

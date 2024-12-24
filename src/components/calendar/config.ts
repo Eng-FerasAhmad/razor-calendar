@@ -4,4 +4,5 @@ export const calendarConfig = {
     timeSlotHeight: 40,
     showWeekend: true,
     showJustWorkHours: false,
+    showWeekNumbers: true,
 };

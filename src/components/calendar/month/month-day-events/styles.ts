@@ -54,6 +54,8 @@ export const MoreEventButtonWrapper = styled.div`
 export const PointWrapper = styled.span<Props>`
     height: 7px;
     width: 7px;
+    min-height: 7px;
+    min-width: 7px;
     background-color: ${(props) => props.color};
     border-radius: 50%;
 `;

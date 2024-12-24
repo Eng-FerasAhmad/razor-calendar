@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 import { useCalendarContext } from 'calendar/CalendarContext';
+import { MonthWeekNumberContainer } from 'month/month-week-number/styles';
 
 interface WeekNumberProps {
     weekStart: DateTime;
@@ -15,22 +16,13 @@ const WeekNumber: React.FC<WeekNumberProps> = ({ weekStart }) => {
     };
 
     return (
-        <div
+        <MonthWeekNumberContainer
             data-testid="month-week-number"
             onClick={handleWeekClick}
-            style={{
-                width: '40px',
-                textAlign: 'center',
-                fontWeight: 'bold',
-                backgroundColor: '#fff',
-                lineHeight: '30px',
-                cursor: 'pointer',
-                fontSize: '12px',
-            }}
             title={`Go to week ${weekStart.weekNumber}`}
         >
             W{weekStart.weekNumber}
-        </div>
+        </MonthWeekNumberContainer>
     );
 };
 
