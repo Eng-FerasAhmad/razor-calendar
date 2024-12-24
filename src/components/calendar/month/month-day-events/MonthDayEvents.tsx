@@ -1,6 +1,10 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
-import { MonthEventContainer } from 'month/month-day-events/styles';
+import {
+    MonthEventContainer,
+    MoreEventButtonWrapper,
+    PointWrapper,
+} from 'month/month-day-events/styles';
 import { Appointment } from 'types/calendar';
 
 interface Props {
@@ -11,11 +15,11 @@ interface Props {
 function DraggableEvent({
     id,
     title,
-    primaryColor,
+    color,
 }: {
     id: string;
     title: string;
-    primaryColor: string;
+    color: string;
 }): ReactElement {
     const { attributes, listeners, setNodeRef, transform, isDragging } =
         useDraggable({
@@ -27,8 +31,6 @@ function DraggableEvent({
             ? `translate(${transform.x}px, ${transform.y}px)`
             : undefined,
         zIndex: isDragging ? 2 : 'auto',
-        backgroundColor: primaryColor,
-        opacity: isDragging ? 0.8 : 1,
     };
 
     return (
@@ -37,10 +39,11 @@ function DraggableEvent({
             style={style}
             {...attributes}
             {...listeners}
-            color={primaryColor}
+            color={color}
             data-testid="draggable-event"
         >
-            {title}
+            <PointWrapper color={color} />
+            <span>{title}</span>
         </MonthEventContainer>
     );
 }
@@ -60,18 +63,18 @@ export default function DisplayEvents({
                     key={appointment.id}
                     id={appointment.id}
                     title={appointment.title}
-                    primaryColor={primaryColor}
+                    color={appointment.color || primaryColor}
                 />
             ))}
 
             {/* Show remaining events count if applicable */}
             {remainingCount > 0 && (
-                <MonthEventContainer
+                <MoreEventButtonWrapper
                     color={primaryColor}
                     data-testid="month-event-container-more"
                 >
                     {`${remainingCount} more events`}
-                </MonthEventContainer>
+                </MoreEventButtonWrapper>
             )}
         </>
     );

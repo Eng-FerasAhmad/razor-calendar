@@ -1,6 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
-import { DraggableEventContainer } from './styles';
+import { DraggableEventContainer } from '../month-day-events/styles';
+import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
     id: string;
@@ -23,8 +24,8 @@ export default function DraggableEvent({
             ? `translate(${transform.x}px, ${transform.y}px)`
             : undefined,
         zIndex: isDragging ? 2 : 'auto',
-        backgroundColor: primaryColor,
-        opacity: isDragging ? 0.8 : 1,
+        backgroundColor: darkenColor(primaryColor, -70),
+        color: darkenColor(primaryColor, 80),
     };
 
     return (

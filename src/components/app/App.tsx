@@ -51,6 +51,13 @@ export default function App(): ReactElement {
             start: '2024-12-16T10:00',
             end: '2024-12-16T10:10',
             isFullDay: false,
+            color: '#3385ff',
+            canceled: false,
+            draggable: true,
+            editable: true,
+            available: false,
+            visibility: true,
+            location: '',
         },
         {
             id: '7',
@@ -58,6 +65,7 @@ export default function App(): ReactElement {
             start: '2024-12-16T11:00',
             end: '2024-12-16T11:15',
             isFullDay: false,
+            color: '#ff9933',
         },
         {
             id: '8',
@@ -65,6 +73,7 @@ export default function App(): ReactElement {
             start: '2024-12-16T12:00',
             end: '2024-12-16T12:30',
             isFullDay: false,
+            color: '#8e56f5',
         },
         {
             id: '9',

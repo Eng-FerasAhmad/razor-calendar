@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import DisplayEvents from 'components/calendar/month/month-day-events/MonthDayEvents';
+import DisplayEvents from 'month/month-day-events/MonthDayEvents';
 import {
     DayNumberContainer,
     MonthDayWrapper,

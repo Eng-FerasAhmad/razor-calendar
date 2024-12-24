@@ -17,10 +17,8 @@ export default function DaysInTheWeek({
     const currentDay = DateTime.now();
 
     const getEventsForDay = (day: DateTime): Appointment[] =>
-        appointments.filter(
-            (appointment) =>
-                typeof appointment.start === 'string' &&
-                DateTime.fromISO(appointment.start).hasSame(day, 'day')
+        appointments.filter((appointment) =>
+            DateTime.fromISO(appointment.start).hasSame(day, 'day')
         );
 
     return (

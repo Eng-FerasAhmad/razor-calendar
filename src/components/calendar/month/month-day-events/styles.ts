@@ -5,18 +5,17 @@ interface Props {
 }
 
 export const MonthEventContainer = styled.div<Props>`
-    background-color: ${(props) => props.color};
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 7px;
     font-size: 10px;
-    height: 20px;
-    margin-top: 2px;
     white-space: nowrap;
+    height: 24px;
+    margin: 1px 0;
+    padding: 1px 3px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
+    gap: 4px;
     cursor: grab; /* Default cursor for draggable events */
     user-select: none;
 
@@ -31,10 +30,38 @@ export const MonthEventContainer = styled.div<Props>`
     }
 `;
 
+export const MoreEventButtonWrapper = styled.div`
+    font-size: 10px;
+    white-space: nowrap;
+    height: 22px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    padding: 0 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #e0e0e0;
+        width: fit-content;
+        margin: auto;
+        border-radius: 10px;
+        padding: 0 10px;
+    }
+`;
+
+export const PointWrapper = styled.span<Props>`
+    height: 7px;
+    width: 7px;
+    background-color: ${(props) => props.color};
+    border-radius: 50%;
+`;
+
 export const DraggableEventContainer = styled.div`
     color: #fff;
     padding: 2px 5px;
-    border-radius: 7px;
+    border-radius: 2px;
     font-size: 10px;
     cursor: grab; /* Default draggable cursor */
 
@@ -43,7 +70,7 @@ export const DraggableEventContainer = styled.div`
     }
 
     &:active {
-        cursor: grabbing; /* Hand cursor on active click */
-        transform: scale(0.95); /* Example active style */
+        cursor: grabbing;
+        transform: scale(0.95);
     }
 `;

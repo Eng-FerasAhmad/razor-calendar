@@ -4,11 +4,12 @@ import {
     DragEndEvent,
     DragStartEvent,
 } from '@dnd-kit/core';
+import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
-import DraggableEvent from 'month/month-day-events/DraggableEvent';
+import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
 import {
     MonthGridContainer,
     MonthGridContentContainer,
@@ -33,7 +34,6 @@ export default function MonthGrid({
     const [activeDrag, setActiveDrag] = useState<Appointment | null>(null);
 
     const handleDragStart = (event: DragStartEvent): void => {
-        console.log('event', event);
         const draggedAppointment = updatedAppointments.find(
             (appointment) => appointment.id === String(event.active.id) // Convert to string
         );
@@ -91,7 +91,11 @@ export default function MonthGrid({
     };
 
     return (
-        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <DndContext
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            modifiers={[restrictToWindowEdges]}
+        >
             <MonthGridContainer data-testid="month-grid-container">
                 {weeks.map((week, weekIndex) => (
                     <MonthGridContentContainer
