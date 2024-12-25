@@ -1,4 +1,4 @@
-import { CalendarConfig, RazorCalendarConfig } from 'types/calendar';
+import { CalendarConfig, RazorCalendarConfig } from 'types/config';
 
 export function mergeConfig(
     config: CalendarConfig,

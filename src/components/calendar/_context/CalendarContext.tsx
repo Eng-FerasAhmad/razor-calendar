@@ -7,14 +7,11 @@ import {
     ReactNode,
     useContext,
 } from 'react';
-import { basicConfig } from 'calendar/config';
-import { CalendarContextProps } from 'calendar/types';
-import {
-    Appointment,
-    CalendarConfig,
-    RazorCalendarConfig,
-} from 'types/calendar';
-import { mergeConfig } from 'utils/config';
+import { basicConfig } from 'calendar/_config/basicConfig';
+import { mergeConfig } from 'calendar/_config/utils';
+import { CalendarContextProps } from 'calendar/_context/types';
+import { Appointment } from 'types/appointment';
+import { CalendarConfig, RazorCalendarConfig } from 'types/config';
 
 interface Props {
     children: ReactNode;

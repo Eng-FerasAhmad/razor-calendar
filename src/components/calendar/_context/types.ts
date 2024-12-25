@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
-import { Appointment, CalendarConfig } from 'types/calendar';
+import { Appointment } from 'types/appointment';
+import { CalendarConfig } from 'types/config';
 
 export interface CalendarContextProps {
     view: string;

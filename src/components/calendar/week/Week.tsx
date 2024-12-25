@@ -15,10 +15,10 @@ import {
     FullDaysEventHeaderContainer,
     FullDayTitleWrapper,
 } from './styles';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
-import { Appointment } from 'types/calendar';
+import { Appointment } from 'types/appointment';
 import { getDateRange, formatDate } from 'utils/dates';
 
 interface Props {

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { isWorkTime } from 'utils/dateTime';
 import {
     TimeColumnContainer,

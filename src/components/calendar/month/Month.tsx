@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
 import React from 'react';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
 import { MonthContainer } from 'month/styles';
-import { Appointment } from 'types/calendar';
+import { Appointment } from 'types/appointment';
 import { getDateRange, getLocalizedWeekdays } from 'utils/dates';
 
 interface Props {

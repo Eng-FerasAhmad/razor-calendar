@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { Appointment } from 'types/calendar';
+import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
 
 interface Props {

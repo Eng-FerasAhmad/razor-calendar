@@ -3,14 +3,10 @@ import { ReactElement, useState } from 'react';
 
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
-import CalendarToolbar from 'components/toolbar/CalendarToolbar';
+import RazorCalendarToolbar from 'components/toolbar';
 import { GlobalStyle } from 'style/global';
-import {
-    Appointment,
-    CalendarConfig,
-    RazorCalendarConfig,
-    ViewType,
-} from 'types/calendar';
+import { Appointment, ViewType } from 'types/appointment';
+import { CalendarConfig, RazorCalendarConfig } from 'types/config';
 import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
@@ -127,20 +123,18 @@ export default function App(): ReactElement {
         style: {
             primaryColor: '#ff6666',
         },
+        common: {
+            lang: 'de',
+        },
     };
 
     // State for CalendarToolbar and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('week');
-    const [currentLang, setCurrentLang] = useState<string>('en');
     const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
 
     // Handlers
     const handleViewChange = (view: ViewType): void => {
         setCurrentView(view);
-    };
-
-    const handleLanguageChange = (language: string): void => {
-        setCurrentLang(language);
     };
 
     const handleNavigate = (
@@ -164,11 +158,9 @@ export default function App(): ReactElement {
         <AppContainer data-testid="app">
             <GlobalStyle />
             {/* Pass handlers and state to CalendarToolbar */}
-            <CalendarToolbar
+            <RazorCalendarToolbar
                 currentView={currentView}
                 onViewChange={handleViewChange}
-                currentLang={currentLang}
-                onLanguageChange={handleLanguageChange}
                 currentDate={currentDate}
                 onNavigate={handleNavigate}
             />

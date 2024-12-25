@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { commonSize } from 'calendar/config';
+import { commonSize } from 'calendar/_config/basicConfig';
 import { calendarColors } from 'style/color';
 import { pixelToRem } from 'utils/common';
 

@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { ReactElement } from 'react';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
     DisplayAppointmentContainer,
     ShortLabelView2Wrapper,

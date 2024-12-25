@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import DayCell from './DayCell';
-import { useCalendarContext } from 'calendar/CalendarContext';
-import { Appointment } from 'types/calendar';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+
+import { Appointment } from 'types/appointment';
 
 interface Props {
     week: DateTime[];

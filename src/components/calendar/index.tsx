@@ -1,14 +1,10 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { StyleSheetManager } from 'styled-components';
-import { CalendarProvider } from 'calendar/CalendarContext';
-import CalendarLayout from 'calendar/CalendarLayout';
-import {
-    Appointment,
-    CalendarConfig,
-    RazorCalendarConfig,
-    ViewType,
-} from 'types/calendar';
+import { CalendarProvider } from 'calendar/_context/CalendarContext';
+import CalendarLayout from 'calendar/_layout/CalendarLayout';
+import { Appointment, ViewType } from 'types/appointment';
+import { CalendarConfig, RazorCalendarConfig } from 'types/config';
 import { shouldForwardProp } from 'utils/common';
 
 export interface Props {

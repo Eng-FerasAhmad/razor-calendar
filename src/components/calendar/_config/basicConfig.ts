@@ -1,4 +1,4 @@
-import { CalendarConfig } from 'types/calendar';
+import { CalendarConfig } from 'types/config';
 
 export const commonSize = {
     headerHeight: 73,

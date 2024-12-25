@@ -1,13 +1,14 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
     EventTitleWrapper,
     MonthEventContainer,
     MoreEventButtonWrapper,
     PointWrapper,
 } from 'month/month-day-events/styles';
-import { Appointment } from 'types/calendar';
+
+import { Appointment } from 'types/appointment';
 
 interface Props {
     appointments: Appointment[];

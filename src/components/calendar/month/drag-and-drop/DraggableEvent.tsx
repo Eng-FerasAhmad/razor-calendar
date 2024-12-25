@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
 import { DraggableEventContainer } from '../month-day-events/styles';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { darkenColor } from 'utils/colorConverter';
 
 interface Props {

@@ -7,7 +7,7 @@ import {
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
-import { useCalendarContext } from 'calendar/CalendarContext';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
 import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
@@ -15,7 +15,8 @@ import {
     MonthGridContainer,
     MonthGridContentContainer,
 } from 'month/month-grid/styles';
-import { Appointment } from 'types/calendar';
+
+import { Appointment } from 'types/appointment';
 
 interface Props {
     weeks: DateTime[][];

@@ -6,7 +6,8 @@ import {
     DayNumberContainer,
     MonthDayWrapper,
 } from 'month/month-days-in-week/styles';
-import { Appointment } from 'types/calendar';
+
+import { Appointment } from 'types/appointment';
 
 interface DroppableDayProps {
     day: DateTime;

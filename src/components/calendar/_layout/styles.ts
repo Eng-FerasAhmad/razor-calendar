@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { commonSize } from 'calendar/config';
+import { commonSize } from 'calendar/_config/basicConfig';
 
 export const LayoutContainer = styled.div`
     position: relative;

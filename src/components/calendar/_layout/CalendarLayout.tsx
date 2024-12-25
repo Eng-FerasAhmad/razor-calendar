@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Agenda from 'agenda/Agenda';
-import { LayoutContainer } from 'calendar/styles';
+import { LayoutContainer } from 'calendar/_layout/styles';
 import Day from 'day/Day';
 import Month from 'month/Month';
-import { Appointment, ViewType } from 'types/calendar';
+import { Appointment, ViewType } from 'types/appointment';
 import Week from 'week/Week';
 
 interface Props {
