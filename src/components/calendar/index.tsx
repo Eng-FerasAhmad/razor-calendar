@@ -23,10 +23,9 @@ export function RazorCalendar({
     handleChangeAppointment,
 }: Props): ReactElement {
     return (
-        <CalendarProvider config={config}>
+        <CalendarProvider config={config} view={view}>
             <StyleSheetManager shouldForwardProp={shouldForwardProp}>
                 <CalendarLayout
-                    view={view}
                     selectedDate={selectedDate}
                     appointments={appointments}
                     handleChangeAppointment={handleChangeAppointment}

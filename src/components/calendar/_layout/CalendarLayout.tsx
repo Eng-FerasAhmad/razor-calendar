@@ -1,25 +1,26 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Agenda from 'agenda/Agenda';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { LayoutContainer } from 'calendar/_layout/styles';
 import Day from 'day/Day';
 import Month from 'month/Month';
-import { Appointment, ViewType } from 'types/appointment';
+import { Appointment } from 'types/appointment';
 import Week from 'week/Week';
 
 interface Props {
     appointments: Appointment[];
-    view: ViewType;
     selectedDate: DateTime;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function CalendarLayout({
-    view,
     selectedDate,
     appointments,
     handleChangeAppointment,
 }: Props): ReactElement {
+    const { view } = useCalendarContext();
+
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
