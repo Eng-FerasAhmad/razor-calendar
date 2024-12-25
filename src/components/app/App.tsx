@@ -5,7 +5,12 @@ import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
 import CalendarToolbar from 'components/toolbar/CalendarToolbar';
 import { GlobalStyle } from 'style/global';
-import { Appointment, ViewType } from 'types/calendar';
+import {
+    Appointment,
+    CalendarConfig,
+    RazorCalendarConfig,
+    ViewType,
+} from 'types/calendar';
 import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
@@ -105,6 +110,25 @@ export default function App(): ReactElement {
         },
     ];
 
+    const config: RazorCalendarConfig<CalendarConfig> = {
+        hour: {
+            is24HourFormat: false,
+            hourIntervalIndex: 1,
+            workHoursStart: 8,
+            workHoursEnd: 18,
+        },
+        month: {
+            showWeekNumbers: true,
+        },
+        week: {
+            showWeekend: true,
+            showWeekNumbers: true,
+        },
+        style: {
+            primaryColor: '#ff6666',
+        },
+    };
+
     // State for CalendarToolbar and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('week');
     const [currentLang, setCurrentLang] = useState<string>('en');
@@ -153,9 +177,8 @@ export default function App(): ReactElement {
             <RazorCalendar
                 appointments={appointments}
                 view={currentView}
-                language={currentLang}
+                config={config}
                 selectedDate={currentDate}
-                primaryColor="#2ba172"
                 handleChangeAppointment={handleChangeAppointment}
             />
         </AppContainer>

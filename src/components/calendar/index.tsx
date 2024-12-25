@@ -3,35 +3,36 @@ import { ReactElement } from 'react';
 import { StyleSheetManager } from 'styled-components';
 import { CalendarProvider } from 'calendar/CalendarContext';
 import CalendarLayout from 'calendar/CalendarLayout';
-import { Appointment, ViewType } from 'types/calendar';
+import {
+    Appointment,
+    CalendarConfig,
+    RazorCalendarConfig,
+    ViewType,
+} from 'types/calendar';
 import { shouldForwardProp } from 'utils/common';
 
 export interface Props {
     appointments: Appointment[];
     view: ViewType;
     selectedDate: DateTime;
-    language: string;
-    primaryColor: string;
     handleChangeAppointment: (appointment: Appointment) => void;
+    config: RazorCalendarConfig<CalendarConfig>;
 }
 
 export function RazorCalendar({
     appointments,
     view,
+    config,
     selectedDate,
-    language,
-    primaryColor,
     handleChangeAppointment,
 }: Props): ReactElement {
     return (
-        <CalendarProvider>
+        <CalendarProvider config={config}>
             <StyleSheetManager shouldForwardProp={shouldForwardProp}>
                 <CalendarLayout
                     view={view}
-                    language={language}
                     selectedDate={selectedDate}
                     appointments={appointments}
-                    primaryColor={primaryColor}
                     handleChangeAppointment={handleChangeAppointment}
                 />
             </StyleSheetManager>

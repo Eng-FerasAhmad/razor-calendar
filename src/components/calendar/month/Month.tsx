@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import React from 'react';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
 import { MonthContainer } from 'month/styles';
@@ -9,20 +10,17 @@ import { getDateRange, getLocalizedWeekdays } from 'utils/dates';
 interface Props {
     appointments: Appointment[];
     selectedDate: DateTime;
-    primaryColor: string;
-    language: string;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function Month({
     selectedDate,
     appointments,
-    primaryColor,
-    language,
     handleChangeAppointment,
 }: Props): React.ReactElement {
+    const { config } = useCalendarContext();
     // Localized weekdays and months
-    const localizedWeekdays = getLocalizedWeekdays(language, 1); // Start on Monday
+    const localizedWeekdays = getLocalizedWeekdays(config.common.lang, 1); // Start on Monday
 
     const startOfMonth = selectedDate.startOf('month');
     const endOfMonth = selectedDate.endOf('month');
@@ -41,7 +39,7 @@ export default function Month({
             <MonthGrid
                 weeks={weeks}
                 appointments={appointments!}
-                primaryColor={primaryColor}
+                primaryColor={config.style.primaryColor}
                 handleChangeAppointment={handleChangeAppointment}
             />
         </MonthContainer>

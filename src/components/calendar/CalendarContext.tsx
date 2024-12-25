@@ -7,15 +7,23 @@ import {
     ReactNode,
     useContext,
 } from 'react';
+import { basicConfig } from 'calendar/config';
 import { CalendarContextProps } from 'calendar/types';
-import { Appointment } from 'types/calendar';
+import {
+    Appointment,
+    CalendarConfig,
+    RazorCalendarConfig,
+} from 'types/calendar';
+import { mergeConfig } from 'utils/config';
 
 interface Props {
     children: ReactNode;
+    config: RazorCalendarConfig<CalendarConfig>;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
     view: 'week',
+    config: basicConfig,
     appointments: [],
     language: 'en',
     firstDayOfWeek: 1,
@@ -27,12 +35,16 @@ export const CalendarContext = createContext<CalendarContextProps>({
     onChangeFirstDay: () => {},
 });
 
-export function CalendarProvider({ children }: Props): ReactElement {
+export function CalendarProvider({ children, config }: Props): ReactElement {
+    const mergedConfig = mergeConfig(basicConfig, config);
+
     const [view, setView] = useState<string>('week');
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
-    const [language, setLanguage] = useState<string>('en');
+    const [language, setLanguage] = useState<string>(mergedConfig.common.lang);
     const [appointments, setAppointments] = useState<Appointment[]>([]);
-    const [firstDayOfWeek, setFirstDayOfWeek] = useState<number>(1);
+    const [firstDayOfWeek, setFirstDayOfWeek] = useState<number>(
+        mergedConfig.month.startWithWeekday ? 1 : 0
+    );
 
     const onViewChange = useCallback((newView: string) => {
         setView(newView);
@@ -58,6 +70,7 @@ export function CalendarProvider({ children }: Props): ReactElement {
         <CalendarContext.Provider
             value={{
                 view,
+                config: mergedConfig,
                 selectedDate,
                 language,
                 appointments,

@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon';
-import { Appointment } from 'types/calendar';
+import { Appointment, CalendarConfig } from 'types/calendar';
 
 export interface CalendarContextProps {
     view: string;
+    config: CalendarConfig;
     selectedDate: DateTime;
     firstDayOfWeek: number | undefined;
     appointments: Appointment[] | undefined;

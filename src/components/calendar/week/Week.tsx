@@ -16,42 +16,31 @@ import {
     FullDayTitleWrapper,
 } from './styles';
 import { useCalendarContext } from 'calendar/CalendarContext';
-import { calendarConfig } from 'calendar/config';
 import DayColumn from 'components/calendar/week/days-columns/DaysColumns';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import { Appointment } from 'types/calendar';
 import { getDateRange, formatDate } from 'utils/dates';
 
 interface Props {
-    startWorkHour: number;
-    endWorkHour: number;
     appointments: Appointment[];
     selectedDate: DateTime;
-    intervalIndex: number;
-    is24HourFormat: boolean;
-    primaryColor: string;
 }
 
 export default function Week({
-    startWorkHour,
-    endWorkHour,
     appointments,
     selectedDate,
-    intervalIndex,
-    is24HourFormat,
-    primaryColor,
 }: Props): ReactElement {
-    const { onDateChange, onViewChange } = useCalendarContext();
+    const { onDateChange, onViewChange, config } = useCalendarContext();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
-    const interval = intervalOptions[intervalIndex];
+    const interval = intervalOptions[config.hour.hourIntervalIndex];
 
     // Days of the week
     const days = getDateRange(
         selectedDate.startOf('week'),
         selectedDate.endOf('week'),
-        calendarConfig.showWeekend
+        config.week.showWeekend
     );
 
     // Filter all-day or multi-day appointments
@@ -94,7 +83,7 @@ export default function Week({
                                 {formatDate(day, 'ccc')}
                             </DayShortNameWrapper>
                             <DayNumberWrapper
-                                primaryColor={primaryColor}
+                                primaryColor={config.style.primaryColor!}
                                 isToday={day.hasSame(DateTime.now(), 'day')}
                             >
                                 {formatDate(day, 'dd')}
@@ -130,7 +119,9 @@ export default function Week({
                                             key={appointment.id}
                                         >
                                             <FullDayTitleWrapper
-                                                color={primaryColor}
+                                                color={
+                                                    config.style.primaryColor
+                                                }
                                             >
                                                 {appointment.title}
                                             </FullDayTitleWrapper>
@@ -146,10 +137,10 @@ export default function Week({
             <TimeDayWrapper data-testid="time-day-wrapper">
                 <TimeColumn
                     interval={interval}
-                    is24HourFormat={is24HourFormat}
-                    startWorkHour={startWorkHour}
-                    endWorkHour={endWorkHour}
-                    intervalIndex={intervalIndex}
+                    is24HourFormat={config.hour.is24HourFormat}
+                    startWorkHour={config.hour.workHoursStart}
+                    endWorkHour={config.hour.workHoursEnd}
+                    intervalIndex={config.hour.hourIntervalIndex}
                 />
 
                 {days.map((day) => (
@@ -158,10 +149,10 @@ export default function Week({
                         day={day}
                         appointments={appointments!}
                         interval={interval}
-                        intervalIndex={intervalIndex}
-                        startWorkHour={startWorkHour}
-                        endWorkHour={endWorkHour}
-                        primaryColor={primaryColor}
+                        intervalIndex={config.hour.hourIntervalIndex}
+                        startWorkHour={config.hour.workHoursStart}
+                        endWorkHour={config.hour.workHoursEnd}
+                        primaryColor={config.style.primaryColor}
                         fullDayAppointments={fullDayAppointments}
                     />
                 ))}
