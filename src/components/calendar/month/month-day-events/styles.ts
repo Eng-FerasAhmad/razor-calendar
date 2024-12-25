@@ -9,7 +9,7 @@ export const MonthEventContainer = styled.div<Props>`
     white-space: nowrap;
     height: 24px;
     margin: 1px 0;
-    padding: 1px 3px;
+    padding: 1px 3px 1px 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: flex;
@@ -75,4 +75,12 @@ export const DraggableEventContainer = styled.div`
         cursor: grabbing;
         transform: scale(0.95);
     }
+`;
+
+export const EventTitleWrapper = styled.span`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: auto;
 `;

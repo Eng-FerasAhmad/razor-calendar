@@ -1,6 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
 import {
+    EventTitleWrapper,
     MonthEventContainer,
     MoreEventButtonWrapper,
     PointWrapper,
@@ -43,7 +44,7 @@ function DraggableEvent({
             data-testid="draggable-event"
         >
             <PointWrapper color={color} />
-            <span>{title}</span>
+            <EventTitleWrapper>{title}</EventTitleWrapper>
         </MonthEventContainer>
     );
 }

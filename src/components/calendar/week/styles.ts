@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
     isToday: boolean;
@@ -102,6 +103,7 @@ export const DayNumberWrapper = styled.div<Props>`
     color: ${(props) => (props.isToday ? '#fff' : '')};
     &:hover {
         cursor: pointer;
-        background-color: #e6e6e6;
+        background-color: ${(props) =>
+            props.isToday ? darkenColor(props.primaryColor!, 30) : '#e0e0e0'};
     }
 `;

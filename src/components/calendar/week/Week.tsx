@@ -103,7 +103,10 @@ export default function Week({
                     ))}
                 </WeekHeaderDaysRow>
                 <WeekHeaderFullDaysRow>
-                    <GmtWrapper>GMT +{DateTime.now().offset / 60}</GmtWrapper>
+                    <GmtWrapper>
+                        GMT +{DateTime.now().offset / 60}-
+                        <div>W{selectedDate.weekNumber}</div>
+                    </GmtWrapper>
                     <FullDaysEventHeaderContainer data-testid="full-days-event-header-container">
                         {days.map((day) => (
                             <WeekDayHeaderWrapper key={day.toISO()}>
