@@ -6,7 +6,6 @@ import {
     useCallback,
     ReactNode,
     useContext,
-    useEffect,
 } from 'react';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
@@ -17,7 +16,7 @@ import { CalendarConfig, RazorCalendarConfig } from 'types/config';
 interface Props {
     children: ReactNode;
     config: RazorCalendarConfig<CalendarConfig>;
-    view: ViewType;
+    onExternalViewChange: (view: ViewType) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
@@ -37,11 +36,11 @@ export const CalendarContext = createContext<CalendarContextProps>({
 export function CalendarProvider({
     children,
     config,
-    view: initView,
+    onExternalViewChange,
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
 
-    const [view, setView] = useState<ViewType>(initView);
+    const [view, setView] = useState<ViewType>('week');
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
     const [language, setLanguage] = useState<string>(mergedConfig.common.lang);
     const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -49,12 +48,9 @@ export function CalendarProvider({
         mergedConfig.month.startWithWeekday ? 1 : 0
     );
 
-    useEffect(() => {
-        setView(initView);
-    }, [initView]);
-
     const onViewChange = useCallback((newView: ViewType) => {
         setView(newView);
+        onExternalViewChange(newView);
     }, []);
 
     const onDateChange = useCallback((newDate: DateTime) => {

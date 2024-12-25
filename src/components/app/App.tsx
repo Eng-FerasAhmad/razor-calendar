@@ -147,6 +147,7 @@ export default function App(): ReactElement {
             action,
             newDate || DateTime.now()
         );
+
         setCurrentDate(updatedDate);
     };
 
@@ -169,6 +170,7 @@ export default function App(): ReactElement {
             <RazorCalendar
                 appointments={appointments}
                 view={currentView}
+                onViewChange={handleViewChange}
                 config={config}
                 selectedDate={currentDate}
                 handleChangeAppointment={handleChangeAppointment}

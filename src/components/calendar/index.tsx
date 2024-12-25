@@ -11,8 +11,9 @@ export interface Props {
     appointments: Appointment[];
     view: ViewType;
     selectedDate: DateTime;
-    handleChangeAppointment: (appointment: Appointment) => void;
     config: RazorCalendarConfig<CalendarConfig>;
+    handleChangeAppointment: (appointment: Appointment) => void;
+    onViewChange: (view: ViewType) => void;
 }
 
 export function RazorCalendar({
@@ -21,11 +22,13 @@ export function RazorCalendar({
     config,
     selectedDate,
     handleChangeAppointment,
+    onViewChange,
 }: Props): ReactElement {
     return (
-        <CalendarProvider config={config} view={view}>
+        <CalendarProvider config={config} onExternalViewChange={onViewChange}>
             <StyleSheetManager shouldForwardProp={shouldForwardProp}>
                 <CalendarLayout
+                    initView={view}
                     selectedDate={selectedDate}
                     appointments={appointments}
                     handleChangeAppointment={handleChangeAppointment}
