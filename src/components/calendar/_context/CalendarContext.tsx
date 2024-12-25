@@ -17,6 +17,7 @@ interface Props {
     children: ReactNode;
     config: RazorCalendarConfig<CalendarConfig>;
     onExternalViewChange: (view: ViewType) => void;
+    onExternalChangeDate: (date: DateTime) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
@@ -37,6 +38,7 @@ export function CalendarProvider({
     children,
     config,
     onExternalViewChange,
+    onExternalChangeDate,
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
 
@@ -48,14 +50,21 @@ export function CalendarProvider({
         mergedConfig.month.startWithWeekday ? 1 : 0
     );
 
-    const onViewChange = useCallback((newView: ViewType) => {
-        setView(newView);
-        onExternalViewChange(newView);
-    }, []);
+    const onViewChange = useCallback(
+        (newView: ViewType) => {
+            setView(newView);
+            onExternalViewChange(newView);
+        },
+        [onExternalViewChange]
+    );
 
-    const onDateChange = useCallback((newDate: DateTime) => {
-        setSelectedDate(newDate);
-    }, []);
+    const onDateChange = useCallback(
+        (newDate: DateTime) => {
+            setSelectedDate(newDate);
+            onExternalChangeDate(newDate);
+        },
+        [onExternalChangeDate]
+    );
 
     const onChangeLanguage = useCallback((newLanguage: string) => {
         setLanguage(newLanguage);

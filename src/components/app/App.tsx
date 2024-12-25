@@ -151,6 +151,10 @@ export default function App(): ReactElement {
         setCurrentDate(updatedDate);
     };
 
+    const onChangeDate = (newDate: DateTime): void => {
+        setCurrentDate(newDate);
+    };
+
     const handleChangeAppointment = (appointment: Appointment): void => {
         console.log('Changed Appointment:', appointment);
     };
@@ -169,11 +173,12 @@ export default function App(): ReactElement {
             {/* Pass updated values to RazorCalendar */}
             <RazorCalendar
                 appointments={appointments}
+                handleChangeAppointment={handleChangeAppointment}
                 view={currentView}
                 onViewChange={handleViewChange}
-                config={config}
                 selectedDate={currentDate}
-                handleChangeAppointment={handleChangeAppointment}
+                onChangeDate={onChangeDate}
+                config={config}
             />
         </AppContainer>
     );
