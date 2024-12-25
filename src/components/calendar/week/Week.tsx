@@ -83,7 +83,7 @@ export default function Week({
                                 {formatDate(day, 'ccc')}
                             </DayShortNameWrapper>
                             <DayNumberWrapper
-                                primaryColor={config.style.primaryColor!}
+                                color={config.style.primaryColor!}
                                 isToday={day.hasSame(DateTime.now(), 'day')}
                             >
                                 {formatDate(day, 'dd')}
@@ -135,24 +135,14 @@ export default function Week({
             </WeekHeaderRow>
 
             <TimeDayWrapper data-testid="time-day-wrapper">
-                <TimeColumn
-                    interval={interval}
-                    is24HourFormat={config.hour.is24HourFormat}
-                    startWorkHour={config.hour.workHoursStart}
-                    endWorkHour={config.hour.workHoursEnd}
-                    intervalIndex={config.hour.hourIntervalIndex}
-                />
+                <TimeColumn interval={interval} />
 
                 {days.map((day) => (
                     <DayColumn
                         key={day.toISO()}
                         day={day}
-                        appointments={appointments!}
                         interval={interval}
-                        intervalIndex={config.hour.hourIntervalIndex}
-                        startWorkHour={config.hour.workHoursStart}
-                        endWorkHour={config.hour.workHoursEnd}
-                        primaryColor={config.style.primaryColor}
+                        appointments={appointments!}
                         fullDayAppointments={fullDayAppointments}
                     />
                 ))}

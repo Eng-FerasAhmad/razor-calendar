@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { calendarConfig } from 'calendar/config';
+import { commonSize } from 'calendar/config';
 import { calendarColors } from 'style/color';
 import { pixelToRem } from 'utils/common';
 
@@ -16,7 +16,7 @@ export const TimeColumnContainer = styled.div`
 
 const calcTimeSlotHeight = (props: Props): string => {
     const offset = props.intervalIndex! * TimeSlotOffset;
-    return pixelToRem(calendarConfig.timeSlotHeight - offset);
+    return pixelToRem(commonSize.timeSlotHeight - offset);
 };
 
 export const TimeLabelWrapper = styled.div<Props>`

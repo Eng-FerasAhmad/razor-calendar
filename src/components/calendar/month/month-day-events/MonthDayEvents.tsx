@@ -1,5 +1,6 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import {
     EventTitleWrapper,
     MonthEventContainer,
@@ -9,7 +10,6 @@ import {
 import { Appointment } from 'types/calendar';
 
 interface Props {
-    primaryColor: string;
     appointments: Appointment[];
 }
 
@@ -49,10 +49,8 @@ function DraggableEvent({
     );
 }
 
-export default function DisplayEvents({
-    appointments,
-    primaryColor,
-}: Props): ReactElement {
+export default function DisplayEvents({ appointments }: Props): ReactElement {
+    const { config } = useCalendarContext();
     // Limit to first 3 events
     const visibleAppointments = appointments.slice(0, 3);
     const remainingCount = appointments.length - visibleAppointments.length;
@@ -64,14 +62,14 @@ export default function DisplayEvents({
                     key={appointment.id}
                     id={appointment.id}
                     title={appointment.title}
-                    color={appointment.color || primaryColor}
+                    color={appointment.color || config.style.primaryColor}
                 />
             ))}
 
             {/* Show remaining events count if applicable */}
             {remainingCount > 0 && (
                 <MoreEventButtonWrapper
-                    color={primaryColor}
+                    color={config.style.primaryColor}
                     data-testid="month-event-container-more"
                 >
                     {`${remainingCount} more events`}

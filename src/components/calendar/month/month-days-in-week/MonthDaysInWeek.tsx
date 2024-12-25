@@ -1,19 +1,19 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import DayCell from './DayCell';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import { Appointment } from 'types/calendar';
 
 interface Props {
     week: DateTime[];
-    primaryColor: string;
     appointments: Appointment[];
 }
 
 export default function DaysInTheWeek({
     week,
-    primaryColor,
     appointments,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
     const currentDay = DateTime.now();
 
     const getEventsForDay = (day: DateTime): Appointment[] =>
@@ -33,7 +33,7 @@ export default function DaysInTheWeek({
                         day={day}
                         dailyEvents={dailyEvents}
                         isToday={isToday}
-                        primaryColor={primaryColor}
+                        primaryColor={config.style.primaryColor}
                     />
                 );
             })}

@@ -3,7 +3,7 @@ import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
     isToday: boolean;
-    primaryColor: string;
+    color: string;
 }
 
 export const WeekContainer = styled.div`
@@ -99,11 +99,11 @@ export const DayNumberWrapper = styled.div<Props>`
     align-items: center;
     margin: 0 auto 5px auto;
     background-color: ${(props) =>
-        props.isToday ? props.primaryColor : 'transparent'};
+        props.isToday ? props.color : 'transparent'};
     color: ${(props) => (props.isToday ? '#fff' : '')};
     &:hover {
         cursor: pointer;
         background-color: ${(props) =>
-            props.isToday ? darkenColor(props.primaryColor!, 30) : '#e0e0e0'};
+            props.isToday ? darkenColor(props.color!, 30) : '#e0e0e0'};
     }
 `;

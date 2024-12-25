@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import {
     DisplayAppointmentContainer,
     ShortLabelView2Wrapper,
@@ -14,8 +15,6 @@ interface Props {
     title: string;
     from: string;
     to: string;
-    primaryColor: string;
-    intervalIndex: number;
     style: React.CSSProperties;
 }
 
@@ -23,10 +22,10 @@ export default function DisplayAppointment({
     title,
     from,
     to,
-    primaryColor,
-    intervalIndex,
     style,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
+
     const start = DateTime.fromISO(from).toFormat('hh:mm');
     const end = DateTime.fromISO(to).toFormat('hh:mm');
     const diffInMinutes = DateTime.fromISO(to)
@@ -91,7 +90,7 @@ export default function DisplayAppointment({
     );
 
     const viewLabelTimer = (): ReactElement => {
-        switch (intervalIndex) {
+        switch (config.hour.hourIntervalIndex) {
             case 0:
                 return diffInMinutes! <= 45 ? view1() : view();
             case 1:
@@ -111,7 +110,7 @@ export default function DisplayAppointment({
         <DisplayAppointmentContainer
             style={{
                 ...style,
-                backgroundColor: primaryColor,
+                backgroundColor: config.style.primaryColor,
             }}
         >
             {viewLabelTimer()}

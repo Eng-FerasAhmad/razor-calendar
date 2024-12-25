@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { calendarConfig } from 'calendar/config';
+import { commonSize } from 'calendar/config';
 import { calendarColors } from 'style/color';
 import { pixelToRem } from 'utils/common';
 import { TimeSlotOffset } from 'week/time-column/styles';
@@ -15,20 +15,18 @@ interface Props {
 
 const calcColumnHeight = (props: Props): string => {
     let offset = 0;
-    let slotHeight = calendarConfig.timeSlotHeight;
+    let slotHeight = commonSize.timeSlotHeight;
     switch (props.intervalIndex) {
         case 0:
             offset = 24;
             break;
         case 1:
             offset = props.intervalIndex! * 24 + 24;
-            slotHeight =
-                calendarConfig.timeSlotHeight - props.intervalIndex! * 10;
+            slotHeight = commonSize.timeSlotHeight - props.intervalIndex! * 10;
             break;
         case 2:
             offset = props.intervalIndex! * 36 + 24;
-            slotHeight =
-                calendarConfig.timeSlotHeight - props.intervalIndex! * 10;
+            slotHeight = commonSize.timeSlotHeight - props.intervalIndex! * 10;
             break;
         case 3:
             offset = props.intervalIndex! * 40 + 24;
@@ -49,7 +47,7 @@ const calcColumnHeight = (props: Props): string => {
 
 const calcTimeSlotHeight = (props: Props): string => {
     const offset = props.intervalIndex! * TimeSlotOffset;
-    return pixelToRem(calendarConfig.timeSlotHeight - offset);
+    return pixelToRem(commonSize.timeSlotHeight - offset);
 };
 
 const calcBorder = (props: Props): string => {

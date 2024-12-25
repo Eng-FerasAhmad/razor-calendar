@@ -7,7 +7,7 @@ import {
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
-import { calendarConfig } from 'calendar/config';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
 import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
@@ -20,16 +20,16 @@ import { Appointment } from 'types/calendar';
 interface Props {
     weeks: DateTime[][];
     appointments: Appointment[];
-    primaryColor: string;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function MonthGrid({
     weeks,
     appointments,
-    primaryColor,
     handleChangeAppointment,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
+
     const [updatedAppointments, setUpdatedAppointments] =
         useState(appointments);
     const [activeDrag, setActiveDrag] = useState<Appointment | null>(null);
@@ -103,13 +103,13 @@ export default function MonthGrid({
                         data-testid="month-grid-content-container"
                         key={weekIndex}
                     >
-                        {calendarConfig.showWeekNumbers && (
+                        {config.month.showWeekNumbers && (
                             <WeekNumber weekStart={week[0]} />
                         )}
                         <DaysInTheWeek
                             week={week}
                             appointments={updatedAppointments}
-                            primaryColor={primaryColor}
+                            primaryColor={config.style.primaryColor}
                         />
                     </MonthGridContentContainer>
                 ))}
@@ -121,7 +121,6 @@ export default function MonthGrid({
                     <DraggableEvent
                         id={activeDrag.id}
                         title={activeDrag.title}
-                        primaryColor={primaryColor}
                     />
                 )}
             </DragOverlay>

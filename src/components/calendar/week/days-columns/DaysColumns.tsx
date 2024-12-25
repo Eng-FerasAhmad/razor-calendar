@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/CalendarContext';
 import { Appointment } from 'types/calendar';
 import { isWorkTime } from 'utils/dateTime';
 import {
@@ -11,24 +12,18 @@ import DisplayAppointment from 'week/display-appointment/DisplayAppointment';
 interface Props {
     day: DateTime;
     appointments: Appointment[];
-    interval: number; // Interval in minutes
-    startWorkHour: number;
-    endWorkHour: number;
-    intervalIndex: number;
-    primaryColor: string;
     fullDayAppointments: Appointment[];
+    interval: number;
 }
 
 export default function DayColumn({
     day,
     appointments,
-    interval,
-    startWorkHour,
-    endWorkHour,
-    intervalIndex,
-    primaryColor,
     fullDayAppointments,
+    interval,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
+
     // Generate time slots
     const timeSlots = Array.from(
         { length: (24 * 60) / interval },
@@ -50,7 +45,7 @@ export default function DayColumn({
         );
 
     const calcMinHeight = (height: number): number => {
-        switch (intervalIndex) {
+        switch (config.hour.hourIntervalIndex) {
             case 0:
                 return height < 1.5 ? 1.7 : height;
             case 1:
@@ -86,7 +81,7 @@ export default function DayColumn({
         <DaysColumnsContainer
             data-testid="days-columns-container"
             timSlotsCount={timeSlots.length}
-            intervalIndex={intervalIndex}
+            intervalIndex={config.hour.hourIntervalIndex}
         >
             {timeSlots.map((_, index) => {
                 const hour = Math.floor((index * interval) / 60);
@@ -98,9 +93,13 @@ export default function DayColumn({
                         key={index}
                         isFullHour={minute === 0}
                         isFirstRow={index === 0}
-                        intervalIndex={intervalIndex}
+                        intervalIndex={config.hour.hourIntervalIndex}
                         isLastRow={index === timeSlots.length - 1}
-                        workTime={isWorkTime(hour, startWorkHour, endWorkHour)}
+                        workTime={isWorkTime(
+                            hour,
+                            config.hour.workHoursStart,
+                            config.hour.workHoursEnd
+                        )}
                     />
                 );
             })}
@@ -111,8 +110,6 @@ export default function DayColumn({
                     title={event.title}
                     from={event.start}
                     to={event.end}
-                    primaryColor={primaryColor}
-                    intervalIndex={intervalIndex}
                     style={calculateEventStyle(event)}
                 />
             ))}

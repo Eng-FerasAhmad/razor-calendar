@@ -39,7 +39,6 @@ export default function Month({
             <MonthGrid
                 weeks={weeks}
                 appointments={appointments!}
-                primaryColor={config.style.primaryColor}
                 handleChangeAppointment={handleChangeAppointment}
             />
         </MonthContainer>
