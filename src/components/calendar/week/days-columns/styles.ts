@@ -73,4 +73,8 @@ export const TimeSlotWrapper = styled.div<Props>`
     border-bottom: ${calcBorderBottom};
     background-color: ${(props) =>
         props.workTime ? calendarColors.workTime : calendarColors.outOfWork};
+    &:hover {
+        background-color: ${color.hover};
+        cursor: pointer;
+    }
 `;

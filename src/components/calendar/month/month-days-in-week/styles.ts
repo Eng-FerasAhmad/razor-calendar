@@ -18,13 +18,22 @@ export const MonthDayWrapper = styled.div`
 `;
 
 export const DayNumberContainer = styled.div<Props>`
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+`;
+
+export const DayNumberButtonContainer = styled.div<Props>`
     font-weight: bold;
-    border-bottom-right-radius: 4px;
+    border-radius: 50%;
     padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
     width: 24px;
     height: 24px;
     display: flex;
+    justify-content: center;
     align-items: center;
     box-sizing: border-box;
     background-color: ${(props) =>

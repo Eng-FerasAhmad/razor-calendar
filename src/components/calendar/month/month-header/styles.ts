@@ -10,11 +10,14 @@ export const MonthHeaderContainer = styled.div`
     position: sticky;
     top: 0;
     z-index: 10;
+    color: ${color.fontPrimaryLight};
 `;
 
 export const ContentWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 50px;
 `;
 
 export const SpaceWrapper = styled.div`

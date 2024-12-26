@@ -40,7 +40,7 @@ export const getLocalizedWeekdays = (language: string, firstDay: number) => {
             | 7;
         return DateTime.fromObject({ weekday })
             .setLocale(language)
-            .toFormat('EEEE');
+            .toFormat('ccc');
     });
 
     return weekdays;

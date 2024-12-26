@@ -10,6 +10,7 @@ export const MonthWeekNumberContainer = styled.div`
     cursor: pointer;
     font-size: 12px;
     border-bottom: 1px solid ${color.border};
+    color: ${color.fontPrimaryLight};
 
     &:hover {
         background-color: ${color.hover};

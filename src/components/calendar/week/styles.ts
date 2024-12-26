@@ -73,15 +73,16 @@ export const TimeDayWrapper = styled.div`
 `;
 
 export const WidthSpaceWrapper = styled.div`
-    width: 80px;
+    width: 70px;
 `;
 
 export const GmtWrapper = styled.div`
-    width: 87px;
+    width: 75px;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: ${color.fontPrimaryLight};
 `;
 
 export const DayShortNameWrapper = styled.div`
