@@ -6,7 +6,8 @@ import { AppContainer } from 'components/app/styles';
 import RazorCalendarToolbar from 'components/toolbar';
 import { GlobalStyle } from 'style/global';
 import { Appointment, ViewType } from 'types/appointment';
-import { CalendarConfig, RazorCalendarConfig } from 'types/config';
+import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
+import { ToolbarConfig } from 'types/toolbarConfig';
 import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
@@ -120,12 +121,14 @@ export default function App(): ReactElement {
             showWeekend: true,
             showWeekNumbers: true,
         },
-        style: {
-            primaryColor: '#ff6666',
-        },
         common: {
             lang: 'de',
         },
+    };
+
+    const toolbarConfig: Partial<ToolbarConfig> = {
+        fontColor: '#fff',
+        lang: 'de',
     };
 
     // State for CalendarToolbar and Calendar
@@ -168,6 +171,7 @@ export default function App(): ReactElement {
                 onViewChange={handleViewChange}
                 currentDate={currentDate}
                 onNavigate={handleNavigate}
+                toolbarConfig={toolbarConfig}
             />
 
             {/* Pass updated values to RazorCalendar */}

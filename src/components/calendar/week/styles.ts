@@ -89,10 +89,10 @@ export const DayShortNameWrapper = styled.div`
 `;
 
 export const DayNumberWrapper = styled.div<Props>`
-    font-size: 26px;
+    font-size: 20px;
     font-weight: normal;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
