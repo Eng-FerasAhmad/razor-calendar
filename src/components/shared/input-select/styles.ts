@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
 import { darkenColor } from 'utils/colorConverter';
 
 interface ValueWrapperProps {
@@ -62,6 +63,6 @@ export const OptionItem = styled.li`
     color: #595959;
 
     &:hover {
-        background-color: #f5f5f5;
+        background-color: ${color.hover};
     }
 `;

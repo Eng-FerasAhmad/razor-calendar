@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
 
 export const MonthHeaderContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid ${color.border};
     background-color: #fff;
     position: sticky;
     top: 0;

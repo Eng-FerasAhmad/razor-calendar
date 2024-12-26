@@ -38,9 +38,10 @@ export default function TimeColumn({ interval }: Props): ReactElement {
     const timeSlots = generateTimeSlots();
 
     return (
-        <TimeColumnContainer>
+        <TimeColumnContainer data-testid="time-column-container">
             {timeSlots.map(({ hour, minute, label }) => (
                 <TimeLabelWrapper
+                    data-testid="time-label-wrapper"
                     key={`${hour}:${minute}`}
                     workTime={isWorkTime(
                         hour,

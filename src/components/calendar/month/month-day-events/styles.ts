@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
 
 interface Props {
     color: string;
@@ -21,7 +22,7 @@ export const MonthEventContainer = styled.div<Props>`
 
     &:hover {
         cursor: pointer; /* Changes to pointer on hover */
-        background-color: #f0f0f0; /* Example hover style */
+        background-color: ${color.hover}; /* Example hover style */
     }
 
     &:active {
@@ -43,7 +44,7 @@ export const MoreEventButtonWrapper = styled.div`
 
     &:hover {
         cursor: pointer;
-        background-color: #e0e0e0;
+        background-color: ${color.hover};
         width: fit-content;
         margin: auto;
         border-radius: 10px;

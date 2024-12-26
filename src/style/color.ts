@@ -5,10 +5,12 @@ export const color = {
 
     /* fonts */
     fontPrimaryDark: '#4d4d4d',
-    fontPrimaryLight: '#b3b3b3',
+    fontPrimaryLight: '#737373',
+
+    hover: '#f0f0f0',
 
     /* borders */
-    border: '#a6a6a6',
+    border: '#dde3ea',
     borderLight: '#e6e6e6',
 
     /* background */

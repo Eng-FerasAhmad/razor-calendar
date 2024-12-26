@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
 
 export const MonthWeekNumberContainer = styled.div`
     width: 40px;
@@ -8,9 +9,9 @@ export const MonthWeekNumberContainer = styled.div`
     line-height: 30px;
     cursor: pointer;
     font-size: 12px;
-    border-bottom: 1px solid #dde3ea;
+    border-bottom: 1px solid ${color.border};
 
     &:hover {
-        background-color: #e0e0e0;
+        background-color: ${color.hover};
     }
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
 import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
@@ -11,8 +12,8 @@ export const MonthDayWrapper = styled.div`
     width: 50px;
     min-height: 100px;
     padding: 0;
-    border-left: 1px solid #dde3ea;
-    border-bottom: 1px solid #dde3ea;
+    border-left: 1px solid ${color.border};
+    border-bottom: 1px solid ${color.border};
     height: 130px;
 `;
 
@@ -33,6 +34,6 @@ export const DayNumberContainer = styled.div<Props>`
     &:hover {
         cursor: pointer;
         background-color: ${(props) =>
-            props.isToday ? darkenColor(props.color, 30) : '#e0e0e0'};
+            props.isToday ? darkenColor(props.color, 30) : color.hover};
     }
 `;

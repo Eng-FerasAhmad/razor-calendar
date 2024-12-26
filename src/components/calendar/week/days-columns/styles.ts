@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { commonSize } from 'calendar/_config/basicConfig';
-import { calendarColors } from 'style/color';
+import { calendarColors, color } from 'style/color';
 import { pixelToRem } from 'utils/common';
 import { TimeSlotOffset } from 'week/time-column/styles';
 
@@ -62,7 +62,7 @@ const calcBorderBottom = (props: Props): string => {
 export const DaysColumnsContainer = styled.div<Props>`
     flex: 1;
     position: relative;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid ${color.border};
     height: ${calcColumnHeight};
 `;
 

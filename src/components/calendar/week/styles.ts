@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
 import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
@@ -17,7 +18,7 @@ export const WeekHeaderRow = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid ${color.border};
     background-color: #fff;
     position: sticky;
     top: 0;
@@ -104,6 +105,6 @@ export const DayNumberWrapper = styled.div<Props>`
     &:hover {
         cursor: pointer;
         background-color: ${(props) =>
-            props.isToday ? darkenColor(props.color!, 30) : '#e0e0e0'};
+            props.isToday ? darkenColor(props.color!, 30) : color.hover};
     }
 `;
