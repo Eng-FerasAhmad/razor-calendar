@@ -11,6 +11,7 @@ import { ToolbarConfig } from 'types/toolbarConfig';
 import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
+    const locale = 'de';
     const appointments = [
         {
             id: '1',
@@ -122,13 +123,13 @@ export default function App(): ReactElement {
             showWeekNumbers: true,
         },
         common: {
-            lang: 'de',
+            lang: locale,
         },
     };
 
     const toolbarConfig: Partial<ToolbarConfig> = {
         fontColor: '#fff',
-        lang: 'de',
+        lang: locale,
     };
 
     // State for CalendarToolbar and Calendar

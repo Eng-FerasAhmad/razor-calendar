@@ -87,8 +87,9 @@ export const GmtWrapper = styled.div`
 `;
 
 export const DayShortNameWrapper = styled.div`
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
+    color: ${color.fontPrimaryLight};
 `;
 
 export const DayNumberWrapper = styled.div<Props>`

@@ -67,6 +67,8 @@ export default function InputSelect<T>({
                     {options.map((option) => (
                         <OptionItem
                             key={option.value as string}
+                            color={color}
+                            isSelected={option.value === value}
                             onClick={() => handleSelect(option.value)}
                         >
                             {option.label}

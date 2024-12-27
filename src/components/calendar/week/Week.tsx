@@ -80,7 +80,9 @@ export default function Week({
                             onClick={() => navigateToDay(day)}
                         >
                             <DayShortNameWrapper>
-                                {formatDate(day, 'ccc')}
+                                {day
+                                    .setLocale(config.common.lang)
+                                    .toFormat('ccc')}
                             </DayShortNameWrapper>
                             <DayNumberWrapper
                                 color={config.style.primaryColor!}

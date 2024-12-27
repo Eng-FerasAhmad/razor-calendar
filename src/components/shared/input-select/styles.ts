@@ -5,6 +5,7 @@ import { darkenColor } from 'utils/colorConverter';
 interface Props {
     isOpen: boolean;
     color?: string;
+    isSelected?: boolean;
 }
 
 export const SelectContainer = styled.div`
@@ -38,7 +39,6 @@ export const ValueWrapper = styled.div<Props>`
 export const IconWrapper = styled.div<Props>`
     font-size: 10px;
     margin-left: 8px;
-    color: #888;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,11 +61,11 @@ export const OptionsWrapper = styled.ul`
     z-index: 1000;
 `;
 
-export const OptionItem = styled.li`
-    padding: 8px 12px;
+export const OptionItem = styled.div<Props>`
+    padding: 8px 10px;
     cursor: pointer;
-    font-size: 16px;
-    color: #595959;
+    color: ${(props) => (props.isSelected ? props.color : '')};
+    transition: background-color 0.3s ease;
 
     &:hover {
         background-color: ${color.hover};
