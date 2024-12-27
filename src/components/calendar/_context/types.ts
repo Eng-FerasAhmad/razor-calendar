@@ -6,7 +6,7 @@ export interface CalendarContextProps {
     view: ViewType;
     config: CalendarConfig;
     selectedDate: DateTime;
-    firstDayOfWeek: number | undefined;
+    firstDayOfWeek: number;
     appointments: Appointment[] | undefined;
     language: string;
     onViewChange: (view: ViewType) => void;

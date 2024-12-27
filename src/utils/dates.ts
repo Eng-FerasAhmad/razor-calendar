@@ -45,11 +45,3 @@ export const getLocalizedWeekdays = (language: string, firstDay: number) => {
 
     return weekdays;
 };
-
-export const getLocalizedMonths = (language: string) => {
-    return Array.from({ length: 12 }, (_, i) =>
-        DateTime.fromObject({ month: i + 1 })
-            .setLocale(language)
-            .toFormat('MMMM')
-    );
-};
