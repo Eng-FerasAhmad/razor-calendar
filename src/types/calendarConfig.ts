@@ -5,7 +5,6 @@ export type RazorCalendarConfig<T> = {
 export interface MonthConfig {
     showWeekNumbers: boolean;
     showEvents: boolean;
-    startWithWeekday: boolean; // e.g., true for starting with Monday
     showHolidays: boolean;
 }
 

@@ -1,21 +1,16 @@
 import { DateTime } from 'luxon';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import {
-    DisplayAppointmentContainer,
-    ShortLabelView2Wrapper,
-    ShortLabelView1Wrapper,
-    ShortTimerView2Wrapper,
-    ShortTimerView1Wrapper,
-    ShortTimerViewWrapper,
-    ShortLabelViewWrapper,
-} from 'week/display-appointment/styles';
+import { DisplayAppointmentContainer } from 'week/display-appointment/styles';
+import IntervalView from 'week/display-appointment/views/IntervalView';
+import StandardView from 'week/display-appointment/views/StandardView';
+import ZoomIntervalView from 'week/display-appointment/views/ZoomIntervalView';
 
 interface Props {
     title: string;
     from: string;
     to: string;
-    style: React.CSSProperties;
+    style: { top: string; height: string };
 }
 
 export default function DisplayAppointment({
@@ -25,95 +20,67 @@ export default function DisplayAppointment({
     style,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
-
     const start = DateTime.fromISO(from).toFormat('hh:mm');
     const end = DateTime.fromISO(to).toFormat('hh:mm');
-    const diffInMinutes = DateTime.fromISO(to)
-        .diff(DateTime.fromISO(from), 'minutes')
-        .toObject().minutes;
 
-    // view1: for all events smaller than 30 minutes in interval 0
-    const view1 = (): ReactElement => (
-        <div
-            data-testid="view1"
-            style={{
-                display: 'flex',
-                flexDirection: 'row-reverse',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                height: '100%',
-            }}
-        >
-            <ShortTimerView1Wrapper>
-                {start} - {end}
-            </ShortTimerView1Wrapper>
-            <ShortLabelView1Wrapper>{title}</ShortLabelView1Wrapper>
-        </div>
-    );
+    const diffInMinutes = DateTime.fromISO(to).diff(
+        DateTime.fromISO(from),
+        'minutes'
+    ).minutes;
 
-    // view2: for all events bigger than 30 minutes in interval 0
-    const view2 = (): ReactElement => (
-        <div
-            data-testid="view2"
-            style={{
-                display: 'flex',
-                flexDirection: 'row-reverse',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                height: '100%',
-            }}
-        >
-            <ShortTimerView2Wrapper>
-                {start} - {end}
-            </ShortTimerView2Wrapper>
-            <ShortLabelView2Wrapper>{title}</ShortLabelView2Wrapper>
-        </div>
-    );
+    // Helper function to get the appropriate view component
+    const getViewComponent = (): ReactElement => {
+        const { hourIntervalIndex } = config.hour;
 
-    // view: default normal view:
-    const view = (): ReactElement => (
-        <div
-            data-testid="view"
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                height: '100%',
-            }}
-        >
-            <ShortTimerViewWrapper>
-                {start} - {end}
-            </ShortTimerViewWrapper>
-            <ShortLabelViewWrapper>{title}</ShortLabelViewWrapper>
-        </div>
-    );
+        // Map hourIntervalIndex to conditions and components
+        const viewConfig: {
+            condition: (minutes: number) => boolean;
+            view: ReactElement;
+        }[] = [
+            {
+                condition: (minutes) => minutes <= 45,
+                view: <IntervalView start={start} end={end} title={title} />,
+            },
+            {
+                condition: (minutes) => minutes <= 45,
+                view: (
+                    <ZoomIntervalView start={start} end={end} title={title} />
+                ),
+            },
+            {
+                condition: (minutes) => minutes < 30,
+                view: <IntervalView start={start} end={end} title={title} />,
+            },
+            {
+                condition: (minutes) => minutes < 20,
+                view: <IntervalView start={start} end={end} title={title} />,
+            },
+            {
+                condition: (minutes) => minutes < 10,
+                view: <IntervalView start={start} end={end} title={title} />,
+            },
+        ];
 
-    const viewLabelTimer = (): ReactElement => {
-        switch (config.hour.hourIntervalIndex) {
-            case 0:
-                return diffInMinutes! <= 45 ? view1() : view();
-            case 1:
-                return diffInMinutes! <= 45 ? view2() : view();
-            case 2:
-                return diffInMinutes! < 30 ? view1() : view();
-            case 3:
-                return diffInMinutes! < 20 ? view1() : view();
-            case 4:
-                return diffInMinutes! < 10 ? view1() : view();
-            default:
-                return view();
+        // Select the appropriate view component based on the hourIntervalIndex
+        if (hourIntervalIndex < viewConfig.length) {
+            const { condition, view } = viewConfig[hourIntervalIndex];
+            if (condition(diffInMinutes!)) {
+                return view;
+            }
         }
+
+        // Default to StandardView if no condition matches
+        return <StandardView start={start} end={end} title={title} />;
     };
 
     return (
         <DisplayAppointmentContainer
-            style={{
-                ...style,
-                backgroundColor: config.style.primaryColor,
-            }}
+            data-testid="display-appointment-container"
+            top={style.top}
+            height={style.height}
+            backgroundColor={config.style.primaryColor}
         >
-            {viewLabelTimer()}
+            {getViewComponent()}
         </DisplayAppointmentContainer>
     );
 }

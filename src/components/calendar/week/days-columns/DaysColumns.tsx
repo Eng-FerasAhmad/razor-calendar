@@ -60,7 +60,10 @@ export default function DayColumn({
     };
 
     // Helper to calculate event position
-    const calculateEventStyle = (event: { start: string; end: string }) => {
+    const calculateEventStyle = (event: {
+        start: string;
+        end: string;
+    }): { top: string; height: string } => {
         const eventStart = DateTime.fromISO(event.start);
         const eventEnd = DateTime.fromISO(event.end);
 

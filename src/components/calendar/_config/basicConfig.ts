@@ -26,7 +26,6 @@ export const basicConfig: CalendarConfig = {
     month: {
         showWeekNumbers: true,
         showEvents: true,
-        startWithWeekday: true, // e.g., true for starting with Monday
         showHolidays: true,
     },
     year: {

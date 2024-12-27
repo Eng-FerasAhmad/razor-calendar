@@ -26,7 +26,6 @@ export const DayNumberContainer = styled.div<Props>`
 `;
 
 export const DayNumberButtonContainer = styled.div<Props>`
-    font-weight: bold;
     border-radius: 50%;
     padding: 5px;
     font-size: 12px;
