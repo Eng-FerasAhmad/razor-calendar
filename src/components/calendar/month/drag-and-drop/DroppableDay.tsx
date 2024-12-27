@@ -35,10 +35,7 @@ export default function DroppableDay({
             <DayNumberContainer isToday={isToday} color={primaryColor}>
                 {day.day}
             </DayNumberContainer>
-            <DisplayEvents
-                appointments={dailyEvents}
-                primaryColor={primaryColor}
-            />
+            <DisplayEvents appointments={dailyEvents} />
         </MonthDayWrapper>
     );
 }

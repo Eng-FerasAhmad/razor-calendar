@@ -9,7 +9,7 @@ interface Props {
 
 export const MonthDayWrapper = styled.div`
     flex: 1;
-    width: 50px;
+    min-width: 50px;
     min-height: 100px;
     padding: 0;
     border-left: 1px solid ${color.border};

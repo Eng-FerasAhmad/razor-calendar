@@ -110,7 +110,6 @@ export default function MonthGrid({
                         <DaysInTheWeek
                             week={week}
                             appointments={updatedAppointments}
-                            primaryColor={config.style.primaryColor}
                         />
                     </MonthGridContentContainer>
                 ))}
