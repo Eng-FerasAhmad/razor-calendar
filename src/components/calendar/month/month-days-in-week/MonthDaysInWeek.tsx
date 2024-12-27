@@ -1,8 +1,7 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import DayCell from './DayCell';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
 
+import DroppableDay from 'month/drag-and-drop/DroppableDay';
 import { Appointment } from 'types/appointment';
 
 interface Props {
@@ -14,9 +13,7 @@ export default function DaysInTheWeek({
     week,
     appointments,
 }: Props): ReactElement {
-    const { config } = useCalendarContext();
     const currentDay = DateTime.now();
-
     const getEventsForDay = (day: DateTime): Appointment[] =>
         appointments.filter((appointment) =>
             DateTime.fromISO(appointment.start).hasSame(day, 'day')
@@ -29,12 +26,11 @@ export default function DaysInTheWeek({
                 const isToday = day.hasSame(currentDay, 'day');
 
                 return (
-                    <DayCell
+                    <DroppableDay
                         key={day.toISO()}
                         day={day}
                         dailyEvents={dailyEvents}
                         isToday={isToday}
-                        primaryColor={config.style.primaryColor}
                     />
                 );
             })}

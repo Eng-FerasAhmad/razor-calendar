@@ -4,8 +4,9 @@ import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
 import { MonthContainer } from 'month/styles';
+import { getMonthWeekNames, getMonthWeeksRow } from 'month/utils';
 import { Appointment } from 'types/appointment';
-import { getDateRange, getLocalizedWeekdays } from 'utils/dates';
+import { getDateRange } from 'utils/dates';
 
 interface Props {
     appointments: Appointment[];
@@ -19,9 +20,8 @@ export default function Month({
     handleChangeAppointment,
 }: Props): React.ReactElement {
     const { config } = useCalendarContext();
-    // Localized weekdays and months
-    const localizedWeekdays = getLocalizedWeekdays(config.common.lang, 1); // Start on Monday
 
+    const monthWeekNames = getMonthWeekNames(config.common.lang);
     const startOfMonth = selectedDate.startOf('month');
     const endOfMonth = selectedDate.endOf('month');
 
@@ -29,15 +29,12 @@ export default function Month({
         startOfMonth.startOf('week'),
         endOfMonth.endOf('week')
     );
-    const weeks = Array.from({ length: Math.ceil(days.length / 7) }, (_, i) =>
-        days.slice(i * 7, i * 7 + 7)
-    );
 
     return (
         <MonthContainer data-testid="month-container">
-            <MonthHeader localizedWeekdays={localizedWeekdays} />
+            <MonthHeader monthWeekNames={monthWeekNames} />
             <MonthGrid
-                weeks={weeks}
+                weeksRow={getMonthWeeksRow(days)}
                 appointments={appointments!}
                 handleChangeAppointment={handleChangeAppointment}
             />

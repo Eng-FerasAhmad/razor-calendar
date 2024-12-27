@@ -3,11 +3,55 @@ import { color } from 'style/color';
 import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
-    isToday: boolean;
     color: string;
+    isToday?: boolean;
 }
 
-export const MonthDayWrapper = styled.div`
+export const DraggableEventContainer = styled.div<Props>`
+    font-size: 10px;
+    white-space: nowrap;
+    height: 24px;
+    margin: 1px 0;
+    padding: 1px 3px 1px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    cursor: grab;
+    user-select: none;
+
+    &:hover {
+        cursor: pointer;
+        background-color: ${color.hover};
+    }
+
+    &:active {
+        cursor: grabbing;
+        background-color: #e0e0e0;
+    }
+`;
+
+export const PointWrapper = styled.span<Props>`
+    height: 7px;
+    width: 7px;
+    min-height: 7px;
+    min-width: 7px;
+    background-color: ${(props) => props.color};
+    border-radius: 50%;
+`;
+
+export const EventTitleWrapper = styled.span`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: auto;
+`;
+
+// droppable:
+export const DroppableDayContainer = styled.div`
     flex: 1;
     min-width: 50px;
     min-height: 100px;

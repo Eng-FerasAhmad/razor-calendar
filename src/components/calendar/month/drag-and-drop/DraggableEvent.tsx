@@ -1,16 +1,22 @@
 import { useDraggable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
-import { DraggableEventContainer } from '../month-day-events/styles';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import { darkenColor } from 'utils/colorConverter';
+import {
+    DraggableEventContainer,
+    EventTitleWrapper,
+    PointWrapper,
+} from 'month/drag-and-drop/styles';
 
 interface Props {
     id: string;
     title: string;
+    color: string;
 }
 
-export default function DraggableEvent({ id, title }: Props): ReactElement {
-    const { config } = useCalendarContext();
+export default function DraggableEvent({
+    id,
+    title,
+    color,
+}: Props): ReactElement {
     const { attributes, listeners, setNodeRef, transform, isDragging } =
         useDraggable({
             id,
@@ -21,8 +27,6 @@ export default function DraggableEvent({ id, title }: Props): ReactElement {
             ? `translate(${transform.x}px, ${transform.y}px)`
             : undefined,
         zIndex: isDragging ? 2 : 'auto',
-        backgroundColor: darkenColor(config.style.primaryColor, -70),
-        color: darkenColor(config.style.primaryColor, 80),
     };
 
     return (
@@ -31,8 +35,11 @@ export default function DraggableEvent({ id, title }: Props): ReactElement {
             style={style}
             {...attributes}
             {...listeners}
+            color={color}
+            data-testid="draggable-event-container"
         >
-            {title}
+            <PointWrapper color={color} />
+            <EventTitleWrapper>{title}</EventTitleWrapper>
         </DraggableEventContainer>
     );
 }

@@ -1,41 +1,53 @@
 import { useDroppable } from '@dnd-kit/core';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import DisplayEvents from 'month/month-day-events/MonthDayEvents';
-import {
-    DayNumberContainer,
-    MonthDayWrapper,
-} from 'month/month-days-in-week/styles';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import DisplayMonthAppointments from 'month/display-month-appointment/DisplayMonthAppointment';
 
+import {
+    DayNumberButtonContainer,
+    DayNumberContainer,
+    DroppableDayContainer,
+} from 'month/drag-and-drop/styles';
 import { Appointment } from 'types/appointment';
 
-interface DroppableDayProps {
+interface DayCellProps {
     day: DateTime;
     dailyEvents: Appointment[];
-    primaryColor: string;
-    isToday?: boolean;
+    isToday: boolean;
 }
 
 export default function DroppableDay({
     day,
     dailyEvents,
-    primaryColor,
-    isToday = false,
-}: DroppableDayProps): ReactElement {
+    isToday,
+}: DayCellProps): ReactElement {
+    const { onDateChange, onViewChange, config } = useCalendarContext();
     const { setNodeRef } = useDroppable({
-        id: day.toISODate() || '', // Ensure no null values
+        id: day.toISODate() || '',
     });
 
+    // Navigate to Day View
+    const navigateToDay = (newDay: DateTime): void => {
+        onDateChange(newDay);
+        onViewChange('day');
+    };
+
     return (
-        <MonthDayWrapper
-            ref={setNodeRef}
-            data-testid="month-day-wrapper"
-            style={{ border: isToday ? `2px solid ${primaryColor}` : 'none' }}
-        >
-            <DayNumberContainer isToday={isToday} color={primaryColor}>
-                {day.day}
+        <DroppableDayContainer ref={setNodeRef} data-testid="month-day-wrapper">
+            <DayNumberContainer
+                isToday={isToday}
+                color={config.style.primaryColor}
+            >
+                <DayNumberButtonContainer
+                    isToday={isToday}
+                    color={config.style.primaryColor}
+                    onClick={() => navigateToDay(day)}
+                >
+                    {day.day}
+                </DayNumberButtonContainer>
             </DayNumberContainer>
-            <DisplayEvents appointments={dailyEvents} />
-        </MonthDayWrapper>
+            <DisplayMonthAppointments appointments={dailyEvents} />
+        </DroppableDayContainer>
     );
 }

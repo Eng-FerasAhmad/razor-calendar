@@ -6,6 +6,6 @@ export const MonthGridContainer = styled.div`
     overflow-y: auto;
 `;
 
-export const MonthGridContentContainer = styled.div`
+export const MonthGridContentWrapper = styled.div`
     display: flex;
 `;

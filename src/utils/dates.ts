@@ -26,22 +26,3 @@ export const getDateRange = (
 
     return days;
 };
-
-export const getLocalizedWeekdays = (language: string, firstDay: number) => {
-    // Generate the weekdays in order based on the locale
-    const weekdays = Array.from({ length: 7 }, (_, i) => {
-        const weekday = (((i + firstDay - 1) % 7) + 1) as
-            | 1
-            | 2
-            | 3
-            | 4
-            | 5
-            | 6
-            | 7;
-        return DateTime.fromObject({ weekday })
-            .setLocale(language)
-            .toFormat('ccc');
-    });
-
-    return weekdays;
-};
