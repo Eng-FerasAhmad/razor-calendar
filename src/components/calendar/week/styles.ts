@@ -28,6 +28,7 @@ export const WeekHeaderRow = styled.div`
 export const WeekHeaderDaysRow = styled.div`
     display: flex;
     width: 100%;
+    padding-top: 10px;
 `;
 
 export const WeekHeaderFullDaysRow = styled.div`

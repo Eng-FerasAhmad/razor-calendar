@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     SelectContainer,
     ValueWrapper,
@@ -6,6 +6,7 @@ import {
     OptionsWrapper,
     OptionItem,
 } from './styles';
+import ArrowDownSymbol from 'components/shared/arrow-down/ArrowDownSymbole';
 
 interface Option<T> {
     value: T;
@@ -26,6 +27,7 @@ export default function InputSelect<T>({
     color,
 }: InputSelectProps<T>): React.ReactElement {
     const [isOpen, setIsOpen] = useState(false);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     const handleToggle = (): void => setIsOpen((prev) => !prev);
     const handleSelect = (optionValue: T): void => {
@@ -33,14 +35,32 @@ export default function InputSelect<T>({
         setIsOpen(false);
     };
 
+    const handleClickOutside = (event: MouseEvent): void => {
+        if (
+            containerRef.current &&
+            !containerRef.current.contains(event.target as Node)
+        ) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <SelectContainer>
+        <SelectContainer ref={containerRef}>
             <ValueWrapper onClick={handleToggle} isOpen={isOpen} color={color}>
                 <span>
                     {options.find((option) => option.value === value)?.label ||
                         'Select...'}
                 </span>
-                <IconWrapper>{isOpen ? '▲' : '▼'}</IconWrapper>
+                <IconWrapper isOpen={isOpen}>
+                    <ArrowDownSymbol size={18} color="#fff" />
+                </IconWrapper>
             </ValueWrapper>
             {isOpen && (
                 <OptionsWrapper>

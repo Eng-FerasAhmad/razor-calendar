@@ -51,8 +51,8 @@ const calcTimeSlotHeight = (props: Props): string => {
 };
 
 const calcBorder = (props: Props): string => {
-    const color = props.isFullHour ? '#ddd' : '#f0f0f0';
-    return !props.isFirstRow ? `1px solid ${color}` : 'none';
+    const currColor = props.isFullHour ? '#ddd' : '#f0f0f0';
+    return !props.isFirstRow ? `1px solid ${currColor}` : 'none';
 };
 
 const calcBorderBottom = (props: Props): string => {
