@@ -21,7 +21,6 @@ export default function DraggableEvent({
         useDraggable({
             id,
         });
-
     const style = {
         transform: transform
             ? `translate(${transform.x}px, ${transform.y}px)`

@@ -39,8 +39,8 @@ export const basicConfig: CalendarConfig = {
         showOverdueTasks: true,
     },
     style: {
-        primaryColor: '#2ba172',
-        secondaryColor: '#2ba172',
+        primaryColor: '#33b679',
+        secondaryColor: '#33b679',
         backgroundColor: '#fff',
         fontFamily: 'Roboto',
     },

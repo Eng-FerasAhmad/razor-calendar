@@ -42,6 +42,7 @@ export default function CalendarLayout({
                     <Week
                         appointments={appointments}
                         selectedDate={selectedDate}
+                        handleChangeAppointment={handleChangeAppointment}
                     />
                 );
             case 'day':

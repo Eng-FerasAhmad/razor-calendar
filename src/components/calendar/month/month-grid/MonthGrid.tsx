@@ -1,11 +1,10 @@
-import { DndContext, DragOverlay } from '@dnd-kit/core';
+import { DndContext } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
-import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
 import { useDragAndDrop } from 'month/drag-and-drop/useDragAndDrop';
 import {
     MonthGridContainer,
@@ -26,7 +25,7 @@ export default function MonthGrid({
 }: Props): ReactElement {
     const { config } = useCalendarContext();
 
-    const { updatedAppointments, activeDrag, handleDragStart, handleDragEnd } =
+    const { updatedAppointments, handleDragStart, handleDragEnd } =
         useDragAndDrop({
             appointments,
             handleChangeAppointment,
@@ -54,15 +53,6 @@ export default function MonthGrid({
                     </MonthGridContentWrapper>
                 ))}
             </MonthGridContainer>
-
-            <DragOverlay>
-                {activeDrag && (
-                    <DraggableEvent
-                        id={activeDrag.id}
-                        title={activeDrag.title}
-                    />
-                )}
-            </DragOverlay>
         </DndContext>
     );
 }

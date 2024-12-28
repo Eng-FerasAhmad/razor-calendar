@@ -21,6 +21,7 @@ export const DraggableEventContainer = styled.div<Props>`
     gap: 4px;
     cursor: grab;
     user-select: none;
+    border-radius: 3px;
 
     &:hover {
         cursor: pointer;
@@ -29,7 +30,6 @@ export const DraggableEventContainer = styled.div<Props>`
 
     &:active {
         cursor: grabbing;
-        background-color: #e0e0e0;
     }
 `;
 

@@ -34,7 +34,10 @@ export default function DroppableDay({
     };
 
     return (
-        <DroppableDayContainer ref={setNodeRef} data-testid="month-day-wrapper">
+        <DroppableDayContainer
+            ref={setNodeRef}
+            data-testid="droppable-month-day-wrapper"
+        >
             <DayNumberContainer
                 isToday={isToday}
                 color={config.style.primaryColor}
