@@ -25,13 +25,15 @@ export const CalendarContext = createContext<CalendarContextProps>({
     config: basicConfig,
     appointments: [],
     language: 'en',
-    firstDayOfWeek: 1,
     selectedDate: DateTime.now(),
+    showAllFullDays: false,
+    fullDaysCount: 0,
+    onUpdateFullDaysCount: () => {},
+    onShowAllFullDays: () => {},
     onViewChange: () => {},
     onDateChange: () => {},
     onChangeLanguage: () => {},
     onChangeAppointments: () => {},
-    onChangeFirstDay: () => {},
 });
 
 export function CalendarProvider({
@@ -46,9 +48,8 @@ export function CalendarProvider({
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
     const [language, setLanguage] = useState<string>(mergedConfig.common.lang);
     const [appointments, setAppointments] = useState<Appointment[]>([]);
-    const [firstDayOfWeek, setFirstDayOfWeek] = useState<number>(
-        mergedConfig.month.startWithWeekday ? 1 : 0
-    );
+    const [showAllFullDays, setShowAllFullDays] = useState<boolean>(false);
+    const [fullDaysCount, setFullDaysCount] = useState<number>(0);
 
     const onViewChange = useCallback(
         (newView: ViewType) => {
@@ -74,8 +75,12 @@ export function CalendarProvider({
         setAppointments(newEvents);
     }, []);
 
-    const onChangeFirstDay = useCallback((firstDay: number) => {
-        setFirstDayOfWeek(firstDay);
+    const onShowAllFullDays = useCallback(() => {
+        setShowAllFullDays((prev) => !prev);
+    }, []);
+
+    const onUpdateFullDaysCount = useCallback((count: number) => {
+        setFullDaysCount(count);
     }, []);
 
     return (
@@ -86,12 +91,14 @@ export function CalendarProvider({
                 selectedDate,
                 language,
                 appointments,
-                firstDayOfWeek,
+                showAllFullDays,
+                fullDaysCount,
+                onShowAllFullDays,
+                onUpdateFullDaysCount,
                 onViewChange,
                 onDateChange,
                 onChangeLanguage,
                 onChangeAppointments,
-                onChangeFirstDay,
             }}
         >
             {children}

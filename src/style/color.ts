@@ -7,7 +7,7 @@ export const color = {
     fontPrimaryDark: '#4d4d4d',
     fontPrimaryLight: '#737373',
 
-    hover: '#f0f0f0',
+    hover: '#f8f8f8',
 
     /* borders */
     border: '#dde3ea',

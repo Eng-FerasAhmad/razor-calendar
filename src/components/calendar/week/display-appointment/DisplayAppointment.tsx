@@ -6,6 +6,7 @@ import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 interface Props {
     day: DateTime;
     appointments: Appointment[];
+    fullDayAppointments: Appointment[];
     calculatePosition: (
         start: DateTime,
         end: DateTime
@@ -16,10 +17,15 @@ export default function DisplayAppointment({
     day,
     appointments,
     calculatePosition,
+    fullDayAppointments,
 }: Props): ReactElement {
+    const filteredAppointments = appointments.filter((item) => {
+        return !fullDayAppointments.some((fullDay) => fullDay.id === item.id);
+    });
+
     return (
         <>
-            {appointments.map((appointment) => {
+            {filteredAppointments.map((appointment) => {
                 const start = DateTime.fromISO(appointment.start);
                 const end = DateTime.fromISO(appointment.end);
                 if (!start.hasSame(day, 'day')) return null;

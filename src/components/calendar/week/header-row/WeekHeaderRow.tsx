@@ -24,7 +24,8 @@ export default function WeekHeaderRow({
     days,
     fullDayAppointments,
 }: Props): ReactElement {
-    const { config, onDateChange, onViewChange } = useCalendarContext();
+    const { config, onDateChange, onViewChange, fullDaysCount } =
+        useCalendarContext();
 
     // Navigate to Day View
     const navigateToDay = (day: DateTime): void => {
@@ -55,7 +56,10 @@ export default function WeekHeaderRow({
                     </WeekDayHeaderWrapper>
                 ))}
             </WeekHeaderDaysRowWrapper>
-            <WeekHeaderFullDaysRowWrapper>
+            <WeekHeaderFullDaysRowWrapper
+                fullDaysCount={fullDaysCount}
+                data-testid="week-header-full-days-row-wrapper"
+            >
                 <GmtWrapper data-testid="gmt-wrapper">
                     GMT +{DateTime.now().offset / 60}
                 </GmtWrapper>

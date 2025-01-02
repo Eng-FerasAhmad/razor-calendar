@@ -130,6 +130,7 @@ export default function Week({
                             day={day}
                             interval={interval}
                             appointments={updatedAppointments}
+                            fullDayAppointments={fullDayAppointments}
                         />
                     ))}
                 </DndContext>

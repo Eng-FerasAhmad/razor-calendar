@@ -22,6 +22,15 @@ export default function DraggableAppointment({
     to,
     style,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
+    const start = DateTime.fromISO(from).toFormat('hh:mm');
+    const end = DateTime.fromISO(to).toFormat('hh:mm');
+
+    const diffInMinutes = DateTime.fromISO(to).diff(
+        DateTime.fromISO(from),
+        'minutes'
+    ).minutes;
+
     const { attributes, listeners, setNodeRef, transform, isDragging } =
         useDraggable({
             id,
@@ -33,14 +42,6 @@ export default function DraggableAppointment({
         zIndex: isDragging ? 2 : 'auto',
         ...style,
     };
-    const { config } = useCalendarContext();
-    const start = DateTime.fromISO(from).toFormat('hh:mm');
-    const end = DateTime.fromISO(to).toFormat('hh:mm');
-
-    const diffInMinutes = DateTime.fromISO(to).diff(
-        DateTime.fromISO(from),
-        'minutes'
-    ).minutes;
 
     // Helper function to get the appropriate view component
     const getViewComponent = (): ReactElement => {
@@ -94,6 +95,7 @@ export default function DraggableAppointment({
             {...listeners}
             id={id}
             style={dragStyle}
+            backgroundColor={config.style.primaryColor}
             data-testid="draggable-appointment"
         >
             {getViewComponent()}

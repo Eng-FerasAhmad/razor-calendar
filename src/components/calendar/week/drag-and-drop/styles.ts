@@ -13,6 +13,10 @@ interface Props {
     isLastRow?: boolean;
 }
 
+interface AppointmentProps {
+    backgroundColor: string;
+}
+
 const calcTimeSlotHeight = (props: Props): string => {
     const offset = props.intervalIndex! * TimeSlotOffset;
     return pixelToRem(commonSize.timeSlotHeight - offset);
@@ -27,12 +31,10 @@ const calcBorderBottom = (props: Props): string => {
     return props.isLastRow ? `1px solid #ddd` : 'none';
 };
 
-export const AppointmentWrapper = styled.div`
+export const AppointmentWrapper = styled.div<AppointmentProps>`
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #90caf9;
+    left: 1px;
+    right: 1px;
     color: #fff;
     border-radius: 4px;
     padding: 4px;
@@ -42,6 +44,15 @@ export const AppointmentWrapper = styled.div`
     text-overflow: ellipsis;
     font-size: 12px;
     z-index: 1;
+    background-color: ${(props) => props.backgroundColor};
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        cursor: grabbing;
+    }
 `;
 
 export const DroppableSlotWrapper = styled.div<Props>`

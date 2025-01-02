@@ -7,6 +7,15 @@ interface Props {
     color: string;
 }
 
+interface FullDaysProps {
+    fullDaysCount: number;
+}
+
+const calculateWidth = (props: FullDaysProps): string => {
+    console.log('props.fullDaysCount', props.fullDaysCount);
+    return props.fullDaysCount ? `${props.fullDaysCount * 23}px` : '100%';
+};
+
 export const WeekHeaderRowContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,9 +33,13 @@ export const WeekHeaderDaysRowWrapper = styled.div`
     padding-top: 10px;
 `;
 
-export const WeekHeaderFullDaysRowWrapper = styled.div`
+export const WeekHeaderFullDaysRowWrapper = styled.div<FullDaysProps>`
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: ${calculateWidth};
     width: 100%;
+    margin: 2px 0;
 `;
 
 export const WidthSpaceWrapper = styled.div`
@@ -35,9 +48,11 @@ export const WidthSpaceWrapper = styled.div`
 
 export const GmtWrapper = styled.div`
     width: 75px;
+    height: 100%;
+    min-width: 70px;
     font-size: 12px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     color: ${color.fontPrimaryLight};
 `;

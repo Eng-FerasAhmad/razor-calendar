@@ -1,9 +1,9 @@
 import { useDroppable } from '@dnd-kit/core';
-import React from 'react';
+import { ReactElement } from 'react';
 import { isWorkTime } from 'utils/dateTime';
 import { DroppableSlotWrapper } from 'week/drag-and-drop/styles';
 
-interface DroppableSlotProps {
+interface Props {
     slotId: string;
     hour: number;
     minute: number;
@@ -14,7 +14,7 @@ interface DroppableSlotProps {
     workHoursEnd: number;
 }
 
-export const DroppableTimeSlot: React.FC<DroppableSlotProps> = ({
+export default function DroppableTimeSlot({
     slotId,
     hour,
     minute,
@@ -23,7 +23,7 @@ export const DroppableTimeSlot: React.FC<DroppableSlotProps> = ({
     intervalIndex,
     workHoursStart,
     workHoursEnd,
-}) => {
+}: Props): ReactElement {
     const { setNodeRef, isOver } = useDroppable({ id: slotId });
 
     return (
@@ -42,4 +42,4 @@ export const DroppableTimeSlot: React.FC<DroppableSlotProps> = ({
             }}
         />
     );
-};
+}

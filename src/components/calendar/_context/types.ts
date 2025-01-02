@@ -6,12 +6,14 @@ export interface CalendarContextProps {
     view: ViewType;
     config: CalendarConfig;
     selectedDate: DateTime;
-    firstDayOfWeek: number;
     appointments: Appointment[] | undefined;
     language: string;
     onViewChange: (view: ViewType) => void;
     onDateChange: (date: DateTime) => void;
     onChangeLanguage: (lang: string) => void;
     onChangeAppointments: (appointment: Appointment[]) => void;
-    onChangeFirstDay: (firstDay: number) => void;
+    onShowAllFullDays: () => void;
+    showAllFullDays: boolean;
+    fullDaysCount: number;
+    onUpdateFullDaysCount: (count: number) => void;
 }

@@ -10,12 +10,14 @@ interface DayCellProps {
     day: DateTime;
     appointments: Appointment[];
     interval: number;
+    fullDayAppointments: Appointment[];
 }
 
 export default function DayColumns({
     day,
     appointments,
     interval,
+    fullDayAppointments,
 }: DayCellProps): React.ReactElement {
     const { config } = useCalendarContext();
 
@@ -49,7 +51,7 @@ export default function DayColumns({
 
         return {
             top: `calc(${top}% + 1px)`,
-            height: `calc(${height}% - 3px)`,
+            height: `calc(${height}% - 11px)`,
         };
     };
 
@@ -68,6 +70,7 @@ export default function DayColumns({
                 day={day}
                 appointments={updatedAppointments}
                 calculatePosition={calculatePosition}
+                fullDayAppointments={fullDayAppointments}
             />
         </DaysColumnsContainer>
     );

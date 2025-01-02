@@ -1,32 +1,58 @@
 import styled from 'styled-components';
+import { color } from 'style/color';
+import { darkenColor } from 'utils/colorConverter';
 
-export const FullDaysEventHeaderWrapper = styled.div`
-    text-align: center;
-    font-weight: bold;
-    padding: 0;
+interface Props {
+    color: string;
+}
+
+export const FullDayTitleWrapper = styled.div<{ color: string }>`
+    padding: 0 5px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: ${color.hover};
+    box-sizing: border-box;
+    border-radius: 2px;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis when text overflows */
+    font-size: 10px;
+    color: ${color.fontPrimaryLight};
+    margin: 0 1px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: ${darkenColor(color.hover, 40)};
+    }
 `;
 
 export const FullDaysEventHeaderContainer = styled.div`
-    display: flex;
+    position: relative;
     width: 100%;
-    font-size: 10px;
-    color: #fff;
+    height: 100%;
 `;
 
-export const FullDayTitleWrapper = styled.div<{ color: string }>`
-    height: 18px;
-    padding: 5px;
+export const FullDaysEventHeaderWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    height: 100%;
+`;
+
+export const PointWrapper = styled.div<Props>`
+    height: 5px;
+    width: 5px;
+    min-height: 5px;
+    min-width: 5px;
     background-color: ${(props) => props.color};
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    box-sizing: border-box;
+    border-radius: 50%;
 `;
 
-export const WeekDayHeaderWrapper = styled.div`
-    flex: 1;
-    text-align: center;
-    font-weight: bold;
-    background-color: #fff;
-    padding: 0;
+export const EventTitleWrapper = styled.span`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: auto;
 `;
