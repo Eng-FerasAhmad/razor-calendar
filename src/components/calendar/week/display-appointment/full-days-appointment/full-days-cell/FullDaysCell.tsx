@@ -22,13 +22,7 @@ export default function FullDaysCell({
     const left = dayWidth * visibleStartIndex;
 
     return (
-        <FullDaysCellContainer
-            style={{
-                width: `calc(${width}% - 2px)`,
-                left: `${left}%`,
-                position: 'absolute',
-            }}
-        >
+        <FullDaysCellContainer width={width} left={left}>
             <FullDayTitleWrapper color={appointment.color || ''}>
                 {appointment.title}
             </FullDayTitleWrapper>

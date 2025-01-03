@@ -98,7 +98,7 @@ export default function App(): ReactElement {
             id: '11',
             title: 'View 2 days',
             start: '2024-12-22T13:00',
-            end: '2024-12-31T14:30',
+            end: '2025-02-28T14:30',
             isFullDay: true,
             color: '#66a3ff',
         },
