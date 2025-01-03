@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import ArrowDownSymbol from 'components/shared/arrow-down/ArrowDownSymbole';
+import Tooltip from 'components/shared/tooltip/Tooltip';
 import { color } from 'style/color';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
@@ -57,13 +58,15 @@ export default function WeekHeaderRow({
                         <DayShortNameWrapper data-testid="day-short-name-wrapper">
                             {day.setLocale(config.common.lang).toFormat('ccc')}
                         </DayShortNameWrapper>
-                        <DayNumberWrapper
-                            data-testid="day-number-wrapper"
-                            color={config.style.primaryColor!}
-                            isToday={day.hasSame(DateTime.now(), 'day')}
-                        >
-                            {formatDate(day, 'dd')}
-                        </DayNumberWrapper>
+                        <Tooltip text={'Day view'}>
+                            <DayNumberWrapper
+                                data-testid="day-number-wrapper"
+                                color={config.style.primaryColor!}
+                                isToday={day.hasSame(DateTime.now(), 'day')}
+                            >
+                                {formatDate(day, 'dd')}
+                            </DayNumberWrapper>
+                        </Tooltip>
                     </WeekDayHeaderWrapper>
                 ))}
             </WeekHeaderDaysRowWrapper>
@@ -71,15 +74,19 @@ export default function WeekHeaderRow({
                 <GmtWrapper data-testid="gmt-wrapper">
                     <div>GMT +{DateTime.now().offset / 60}</div>
                     {fullDaysCount > 2 && (
-                        <IconDownWrapper
-                            isOpen={showAllFullDays}
-                            onClick={handleToggle}
+                        <Tooltip
+                            text={`${showAllFullDays ? 'hide' : 'show'} all full days`}
                         >
-                            <ArrowDownSymbol
-                                size={16}
-                                color={color.fontPrimaryLight}
-                            />
-                        </IconDownWrapper>
+                            <IconDownWrapper
+                                isOpen={showAllFullDays}
+                                onClick={handleToggle}
+                            >
+                                <ArrowDownSymbol
+                                    size={16}
+                                    color={color.fontPrimaryLight}
+                                />
+                            </IconDownWrapper>
+                        </Tooltip>
                     )}
                 </GmtWrapper>
 

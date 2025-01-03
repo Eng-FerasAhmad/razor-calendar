@@ -5,6 +5,7 @@ import ArrowNextSymbol from 'components/shared/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/arrow-prev/ArrowPrevSymbol';
 import Button from 'components/shared/button/Button';
 import InputSelect from 'components/shared/input-select/InputSelect';
+import Tooltip from 'components/shared/tooltip/Tooltip';
 import { baseToolbarConfig } from 'components/toolbar/_config/baseToolbarConfig';
 import { getLocalizedLabel } from 'components/toolbar/_config/localization';
 import { mergeToolbarConfig } from 'components/toolbar/_config/utils';
@@ -85,20 +86,31 @@ export default function RazorCalendarToolbar({
                     >
                         {getLocalizedLabel('today', lang)}
                     </Button>
-                    <NavigationIconsWrapper
-                        onClick={handleClickPrev}
-                        color={config.primaryColor}
-                        title={getLocalizedLabel('previous', lang)}
-                    >
-                        <ArrowPrevSymbol size={22} color={config.fontColor} />
-                    </NavigationIconsWrapper>
-                    <NavigationIconsWrapper
-                        onClick={handleClickNext}
-                        color={config.primaryColor}
-                        title={getLocalizedLabel('next', lang)}
-                    >
-                        <ArrowNextSymbol size={22} color={config.fontColor} />
-                    </NavigationIconsWrapper>
+
+                    <Tooltip text={getLocalizedLabel('previous', lang)}>
+                        <NavigationIconsWrapper
+                            onClick={handleClickPrev}
+                            color={config.primaryColor}
+                        >
+                            <ArrowPrevSymbol
+                                size={22}
+                                color={config.fontColor}
+                            />
+                        </NavigationIconsWrapper>
+                    </Tooltip>
+
+                    <Tooltip text={getLocalizedLabel('next', lang)}>
+                        <NavigationIconsWrapper
+                            onClick={handleClickNext}
+                            color={config.primaryColor}
+                            title={getLocalizedLabel('next', lang)}
+                        >
+                            <ArrowNextSymbol
+                                size={22}
+                                color={config.fontColor}
+                            />
+                        </NavigationIconsWrapper>
+                    </Tooltip>
                     <TitleWrapper>{getTitle()}</TitleWrapper>
                 </NavigationWrapper>
                 <ViewWrapper>
