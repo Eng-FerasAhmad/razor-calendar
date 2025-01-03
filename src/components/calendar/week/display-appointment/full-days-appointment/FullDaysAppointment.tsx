@@ -1,15 +1,9 @@
-// FullDaysAppointment.tsx
 import { DateTime } from 'luxon';
-import { ReactElement, useEffect } from 'react';
-import {
-    EventTitleWrapper,
-    FullDaysEventHeaderContainer,
-    FullDaysEventHeaderWrapper,
-    FullDayTitleWrapper,
-    PointWrapper,
-} from './styles';
+import { ReactElement, useEffect, useMemo } from 'react';
+import { FullDaysEventHeaderContainer } from './styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
+import FullDaysRow from 'week/display-appointment/full-days-appointment/full-days-row/FullDaysRow';
 
 interface Props {
     days: DateTime<boolean>[];
@@ -20,166 +14,80 @@ export default function FullDaysAppointment({
     fullDayAppointments,
     days,
 }: Props): ReactElement {
-    const { config, onUpdateFullDaysCount } = useCalendarContext();
+    const { config, onUpdateFullDaysCount, showAllFullDays } =
+        useCalendarContext();
     const fullWidth = 100; // Full width in percentage
     const dayWidth = fullWidth / (config.week.showWeekend ? 7 : 5);
-    // Tracks the current top offset for each day to stack appointments
-    const dayOffsetTracker: Record<number, number> = {};
 
+    // Calculate rows of appointments by iterating through days in the current week
+    const rows = useMemo(() => {
+        const rowsInside: Appointment[][] = [];
+
+        const weekStart = days[0];
+        const weekEnd = days[days.length - 1];
+
+        fullDayAppointments.forEach((appointment) => {
+            const appointmentStart = DateTime.fromISO(
+                appointment.start
+            ).startOf('day');
+            const appointmentEnd = DateTime.fromISO(appointment.end).startOf(
+                'day'
+            );
+
+            // Determine the visible range of the appointment within the current week
+            const visibleStart =
+                appointmentStart < weekStart ? weekStart : appointmentStart;
+            const visibleEnd =
+                appointmentEnd > weekEnd ? weekEnd : appointmentEnd;
+
+            if (visibleStart <= visibleEnd) {
+                const fittingRow = rowsInside.find((row) =>
+                    row.every((item) => {
+                        const itemStart = DateTime.fromISO(item.start).startOf(
+                            'day'
+                        );
+                        const itemEnd = DateTime.fromISO(item.end).startOf(
+                            'day'
+                        );
+                        return visibleEnd < itemStart || visibleStart > itemEnd;
+                    })
+                );
+
+                const partialAppointment: Appointment = {
+                    ...appointment,
+                    start: visibleStart.toISO()!,
+                    end: visibleEnd.toISO()!,
+                };
+
+                if (fittingRow) {
+                    fittingRow.push(partialAppointment);
+                } else {
+                    rowsInside.push([partialAppointment]);
+                }
+            }
+        });
+
+        return rowsInside;
+    }, [fullDayAppointments, days]);
+
+    // Update the count of rows
     useEffect(() => {
-        // Calculate and log the maximum offset
-        const maxCount = Math.max(...Object.values(dayOffsetTracker));
+        onUpdateFullDaysCount(rows.length);
+    }, [rows, onUpdateFullDaysCount]);
 
-        if (maxCount > 0) {
-            onUpdateFullDaysCount(maxCount / 23);
-        } else if (Object.keys(dayOffsetTracker).length === 0) {
-            onUpdateFullDaysCount(0);
-        }
-    }, [dayOffsetTracker, onUpdateFullDaysCount]);
+    // Limit rows based on showAllFullDays
+    const visibleRows = showAllFullDays ? rows : rows.slice(0, 2);
 
     return (
         <FullDaysEventHeaderContainer data-testid="full-days-event-header-container">
-            {fullDayAppointments.map((appointment) => {
-                const start = DateTime.fromISO(appointment.start).startOf(
-                    'day'
-                );
-                const end = DateTime.fromISO(appointment.end).startOf('day');
-
-                // Calculate the range of days the appointment spans
-                const startIndex = days.findIndex((day) =>
-                    day.hasSame(start, 'day')
-                );
-                const endIndex = days.findIndex((day) =>
-                    day.hasSame(end, 'day')
-                );
-
-                console.log('appointment', appointment);
-
-                // Logic for splitting appointments into visible spans
-                if (startIndex !== -1 && endIndex !== -1) {
-                    const visibleStartIndex = Math.max(startIndex, 0);
-                    const visibleEndIndex = Math.min(endIndex, days.length - 1);
-
-                    const top = dayOffsetTracker[visibleStartIndex] || 0;
-                    dayOffsetTracker[visibleStartIndex] =
-                        (dayOffsetTracker[visibleStartIndex] || 0) + 23;
-
-                    const width =
-                        dayWidth * (visibleEndIndex - visibleStartIndex + 1);
-                    const left = dayWidth * visibleStartIndex;
-
-                    return (
-                        <FullDaysEventHeaderWrapper
-                            key={appointment.id}
-                            style={{
-                                width: `calc(${width}% - 0px)`,
-                                left: `${left}%`,
-                                position: 'absolute',
-                                top: `${top}px`, // Use calculated top offset
-                            }}
-                        >
-                            <FullDayTitleWrapper
-                                color={config.style.primaryColor}
-                                style={{
-                                    width: '100%',
-                                }}
-                            >
-                                <PointWrapper
-                                    color={
-                                        appointment.color ||
-                                        config.style.primaryColor
-                                    }
-                                    data-testid="full-day-appointment-point"
-                                />
-                                <EventTitleWrapper>
-                                    {appointment.title}{' '}
-                                </EventTitleWrapper>
-                            </FullDayTitleWrapper>
-                        </FullDaysEventHeaderWrapper>
-                    );
-                }
-
-                // Handle split case for appointments partially outside the week
-                if (startIndex !== -1) {
-                    const visibleEndIndex = days.length - 1;
-                    const width = dayWidth * (visibleEndIndex - startIndex + 1);
-                    const left = dayWidth * startIndex;
-                    const top = dayOffsetTracker[startIndex] || 0;
-                    dayOffsetTracker[startIndex] =
-                        (dayOffsetTracker[startIndex] || 0) + 23;
-
-                    return (
-                        <FullDaysEventHeaderWrapper
-                            key={`${appointment.id}-start`}
-                            style={{
-                                width: `calc(${width}% - 2px)`,
-                                left: `${left}%`,
-                                position: 'absolute',
-                                top: `${top}px`,
-                            }}
-                        >
-                            <FullDayTitleWrapper
-                                color={config.style.primaryColor}
-                                style={{
-                                    width: '100%',
-                                }}
-                            >
-                                <PointWrapper
-                                    color={
-                                        appointment.color ||
-                                        config.style.primaryColor
-                                    }
-                                    data-testid="full-day-appointment-point"
-                                />
-                                <EventTitleWrapper>
-                                    {appointment.title}{' '}
-                                </EventTitleWrapper>
-                            </FullDayTitleWrapper>
-                        </FullDaysEventHeaderWrapper>
-                    );
-                }
-
-                if (endIndex !== -1) {
-                    const visibleStartIndex = 0;
-                    const width = dayWidth * (endIndex - visibleStartIndex + 1);
-                    const left = dayWidth * visibleStartIndex;
-                    const top = dayOffsetTracker[endIndex] || 0;
-                    dayOffsetTracker[endIndex] =
-                        (dayOffsetTracker[endIndex] || 0) + 23;
-
-                    return (
-                        <FullDaysEventHeaderWrapper
-                            key={`${appointment.id}-end`}
-                            style={{
-                                width: `calc(${width}% - 2px)`,
-                                left: `${left}%`,
-                                position: 'absolute',
-                                top: `${top}px`,
-                            }}
-                        >
-                            <FullDayTitleWrapper
-                                color={config.style.primaryColor}
-                                style={{
-                                    width: '100%',
-                                }}
-                            >
-                                <PointWrapper
-                                    color={
-                                        appointment.color ||
-                                        config.style.primaryColor
-                                    }
-                                    data-testid="full-day-appointment-point"
-                                />
-                                <EventTitleWrapper>
-                                    {appointment.title}{' '}
-                                </EventTitleWrapper>
-                            </FullDayTitleWrapper>
-                        </FullDaysEventHeaderWrapper>
-                    );
-                }
-
-                return null;
-            })}
+            {visibleRows.map((row, index) => (
+                <FullDaysRow
+                    key={index}
+                    appointments={row}
+                    dayWidth={dayWidth}
+                    days={days.map((day) => day.toJSDate())}
+                />
+            ))}
         </FullDaysEventHeaderContainer>
     );
 }

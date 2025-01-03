@@ -11,4 +11,5 @@ export const TimeDayWrapper = styled.div`
     display: flex;
     flex-direction: row;
     overflow-y: auto;
+    z-index: 20;
 `;

@@ -7,15 +7,6 @@ interface Props {
     color: string;
 }
 
-interface FullDaysProps {
-    fullDaysCount: number;
-}
-
-const calculateWidth = (props: FullDaysProps): string => {
-    console.log('props.fullDaysCount', props.fullDaysCount);
-    return props.fullDaysCount ? `${props.fullDaysCount * 23}px` : '100%';
-};
-
 export const WeekHeaderRowContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -33,11 +24,11 @@ export const WeekHeaderDaysRowWrapper = styled.div`
     padding-top: 10px;
 `;
 
-export const WeekHeaderFullDaysRowWrapper = styled.div<FullDaysProps>`
+export const WeekHeaderFullDaysRowWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: ${calculateWidth};
+    height: auto;
     width: 100%;
     margin: 2px 0;
 `;
@@ -52,9 +43,26 @@ export const GmtWrapper = styled.div`
     min-width: 70px;
     font-size: 12px;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     color: ${color.fontPrimaryLight};
+`;
+
+export const IconDownWrapper = styled.div<{ isOpen: boolean }>`
+    font-size: 10px;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    padding: 5px;
+    justify-content: space-between;
+    transition: transform 0.3s ease; /* Smooth transition */
+    transform: rotate(${(props) => (props.isOpen! ? '180deg' : '0deg')});
+    &:hover {
+        cursor: pointer;
+        background-color: ${color.hover};
+    }
 `;
 
 export const DayShortNameWrapper = styled.div`

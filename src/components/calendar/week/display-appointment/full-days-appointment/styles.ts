@@ -1,32 +1,8 @@
 import styled from 'styled-components';
-import { color } from 'style/color';
-import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
     color: string;
 }
-
-export const FullDayTitleWrapper = styled.div<{ color: string }>`
-    padding: 0 5px;
-    display: flex;
-    gap: 2px;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: ${color.hover};
-    box-sizing: border-box;
-    border-radius: 2px;
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Show ellipsis when text overflows */
-    font-size: 10px;
-    color: ${color.fontPrimaryLight};
-    margin: 0 1px;
-
-    &:hover {
-        cursor: pointer;
-        background-color: ${darkenColor(color.hover, 40)};
-    }
-`;
 
 export const FullDaysEventHeaderContainer = styled.div`
     position: relative;
@@ -37,10 +13,10 @@ export const FullDaysEventHeaderContainer = styled.div`
 export const FullDaysEventHeaderWrapper = styled.div`
     position: absolute;
     top: 0;
-    height: 100%;
+    height: 23px;
 `;
 
-export const PointWrapper = styled.div<Props>`
+export const PointWrapper = styled.span<Props>`
     height: 5px;
     width: 5px;
     min-height: 5px;
@@ -55,4 +31,44 @@ export const EventTitleWrapper = styled.span`
     text-overflow: ellipsis;
     display: inline-block;
     width: auto;
+`;
+
+export const ArrowWrapper = styled.div`
+    height: 10px;
+    width: 10px;
+    min-height: 10px;
+    min-width: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const TitlePointWrapper = styled.div`
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-start;
+`;
+
+export const FullDayEventWrapper = styled.div`
+    position: absolute;
+    border-radius: 4px;
+    background-color: ${(props) => props.theme.primaryColor || '#007bff'};
+    color: white;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    line-height: 1.4;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+`;
+
+export const FullDayEventContent = styled.div`
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;

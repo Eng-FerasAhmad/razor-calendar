@@ -23,9 +23,9 @@ export default function App(): ReactElement {
         {
             id: '2',
             title: 'Lunch but also long long text',
-            start: '2024-12-18T05:00',
-            end: '2024-12-18T10:00',
-            isFullDay: false,
+            start: '2025-01-01T13:00',
+            end: '2025-01-01T13:00',
+            isFullDay: true,
         },
         {
             id: '3',
@@ -47,6 +47,7 @@ export default function App(): ReactElement {
             start: '2024-12-24T14:30',
             end: '2024-12-24T14:30',
             isFullDay: true,
+            color: '#ff9933',
         },
         {
             id: '6',
@@ -73,9 +74,9 @@ export default function App(): ReactElement {
         {
             id: '8',
             title: 'View 4',
-            start: '2024-12-25T12:00',
-            end: '2024-12-25T13:00',
-            isFullDay: false,
+            start: '2024-12-12T12:00',
+            end: '2024-12-12T13:00',
+            isFullDay: true,
             color: '#8e56f5',
         },
         {
@@ -97,8 +98,9 @@ export default function App(): ReactElement {
             id: '11',
             title: 'View 2 days',
             start: '2024-12-22T13:00',
-            end: '2024-12-24T14:30',
+            end: '2024-12-31T14:30',
             isFullDay: true,
+            color: '#66a3ff',
         },
         {
             id: '12',

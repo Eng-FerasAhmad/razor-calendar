@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import ArrowDownSymbol from 'components/shared/arrow-down/ArrowDownSymbole';
+import { color } from 'style/color';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
 import FullDaysAppointment from 'week/display-appointment/full-days-appointment/FullDaysAppointment';
@@ -13,6 +15,7 @@ import {
     WidthSpaceWrapper,
     WeekHeaderDaysRowWrapper,
     WeekHeaderFullDaysRowWrapper,
+    IconDownWrapper,
 } from 'week/header-row/styles';
 
 interface Props {
@@ -24,14 +27,22 @@ export default function WeekHeaderRow({
     days,
     fullDayAppointments,
 }: Props): ReactElement {
-    const { config, onDateChange, onViewChange, fullDaysCount } =
-        useCalendarContext();
+    const {
+        config,
+        onDateChange,
+        onViewChange,
+        fullDaysCount,
+        showAllFullDays,
+        onShowAllFullDays,
+    } = useCalendarContext();
 
     // Navigate to Day View
     const navigateToDay = (day: DateTime): void => {
         onDateChange(day);
         onViewChange('day');
     };
+
+    const handleToggle = (): void => onShowAllFullDays();
 
     return (
         <WeekHeaderRowContainer data-testid="week-header-row">
@@ -56,13 +67,22 @@ export default function WeekHeaderRow({
                     </WeekDayHeaderWrapper>
                 ))}
             </WeekHeaderDaysRowWrapper>
-            <WeekHeaderFullDaysRowWrapper
-                fullDaysCount={fullDaysCount}
-                data-testid="week-header-full-days-row-wrapper"
-            >
+            <WeekHeaderFullDaysRowWrapper data-testid="week-header-full-days-row-wrapper">
                 <GmtWrapper data-testid="gmt-wrapper">
-                    GMT +{DateTime.now().offset / 60}
+                    <div>GMT +{DateTime.now().offset / 60}</div>
+                    {fullDaysCount > 2 && (
+                        <IconDownWrapper
+                            isOpen={showAllFullDays}
+                            onClick={handleToggle}
+                        >
+                            <ArrowDownSymbol
+                                size={16}
+                                color={color.fontPrimaryLight}
+                            />
+                        </IconDownWrapper>
+                    )}
                 </GmtWrapper>
+
                 <FullDaysAppointment
                     fullDayAppointments={fullDayAppointments}
                     days={days}

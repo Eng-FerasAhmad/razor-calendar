@@ -69,6 +69,7 @@ export default function InputSelect<T>({
                             key={option.value as string}
                             color={color}
                             isSelected={option.value === value}
+                            isOpen={isOpen}
                             onClick={() => handleSelect(option.value)}
                         >
                             {option.label}
