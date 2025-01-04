@@ -1,39 +1,36 @@
 import { createTheme, Theme } from '@mui/material/styles';
+import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
-interface Config {
-    style?: {
-        primaryColor?: string;
-    };
-}
-
-export const createDynamicTheme = (config: Config): Theme => {
+export const createDynamicTheme = (
+    config: RazorCalendarConfig<CalendarConfig>
+): Theme => {
     return createTheme({
         palette: {
             primary: {
-                main: config.style?.primaryColor || '#1976d2', // Use provided primary color or fallback
+                main: config.style?.primaryColor || '#36c98e',
             },
             secondary: {
-                main: '#dc004e',
+                main: '#737373',
             },
             background: {
                 default: '#f5f5f5',
                 paper: '#ffffff',
             },
             text: {
-                primary: '#333333',
-                secondary: '#666666',
+                primary: '#4d4d4d',
+                secondary: '#737373',
             },
             action: {
-                hover: '#e0e0e0',
+                hover: '#f8f8f8',
             },
             divider: '#d9d9d9',
         },
         typography: {
-            fontSize: 16, // Base font size
-            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', // Replace with your fonts.primary
+            fontSize: 16,
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             body1: {
                 lineHeight: '22px',
-                fontWeight: 200, // Light font weight
+                fontWeight: 200,
                 letterSpacing: '0.0625rem',
             },
         },
@@ -51,7 +48,7 @@ export const createDynamicTheme = (config: Config): Theme => {
                         margin: 0,
                         padding: 0,
                         height: '100%',
-                        backgroundColor: '#f5f5f5', // Corresponds to your global background
+                        backgroundColor: '#fff',
                         fontWeight: 200,
                     },
                     p: {

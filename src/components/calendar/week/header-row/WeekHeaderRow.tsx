@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import ArrowDownSymbol from 'components/shared/arrow-down/ArrowDownSymbole';
-import { color } from 'style/color';
+import { color } from 'src/theme/color';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
 import FullDaysAppointment from 'week/display-appointment/full-days-appointment/FullDaysAppointment';

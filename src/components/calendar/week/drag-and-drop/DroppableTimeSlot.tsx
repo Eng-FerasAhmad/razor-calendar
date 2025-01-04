@@ -2,7 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { ReactElement, useState } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import AddCircleSymbol from 'components/shared/icons/add-circle/AddCircle';
-import { color } from 'style/color';
+import { color } from 'src/theme/color';
 import { isWorkTime } from 'utils/dateTime';
 import {
     DroppableSlotWrapper,

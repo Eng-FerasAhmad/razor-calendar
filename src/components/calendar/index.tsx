@@ -1,9 +1,9 @@
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { createDynamicTheme } from './theme'; // Import the dynamic theme creator
 import { CalendarProvider } from 'calendar/_context/CalendarContext';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
+import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
@@ -26,7 +26,7 @@ export function RazorCalendar({
     onViewChange,
     onChangeDate,
 }: Props): ReactElement {
-    const theme = createDynamicTheme(config); // Create the theme dynamically
+    const theme = createDynamicTheme(config);
 
     return (
         <ThemeProvider theme={theme}>
