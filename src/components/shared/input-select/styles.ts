@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { color } from 'style/color';
+import { styled } from '@mui/material/styles';
 import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
@@ -8,66 +7,63 @@ interface Props {
     isSelected?: boolean;
 }
 
-export const SelectContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-    position: relative;
-`;
+export const SelectContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100px',
+    position: 'relative',
+});
 
-export const ValueWrapper = styled.div<Props>`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid
-        ${(props) => (props.isOpen ? darkenColor(props.color!, 30) : '#ccc')};
-    border-radius: 4px;
-    padding: 7px 12px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: border-color 0.3s;
-    background-color: transparent;
-    border-color: ${(props) => darkenColor(props.color!, 30)};
-    color: #fff;
-    box-sizing: border-box;
-    &:hover {
-        box-sizing: border-box;
-        background-color: ${(props) => darkenColor(props.color!, 10)};
-    }
-`;
+export const ValueWrapper = styled('div')<Props>(({ isOpen, color }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    border: `1px solid ${isOpen ? darkenColor(color!, 30) : '#ccc'}`,
+    borderRadius: '4px',
+    padding: '7px 12px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    transition: 'border-color 0.3s',
+    backgroundColor: 'transparent',
+    color: '#fff',
+    boxSizing: 'border-box',
+    '&:hover': {
+        boxSizing: 'border-box',
+        backgroundColor: darkenColor(color!, 10),
+    },
+}));
 
-export const IconWrapper = styled.div<Props>`
-    font-size: 10px;
-    margin-left: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: transform 0.3s ease; /* Smooth transition */
-    transform: rotate(${(props) => (props.isOpen! ? '180deg' : '0deg')});
-`;
+export const IconWrapper = styled('div')<Props>(({ isOpen }) => ({
+    fontSize: '10px',
+    marginLeft: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    transition: 'transform 0.3s ease',
+    transform: `rotate(${isOpen ? '180deg' : '0deg'})`,
+}));
 
-export const OptionsWrapper = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 38px 0 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
-`;
+export const OptionsWrapper = styled('ul')({
+    listStyle: 'none',
+    padding: 0,
+    margin: '38px 0 0',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    maxHeight: '200px',
+    overflowY: 'auto',
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    position: 'absolute',
+    width: '100%',
+    zIndex: 1000,
+});
 
-export const OptionItem = styled.div<Props>`
-    padding: 8px 10px;
-    cursor: pointer;
-    color: ${(props) => (props.isSelected ? props.color : '')};
-    transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: ${color.hover};
-    }
-`;
+export const OptionItem = styled('div')<Props>(({ isSelected, color }) => ({
+    padding: '8px 10px',
+    cursor: 'pointer',
+    color: isSelected ? color : '',
+    transition: 'background-color 0.3s ease',
+    '&:hover': {
+        backgroundColor: color,
+    },
+}));

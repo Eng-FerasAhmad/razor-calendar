@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 
-export const AppContainer = styled.div`
-    width: 100%;
-    height: 100%;
-`;
+export const AppContainer = styled('div')({
+    width: '100%',
+    height: '100%',
+});

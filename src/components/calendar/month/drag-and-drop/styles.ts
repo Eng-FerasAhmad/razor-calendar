@@ -1,91 +1,93 @@
-import styled from 'styled-components';
-import { color } from 'style/color';
-import { darkenColor } from 'utils/colorConverter';
+import { darken } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 interface Props {
     color: string;
     isToday?: boolean;
 }
 
-export const DraggableEventContainer = styled.div<Props>`
-    font-size: 10px;
-    white-space: nowrap;
-    height: 24px;
-    margin: 1px 0;
-    padding: 1px 3px 1px 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px;
-    cursor: grab;
-    user-select: none;
-    border-radius: 3px;
+export const DraggableEventContainer = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'color' && prop !== 'isToday',
+})<Props>(({ theme }) => ({
+    fontSize: '10px',
+    whiteSpace: 'nowrap',
+    height: '24px',
+    margin: '1px 0',
+    padding: '1px 3px 1px 5px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: '4px',
+    cursor: 'grab',
+    userSelect: 'none',
+    borderRadius: '3px',
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: theme.palette.action.hover,
+    },
+    '&:active': {
+        cursor: 'grabbing',
+    },
+}));
 
-    &:hover {
-        cursor: pointer;
-        background-color: ${color.hover};
-    }
+export const PointWrapper = styled('span', {
+    shouldForwardProp: (prop) => prop !== 'color',
+})<Props>(({ color }) => ({
+    height: '7px',
+    width: '7px',
+    minHeight: '7px',
+    minWidth: '7px',
+    backgroundColor: color,
+    borderRadius: '50%',
+}));
 
-    &:active {
-        cursor: grabbing;
-    }
-`;
+export const EventTitleWrapper = styled('span')({
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: 'inline-block',
+    width: 'auto',
+});
 
-export const PointWrapper = styled.span<Props>`
-    height: 7px;
-    width: 7px;
-    min-height: 7px;
-    min-width: 7px;
-    background-color: ${(props) => props.color};
-    border-radius: 50%;
-`;
+// Droppable
+export const DroppableDayContainer = styled('div')(({ theme }) => ({
+    flex: 1,
+    minWidth: '50px',
+    minHeight: '100px',
+    padding: 0,
+    borderLeft: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    height: '130px',
+}));
 
-export const EventTitleWrapper = styled.span`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    width: auto;
-`;
+export const DayNumberContainer = styled('div')({
+    height: '25px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxSizing: 'border-box',
+});
 
-// droppable:
-export const DroppableDayContainer = styled.div`
-    flex: 1;
-    min-width: 50px;
-    min-height: 100px;
-    padding: 0;
-    border-left: 1px solid ${color.border};
-    border-bottom: 1px solid ${color.border};
-    height: 130px;
-`;
-
-export const DayNumberContainer = styled.div<Props>`
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-`;
-
-export const DayNumberButtonContainer = styled.div<Props>`
-    border-radius: 50%;
-    padding: 5px;
-    font-size: 12px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    background-color: ${(props) =>
-        props.isToday ? props.color : 'transparent'};
-    color: ${(props) => (props.isToday ? '#fff' : '')};
-
-    &:hover {
-        cursor: pointer;
-        background-color: ${(props) =>
-            props.isToday ? darkenColor(props.color, 30) : color.hover};
-    }
-`;
+export const DayNumberButtonContainer = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'color' && prop !== 'isToday',
+})<Props>(({ theme, color, isToday }) => ({
+    borderRadius: '50%',
+    padding: '5px',
+    fontSize: '12px',
+    width: '24px',
+    height: '24px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxSizing: 'border-box',
+    backgroundColor: isToday ? color : 'transparent',
+    color: isToday ? '#fff' : theme.palette.text.primary,
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: isToday
+            ? darken(color, 0.3)
+            : theme.palette.action.hover,
+    },
+}));

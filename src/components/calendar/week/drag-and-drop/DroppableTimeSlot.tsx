@@ -1,7 +1,13 @@
 import { useDroppable } from '@dnd-kit/core';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import AddCircleSymbol from 'components/shared/icons/add-circle/AddCircle';
+import { color } from 'style/color';
 import { isWorkTime } from 'utils/dateTime';
-import { DroppableSlotWrapper } from 'week/drag-and-drop/styles';
+import {
+    DroppableSlotWrapper,
+    PopupAreaWrapper,
+} from 'week/drag-and-drop/styles';
 
 interface Props {
     slotId: string;
@@ -24,7 +30,14 @@ export default function DroppableTimeSlot({
     workHoursStart,
     workHoursEnd,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
     const { setNodeRef, isOver } = useDroppable({ id: slotId });
+    const [isHovered, setIsHovered] = useState(false);
+    const [isIconVisible, setIsIconVisible] = useState(true);
+
+    const handleIconClick = (): void => {
+        setIsIconVisible(false);
+    };
 
     return (
         <DroppableSlotWrapper
@@ -38,8 +51,21 @@ export default function DroppableTimeSlot({
             isLastRow={isLastRow}
             workTime={isWorkTime(hour, workHoursStart, workHoursEnd)}
             style={{
-                backgroundColor: isOver ? '#e3f2fd' : '', // Highlight when hovered
+                backgroundColor: isOver ? '#e3f2fd' : '', // Highlight when hovered for drag and drop
             }}
-        />
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <PopupAreaWrapper>
+                {isHovered && isIconVisible && (
+                    <AddCircleSymbol
+                        size={24}
+                        color={color.fontPrimaryLight}
+                        hoverColor={config.style.primaryColor}
+                        onClick={handleIconClick}
+                    />
+                )}
+            </PopupAreaWrapper>
+        </DroppableSlotWrapper>
     );
 }

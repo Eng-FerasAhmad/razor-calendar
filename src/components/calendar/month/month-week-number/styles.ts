@@ -1,18 +1,17 @@
-import styled from 'styled-components';
-import { color } from 'style/color';
+import { styled } from '@mui/material/styles';
 
-export const MonthWeekNumberContainer = styled.div`
-    width: 40px;
-    text-align: center;
-    font-weight: bold;
-    background-color: #fff;
-    line-height: 30px;
-    cursor: pointer;
-    font-size: 12px;
-    border-bottom: 1px solid ${color.border};
-    color: ${color.fontPrimaryLight};
+export const MonthWeekNumberContainer = styled('div')(({ theme }) => ({
+    width: '40px',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    backgroundColor: theme.palette.background.paper,
+    lineHeight: '30px',
+    cursor: 'pointer',
+    fontSize: '12px',
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    color: theme.palette.text.primary,
 
-    &:hover {
-        background-color: ${color.hover};
-    }
-`;
+    '&:hover': {
+        backgroundColor: theme.palette.action.hover,
+    },
+}));

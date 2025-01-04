@@ -1,11 +1,9 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { StyleSheetManager } from 'styled-components';
 import ArrowNextSymbol from 'components/shared/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/arrow-prev/ArrowPrevSymbol';
 import Button from 'components/shared/button/Button';
 import InputSelect from 'components/shared/input-select/InputSelect';
-import Tooltip from 'components/shared/tooltip/Tooltip';
 import { baseToolbarConfig } from 'components/toolbar/_config/baseToolbarConfig';
 import { getLocalizedLabel } from 'components/toolbar/_config/localization';
 import { mergeToolbarConfig } from 'components/toolbar/_config/utils';
@@ -18,7 +16,6 @@ import {
 } from 'components/toolbar/styles';
 import { ViewType } from 'types/appointment';
 import { ToolbarConfig } from 'types/toolbarConfig';
-import { shouldForwardProp } from 'utils/common';
 import { NavigateAction } from 'utils/constants';
 
 interface ToolbarProps {
@@ -77,51 +74,36 @@ export default function RazorCalendarToolbar({
     };
 
     return (
-        <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-            <ToolbarContainer backgroundColor={config.backgroundColor}>
-                <NavigationWrapper>
-                    <Button
-                        color={config.primaryColor}
-                        onClick={handleClickToday}
-                    >
-                        {getLocalizedLabel('today', lang)}
-                    </Button>
+        <ToolbarContainer backgroundColor={config.backgroundColor}>
+            <NavigationWrapper>
+                <Button color={config.primaryColor} onClick={handleClickToday}>
+                    {getLocalizedLabel('today', lang)}
+                </Button>
 
-                    <Tooltip text={getLocalizedLabel('previous', lang)}>
-                        <NavigationIconsWrapper
-                            onClick={handleClickPrev}
-                            color={config.primaryColor}
-                        >
-                            <ArrowPrevSymbol
-                                size={22}
-                                color={config.fontColor}
-                            />
-                        </NavigationIconsWrapper>
-                    </Tooltip>
+                <NavigationIconsWrapper
+                    onClick={handleClickPrev}
+                    color={config.primaryColor}
+                >
+                    <ArrowPrevSymbol size={22} color={config.fontColor} />
+                </NavigationIconsWrapper>
 
-                    <Tooltip text={getLocalizedLabel('next', lang)}>
-                        <NavigationIconsWrapper
-                            onClick={handleClickNext}
-                            color={config.primaryColor}
-                            title={getLocalizedLabel('next', lang)}
-                        >
-                            <ArrowNextSymbol
-                                size={22}
-                                color={config.fontColor}
-                            />
-                        </NavigationIconsWrapper>
-                    </Tooltip>
-                    <TitleWrapper>{getTitle()}</TitleWrapper>
-                </NavigationWrapper>
-                <ViewWrapper>
-                    <InputSelect
-                        color={config.primaryColor}
-                        value={currentView}
-                        options={options}
-                        onChange={onViewChange}
-                    />
-                </ViewWrapper>
-            </ToolbarContainer>
-        </StyleSheetManager>
+                <NavigationIconsWrapper
+                    onClick={handleClickNext}
+                    color={config.primaryColor}
+                    title={getLocalizedLabel('next', lang)}
+                >
+                    <ArrowNextSymbol size={22} color={config.fontColor} />
+                </NavigationIconsWrapper>
+                <TitleWrapper>{getTitle()}</TitleWrapper>
+            </NavigationWrapper>
+            <ViewWrapper>
+                <InputSelect
+                    color={config.primaryColor}
+                    value={currentView}
+                    options={options}
+                    onChange={onViewChange}
+                />
+            </ViewWrapper>
+        </ToolbarContainer>
     );
 }

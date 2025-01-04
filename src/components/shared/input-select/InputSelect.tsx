@@ -55,8 +55,7 @@ export default function InputSelect<T>({
         <SelectContainer ref={containerRef}>
             <ValueWrapper onClick={handleToggle} isOpen={isOpen} color={color}>
                 <span>
-                    {options.find((option) => option.value === value)?.label ||
-                        'Select...'}
+                    {options.find((option) => option.value === value)?.label}
                 </span>
                 <IconWrapper isOpen={isOpen}>
                     <ArrowDownSymbol size={18} color="#fff" />

@@ -1,5 +1,4 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { ButtonContainer } from './styles';
 
 interface Props {
     onClick: () => void;
@@ -12,8 +11,8 @@ export default function Button({
     color,
 }: PropsWithChildren<Props>): ReactElement {
     return (
-        <ButtonContainer onClick={onClick} color={color}>
+        <div onClick={onClick} color={color}>
             {children}
-        </ButtonContainer>
+        </div>
     );
 }

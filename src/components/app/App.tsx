@@ -4,7 +4,6 @@ import { ReactElement, useState } from 'react';
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
 import RazorCalendarToolbar from 'components/toolbar';
-import { GlobalStyle } from 'style/global';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
@@ -168,7 +167,6 @@ export default function App(): ReactElement {
 
     return (
         <AppContainer data-testid="app">
-            <GlobalStyle />
             {/* Pass handlers and state to CalendarToolbar */}
             <RazorCalendarToolbar
                 currentView={currentView}

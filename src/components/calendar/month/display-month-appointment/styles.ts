@@ -1,40 +1,39 @@
-import styled from 'styled-components';
-import { color } from 'style/color';
+import { styled } from '@mui/material/styles';
 
-export const MoreEventsButtonWrapper = styled.div`
-    font-size: 10px;
-    white-space: nowrap;
-    height: 22px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    padding: 0 10px;
+export const MoreEventsButtonWrapper = styled('div')(({ theme }) => ({
+    fontSize: '10px',
+    whiteSpace: 'nowrap',
+    height: '22px',
+    overflow: 'hidden',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    userSelect: 'none',
+    padding: '0 10px',
 
-    &:hover {
-        cursor: pointer;
-        background-color: ${color.hover};
-        width: fit-content;
-        margin: auto;
-        border-radius: 10px;
-        padding: 0 10px;
-    }
-`;
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: theme.palette.action.hover,
+        width: 'fit-content',
+        margin: 'auto',
+        borderRadius: '10px',
+        padding: '0 10px',
+    },
+}));
 
-export const DraggableEventContainer = styled.div`
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 2px;
-    font-size: 10px;
-    cursor: grab;
+export const DraggableEventContainer = styled('div')(({ theme }) => ({
+    color: theme.palette.common.white,
+    padding: '2px 5px',
+    borderRadius: '2px',
+    fontSize: '10px',
+    cursor: 'grab',
 
-    &:hover {
-        cursor: pointer;
-    }
+    '&:hover': {
+        cursor: 'pointer',
+    },
 
-    &:active {
-        cursor: grabbing;
-        transform: scale(0.95);
-    }
-`;
+    '&:active': {
+        cursor: 'grabbing',
+        transform: 'scale(0.95)',
+    },
+}));

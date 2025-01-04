@@ -1,6 +1,5 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import { commonSize } from 'calendar/_config/basicConfig';
-import { calendarColors, color } from 'style/color';
 import { pixelToRem } from 'utils/common';
 import { TimeSlotOffset } from 'week/time-column/styles';
 
@@ -31,39 +30,68 @@ const calcBorderBottom = (props: Props): string => {
     return props.isLastRow ? `1px solid #ddd` : 'none';
 };
 
-export const AppointmentWrapper = styled.div<AppointmentProps>`
-    position: absolute;
-    left: 1px;
-    right: 1px;
-    color: #fff;
-    border-radius: 4px;
-    padding: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    z-index: 1;
-    background-color: ${(props) => props.backgroundColor};
+export const AppointmentWrapper = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'backgroundColor',
+})<AppointmentProps>(({ backgroundColor }) => ({
+    position: 'absolute',
+    left: '1px',
+    right: '1px',
+    color: '#fff',
+    borderRadius: '4px',
+    padding: '4px',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    fontSize: '12px',
+    zIndex: 1,
+    backgroundColor,
+    '&:hover': {
+        cursor: 'pointer',
+    },
+    '&:active': {
+        cursor: 'grabbing',
+    },
+}));
 
-    &:hover {
-        cursor: pointer;
-    }
+export const DroppableSlotWrapper = styled('div', {
+    shouldForwardProp: (prop) =>
+        ![
+            'workTime',
+            'timSlotsCount',
+            'isFullHour',
+            'intervalIndex',
+            'isFirstRow',
+            'isLastRow',
+        ].includes(prop.toString()),
+})<Props>(
+    ({
+        theme,
+        workTime,
+        intervalIndex,
+        isFirstRow,
+        isLastRow,
+        isFullHour,
+    }) => ({
+        height: calcTimeSlotHeight({ intervalIndex }),
+        minHeight: pixelToRem(20),
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTop: calcBorder({ isFirstRow, isFullHour }),
+        borderBottom: calcBorderBottom({ isLastRow }),
+        backgroundColor: workTime
+            ? theme.palette.success.light // Example: use success for workTime
+            : theme.palette.error.light, // Example: use error for outOfWork
+        '&:hover': {
+            backgroundColor: theme.palette.action.hover,
+            cursor: 'pointer',
+        },
+    })
+);
 
-    &:active {
-        cursor: grabbing;
-    }
-`;
-
-export const DroppableSlotWrapper = styled.div<Props>`
-    height: ${calcTimeSlotHeight};
-    min-height: ${pixelToRem(20)};
-    border-top: ${calcBorder};
-    border-bottom: ${calcBorderBottom};
-    background-color: ${(props) =>
-        props.workTime ? calendarColors.workTime : calendarColors.outOfWork};
-    &:hover {
-        background-color: ${color.hover};
-        cursor: pointer;
-    }
-`;
+export const PopupAreaWrapper = styled('div')({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+});

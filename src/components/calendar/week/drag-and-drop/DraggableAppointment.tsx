@@ -84,7 +84,6 @@ export default function DraggableAppointment({
             }
         }
 
-        // Default to StandardView if no condition matches
         return <StandardView start={start} end={end} title={title} />;
     };
 

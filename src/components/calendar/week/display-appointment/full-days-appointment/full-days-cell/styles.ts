@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-import { color } from 'style/color';
-import { darkenColor } from 'utils/colorConverter';
+import { darken } from '@mui/material';
+import { styled, Theme } from '@mui/material/styles';
 
 interface Props {
     color: string;
@@ -11,57 +10,43 @@ interface FullDaysCellProps {
     left: number;
 }
 
-const calcBackgroundHoverColor = (props: Props): string => {
-    return props.color ? props.color : darkenColor(color.hover, 10);
-};
+const calcBackgroundHoverColor = (props: Props, theme: Theme): string =>
+    props.color ? props.color : darken(theme.palette.action.hover, 0.1);
 
-const calcHoverColor = (props: Props): string => {
-    return props.color
-        ? darkenColor(props.color, 30)
-        : darkenColor(color.hover, 30);
-};
+const calcHoverColor = (props: Props, theme: Theme): string =>
+    props.color
+        ? darken(props.color, 0.3)
+        : darken(theme.palette.action.hover, 0.3);
 
-const calcFontColor = (props: Props): string => {
-    return props.color ? '#fff' : color.fontPrimaryLight;
-};
+const calcFontColor = (props: Props, theme: Theme): string =>
+    props.color ? theme.palette.common.white : theme.palette.text.secondary;
 
-export const FullDaysCellContainer = styled.div<FullDaysCellProps>`
-    height: 23px;
-    width: ${(props) => `calc(${props.width}% - 2px)`};
-    left: ${(props) => `${props.left}%`};
-    position: absolute;
-`;
+export const FullDaysCellContainer = styled('div')<FullDaysCellProps>(
+    ({ width, left }) => ({
+        height: '23px',
+        width: `calc(${width}% - 2px)`,
+        left: `${left}%`,
+        position: 'absolute',
+    })
+);
 
-export const FullDayTitleWrapper = styled.div<Props>`
-    width: 100%;
-    padding: 0 5px;
-    display: inline-block;
-    background-color: ${calcBackgroundHoverColor};
-    box-sizing: border-box;
-    border-radius: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 10px;
-    color: ${calcFontColor};
-    margin: 0 1px;
-
-    &:hover {
-        cursor: pointer;
-        background-color: ${calcHoverColor};
-    }
-`;
-
-export const ArrowWrapper = styled.div<{ position: 'left' | 'right' }>`
-    display: flex;
-    align-items: center;
-    justify-content: ${({ position }) =>
-        position === 'left' ? 'flex-start' : 'flex-end'};
-    position: absolute;
-    top: 50%;
-    ${({ position }) => (position === 'left' ? 'left: 0;' : 'right: 0;')}
-    transform: translateY(-50%);
-    width: 15px; /* Adjust width as needed */
-    height: 15px; /* Adjust height as needed */
-    pointer-events: none;
-`;
+export const FullDayTitleWrapper = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'color',
+})<Props>(({ theme, color }) => ({
+    width: '100%',
+    padding: '0 5px',
+    display: 'inline-block',
+    backgroundColor: calcBackgroundHoverColor({ color }, theme),
+    boxSizing: 'border-box',
+    borderRadius: '2px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    fontSize: '10px',
+    color: calcFontColor({ color }, theme),
+    margin: '0 1px',
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: calcHoverColor({ color }, theme),
+    },
+}));

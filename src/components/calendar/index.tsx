@@ -1,11 +1,11 @@
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { StyleSheetManager } from 'styled-components';
+import { createDynamicTheme } from './theme'; // Import the dynamic theme creator
 import { CalendarProvider } from 'calendar/_context/CalendarContext';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
-import { shouldForwardProp } from 'utils/common';
 
 export interface Props {
     appointments: Appointment[];
@@ -26,20 +26,23 @@ export function RazorCalendar({
     onViewChange,
     onChangeDate,
 }: Props): ReactElement {
+    const theme = createDynamicTheme(config); // Create the theme dynamically
+
     return (
-        <CalendarProvider
-            config={config}
-            onExternalViewChange={onViewChange}
-            onExternalChangeDate={onChangeDate}
-        >
-            <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <CalendarProvider
+                config={config}
+                onExternalViewChange={onViewChange}
+                onExternalChangeDate={onChangeDate}
+            >
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}
                     appointments={appointments}
                     handleChangeAppointment={handleChangeAppointment}
                 />
-            </StyleSheetManager>
-        </CalendarProvider>
+            </CalendarProvider>
+        </ThemeProvider>
     );
 }

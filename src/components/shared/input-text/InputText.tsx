@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-export default function PopupDetails(): ReactElement {
+export default function InputText(): ReactElement {
     return (
         <>
             <></>
