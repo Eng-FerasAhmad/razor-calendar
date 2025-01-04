@@ -81,8 +81,8 @@ export const DroppableSlotWrapper = styled('div', {
         borderTop: calcBorder({ isFirstRow, isFullHour }),
         borderBottom: calcBorderBottom({ isLastRow }),
         backgroundColor: workTime
-            ? theme.palette.success.light // Example: use success for workTime
-            : theme.palette.error.light, // Example: use error for outOfWork
+            ? theme.palette.workTime
+            : theme.palette.outOfWork,
         '&:hover': {
             backgroundColor: theme.palette.action.hover,
             cursor: 'pointer',

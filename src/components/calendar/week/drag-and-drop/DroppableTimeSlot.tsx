@@ -1,8 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
+import { useTheme } from '@mui/material/styles';
 import { ReactElement, useState } from 'react';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import AddCircleSymbol from 'components/shared/icons/add-circle/AddCircle';
-import { color } from 'src/theme/color';
 import { isWorkTime } from 'utils/dateTime';
 import {
     DroppableSlotWrapper,
@@ -30,10 +29,12 @@ export default function DroppableTimeSlot({
     workHoursStart,
     workHoursEnd,
 }: Props): ReactElement {
-    const { config } = useCalendarContext();
     const { setNodeRef, isOver } = useDroppable({ id: slotId });
     const [isHovered, setIsHovered] = useState(false);
     const [isIconVisible, setIsIconVisible] = useState(true);
+
+    // Access theme using the useTheme hook
+    const theme = useTheme();
 
     const handleIconClick = (): void => {
         setIsIconVisible(false);
@@ -51,7 +52,7 @@ export default function DroppableTimeSlot({
             isLastRow={isLastRow}
             workTime={isWorkTime(hour, workHoursStart, workHoursEnd)}
             style={{
-                backgroundColor: isOver ? '#e3f2fd' : '', // Highlight when hovered for drag and drop
+                backgroundColor: isOver ? '#e3f2fd' : '',
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -60,8 +61,8 @@ export default function DroppableTimeSlot({
                 {isHovered && isIconVisible && (
                     <AddCircleSymbol
                         size={24}
-                        color={color.fontPrimaryLight}
-                        hoverColor={config.style.primaryColor}
+                        color={theme.palette.text.primary}
+                        hoverColor={theme.palette.primary.main}
                         onClick={handleIconClick}
                     />
                 )}

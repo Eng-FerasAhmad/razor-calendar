@@ -1,6 +1,21 @@
 import { createTheme, Theme } from '@mui/material/styles';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
+declare module '@mui/material/styles' {
+    interface Palette {
+        border: string;
+        borderLight: string;
+        outOfWork?: string;
+        workTime?: string;
+    }
+    interface PaletteOptions {
+        border?: string;
+        borderLight?: string;
+        outOfWork?: string;
+        workTime?: string;
+    }
+}
+
 export const createDynamicTheme = (
     config: RazorCalendarConfig<CalendarConfig>
 ): Theme => {
@@ -24,6 +39,10 @@ export const createDynamicTheme = (
                 hover: '#f8f8f8',
             },
             divider: '#d9d9d9',
+            border: '#dde3ea',
+            borderLight: '#e6e6e6',
+            outOfWork: '#fff',
+            workTime: '#fff',
         },
         typography: {
             fontSize: 16,

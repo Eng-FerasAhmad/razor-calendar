@@ -24,15 +24,15 @@ export const TimeLabelWrapper = styled('div', {
 })<Props>(({ theme, workTime, intervalIndex }) => ({
     height: calcTimeSlotHeight({ intervalIndex }),
     minHeight: '20px',
-    borderTop: '1px solid transparent', // Necessary for layout
+    borderTop: '1px solid transparent',
     width: '60px',
     margin: 'auto',
-    paddingLeft: '10px',
-    fontSize: '12px',
+    paddingLeft: '5px',
+    fontSize: '11px',
     backgroundColor: workTime
-        ? theme.palette.success.light
-        : theme.palette.error.light,
-    color: theme.palette.text.primary,
+        ? theme.palette.workTime
+        : theme.palette.outOfWork,
+    color: theme.palette.text.secondary,
 }));
 
 export const TimeLabelTextWrapper = styled('span')({

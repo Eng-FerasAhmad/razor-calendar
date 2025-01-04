@@ -1,8 +1,8 @@
+import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import ArrowDownSymbol from 'components/shared/arrow-down/ArrowDownSymbole';
-import { color } from 'src/theme/color';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
 import FullDaysAppointment from 'week/display-appointment/full-days-appointment/FullDaysAppointment';
@@ -36,6 +36,9 @@ export default function WeekHeaderRow({
         onShowAllFullDays,
     } = useCalendarContext();
 
+    // Use the theme object
+    const theme = useTheme();
+
     // Navigate to Day View
     const navigateToDay = (day: DateTime): void => {
         onDateChange(day);
@@ -59,7 +62,7 @@ export default function WeekHeaderRow({
                         </DayShortNameWrapper>
                         <DayNumberWrapper
                             data-testid="day-number-wrapper"
-                            color={config.style.primaryColor!}
+                            color={theme.palette.primary.main}
                             isToday={day.hasSame(DateTime.now(), 'day')}
                         >
                             {formatDate(day, 'dd')}
@@ -77,7 +80,7 @@ export default function WeekHeaderRow({
                         >
                             <ArrowDownSymbol
                                 size={16}
-                                color={color.fontPrimaryLight}
+                                color={theme.palette.text.primary}
                             />
                         </IconDownWrapper>
                     )}
