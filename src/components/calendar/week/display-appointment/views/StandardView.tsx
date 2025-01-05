@@ -9,15 +9,20 @@ interface Props {
     start: string;
     end: string;
     title: string;
+    color: string;
 }
 
 export default function StandardView({
     start,
     end,
     title,
+    color,
 }: Props): ReactElement {
     return (
-        <StandardViewContainer data-testid="standard-view-container">
+        <StandardViewContainer
+            color={color}
+            data-testid="standard-view-container"
+        >
             <ShortTimerViewWrapper>
                 {start} - {end}
             </ShortTimerViewWrapper>

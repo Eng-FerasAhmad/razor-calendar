@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { AppointmentWrapper } from './styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { darkenColor } from 'utils/colorConverter';
 import IntervalView from 'week/display-appointment/views/IntervalView';
 import StandardView from 'week/display-appointment/views/StandardView';
 import ZoomIntervalView from 'week/display-appointment/views/ZoomIntervalView';
@@ -12,6 +13,7 @@ interface Props {
     title: string;
     from: string;
     to: string;
+    color: string;
     style: { top: string; height: string };
 }
 
@@ -20,6 +22,7 @@ export default function DraggableAppointment({
     title,
     from,
     to,
+    color,
     style,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
@@ -54,25 +57,58 @@ export default function DraggableAppointment({
         }[] = [
             {
                 condition: (minutes) => minutes <= 45,
-                view: <IntervalView start={start} end={end} title={title} />,
+                view: (
+                    <IntervalView
+                        start={start}
+                        end={end}
+                        title={title}
+                        color={color}
+                    />
+                ),
             },
             {
                 condition: (minutes) => minutes <= 45,
                 view: (
-                    <ZoomIntervalView start={start} end={end} title={title} />
+                    <ZoomIntervalView
+                        start={start}
+                        end={end}
+                        title={title}
+                        color={color}
+                    />
                 ),
             },
             {
                 condition: (minutes) => minutes < 30,
-                view: <IntervalView start={start} end={end} title={title} />,
+                view: (
+                    <IntervalView
+                        start={start}
+                        end={end}
+                        title={title}
+                        color={color}
+                    />
+                ),
             },
             {
                 condition: (minutes) => minutes < 20,
-                view: <IntervalView start={start} end={end} title={title} />,
+                view: (
+                    <IntervalView
+                        start={start}
+                        end={end}
+                        title={title}
+                        color={color}
+                    />
+                ),
             },
             {
                 condition: (minutes) => minutes < 10,
-                view: <IntervalView start={start} end={end} title={title} />,
+                view: (
+                    <IntervalView
+                        start={start}
+                        end={end}
+                        title={title}
+                        color={color}
+                    />
+                ),
             },
         ];
 
@@ -84,7 +120,9 @@ export default function DraggableAppointment({
             }
         }
 
-        return <StandardView start={start} end={end} title={title} />;
+        return (
+            <StandardView start={start} end={end} title={title} color={color} />
+        );
     };
 
     return (
@@ -94,7 +132,7 @@ export default function DraggableAppointment({
             {...listeners}
             id={id}
             style={dragStyle}
-            backgroundColor={config.style.primaryColor}
+            backgroundColor={darkenColor(color, 30)}
             data-testid="draggable-appointment"
         >
             {getViewComponent()}

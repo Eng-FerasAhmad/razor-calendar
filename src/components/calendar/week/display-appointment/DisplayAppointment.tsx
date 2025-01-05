@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
 import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 
@@ -19,6 +20,7 @@ export default function DisplayAppointment({
     calculatePosition,
     fullDayAppointments,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
     const filteredAppointments = appointments.filter((item) => {
         return !fullDayAppointments.some((fullDay) => fullDay.id === item.id);
     });
@@ -39,6 +41,7 @@ export default function DisplayAppointment({
                         style={position}
                         from={start.toString()}
                         to={end.toString()}
+                        color={appointment.color || config.style.primaryColor}
                     />
                 );
             })}

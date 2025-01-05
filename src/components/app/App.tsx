@@ -44,17 +44,17 @@ export default function App(): ReactElement {
             id: '5',
             title: 'View 1',
             start: '2024-12-24T14:30',
-            end: '2024-12-24T14:30',
-            isFullDay: true,
+            end: '2024-12-24T15:30',
+            isFullDay: false,
             color: '#ff9933',
         },
         {
             id: '6',
             title: 'View 2',
             start: '2024-12-16T10:00',
-            end: '2024-12-16T10:10',
+            end: '2024-12-16T12:10',
             isFullDay: false,
-            color: '#3385ff',
+            color: '#039be5',
             canceled: false,
             draggable: true,
             editable: true,
@@ -65,8 +65,8 @@ export default function App(): ReactElement {
         {
             id: '7',
             title: 'View 3',
-            start: '2024-12-16T11:00',
-            end: '2024-12-16T11:15',
+            start: '2024-12-16T13:00',
+            end: '2024-12-16T14:30',
             isFullDay: false,
             color: '#ff9933',
         },
@@ -112,7 +112,7 @@ export default function App(): ReactElement {
 
     const config: RazorCalendarConfig<CalendarConfig> = {
         hour: {
-            is24HourFormat: false,
+            is24HourFormat: true,
             hourIntervalIndex: 1,
             workHoursStart: 8,
             workHoursEnd: 18,

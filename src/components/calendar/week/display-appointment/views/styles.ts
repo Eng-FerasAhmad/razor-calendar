@@ -1,20 +1,47 @@
-import { styled } from '@mui/material/styles';
+import { lighten } from '@mui/material';
+import { styled, Theme } from '@mui/material/styles';
+
+const getBackgroundColor = (theme: Theme, color?: string): string => {
+    const baseColor = color || theme.palette.primary.light;
+    return lighten(baseColor, 0.8);
+};
+
+const getHoverColor = (theme: Theme, color?: string): string => {
+    const baseColor = color || theme.palette.primary.light;
+    return lighten(baseColor, 0.6);
+};
 
 // Standard view
-export const StandardViewContainer = styled('div')({
+export const StandardViewContainer = styled('div')<{
+    color?: string;
+}>(({ theme, color }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     height: '100%',
-});
+    fontSize: '12px',
+    overflow: 'hidden',
+    padding: 0,
+    backgroundColor: getBackgroundColor(theme, color),
+    color: theme.palette.text.primary,
+    '&:hover': {
+        backgroundColor: getHoverColor(theme, color),
+    },
+}));
 
 export const ShortTimerViewWrapper = styled('div')({
     boxSizing: 'border-box',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    display: 'inline-block',
-    fontSize: '13px',
+    display: 'flex',
+    alignItems: 'center',
+    height: '18px',
+    minHeight: '18px',
+    fontSize: '10px',
+    fontWeight: 600,
+    paddingLeft: '5px',
+    paddingTop: '2px',
 });
 
 export const ShortLabelViewWrapper = styled('div')({
@@ -22,16 +49,20 @@ export const ShortLabelViewWrapper = styled('div')({
     overflow: 'hidden',
     display: 'inline-block',
     fontSize: '13px',
+    paddingLeft: '5px',
 });
 
 // Interval view
-export const IntervalViewContainer = styled('div')({
+export const IntervalViewContainer = styled('div')<{
+    color?: string;
+}>(({ theme, color }) => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
-});
+    backgroundColor: getBackgroundColor(theme, color),
+}));
 
 export const ShortTimerIntervalViewWrapper = styled('div')({
     boxSizing: 'border-box',
@@ -51,13 +82,16 @@ export const ShortLabelIntervalViewWrapper = styled('div')({
 });
 
 // Zoom interval view
-export const ZoomIntervalViewContainer = styled('div')({
+export const ZoomIntervalViewContainer = styled('div')<{
+    color?: string;
+}>(({ theme, color }) => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
-});
+    backgroundColor: getBackgroundColor(theme, color),
+}));
 
 export const ShortTimerZoomIntervalWrapper = styled('div')({
     boxSizing: 'border-box',

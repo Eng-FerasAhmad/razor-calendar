@@ -28,14 +28,17 @@ export const TimeLabelWrapper = styled('div', {
     width: '60px',
     margin: 'auto',
     paddingLeft: '5px',
-    fontSize: '11px',
+    fontSize: '10px',
     backgroundColor: workTime
         ? theme.palette.workTime
         : theme.palette.outOfWork,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.disabled,
+    display: 'flex',
+    justifyContent: 'center',
+    fontWeight: 600,
 }));
 
 export const TimeLabelTextWrapper = styled('span')({
     position: 'relative',
-    top: '-14px',
+    top: '-13px',
 });
