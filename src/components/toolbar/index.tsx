@@ -1,9 +1,9 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import ArrowNextSymbol from 'components/shared/arrow-next/ArrowNextSymbol';
-import ArrowPrevSymbol from 'components/shared/arrow-prev/ArrowPrevSymbol';
 import Button from 'components/shared/button/Button';
+import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
+import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
 import InputSelect from 'components/shared/input-select/InputSelect';
 import { baseToolbarConfig } from 'components/toolbar/_config/baseToolbarConfig';
 import { getLocalizedLabel } from 'components/toolbar/_config/localization';

@@ -1,12 +1,9 @@
 import { useDroppable } from '@dnd-kit/core';
-import { useTheme } from '@mui/material/styles';
 import { ReactElement, useState } from 'react';
-import AddCircleSymbol from 'components/shared/icons/add-circle/AddCircle';
+import { DialogCustom } from 'components/shared/dialog/Dialog';
 import { isWorkTime } from 'utils/dateTime';
-import {
-    DroppableSlotWrapper,
-    PopupAreaWrapper,
-} from 'week/drag-and-drop/styles';
+import { DroppableSlotWrapper } from 'week/drag-and-drop/styles';
+import WeekAppointmentNew from 'week/new/WeekAppointmentNew';
 
 interface Props {
     slotId: string;
@@ -30,14 +27,14 @@ export default function DroppableTimeSlot({
     workHoursEnd,
 }: Props): ReactElement {
     const { setNodeRef, isOver } = useDroppable({ id: slotId });
-    const [isHovered, setIsHovered] = useState(false);
-    const [isIconVisible, setIsIconVisible] = useState(true);
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-    // Access theme using the useTheme hook
-    const theme = useTheme();
+    const handleOpenClick = (): void => {
+        setOpenDialog(true);
+    };
 
-    const handleIconClick = (): void => {
-        setIsIconVisible(false);
+    const handleCloseDialog = (): void => {
+        setOpenDialog(false);
     };
 
     return (
@@ -54,19 +51,15 @@ export default function DroppableTimeSlot({
             style={{
                 backgroundColor: isOver ? '#e3f2fd' : '',
             }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onDoubleClick={handleOpenClick}
         >
-            <PopupAreaWrapper>
-                {isHovered && isIconVisible && (
-                    <AddCircleSymbol
-                        size={24}
-                        color={theme.palette.text.primary}
-                        hoverColor={theme.palette.primary.main}
-                        onClick={handleIconClick}
-                    />
-                )}
-            </PopupAreaWrapper>
+            <DialogCustom
+                title={'Add new Appointment'}
+                open={openDialog}
+                handleClose={handleCloseDialog}
+            >
+                <WeekAppointmentNew slotId={slotId} />
+            </DialogCustom>
         </DroppableSlotWrapper>
     );
 }

@@ -16,12 +16,12 @@ export default function Button({
             variant="outlined"
             onClick={onClick}
             sx={{
-                color: '#fff', // Use primary color for text
-                border: `1px solid ${darken(theme.palette.primary.main, 0.2)}`, // Use a darkened primary color for the border
-                textTransform: 'none', // Keep text casing as is
+                color: '#fff',
+                border: `1px solid ${darken(theme.palette.primary.main, 0.2)}`,
+                textTransform: 'none',
                 '&:hover': {
-                    backgroundColor: 'transparent', // Keep the background transparent on hover
-                    borderColor: darken(theme.palette.primary.main, 0.3), // Darken the border slightly more on hover
+                    backgroundColor: 'transparent',
+                    borderColor: darken(theme.palette.primary.main, 0.3),
                 },
             }}
         >

@@ -126,6 +126,7 @@ export default function App(): ReactElement {
         },
         common: {
             lang: locale,
+            dateFormat: 'dd.MM.yyyy',
         },
     };
 

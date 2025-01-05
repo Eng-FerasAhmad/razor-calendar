@@ -89,9 +89,3 @@ export const DroppableSlotWrapper = styled('div', {
         },
     })
 );
-
-export const PopupAreaWrapper = styled('div')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-});

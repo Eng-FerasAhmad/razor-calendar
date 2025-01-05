@@ -72,7 +72,7 @@ export default function InputSelect<T extends string | number>({
                     backgroundColor: theme.palette.primary.main,
                     color: theme.palette.primary.contrastText,
                     borderRadius: 1,
-                    height: '38px', // Custom height for the Select component
+                    height: '38px',
                     display: 'flex',
                     alignItems: 'center',
                 }}

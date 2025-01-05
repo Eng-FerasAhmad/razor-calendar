@@ -1,30 +1,29 @@
-import { DatePicker, DatePickerProps } from '@mui/x-date-pickers';
+import { TimePicker, TimePickerProps } from '@mui/x-date-pickers';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 
-interface DatePickerGenericProps
-    extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
+interface TimePickerGenericProps
+    extends Omit<TimePickerProps<DateTime>, 'renderInput'> {
     label: string;
-    dateFormat?: string;
+    is24Hours?: boolean;
 }
 
-export default function DatePickerGeneric({
+export default function TimePickerGeneric({
     label,
     value,
     onChange,
-    dateFormat = 'yyyy-mm-dd',
+    is24Hours = true,
     ...props
-}: DatePickerGenericProps): ReactElement {
-    console.log('value', value);
+}: TimePickerGenericProps): ReactElement {
     return (
         <LocalizationProvider dateAdapter={AdapterLuxon}>
-            <DatePicker
+            <TimePicker
                 {...props}
                 value={value}
                 onChange={onChange}
-                format={dateFormat}
+                ampm={!is24Hours}
                 slotProps={{
                     textField: {
                         fullWidth: true,
