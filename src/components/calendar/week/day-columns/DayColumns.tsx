@@ -50,8 +50,8 @@ export default function DayColumns({
         const height = (durationInMinutes / interval) * slotHeightPercentage;
 
         return {
-            top: `calc(${top}% + 1px)`,
-            height: `calc(${height}% - 11px)`,
+            top: `calc(${top}% + 2px)`, // 2px to keep the appointment inside the slot
+            height: `calc(${height}% - 3px)`, // 2 px to keep the appointment inside the slot
         };
     };
 
@@ -59,6 +59,7 @@ export default function DayColumns({
         <DaysColumnsContainer
             timSlotsCount={timeSlots.length}
             intervalIndex={config.hour.hourIntervalIndex}
+            data-testid="days-columns-container"
         >
             <TimeSlots
                 day={day}

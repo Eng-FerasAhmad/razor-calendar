@@ -7,34 +7,15 @@ interface Props {
 }
 
 const calcColumnHeight = (props: Props): string => {
-    let offset = 0;
-    let slotHeight = commonSize.timeSlotHeight;
-    switch (props.intervalIndex) {
-        case 0:
-            offset = 24;
-            break;
-        case 1:
-            offset = props.intervalIndex * 24 + 24;
-            slotHeight = commonSize.timeSlotHeight - props.intervalIndex * 10;
-            break;
-        case 2:
-            offset = props.intervalIndex * 36 + 24;
-            slotHeight = commonSize.timeSlotHeight - props.intervalIndex * 10;
-            break;
-        case 3:
-            offset = props.intervalIndex * 40 + 24;
-            slotHeight = 20;
-            break;
-        case 4:
-            offset = props.intervalIndex * 66 + 24;
-            slotHeight = 20;
-            break;
-        default:
-            offset = 0;
-            break;
-    }
+    const baseSlotHeight = commonSize.timeSlotHeight;
 
-    const height = props.timSlotsCount! * slotHeight + offset;
+    // Define slot height adjustments based on interval index
+    const slotHeight =
+        props.intervalIndex === 3 || props.intervalIndex === 4 // 10 and 5 minutes case
+            ? 20
+            : baseSlotHeight - props.intervalIndex! * 10; // 1 and half hour & 15 min case
+
+    const height = props.timSlotsCount! * slotHeight;
     return `${height}px`;
 };
 
