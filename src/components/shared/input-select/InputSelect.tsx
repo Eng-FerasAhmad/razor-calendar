@@ -1,81 +1,92 @@
-import React, { useState, useEffect, useRef } from 'react';
 import {
-    SelectContainer,
-    ValueWrapper,
-    IconWrapper,
-    OptionsWrapper,
-    OptionItem,
-} from './styles';
-import ArrowDownSymbol from 'components/shared/arrow-down/ArrowDownSymbole';
+    FormControl,
+    Select,
+    MenuItem,
+    InputLabel,
+    SelectChangeEvent,
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import React from 'react';
 
-interface Option<T> {
+interface Option<T extends string | number> {
     value: T;
     label: string;
 }
 
-interface InputSelectProps<T> {
+interface InputSelectProps<T extends string | number> {
     options: Option<T>[];
     value: T;
     onChange: (value: T) => void;
-    color: string;
+    label?: string;
 }
 
-export default function InputSelect<T>({
+export default function InputSelect<T extends string | number>({
     options,
     value,
     onChange,
-    color,
+    label,
 }: InputSelectProps<T>): React.ReactElement {
-    const [isOpen, setIsOpen] = useState(false);
-    const containerRef = useRef<HTMLDivElement | null>(null);
+    const theme = useTheme();
 
-    const handleToggle = (): void => setIsOpen((prev) => !prev);
-    const handleSelect = (optionValue: T): void => {
-        onChange(optionValue);
-        setIsOpen(false);
+    const handleChange = (event: SelectChangeEvent<T>): void => {
+        onChange(event.target.value as T);
     };
-
-    const handleClickOutside = (event: MouseEvent): void => {
-        if (
-            containerRef.current &&
-            !containerRef.current.contains(event.target as Node)
-        ) {
-            setIsOpen(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
 
     return (
-        <SelectContainer ref={containerRef}>
-            <ValueWrapper onClick={handleToggle} isOpen={isOpen} color={color}>
-                <span>
-                    {options.find((option) => option.value === value)?.label}
-                </span>
-                <IconWrapper isOpen={isOpen}>
-                    <ArrowDownSymbol size={18} color="#fff" />
-                </IconWrapper>
-            </ValueWrapper>
-            {isOpen && (
-                <OptionsWrapper>
-                    {options.map((option) => (
-                        <OptionItem
-                            key={option.value as string}
-                            color={color}
-                            isSelected={option.value === value}
-                            isOpen={isOpen}
-                            onClick={() => handleSelect(option.value)}
-                        >
-                            {option.label}
-                        </OptionItem>
-                    ))}
-                </OptionsWrapper>
+        <FormControl
+            fullWidth
+            sx={{
+                backgroundColor: theme.palette.primary.main,
+                borderRadius: 1,
+                '& .MuiOutlinedInput-root': {
+                    color: theme.palette.primary.contrastText,
+                    height: '38px',
+                    '& fieldset': {
+                        borderColor: theme.palette.primary.dark,
+                    },
+                    '&:hover fieldset': {
+                        borderColor: theme.palette.primary.dark,
+                    },
+                    '&.Mui-focused fieldset': {
+                        borderColor: theme.palette.primary.dark,
+                    },
+                },
+            }}
+        >
+            {label && (
+                <InputLabel
+                    sx={{
+                        color: theme.palette.primary.contrastText,
+                    }}
+                >
+                    {label}
+                </InputLabel>
             )}
-        </SelectContainer>
+            <Select
+                value={value}
+                onChange={handleChange}
+                variant="outlined"
+                size="small"
+                label={label}
+                sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    borderRadius: 1,
+                    height: '38px', // Custom height for the Select component
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+            >
+                {options.map((option) => (
+                    <MenuItem
+                        key={String(option.value)}
+                        value={option.value}
+                        sx={{ color: theme.palette.text.primary }}
+                    >
+                        {option.label}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     );
 }

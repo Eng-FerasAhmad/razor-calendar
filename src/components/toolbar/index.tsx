@@ -1,3 +1,4 @@
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import ArrowNextSymbol from 'components/shared/arrow-next/ArrowNextSymbol';
@@ -14,6 +15,7 @@ import {
     ToolbarContainer,
     ViewWrapper,
 } from 'components/toolbar/styles';
+import { createDynamicTheme } from 'src/theme/theme';
 import { ViewType } from 'types/appointment';
 import { ToolbarConfig } from 'types/toolbarConfig';
 import { NavigateAction } from 'utils/constants';
@@ -73,37 +75,40 @@ export default function RazorCalendarToolbar({
         }
     };
 
+    const theme = createDynamicTheme(config);
     return (
-        <ToolbarContainer backgroundColor={config.backgroundColor}>
-            <NavigationWrapper>
-                <Button color={config.primaryColor} onClick={handleClickToday}>
-                    {getLocalizedLabel('today', lang)}
-                </Button>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <ToolbarContainer backgroundColor={config.backgroundColor}>
+                <NavigationWrapper>
+                    <Button onClick={handleClickToday}>
+                        {getLocalizedLabel('today', lang)}
+                    </Button>
 
-                <NavigationIconsWrapper
-                    onClick={handleClickPrev}
-                    color={config.primaryColor}
-                >
-                    <ArrowPrevSymbol size={22} color={config.fontColor} />
-                </NavigationIconsWrapper>
+                    <NavigationIconsWrapper
+                        onClick={handleClickPrev}
+                        color={config.primaryColor}
+                    >
+                        <ArrowPrevSymbol size={22} color={config.fontColor} />
+                    </NavigationIconsWrapper>
 
-                <NavigationIconsWrapper
-                    onClick={handleClickNext}
-                    color={config.primaryColor}
-                    title={getLocalizedLabel('next', lang)}
-                >
-                    <ArrowNextSymbol size={22} color={config.fontColor} />
-                </NavigationIconsWrapper>
-                <TitleWrapper>{getTitle()}</TitleWrapper>
-            </NavigationWrapper>
-            <ViewWrapper>
-                <InputSelect
-                    color={config.primaryColor}
-                    value={currentView}
-                    options={options}
-                    onChange={onViewChange}
-                />
-            </ViewWrapper>
-        </ToolbarContainer>
+                    <NavigationIconsWrapper
+                        onClick={handleClickNext}
+                        color={config.primaryColor}
+                        title={getLocalizedLabel('next', lang)}
+                    >
+                        <ArrowNextSymbol size={22} color={config.fontColor} />
+                    </NavigationIconsWrapper>
+                    <TitleWrapper>{getTitle()}</TitleWrapper>
+                </NavigationWrapper>
+                <ViewWrapper>
+                    <InputSelect
+                        value={currentView}
+                        options={options}
+                        onChange={onViewChange}
+                    />
+                </ViewWrapper>
+            </ToolbarContainer>
+        </ThemeProvider>
     );
 }

@@ -26,15 +26,11 @@ export const NavigationWrapper = styled('div')({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    gap: '10px',
+    gap: '8px',
 });
 
 export const ViewWrapper = styled('div')({
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    width: '150px',
 });
 
 export const NavigationIconsWrapper = styled('div', {

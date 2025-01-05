@@ -19,7 +19,7 @@ const calcHoverColor = (props: Props, theme: Theme): string =>
         : darken(theme.palette.action.hover, 0.3);
 
 const calcFontColor = (props: Props, theme: Theme): string =>
-    props.color ? theme.palette.common.white : theme.palette.text.secondary;
+    props.color ? theme.palette.common.white : theme.palette.text.primary;
 
 export const FullDaysCellContainer = styled('div')<FullDaysCellProps>(
     ({ width, left }) => ({
