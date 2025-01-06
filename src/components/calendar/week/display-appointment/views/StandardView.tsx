@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
     ShortLabelViewWrapper,
     ShortTimerViewWrapper,
@@ -18,10 +19,21 @@ export default function StandardView({
     title,
     color,
 }: Props): ReactElement {
+    const { onDialogAppointmentDetails } = useCalendarContext();
+
+    const dialogHandler = (event: React.MouseEvent<HTMLElement>): void => {
+        onDialogAppointmentDetails({
+            open: true,
+            id: 'id',
+            anchorEl: event.currentTarget, // Pass the clicked element as anchorEl
+        });
+    };
+
     return (
         <StandardViewContainer
             color={color}
             data-testid="standard-view-container"
+            onClick={dialogHandler}
         >
             <ShortTimerViewWrapper>
                 {start} - {end}

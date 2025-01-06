@@ -14,10 +14,9 @@ export default function DatePickerGeneric({
     label,
     value,
     onChange,
-    dateFormat = 'yyyy-mm-dd',
+    dateFormat = 'yyyy-MM-dd',
     ...props
 }: DatePickerGenericProps): ReactElement {
-    console.log('value', value);
     return (
         <LocalizationProvider dateAdapter={AdapterLuxon}>
             <DatePicker

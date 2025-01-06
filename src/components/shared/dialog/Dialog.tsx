@@ -1,6 +1,5 @@
 import { DialogProps } from '@mui/material/Dialog';
-
-import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import {
     BootstrapDialog,
     StyledDialogActions,
@@ -13,7 +12,7 @@ import CloseSymbol from 'components/shared/icons/close/CloseSymbole';
 interface Props {
     handleClose?: () => void;
     title?: string;
-    actions?: ReactNode;
+    actions?: React.ReactNode;
     open: boolean;
     headerColor?: string;
     headerFontColor?: string;
@@ -29,45 +28,47 @@ export function DialogCustom({
     children,
     ...props
 }: PropsWithChildren<DialogProps & Props>): ReactElement {
+    const handleDialogClose = (): void => {
+        if (handleClose) handleClose();
+    };
+
     return (
-        <>
-            <BootstrapDialog
-                aria-labelledby="customized-dialog-title"
-                open={open}
-                {...props}
-                data-testid="dialog"
-            >
-                {title && (
-                    <StyledDialogTitle
-                        data-testid="dialog-title"
-                        id="dialog-title"
-                        headerColor={headerColor}
-                        headerFontColor={headerFontColor}
-                    >
-                        {title}
-                    </StyledDialogTitle>
-                )}
+        <BootstrapDialog
+            aria-labelledby="customized-dialog-title"
+            open={open}
+            {...props}
+            data-testid="dialog"
+        >
+            {title && (
+                <StyledDialogTitle
+                    data-testid="dialog-title"
+                    id="dialog-title"
+                    headerColor={headerColor}
+                    headerFontColor={headerFontColor}
+                >
+                    {title}
+                </StyledDialogTitle>
+            )}
 
-                {handleClose && (
-                    <StyledIconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        data-testid="dialog-close-icon"
-                    >
-                        <CloseSymbol size={24} />
-                    </StyledIconButton>
-                )}
+            {handleClose && (
+                <StyledIconButton
+                    aria-label="close"
+                    onClick={handleDialogClose}
+                    data-testid="dialog-close-icon"
+                >
+                    <CloseSymbol size={24} />
+                </StyledIconButton>
+            )}
 
-                <StyledDialogContent dividers data-testid="dialog-content">
-                    {children}
-                </StyledDialogContent>
+            <StyledDialogContent dividers data-testid="dialog-content">
+                {children}
+            </StyledDialogContent>
 
-                {actions && (
-                    <StyledDialogActions data-testid="dialog-action">
-                        {actions}
-                    </StyledDialogActions>
-                )}
-            </BootstrapDialog>
-        </>
+            {actions && (
+                <StyledDialogActions data-testid="dialog-action">
+                    {actions}
+                </StyledDialogActions>
+            )}
+        </BootstrapDialog>
     );
 }

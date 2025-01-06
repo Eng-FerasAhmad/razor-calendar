@@ -22,16 +22,16 @@ export default function App(): ReactElement {
         {
             id: '2',
             title: 'Lunch but also long long text',
-            start: '2025-01-01T13:00',
-            end: '2025-01-01T13:00',
+            start: '2025-01-06T13:00',
+            end: '2025-01-06T14:00',
             isFullDay: true,
         },
         {
             id: '3',
             title: 'Meeting',
-            start: '2025-01-01T13:00',
-            end: '2025-01-01T13:00',
-            isFullDay: true,
+            start: '2025-01-09T13:00',
+            end: '2025-01-09T14:00',
+            isFullDay: false,
         },
         {
             id: '4',

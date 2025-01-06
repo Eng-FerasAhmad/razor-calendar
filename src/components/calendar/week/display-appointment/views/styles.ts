@@ -25,6 +25,7 @@ export const StandardViewContainer = styled('div')<{
     padding: 0,
     backgroundColor: getBackgroundColor(theme, color),
     color: theme.palette.text.primary,
+    transition: 'opacity 0.2s ease',
     '&:hover': {
         backgroundColor: getHoverColor(theme, color),
     },

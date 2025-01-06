@@ -1,4 +1,12 @@
-import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import {
+    DndContext,
+    DragEndEvent,
+    DragOverlay,
+    DragStartEvent,
+    MouseSensor,
+    useSensor,
+    useSensors,
+} from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
@@ -8,6 +16,7 @@ import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import { Appointment } from 'types/appointment';
 import { getDateRange } from 'utils/dates';
 import DayColumns from 'week/day-columns/DayColumns';
+import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 import useWeek from 'week/useWeeks';
 
@@ -109,6 +118,15 @@ export default function Week({
         setActiveDrag(draggedAppointment || null);
     };
 
+    const mouseSensor = useSensor(MouseSensor, {
+        activationConstraint: {
+            delay: 100, // Drag starts after 200ms
+            tolerance: 5, // Drag starts only if moved 5px
+        },
+    });
+
+    const sensors = useSensors(mouseSensor);
+
     return (
         <WeekContainer data-testid="week-container">
             <WeekHeaderRow
@@ -120,6 +138,7 @@ export default function Week({
                 <TimeColumn interval={interval} />
 
                 <DndContext
+                    sensors={sensors}
                     onDragStart={handleDragStart}
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
@@ -133,6 +152,22 @@ export default function Week({
                             fullDayAppointments={fullDayAppointments}
                         />
                     ))}
+                    <DragOverlay dropAnimation={null}>
+                        {activeDrag && (
+                            <DraggableAppointment
+                                id={activeDrag.id}
+                                title={activeDrag.title}
+                                from={activeDrag.start}
+                                to={activeDrag.end}
+                                color={
+                                    activeDrag.color ||
+                                    config.style.primaryColor
+                                }
+                                style={{ top: '0', height: 'auto' }}
+                                isOverlay={true}
+                            />
+                        )}
+                    </DragOverlay>
                 </DndContext>
             </TimeDayWrapper>
         </WeekContainer>

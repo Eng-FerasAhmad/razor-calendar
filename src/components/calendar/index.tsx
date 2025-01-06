@@ -2,6 +2,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { CalendarProvider } from 'calendar/_context/CalendarContext';
+import DetailsAppointment from 'calendar/_dialogs/details-appointment/DetailsAppointment';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
 import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
@@ -36,6 +37,7 @@ export function RazorCalendar({
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
             >
+                <DetailsAppointment />
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}

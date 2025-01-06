@@ -9,7 +9,10 @@ import {
 } from 'react';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
-import { CalendarContextProps } from 'calendar/_context/types';
+import {
+    CalendarContextProps,
+    DialogAppointmentDetails,
+} from 'calendar/_context/types';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
@@ -28,6 +31,8 @@ export const CalendarContext = createContext<CalendarContextProps>({
     selectedDate: DateTime.now(),
     showAllFullDays: false,
     fullDaysCount: 0,
+    dialogAppointmentDetails: undefined,
+    onDialogAppointmentDetails: () => {},
     onUpdateFullDaysCount: () => {},
     onShowAllFullDays: () => {},
     onViewChange: () => {},
@@ -50,6 +55,9 @@ export function CalendarProvider({
     const [appointments, setAppointments] = useState<Appointment[]>([]);
     const [showAllFullDays, setShowAllFullDays] = useState<boolean>(false);
     const [fullDaysCount, setFullDaysCount] = useState<number>(0);
+    const [dialogAppointmentDetails, setDialogAppointmentDetails] = useState<
+        DialogAppointmentDetails | undefined
+    >(undefined);
 
     const onViewChange = useCallback(
         (newView: ViewType) => {
@@ -83,6 +91,13 @@ export function CalendarProvider({
         setFullDaysCount(count);
     }, []);
 
+    const onDialogAppointmentDetails = useCallback(
+        (appointmentDetails: DialogAppointmentDetails | undefined) => {
+            setDialogAppointmentDetails(appointmentDetails);
+        },
+        []
+    );
+
     return (
         <CalendarContext.Provider
             value={{
@@ -93,6 +108,8 @@ export function CalendarProvider({
                 appointments,
                 showAllFullDays,
                 fullDaysCount,
+                dialogAppointmentDetails,
+                onDialogAppointmentDetails,
                 onShowAllFullDays,
                 onUpdateFullDaysCount,
                 onViewChange,

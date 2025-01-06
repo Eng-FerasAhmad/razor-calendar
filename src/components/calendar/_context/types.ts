@@ -16,4 +16,14 @@ export interface CalendarContextProps {
     showAllFullDays: boolean;
     fullDaysCount: number;
     onUpdateFullDaysCount: (count: number) => void;
+    dialogAppointmentDetails: DialogAppointmentDetails | undefined;
+    onDialogAppointmentDetails: (
+        appointmentDetails: DialogAppointmentDetails | undefined
+    ) => void;
+}
+
+export interface DialogAppointmentDetails {
+    open: boolean;
+    id: string;
+    anchorEl: HTMLElement | null;
 }

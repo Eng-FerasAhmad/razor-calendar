@@ -1,5 +1,6 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { Appointment } from 'types/appointment';
+import WeekAppointmentDetails from 'week/details/WeekAppointmentDetails';
 import {
     FullDaysCellContainer,
     FullDayTitleWrapper,
@@ -20,9 +21,29 @@ export default function FullDaysCell({
 }: Props): ReactElement {
     const width = dayWidth * (visibleEndIndex - visibleStartIndex + 1);
     const left = dayWidth * visibleStartIndex;
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
 
+    const handleOpenClick = (): void => {
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = (): void => {
+        setOpenDialog(false);
+    };
     return (
-        <FullDaysCellContainer width={width} left={left}>
+        <FullDaysCellContainer
+            width={width}
+            left={left}
+            onDoubleClick={handleOpenClick}
+        >
+            <WeekAppointmentDetails
+                color={appointment.color || ''}
+                title={appointment.title}
+                start={appointment.start}
+                end={appointment.end}
+                openDialog={openDialog}
+                handleCloseDialog={handleCloseDialog}
+            />
             <FullDayTitleWrapper color={appointment.color || ''}>
                 {appointment.title}
             </FullDayTitleWrapper>

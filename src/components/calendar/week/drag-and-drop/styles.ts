@@ -31,28 +31,34 @@ const calcBorderBottom = (props: Props): string => {
 };
 
 export const AppointmentWrapper = styled('div', {
-    shouldForwardProp: (prop) => prop !== 'backgroundColor',
-})<AppointmentProps>(({ backgroundColor }) => ({
-    position: 'absolute',
-    left: '1px',
-    right: '1px',
-    color: '#fff',
-    borderRadius: '2px',
-    paddingLeft: '6px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    fontSize: '12px',
-    zIndex: 1,
-    backgroundColor,
-    '&:hover': {
-        cursor: 'pointer',
-    },
-    '&:active': {
-        cursor: 'grabbing',
-    },
-}));
+    shouldForwardProp: (prop) =>
+        prop !== 'backgroundColor' &&
+        prop !== 'isDragging' &&
+        prop !== 'isOverlay',
+})<AppointmentProps & { isDragging?: boolean; isOverlay?: boolean }>(
+    ({ backgroundColor, isDragging, isOverlay }) => ({
+        position: 'absolute',
+        left: '1px',
+        right: '1px',
+        color: '#fff',
+        paddingLeft: '6px',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        fontSize: '12px',
+        zIndex: 1,
+        backgroundColor,
+        border: isDragging && isOverlay ? `2px solid gray` : 'none',
+        borderRadius: isDragging && isOverlay ? `5px` : '2px',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+        '&:active': {
+            cursor: 'grabbing',
+        },
+    })
+);
 
 export const DroppableSlotWrapper = styled('div', {
     shouldForwardProp: (prop) =>
@@ -89,3 +95,13 @@ export const DroppableSlotWrapper = styled('div', {
         },
     })
 );
+
+export const DraggableZone = styled('div')`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    cursor: move;
+    z-index: 2; /* Ensure it's above other elements */
+`;
