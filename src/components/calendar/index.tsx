@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { CalendarProvider } from 'calendar/_context/CalendarContext';
 import DetailsAppointment from 'calendar/_dialogs/details-appointment/DetailsAppointment';
+import NewAppointment from 'calendar/_dialogs/new-appointment/NewAppointment';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
 import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
@@ -38,6 +39,7 @@ export function RazorCalendar({
                 onExternalChangeDate={onChangeDate}
             >
                 <DetailsAppointment />
+                <NewAppointment />
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}

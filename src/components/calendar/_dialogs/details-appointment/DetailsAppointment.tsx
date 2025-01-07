@@ -1,4 +1,3 @@
-import CloseIcon from '@mui/icons-material/Close';
 import {
     Box,
     Fade,
@@ -9,28 +8,27 @@ import {
 } from '@mui/material';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import CloseSymbol from 'components/shared/icons/close/CloseSymbol';
 
 export default function DetailsAppointment(): ReactElement {
-    const { dialogAppointmentDetails, onDialogAppointmentDetails } =
-        useCalendarContext();
+    const { popperAppointment, onPopperAppointment } = useCalendarContext();
 
     const handleClose = (): void => {
-        onDialogAppointmentDetails(undefined); // Close the Popper
+        onPopperAppointment(undefined); // Close the Popper
     };
 
     return (
         <Box>
             <Popper
                 sx={{ zIndex: 1200 }}
-                open={dialogAppointmentDetails?.open || false}
-                anchorEl={dialogAppointmentDetails?.anchorEl || null}
+                open={popperAppointment?.open || false}
+                anchorEl={popperAppointment?.anchorEl || null}
                 placement="bottom"
                 transition
             >
                 {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper sx={{ position: 'relative', padding: 2 }}>
-                            {/* Close Button */}
                             <IconButton
                                 size="small"
                                 onClick={handleClose}
@@ -41,9 +39,8 @@ export default function DetailsAppointment(): ReactElement {
                                 }}
                                 aria-label="close"
                             >
-                                <CloseIcon />
+                                <CloseSymbol size={24} />
                             </IconButton>
-                            {/* Popper Content */}
                             <Typography>AddAppointment</Typography>
                         </Paper>
                     </Fade>

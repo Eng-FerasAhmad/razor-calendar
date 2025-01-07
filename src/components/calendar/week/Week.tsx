@@ -159,6 +159,7 @@ export default function Week({
                                 title={activeDrag.title}
                                 from={activeDrag.start}
                                 to={activeDrag.end}
+                                appointment={activeDrag}
                                 color={
                                     activeDrag.color ||
                                     config.style.primaryColor

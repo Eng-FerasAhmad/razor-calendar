@@ -1,9 +1,8 @@
 import { useDroppable } from '@dnd-kit/core';
-import { ReactElement, useState } from 'react';
-import { DialogCustom } from 'components/shared/dialog/Dialog';
+import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { isWorkTime } from 'utils/dateTime';
 import { DroppableSlotWrapper } from 'week/drag-and-drop/styles';
-import WeekAppointmentNew from 'week/new/WeekAppointmentNew';
 
 interface Props {
     slotId: string;
@@ -27,14 +26,13 @@ export default function DroppableTimeSlot({
     workHoursEnd,
 }: Props): ReactElement {
     const { setNodeRef, isOver } = useDroppable({ id: slotId });
-    const [openDialog, setOpenDialog] = useState<boolean>(false);
+    const { onDialogAppointment } = useCalendarContext();
 
     const handleOpenClick = (): void => {
-        setOpenDialog(true);
-    };
-
-    const handleCloseDialog = (): void => {
-        setOpenDialog(false);
+        onDialogAppointment({
+            open: true,
+            slotId,
+        });
     };
 
     return (
@@ -52,14 +50,6 @@ export default function DroppableTimeSlot({
                 backgroundColor: isOver ? '#e3f2fd' : '',
             }}
             onDoubleClick={handleOpenClick}
-        >
-            <DialogCustom
-                title={'Add new Appointment'}
-                open={openDialog}
-                handleClose={handleCloseDialog}
-            >
-                <WeekAppointmentNew slotId={slotId} />
-            </DialogCustom>
-        </DroppableSlotWrapper>
+        ></DroppableSlotWrapper>
     );
 }

@@ -9,10 +9,10 @@ interface PlusSymbolProps {
     onClick?: () => void;
 }
 
-export default function PlusSymbol({
+export default function AddCircleSymbol({
     size = 36,
     color = '#171717',
-    hoverColor = '#ff5722', // Default hover color
+    hoverColor = '#ff5722',
     opacity = 0.4,
     onClick,
 }: PlusSymbolProps): ReactElement {

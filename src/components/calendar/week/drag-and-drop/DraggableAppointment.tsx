@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { ReactElement, useState, useRef } from 'react';
 import { AppointmentWrapper, DraggableZone } from './styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { Appointment } from 'types/appointment';
 import { darkenColor } from 'utils/colorConverter';
 import IntervalView from 'week/display-appointment/views/IntervalView';
 import StandardView from 'week/display-appointment/views/StandardView';
@@ -15,6 +16,7 @@ interface Props {
     to: string;
     color: string;
     style: { top: string; height: string };
+    appointment: Appointment;
     isOverlay?: boolean;
 }
 
@@ -25,6 +27,7 @@ export default function DraggableAppointment({
     to,
     color,
     style,
+    appointment,
     isOverlay = false,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
@@ -107,7 +110,13 @@ export default function DraggableAppointment({
         }
 
         return (
-            <StandardView start={start} end={end} title={title} color={color} />
+            <StandardView
+                start={start}
+                end={end}
+                title={title}
+                color={color}
+                appointment={appointment}
+            />
         );
     };
 

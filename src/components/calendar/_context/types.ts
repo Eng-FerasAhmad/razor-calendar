@@ -16,14 +16,22 @@ export interface CalendarContextProps {
     showAllFullDays: boolean;
     fullDaysCount: number;
     onUpdateFullDaysCount: (count: number) => void;
-    dialogAppointmentDetails: DialogAppointmentDetails | undefined;
-    onDialogAppointmentDetails: (
-        appointmentDetails: DialogAppointmentDetails | undefined
-    ) => void;
+    dialogAppointment: DialogAppointment | undefined;
+    onDialogAppointment: (appointment: DialogAppointment | undefined) => void;
+    popperAppointment: PopperAppointment | undefined;
+    onPopperAppointment: (appointment: PopperAppointment | undefined) => void;
 }
 
-export interface DialogAppointmentDetails {
+// this dialog content the data that can be edited:
+export interface DialogAppointment {
+    slotId: string;
     open: boolean;
+}
+
+// this popper data show on click on an appointment:
+export interface PopperAppointment {
     id: string;
+    open: boolean;
+    appointment: Appointment;
     anchorEl: HTMLElement | null;
 }

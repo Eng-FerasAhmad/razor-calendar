@@ -42,6 +42,7 @@ export default function DisplayAppointment({
                         from={start.toString()}
                         to={end.toString()}
                         color={appointment.color || config.style.primaryColor}
+                        appointment={appointment}
                     />
                 );
             })}

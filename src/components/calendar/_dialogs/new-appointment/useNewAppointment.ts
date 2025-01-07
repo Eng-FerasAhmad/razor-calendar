@@ -2,10 +2,6 @@ import { DateTime } from 'luxon';
 import { useState, useMemo } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 
-interface UseWeekAppointmentProps {
-    slotId: string;
-}
-
 export interface UseWeekAppointmentReturn {
     title: string;
     setTitle: (title: string) => void;
@@ -23,10 +19,8 @@ export interface UseWeekAppointmentReturn {
     handleSave: () => void;
 }
 
-export const useWeekAppointment = ({
-    slotId,
-}: UseWeekAppointmentProps): UseWeekAppointmentReturn => {
-    const { config } = useCalendarContext();
+export const useNewAppointment = (): UseWeekAppointmentReturn => {
+    const { config, dialogAppointment } = useCalendarContext();
 
     const is24Hours = config.hour?.is24HourFormat || false;
     const dateFormat =
@@ -34,7 +28,8 @@ export const useWeekAppointment = ({
         (config.common.lang === 'de' ? 'dd.MM.yyyy' : 'dd/MM/yyyy');
 
     // Parse slotId (format: 2025-01-02-10:0)
-    const [year, month, day, time] = slotId?.split('-') || [];
+    const [year, month, day, time] =
+        dialogAppointment?.slotId?.split('-') || [];
     const [hour, minute] = time?.split(':').map(Number) || [0, 0];
 
     const initialFromTime = useMemo(() => {

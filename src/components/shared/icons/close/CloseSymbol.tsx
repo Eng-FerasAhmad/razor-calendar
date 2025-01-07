@@ -5,7 +5,7 @@ interface CloseIconProps {
     color?: string;
 }
 
-export default function CloseIcon({
+export default function CloseSymbol({
     size = 24,
     color = '#33363F',
 }: CloseIconProps): ReactElement {

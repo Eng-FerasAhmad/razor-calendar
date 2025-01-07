@@ -7,7 +7,7 @@ import {
     StyledDialogTitle,
     StyledIconButton,
 } from './styles';
-import CloseSymbol from 'components/shared/icons/close/CloseSymbole';
+import CloseSymbol from 'components/shared/icons/close/CloseSymbol';
 
 interface Props {
     handleClose?: () => void;

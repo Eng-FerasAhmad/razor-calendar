@@ -11,7 +11,8 @@ import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
 import {
     CalendarContextProps,
-    DialogAppointmentDetails,
+    DialogAppointment,
+    PopperAppointment,
 } from 'calendar/_context/types';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
@@ -31,8 +32,10 @@ export const CalendarContext = createContext<CalendarContextProps>({
     selectedDate: DateTime.now(),
     showAllFullDays: false,
     fullDaysCount: 0,
-    dialogAppointmentDetails: undefined,
-    onDialogAppointmentDetails: () => {},
+    dialogAppointment: undefined,
+    onDialogAppointment: () => {},
+    popperAppointment: undefined,
+    onPopperAppointment: () => {},
     onUpdateFullDaysCount: () => {},
     onShowAllFullDays: () => {},
     onViewChange: () => {},
@@ -55,8 +58,11 @@ export function CalendarProvider({
     const [appointments, setAppointments] = useState<Appointment[]>([]);
     const [showAllFullDays, setShowAllFullDays] = useState<boolean>(false);
     const [fullDaysCount, setFullDaysCount] = useState<number>(0);
-    const [dialogAppointmentDetails, setDialogAppointmentDetails] = useState<
-        DialogAppointmentDetails | undefined
+    const [dialogAppointment, setDialogAppointment] = useState<
+        DialogAppointment | undefined
+    >(undefined);
+    const [popperAppointment, setPropperAppointment] = useState<
+        PopperAppointment | undefined
     >(undefined);
 
     const onViewChange = useCallback(
@@ -91,9 +97,16 @@ export function CalendarProvider({
         setFullDaysCount(count);
     }, []);
 
-    const onDialogAppointmentDetails = useCallback(
-        (appointmentDetails: DialogAppointmentDetails | undefined) => {
-            setDialogAppointmentDetails(appointmentDetails);
+    const onDialogAppointment = useCallback(
+        (appointment: DialogAppointment | undefined) => {
+            setDialogAppointment(appointment);
+        },
+        []
+    );
+
+    const onPopperAppointment = useCallback(
+        (appointment: PopperAppointment | undefined) => {
+            setPropperAppointment(appointment);
         },
         []
     );
@@ -108,8 +121,10 @@ export function CalendarProvider({
                 appointments,
                 showAllFullDays,
                 fullDaysCount,
-                dialogAppointmentDetails,
-                onDialogAppointmentDetails,
+                dialogAppointment,
+                onDialogAppointment,
+                popperAppointment,
+                onPopperAppointment,
                 onShowAllFullDays,
                 onUpdateFullDaysCount,
                 onViewChange,
