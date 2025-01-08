@@ -53,7 +53,6 @@ export const ShortLabelViewWrapper = styled('div')({
     paddingLeft: '5px',
 });
 
-// Interval view
 export const IntervalViewContainer = styled('div')<{
     color?: string;
 }>(({ theme, color }) => ({
@@ -62,7 +61,13 @@ export const IntervalViewContainer = styled('div')<{
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
+    padding: 0,
     backgroundColor: getBackgroundColor(theme, color),
+    color: theme.palette.text.primary,
+    transition: 'opacity 0.2s ease',
+    '&:hover': {
+        backgroundColor: getHoverColor(theme, color),
+    },
 }));
 
 export const ShortTimerIntervalViewWrapper = styled('div')({
@@ -87,11 +92,16 @@ export const ZoomIntervalViewContainer = styled('div')<{
     color?: string;
 }>(({ theme, color }) => ({
     display: 'flex',
-    flexDirection: 'row-reverse',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
+    color: theme.palette.text.primary,
     backgroundColor: getBackgroundColor(theme, color),
+    transition: 'opacity 0.2s ease',
+    '&:hover': {
+        backgroundColor: getHoverColor(theme, color),
+    },
 }));
 
 export const ShortTimerZoomIntervalWrapper = styled('div')({
@@ -100,7 +110,7 @@ export const ShortTimerZoomIntervalWrapper = styled('div')({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: 'inline-block',
-    maxWidth: '60px',
+    maxWidth: '70px',
     fontSize: '9px',
 });
 

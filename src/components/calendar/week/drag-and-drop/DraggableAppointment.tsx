@@ -11,7 +11,6 @@ import ZoomIntervalView from 'week/display-appointment/views/ZoomIntervalView';
 
 interface Props {
     id: string;
-    title: string;
     from: string;
     to: string;
     color: string;
@@ -22,7 +21,6 @@ interface Props {
 
 export default function DraggableAppointment({
     id,
-    title,
     from,
     to,
     color,
@@ -31,8 +29,6 @@ export default function DraggableAppointment({
     isOverlay = false,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
-    const start = DateTime.fromISO(from).toFormat('hh:mm');
-    const end = DateTime.fromISO(to).toFormat('hh:mm');
     const [isDragging, setIsDragging] = useState(false);
     const dragTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const diffInMinutes = DateTime.fromISO(to).diff(
@@ -81,26 +77,11 @@ export default function DraggableAppointment({
         }[] = [
             {
                 condition: (minutes) => minutes <= 45,
-                view: (
-                    <IntervalView
-                        start={start}
-                        end={end}
-                        title={title}
-                        color={color}
-                    />
-                ),
+                view: <IntervalView appointment={appointment} />,
             },
             {
                 condition: (minutes) => minutes <= 45,
-                view: (
-                    <ZoomIntervalView
-                        start={start}
-                        end={end}
-                        title={title}
-                        color={color}
-                        disableDoubleClick={isDragging}
-                    />
-                ),
+                view: <ZoomIntervalView appointment={appointment} />,
             },
         ];
 
@@ -109,15 +90,7 @@ export default function DraggableAppointment({
             if (condition(diffInMinutes!)) return view;
         }
 
-        return (
-            <StandardView
-                start={start}
-                end={end}
-                title={title}
-                color={color}
-                appointment={appointment}
-            />
-        );
+        return <StandardView appointment={appointment} />;
     };
 
     return (

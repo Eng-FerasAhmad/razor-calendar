@@ -159,7 +159,6 @@ export default function Week({
                         {activeDrag && (
                             <DraggableAppointment
                                 id={activeDrag.id}
-                                title={activeDrag.title}
                                 from={activeDrag.start}
                                 to={activeDrag.end}
                                 appointment={activeDrag}

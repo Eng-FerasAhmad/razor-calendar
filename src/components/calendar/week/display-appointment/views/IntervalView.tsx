@@ -1,5 +1,7 @@
-import { ReactElement, useState } from 'react';
-import WeekAppointmentDetails from 'week/details/WeekAppointmentDetails';
+import { DateTime } from 'luxon';
+import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { Appointment } from 'types/appointment';
 import {
     IntervalViewContainer,
     ShortLabelIntervalViewWrapper,
@@ -7,52 +9,35 @@ import {
 } from 'week/display-appointment/views/styles';
 
 interface Props {
-    start: string;
-    end: string;
-    title: string;
-    color: string;
-    // Optional prop to disable double-click functionality to avoid the conflicts with drag and drops
-    disableDoubleClick?: boolean;
+    appointment: Appointment;
 }
 
-export default function IntervalView({
-    start,
-    end,
-    title,
-    color,
-    disableDoubleClick,
-}: Props): ReactElement {
-    const [openDialog, setOpenDialog] = useState<boolean>(false);
+export default function IntervalView({ appointment }: Props): ReactElement {
+    const { onPopperAppointment, config } = useCalendarContext();
 
-    const handleOpenClick = (): void => {
-        if (!disableDoubleClick) {
-            setOpenDialog(true);
-        }
+    const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
+        onPopperAppointment({
+            open: true,
+            id: appointment.id,
+            anchorEl: event.currentTarget,
+            appointment,
+        });
     };
 
-    const handleCloseDialog = (): void => {
-        setOpenDialog(false);
-    };
+    const start = DateTime.fromISO(appointment.start).toFormat('hh:mm');
+    const end = DateTime.fromISO(appointment.end).toFormat('hh:mm');
 
     return (
         <IntervalViewContainer
-            color={color}
+            color={appointment.color || config.style.primaryColor}
             data-testid="interval-view-container"
-            onClick={handleOpenClick}
+            onClick={popperHandler}
         >
-            <WeekAppointmentDetails
-                color={color}
-                title={title}
-                start={start}
-                end={end}
-                openDialog={openDialog}
-                handleCloseDialog={handleCloseDialog}
-            />
             <ShortTimerIntervalViewWrapper data-testid="short-timer-interval-view-wrapper">
-                {start} - {end}
+                {start} -{end}
             </ShortTimerIntervalViewWrapper>
             <ShortLabelIntervalViewWrapper>
-                {title}
+                {appointment.title}
             </ShortLabelIntervalViewWrapper>
         </IntervalViewContainer>
     );

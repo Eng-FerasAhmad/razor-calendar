@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
 import { DaysColumnsContainer } from 'week/day-columns/styles';
@@ -21,13 +21,6 @@ export default function DayColumns({
 }: DayCellProps): React.ReactElement {
     const { config } = useCalendarContext();
 
-    const [updatedAppointments, setUpdatedAppointments] =
-        useState(appointments);
-
-    useEffect(() => {
-        setUpdatedAppointments(appointments);
-    }, [appointments]);
-
     const timeSlots = Array.from(
         { length: (24 * 60) / interval },
         (_, i) => i * interval
@@ -35,8 +28,10 @@ export default function DayColumns({
 
     const calculatePosition = (
         start: DateTime,
-        end: DateTime
-    ): { top: string; height: string } => {
+        end: DateTime,
+        overlapIndex: number,
+        totalOverlaps: number
+    ): { top: string; height: string; width: string; left: string } => {
         const minutesFromStart = start.diff(
             day.startOf('day'),
             'minutes'
@@ -46,14 +41,56 @@ export default function DayColumns({
         const totalMinutesInDay = 1440; // 24 hours * 60 minutes
         const slotHeightPercentage = 100 / ((24 * 60) / interval);
 
-        const top = (minutesFromStart / totalMinutesInDay) * 100; // As a percentage of the day
+        const top = (minutesFromStart / totalMinutesInDay) * 100; // Percentage of the day
         const height = (durationInMinutes / interval) * slotHeightPercentage;
 
+        // Handle overlapping appointments
+        const width = 100 / totalOverlaps; // Divide width by total overlaps
+        const left = (overlapIndex / totalOverlaps) * 100; // Offset by index
+
         return {
-            top: `calc(${top}% + 2px)`, // 2px to keep the appointment inside the slot
-            height: `calc(${height}% - 3px)`, // 2 px to keep the appointment inside the slot
+            top: `calc(${top}% + 2px)`,
+            height: `calc(${height}% - 3px)`,
+            width: `calc(${width}% - 2px)`,
+            left: `calc(${left}% + 1px)`,
         };
     };
+
+    const groupOverlappingAppointments = (): Appointment[] => {
+        const sortedAppointments = [...appointments].sort(
+            (a, b) =>
+                DateTime.fromISO(a.start).toMillis() -
+                DateTime.fromISO(b.start).toMillis()
+        );
+
+        return sortedAppointments.map((appointment) => {
+            const overlappingAppointments = sortedAppointments.filter(
+                (other) =>
+                    DateTime.fromISO(other.start) <
+                        DateTime.fromISO(appointment.end) &&
+                    DateTime.fromISO(other.end) >
+                        DateTime.fromISO(appointment.start)
+            );
+
+            const overlapIndex = overlappingAppointments.findIndex(
+                (a) => a.id === appointment.id
+            );
+
+            const position = calculatePosition(
+                DateTime.fromISO(appointment.start),
+                DateTime.fromISO(appointment.end),
+                overlapIndex,
+                overlappingAppointments.length
+            );
+
+            return {
+                ...appointment,
+                position,
+            };
+        });
+    };
+
+    const updatedAppointmentsWithPositions = groupOverlappingAppointments();
 
     return (
         <DaysColumnsContainer
@@ -69,7 +106,7 @@ export default function DayColumns({
             />
             <DisplayAppointment
                 day={day}
-                appointments={updatedAppointments}
+                appointments={updatedAppointmentsWithPositions}
                 calculatePosition={calculatePosition}
                 fullDayAppointments={fullDayAppointments}
             />

@@ -15,16 +15,17 @@ export default function App(): ReactElement {
         {
             id: '1',
             title: 'Meeting at these times are very important',
-            start: '2024-12-22T13:00',
-            end: '2024-12-23T13:00',
-            isFullDay: true,
+            start: '2025-01-09T13:00',
+            end: '2025-01-09T13:30',
+            isFullDay: false,
         },
         {
             id: '2',
             title: 'Lunch but also long long text',
-            start: '2025-01-06T13:00',
-            end: '2025-01-06T14:00',
-            isFullDay: true,
+            start: '2025-01-09T09:00',
+            end: '2025-01-09T18:00',
+            isFullDay: false,
+            color: '#039be5',
         },
         {
             id: '3',
@@ -37,9 +38,10 @@ export default function App(): ReactElement {
         {
             id: '4',
             title: 'Lunch: how about more longer text like this one hier, what you say',
-            start: '2024-12-19T09:00',
-            end: '2024-12-19T13:00',
+            start: '2025-01-09T13:00',
+            end: '2025-01-09T15:00',
             isFullDay: false,
+            color: '#ff9933',
         },
         {
             id: '5',
