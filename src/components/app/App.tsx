@@ -32,6 +32,7 @@ export default function App(): ReactElement {
             start: '2025-01-09T13:00',
             end: '2025-01-09T14:00',
             isFullDay: false,
+            assign: 'Max Mustermann',
         },
         {
             id: '4',

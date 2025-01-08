@@ -24,7 +24,7 @@ export default function StandardView({
 }: Props): ReactElement {
     const { onPopperAppointment } = useCalendarContext();
 
-    const dialogHandler = (event: React.MouseEvent<HTMLElement>): void => {
+    const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
             open: true,
             id: 'id',
@@ -37,7 +37,7 @@ export default function StandardView({
         <StandardViewContainer
             color={color}
             data-testid="standard-view-container"
-            onClick={dialogHandler}
+            onClick={popperHandler}
         >
             <ShortTimerViewWrapper>
                 {start} - {end}

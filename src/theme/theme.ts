@@ -20,7 +20,7 @@ declare module '@mui/material/styles' {
 export const createDynamicTheme = (
     config: RazorCalendarConfig<CalendarConfig> | Partial<ToolbarConfig>
 ): Theme => {
-    let primaryColor = '#36c98e'; // Default color
+    let primaryColor = '#33b679'; // Default color
 
     if ('primaryColor' in config && config.primaryColor) {
         primaryColor = config.primaryColor;
@@ -85,6 +85,9 @@ export const createDynamicTheme = (
                     },
                     '#root': {
                         height: '100%',
+                    },
+                    '.no-scroll': {
+                        overflow: 'hidden !important', // Disable scrolling
                     },
                 },
             },

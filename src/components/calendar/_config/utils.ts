@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
 export function mergeConfig(
@@ -16,4 +17,29 @@ export function mergeConfig(
         style: { ...config.style, ...userConfig.style },
         common: { ...config.common, ...userConfig.common },
     };
+}
+
+export function formatTimeDifference(
+    start: string,
+    end: string,
+    isFullDay: boolean
+): string {
+    if (isFullDay) return 'Full Day';
+    const diffInMinutes = Math.abs(
+        DateTime.fromISO(start).diff(DateTime.fromISO(end), 'minutes').minutes
+    );
+
+    if (diffInMinutes >= 60) {
+        const hours = Math.floor(diffInMinutes / 60);
+        const minutes = diffInMinutes % 60;
+        return minutes > 0
+            ? `${hours}:${String(minutes).padStart(2, '0')} Hours`
+            : `${hours} Hours`;
+    }
+
+    if (diffInMinutes > 0) {
+        return `${diffInMinutes} Minute${diffInMinutes > 1 ? 's' : ''}`;
+    }
+
+    return 'No Time Difference';
 }

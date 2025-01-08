@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider, Tooltip } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Button from 'components/shared/button/Button';
@@ -85,20 +85,30 @@ export default function RazorCalendarToolbar({
                         {getLocalizedLabel('today', lang)}
                     </Button>
 
-                    <NavigationIconsWrapper
-                        onClick={handleClickPrev}
-                        color={config.primaryColor}
-                    >
-                        <ArrowPrevSymbol size={22} color={config.fontColor} />
-                    </NavigationIconsWrapper>
+                    <Tooltip title={getLocalizedLabel('previous', lang)}>
+                        <NavigationIconsWrapper
+                            onClick={handleClickPrev}
+                            color={config.primaryColor}
+                        >
+                            <ArrowPrevSymbol
+                                size={22}
+                                color={config.fontColor}
+                            />
+                        </NavigationIconsWrapper>
+                    </Tooltip>
 
-                    <NavigationIconsWrapper
-                        onClick={handleClickNext}
-                        color={config.primaryColor}
-                        title={getLocalizedLabel('next', lang)}
-                    >
-                        <ArrowNextSymbol size={22} color={config.fontColor} />
-                    </NavigationIconsWrapper>
+                    <Tooltip title={getLocalizedLabel('next', lang)}>
+                        <NavigationIconsWrapper
+                            onClick={handleClickNext}
+                            color={config.primaryColor}
+                        >
+                            <ArrowNextSymbol
+                                size={22}
+                                color={config.fontColor}
+                            />
+                        </NavigationIconsWrapper>
+                    </Tooltip>
+
                     <TitleWrapper>{getTitle()}</TitleWrapper>
                 </NavigationWrapper>
                 <ViewWrapper>

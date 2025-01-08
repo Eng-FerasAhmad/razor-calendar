@@ -134,7 +134,10 @@ export default function Week({
                 fullDayAppointments={fullDayAppointments}
             />
 
-            <TimeDayWrapper data-testid="time-day-wrapper">
+            <TimeDayWrapper
+                id="time-day-wrapper"
+                data-testid="time-day-wrapper"
+            >
                 <TimeColumn interval={interval} />
 
                 <DndContext

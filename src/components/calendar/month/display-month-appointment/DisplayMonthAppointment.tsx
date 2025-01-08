@@ -23,6 +23,7 @@ export default function DisplayMonthAppointments({
                 <DraggableEvent
                     key={appointment.id}
                     id={appointment.id}
+                    appointment={appointment}
                     title={appointment.title}
                     color={appointment.color || config.style.primaryColor}
                 />

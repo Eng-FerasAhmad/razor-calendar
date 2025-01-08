@@ -66,7 +66,7 @@ export default function CalendarLayout({
     };
 
     return (
-        <LayoutContainer data-testid="calendar-layout">
+        <LayoutContainer id="calendar-layout" data-testid="calendar-layout">
             {renderView()}
         </LayoutContainer>
     );

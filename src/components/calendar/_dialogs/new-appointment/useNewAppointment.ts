@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 
 export interface UseWeekAppointmentReturn {
@@ -27,26 +27,9 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         config.common?.dateFormat ||
         (config.common.lang === 'de' ? 'dd.MM.yyyy' : 'dd/MM/yyyy');
 
-    // Parse slotId (format: 2025-01-02-10:0)
-    const [year, month, day, time] =
-        dialogAppointment?.slotId?.split('-') || [];
-    const [hour, minute] = time?.split(':').map(Number) || [0, 0];
-
-    const initialFromTime = useMemo(() => {
-        return year && month && day && time
-            ? DateTime.fromObject({
-                  year: Number(year),
-                  month: Number(month),
-                  day: Number(day),
-                  hour,
-                  minute,
-              })
-            : DateTime.now();
-    }, [year, month, day, time, hour, minute]);
-
-    const [fromTime, setFromTime] = useState<DateTime>(initialFromTime);
+    const [fromTime, setFromTime] = useState<DateTime>(DateTime.now());
     const [toTime, setToTime] = useState<DateTime>(
-        initialFromTime.plus({ minutes: 30 })
+        DateTime.now().plus({ minutes: 30 })
     );
     const [title, setTitle] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
@@ -63,6 +46,25 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         ],
         []
     );
+
+    // Update `fromTime` and `toTime` when `dialogAppointment.slotId` changes
+    useEffect(() => {
+        const [year, month, day, time] =
+            dialogAppointment?.slotId?.split('-') || [];
+        const [hour, minute] = time?.split(':').map(Number) || [0, 0];
+
+        if (year && month && day && time) {
+            const newFromTime = DateTime.fromObject({
+                year: Number(year),
+                month: Number(month),
+                day: Number(day),
+                hour,
+                minute,
+            });
+            setFromTime(newFromTime);
+            setToTime(newFromTime.plus({ minutes: 30 }));
+        }
+    }, [dialogAppointment?.slotId]);
 
     const handleSave = (): void => {
         console.log({

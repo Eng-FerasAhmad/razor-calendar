@@ -5,6 +5,7 @@ import { CalendarProvider } from 'calendar/_context/CalendarContext';
 import DetailsAppointment from 'calendar/_dialogs/details-appointment/DetailsAppointment';
 import NewAppointment from 'calendar/_dialogs/new-appointment/NewAppointment';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
+import DisableScrolling from 'calendar/_scrolling/Scrolling';
 import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
@@ -38,6 +39,7 @@ export function RazorCalendar({
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
             >
+                <DisableScrolling />
                 <DetailsAppointment />
                 <NewAppointment />
                 <CalendarLayout

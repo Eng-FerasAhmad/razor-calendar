@@ -5,6 +5,7 @@ export interface Appointment {
     title: string;
     start: string; // ISO string
     end: string; // ISO string
+    assign?: string;
     duration?: string;
     status?: string;
     notes?: string;
