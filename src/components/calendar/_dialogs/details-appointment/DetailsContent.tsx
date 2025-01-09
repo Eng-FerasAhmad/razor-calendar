@@ -31,6 +31,7 @@ export default function DetailsContent(): ReactElement {
         onPopperAppointment,
         config,
         onDeleteAppointment,
+        onDialogAppointment,
     } = useCalendarContext();
 
     const iconSize = 20;
@@ -64,6 +65,15 @@ export default function DetailsContent(): ReactElement {
         onDeleteAppointment(updated);
     };
 
+    const handleEdit = (): void => {
+        handleClose();
+        onDialogAppointment({
+            open: true,
+            slotId: '',
+            appointment,
+        });
+    };
+
     return (
         <DetailsContentContainer
             data-testid="details-content-container"
@@ -71,7 +81,7 @@ export default function DetailsContent(): ReactElement {
         >
             <HeaderBox data-testid="header-box" color={color}>
                 <Tooltip title={'Edit'}>
-                    <IconWrapper color={color}>
+                    <IconWrapper color={color} onClick={handleEdit}>
                         <EditSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>

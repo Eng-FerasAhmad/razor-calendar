@@ -29,6 +29,7 @@ export interface CalendarContextProps {
 export interface DialogAppointment {
     slotId: string;
     open: boolean;
+    appointment?: Appointment;
 }
 
 // this popper data show on click on an appointment:
