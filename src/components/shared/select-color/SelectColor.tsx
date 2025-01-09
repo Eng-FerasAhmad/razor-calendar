@@ -44,7 +44,7 @@ export default function SelectColor({
                 onChange={handleChange}
                 displayEmpty
                 sx={{
-                    height: 40,
+                    height: 44,
                     borderRadius: 1,
                     '& .MuiSelect-outlined': {
                         display: 'flex',

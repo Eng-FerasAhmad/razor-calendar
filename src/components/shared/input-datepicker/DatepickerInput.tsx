@@ -7,6 +7,8 @@ import { ReactElement } from 'react';
 interface Props extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
     label: string;
     dateFormat?: string;
+    error?: boolean;
+    helperText?: string;
 }
 
 export default function DatePickerInput({
@@ -14,6 +16,8 @@ export default function DatePickerInput({
     value,
     onChange,
     dateFormat = 'yyyy-MM-dd',
+    error = false,
+    helperText,
     ...props
 }: Props): ReactElement {
     return (
@@ -28,6 +32,14 @@ export default function DatePickerInput({
                         fullWidth: true,
                         size: 'small',
                         label,
+                        error,
+                        helperText,
+                        FormHelperTextProps: {
+                            sx: {
+                                minHeight: '10px',
+                                fontSize: '11px',
+                            },
+                        },
                     },
                 }}
             />

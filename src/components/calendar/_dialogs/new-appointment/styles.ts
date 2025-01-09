@@ -10,12 +10,21 @@ export const Container = styled(Box)({
     margin: '0 auto',
 });
 
-export const RowWrapper = styled(Box)({
+export const TitleRowWrapper = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: '20px',
+    marginBottom: '16px',
+});
+
+export const RowWrapper = styled(Box)({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    gap: '16px',
+    gap: '20px',
 });
 
 export const ActionRowWrapper = styled(Box)({
@@ -23,5 +32,5 @@ export const ActionRowWrapper = styled(Box)({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    gap: '16px',
+    gap: '20px',
 });

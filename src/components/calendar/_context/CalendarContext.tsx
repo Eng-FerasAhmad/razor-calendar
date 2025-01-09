@@ -23,6 +23,7 @@ interface Props {
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
     onExternalSaveAppointment: (appointment: Appointment) => void;
+    onExternalDeleteAppointment: (appointment: Appointment) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
@@ -45,6 +46,7 @@ export const CalendarContext = createContext<CalendarContextProps>({
     onChangeLanguage: () => {},
     onChangeAppointments: () => {},
     onSaveAppointment: () => {},
+    onDeleteAppointment: () => {},
 });
 
 export function CalendarProvider({
@@ -101,7 +103,14 @@ export function CalendarProvider({
             setSavedAppointment(newEvents);
             if (newEvents) onExternalSaveAppointment(newEvents);
         },
-        []
+        [onExternalSaveAppointment]
+    );
+
+    const onDeleteAppointment = useCallback(
+        (newEvents: Appointment) => {
+            onExternalSaveAppointment(newEvents);
+        },
+        [onExternalSaveAppointment]
     );
 
     const onShowAllFullDays = useCallback(() => {
@@ -148,6 +157,7 @@ export function CalendarProvider({
                 onChangeLanguage,
                 onChangeAppointments,
                 onSaveAppointment,
+                onDeleteAppointment,
             }}
         >
             {children}

@@ -23,10 +23,15 @@ import EditSymbol from 'components/shared/icons/edit/EditSymbol';
 import MenuSymbol from 'components/shared/icons/menu/MenuSymbol';
 import TimerSymbol from 'components/shared/icons/timer/TimerSymbol';
 import { UserSymbol } from 'components/shared/icons/user/UserSymbol';
+import { Appointment } from 'types/appointment';
 
 export default function DetailsContent(): ReactElement {
-    const { popperAppointment, onPopperAppointment, config } =
-        useCalendarContext();
+    const {
+        popperAppointment,
+        onPopperAppointment,
+        config,
+        onDeleteAppointment,
+    } = useCalendarContext();
 
     const iconSize = 20;
     const { appointment } = popperAppointment || {};
@@ -47,6 +52,18 @@ export default function DetailsContent(): ReactElement {
         onPopperAppointment(undefined);
     };
 
+    const onDelete = (): void => {
+        if (!appointment) return;
+
+        const updated: Appointment = {
+            id: appointment.id,
+            title: appointment.title,
+            start: appointment.start,
+            end: appointment.end,
+        };
+        onDeleteAppointment(updated);
+    };
+
     return (
         <DetailsContentContainer
             data-testid="details-content-container"
@@ -60,7 +77,7 @@ export default function DetailsContent(): ReactElement {
                 </Tooltip>
 
                 <Tooltip title={'Delete'}>
-                    <IconWrapper color={color}>
+                    <IconWrapper color={color} onClick={onDelete}>
                         <DeleteSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>

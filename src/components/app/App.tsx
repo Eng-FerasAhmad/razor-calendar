@@ -173,6 +173,10 @@ export default function App(): ReactElement {
         console.log('Save to parent Appointment:', appointment);
     };
 
+    const handleDeleteAppointment = (appointment: Appointment): void => {
+        console.log('Delete to parent Appointment:', appointment);
+    };
+
     return (
         <AppContainer data-testid="app">
             {/* Pass handlers and state to CalendarToolbar */}
@@ -189,6 +193,7 @@ export default function App(): ReactElement {
                 appointments={appointments}
                 handleChangeAppointment={handleChangeAppointment}
                 handleSaveAppointment={handleSaveAppointment}
+                handleDeleteAppointment={handleDeleteAppointment}
                 view={currentView}
                 onViewChange={handleViewChange}
                 selectedDate={currentDate}

@@ -6,7 +6,9 @@ import { Appointment } from 'types/appointment';
 
 export interface UseWeekAppointmentReturn {
     title: string;
+    notes: string;
     setTitle: (title: string) => void;
+    setNotes: (title: string) => void;
     fromTime: DateTime;
     setFromTime: (time: DateTime) => void;
     toTime: DateTime;
@@ -18,6 +20,7 @@ export interface UseWeekAppointmentReturn {
     is24Hours: boolean;
     dateFormat: string;
     handleSave: () => void;
+    titleRequired: boolean;
 }
 
 export const useNewAppointment = (): UseWeekAppointmentReturn => {
@@ -34,8 +37,10 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         DateTime.now().plus({ minutes: 30 })
     );
     const [title, setTitle] = useState('');
+    const [notes, setNotes] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
     const [color, setColor] = useState('#33b679');
+    const [titleRequired, setTitleRequired] = useState(false);
 
     useEffect(() => {
         const [year, month, day, time] =
@@ -56,20 +61,26 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     }, [dialogAppointment?.slotId]);
 
     const handleSave = (): void => {
+        setTitleRequired(!title);
+        if (!title) return;
+
         const appointment: Appointment = {
             id: 'new',
             title,
-            start: fromTime.toFormat(`${dateFormat} HH:mm`),
-            end: toTime.toFormat(`${dateFormat} HH:mm`),
+            start: fromTime.toISO()!,
+            end: toTime.toISO()!,
             isFullDay,
             color,
+            notes,
         };
         onSaveAppointment(appointment);
     };
 
     return {
         title,
+        notes,
         setTitle,
+        setNotes,
         fromTime,
         setFromTime,
         toTime,
@@ -81,5 +92,6 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         is24Hours,
         dateFormat,
         handleSave,
+        titleRequired,
     };
 };

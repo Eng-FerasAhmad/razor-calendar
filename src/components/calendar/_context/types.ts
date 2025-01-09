@@ -14,6 +14,7 @@ export interface CalendarContextProps {
     onChangeLanguage: (lang: string) => void;
     onChangeAppointments: (appointment: Appointment[]) => void;
     onSaveAppointment: (appointment: Appointment | undefined) => void;
+    onDeleteAppointment: (appointment: Appointment) => void;
     onShowAllFullDays: () => void;
     showAllFullDays: boolean;
     fullDaysCount: number;

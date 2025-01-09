@@ -4,19 +4,23 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 
-interface TimePickerGenericProps
+interface InputTimepickerProps
     extends Omit<TimePickerProps<DateTime>, 'renderInput'> {
     label: string;
     is24Hours?: boolean;
+    error?: boolean;
+    helperText?: string;
 }
 
 export default function InputTimepicker({
     label,
     value,
     onChange,
+    error = false,
+    helperText = '',
     is24Hours = true,
     ...props
-}: TimePickerGenericProps): ReactElement {
+}: InputTimepickerProps): ReactElement {
     return (
         <LocalizationProvider dateAdapter={AdapterLuxon}>
             <TimePicker
@@ -29,6 +33,14 @@ export default function InputTimepicker({
                         fullWidth: true,
                         size: 'small',
                         label,
+                        error,
+                        helperText,
+                        FormHelperTextProps: {
+                            sx: {
+                                minHeight: '10px',
+                                fontSize: '11px',
+                            },
+                        },
                     },
                 }}
             />
