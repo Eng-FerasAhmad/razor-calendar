@@ -4,19 +4,18 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 
-interface DatePickerGenericProps
-    extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
+interface Props extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
     label: string;
     dateFormat?: string;
 }
 
-export default function DatePickerGeneric({
+export default function DatePickerInput({
     label,
     value,
     onChange,
     dateFormat = 'yyyy-MM-dd',
     ...props
-}: DatePickerGenericProps): ReactElement {
+}: Props): ReactElement {
     return (
         <LocalizationProvider dateAdapter={AdapterLuxon}>
             <DatePicker

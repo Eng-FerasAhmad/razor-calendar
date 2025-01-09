@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider, Tooltip } from '@mui/material';
+import { CssBaseline, darken, ThemeProvider, Tooltip } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Button from 'components/shared/button/Button';
@@ -81,7 +81,11 @@ export default function RazorCalendarToolbar({
             <CssBaseline />
             <ToolbarContainer backgroundColor={config.backgroundColor}>
                 <NavigationWrapper>
-                    <Button onClick={handleClickToday}>
+                    <Button
+                        sx={{ borderColor: darken(config.primaryColor, 0.2) }}
+                        variant={'outlined'}
+                        onClick={handleClickToday}
+                    >
                         {getLocalizedLabel('today', lang)}
                     </Button>
 

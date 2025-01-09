@@ -1,5 +1,5 @@
-import { TextField } from '@mui/material';
 import { ReactElement } from 'react';
+import { StyledTextField } from 'components/shared/input-text/styles';
 
 interface InputTextProps {
     value: string;
@@ -7,7 +7,8 @@ interface InputTextProps {
     label?: string;
     placeholder?: string;
     fullWidth?: boolean;
-    size?: 'small' | 'medium'; // Optional size control
+    size?: 'small' | 'medium';
+    focused?: boolean;
 }
 
 export default function InputText({
@@ -17,29 +18,18 @@ export default function InputText({
     placeholder,
     fullWidth = true,
     size = 'medium',
+    focused,
 }: InputTextProps): ReactElement {
     return (
-        <TextField
+        <StyledTextField
             value={value}
             onChange={(e) => onChange(e.target.value)}
             label={label}
             placeholder={placeholder}
             fullWidth={fullWidth}
             size={size}
-            variant="outlined" // Default to outlined variant
-            sx={{
-                '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                        borderColor: '#ccc', // Default border color
-                    },
-                    '&:hover fieldset': {
-                        borderColor: '#36c98e', // Hover color
-                    },
-                    '&.Mui-focused fieldset': {
-                        borderColor: '#36c98e', // Focus color
-                    },
-                },
-            }}
+            variant="outlined"
+            autoFocus={focused}
         />
     );
 }

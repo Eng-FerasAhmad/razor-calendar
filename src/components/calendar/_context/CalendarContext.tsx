@@ -22,12 +22,14 @@ interface Props {
     config: RazorCalendarConfig<CalendarConfig>;
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
+    onExternalSaveAppointment: (appointment: Appointment) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
     view: 'week',
     config: basicConfig,
     appointments: [],
+    savedAppointment: undefined,
     language: 'en',
     selectedDate: DateTime.now(),
     showAllFullDays: false,
@@ -42,6 +44,7 @@ export const CalendarContext = createContext<CalendarContextProps>({
     onDateChange: () => {},
     onChangeLanguage: () => {},
     onChangeAppointments: () => {},
+    onSaveAppointment: () => {},
 });
 
 export function CalendarProvider({
@@ -49,6 +52,7 @@ export function CalendarProvider({
     config,
     onExternalViewChange,
     onExternalChangeDate,
+    onExternalSaveAppointment,
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
 
@@ -56,12 +60,15 @@ export function CalendarProvider({
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
     const [language, setLanguage] = useState<string>(mergedConfig.common.lang);
     const [appointments, setAppointments] = useState<Appointment[]>([]);
+    const [savedAppointment, setSavedAppointment] = useState<
+        Appointment | undefined
+    >();
     const [showAllFullDays, setShowAllFullDays] = useState<boolean>(false);
     const [fullDaysCount, setFullDaysCount] = useState<number>(0);
     const [dialogAppointment, setDialogAppointment] = useState<
         DialogAppointment | undefined
     >(undefined);
-    const [popperAppointment, setPropperAppointment] = useState<
+    const [popperAppointment, setPopperAppointment] = useState<
         PopperAppointment | undefined
     >(undefined);
 
@@ -89,6 +96,14 @@ export function CalendarProvider({
         setAppointments(newEvents);
     }, []);
 
+    const onSaveAppointment = useCallback(
+        (newEvents: Appointment | undefined) => {
+            setSavedAppointment(newEvents);
+            if (newEvents) onExternalSaveAppointment(newEvents);
+        },
+        []
+    );
+
     const onShowAllFullDays = useCallback(() => {
         setShowAllFullDays((prev) => !prev);
     }, []);
@@ -106,7 +121,7 @@ export function CalendarProvider({
 
     const onPopperAppointment = useCallback(
         (appointment: PopperAppointment | undefined) => {
-            setPropperAppointment(appointment);
+            setPopperAppointment(appointment);
         },
         []
     );
@@ -119,6 +134,7 @@ export function CalendarProvider({
                 selectedDate,
                 language,
                 appointments,
+                savedAppointment,
                 showAllFullDays,
                 fullDaysCount,
                 dialogAppointment,
@@ -131,6 +147,7 @@ export function CalendarProvider({
                 onDateChange,
                 onChangeLanguage,
                 onChangeAppointments,
+                onSaveAppointment,
             }}
         >
             {children}

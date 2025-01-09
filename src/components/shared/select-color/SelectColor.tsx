@@ -5,7 +5,7 @@ import {
     Box,
     SelectChangeEvent,
 } from '@mui/material';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 interface SelectColorProps {
     value: string;
@@ -16,14 +16,29 @@ export default function SelectColor({
     value,
     onChange,
 }: SelectColorProps): React.ReactElement {
-    const colorOptions = ['red', 'blue', 'green', 'orange', 'yellow', 'cyan'];
+    const colors = useMemo(
+        () => [
+            { name: 'Salbei', value: '#33b679' },
+            { name: 'Pfau', value: '#039be5' },
+            { name: 'Lavendel', value: '#7986cb' },
+            { name: 'Grafit', value: '#616161' },
+            { name: 'Tomato', value: '#d50000' },
+            { name: 'Mandarine', value: '#f4511e' },
+            { name: 'Flamingo', value: '#e67c73' },
+            { name: 'Banane', value: '#f6bf26' },
+            { name: 'Basilikum', value: '#0b8043' },
+            { name: 'Heidelbeere', value: '#3f51b5' },
+            { name: 'Weintraube', value: '#8e24aa' },
+        ],
+        []
+    );
 
     const handleChange = (event: SelectChangeEvent<string>): void => {
         onChange(event.target.value);
     };
 
     return (
-        <FormControl fullWidth>
+        <FormControl sx={{ width: '70px' }}>
             <Select
                 value={value}
                 onChange={handleChange}
@@ -37,15 +52,14 @@ export default function SelectColor({
                     },
                 }}
             >
-                {colorOptions.map((color) => (
-                    <MenuItem key={color} value={color}>
+                {colors.map((color) => (
+                    <MenuItem key={color.name} value={color.value}>
                         <Box
                             sx={{
                                 width: 20,
                                 height: 20,
-                                backgroundColor: color,
+                                backgroundColor: color.value,
                                 borderRadius: '50%',
-                                border: `1px solid ${color === value ? 'black' : 'transparent'}`,
                                 margin: 'auto',
                             }}
                         />

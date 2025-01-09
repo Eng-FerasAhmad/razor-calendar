@@ -16,6 +16,7 @@ export interface Props {
     selectedDate: DateTime;
     config: RazorCalendarConfig<CalendarConfig>;
     handleChangeAppointment: (appointment: Appointment) => void;
+    handleSaveAppointment: (appointment: Appointment) => void;
     onViewChange: (view: ViewType) => void;
     onChangeDate: (date: DateTime) => void;
 }
@@ -26,6 +27,7 @@ export function RazorCalendar({
     config,
     selectedDate,
     handleChangeAppointment,
+    handleSaveAppointment,
     onViewChange,
     onChangeDate,
 }: Props): ReactElement {
@@ -38,6 +40,7 @@ export function RazorCalendar({
                 config={config}
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
+                onExternalSaveAppointment={handleSaveAppointment}
             >
                 <DisableScrolling />
                 <DetailsAppointment />

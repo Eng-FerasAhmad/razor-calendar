@@ -166,7 +166,11 @@ export default function App(): ReactElement {
     };
 
     const handleChangeAppointment = (appointment: Appointment): void => {
-        console.log('Changed Appointment:', appointment);
+        console.log('Save to parent: Changed Appointment:', appointment);
+    };
+
+    const handleSaveAppointment = (appointment: Appointment): void => {
+        console.log('Save to parent Appointment:', appointment);
     };
 
     return (
@@ -184,6 +188,7 @@ export default function App(): ReactElement {
             <RazorCalendar
                 appointments={appointments}
                 handleChangeAppointment={handleChangeAppointment}
+                handleSaveAppointment={handleSaveAppointment}
                 view={currentView}
                 onViewChange={handleViewChange}
                 selectedDate={currentDate}

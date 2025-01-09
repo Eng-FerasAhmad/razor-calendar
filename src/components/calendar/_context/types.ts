@@ -7,11 +7,13 @@ export interface CalendarContextProps {
     config: CalendarConfig;
     selectedDate: DateTime;
     appointments: Appointment[] | undefined;
+    savedAppointment: Appointment | undefined;
     language: string;
     onViewChange: (view: ViewType) => void;
     onDateChange: (date: DateTime) => void;
     onChangeLanguage: (lang: string) => void;
     onChangeAppointments: (appointment: Appointment[]) => void;
+    onSaveAppointment: (appointment: Appointment | undefined) => void;
     onShowAllFullDays: () => void;
     showAllFullDays: boolean;
     fullDaysCount: number;

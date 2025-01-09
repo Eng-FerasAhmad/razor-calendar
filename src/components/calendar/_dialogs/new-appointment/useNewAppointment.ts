@@ -1,6 +1,8 @@
+// useNewAppointment.ts
 import { DateTime } from 'luxon';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { Appointment } from 'types/appointment';
 
 export interface UseWeekAppointmentReturn {
     title: string;
@@ -13,14 +15,14 @@ export interface UseWeekAppointmentReturn {
     setIsFullDay: (isFullDay: boolean) => void;
     color: string;
     setColor: (color: string) => void;
-    colors: { name: string; value: string }[];
     is24Hours: boolean;
     dateFormat: string;
     handleSave: () => void;
 }
 
 export const useNewAppointment = (): UseWeekAppointmentReturn => {
-    const { config, dialogAppointment } = useCalendarContext();
+    const { config, dialogAppointment, onSaveAppointment } =
+        useCalendarContext();
 
     const is24Hours = config.hour?.is24HourFormat || false;
     const dateFormat =
@@ -33,21 +35,8 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     );
     const [title, setTitle] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
-    const [color, setColor] = useState('red');
+    const [color, setColor] = useState('#33b679');
 
-    const colors = useMemo(
-        () => [
-            { name: 'Red', value: 'red' },
-            { name: 'Blue', value: 'blue' },
-            { name: 'Green', value: 'green' },
-            { name: 'Orange', value: 'orange' },
-            { name: 'Yellow', value: 'yellow' },
-            { name: 'Cyan', value: 'cyan' },
-        ],
-        []
-    );
-
-    // Update `fromTime` and `toTime` when `dialogAppointment.slotId` changes
     useEffect(() => {
         const [year, month, day, time] =
             dialogAppointment?.slotId?.split('-') || [];
@@ -67,13 +56,15 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     }, [dialogAppointment?.slotId]);
 
     const handleSave = (): void => {
-        console.log({
+        const appointment: Appointment = {
+            id: 'new',
             title,
-            from: fromTime.toFormat(`${dateFormat} HH:mm`),
-            to: toTime.toFormat(`${dateFormat} HH:mm`),
+            start: fromTime.toFormat(`${dateFormat} HH:mm`),
+            end: toTime.toFormat(`${dateFormat} HH:mm`),
             isFullDay,
             color,
-        });
+        };
+        onSaveAppointment(appointment);
     };
 
     return {
@@ -87,7 +78,6 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         setIsFullDay,
         color,
         setColor,
-        colors,
         is24Hours,
         dateFormat,
         handleSave,

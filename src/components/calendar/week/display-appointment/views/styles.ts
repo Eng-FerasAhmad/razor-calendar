@@ -112,6 +112,7 @@ export const ShortTimerZoomIntervalWrapper = styled('div')({
     display: 'inline-block',
     maxWidth: '70px',
     fontSize: '9px',
+    paddingLeft: '3px',
 });
 
 export const ShortLabelZoomIntervalWrapper = styled('div')({

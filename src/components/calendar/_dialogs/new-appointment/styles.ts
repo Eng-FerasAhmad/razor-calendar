@@ -9,3 +9,19 @@ export const Container = styled(Box)({
     width: '800px',
     margin: '0 auto',
 });
+
+export const RowWrapper = styled(Box)({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '16px',
+});
+
+export const ActionRowWrapper = styled(Box)({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: '16px',
+});

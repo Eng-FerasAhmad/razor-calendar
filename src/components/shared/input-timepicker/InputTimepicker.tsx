@@ -10,7 +10,7 @@ interface TimePickerGenericProps
     is24Hours?: boolean;
 }
 
-export default function TimePickerGeneric({
+export default function InputTimepicker({
     label,
     value,
     onChange,
