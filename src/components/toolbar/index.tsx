@@ -28,7 +28,7 @@ interface ToolbarProps {
     toolbarConfig: Partial<ToolbarConfig>;
 }
 
-export default function RazorCalendarToolbar({
+export function RazorCalendarToolbar({
     currentView,
     onViewChange,
     currentDate,

@@ -3,7 +3,7 @@ import { ReactElement, useState } from 'react';
 
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
-import RazorCalendarToolbar from 'components/toolbar';
+import { RazorCalendarToolbar } from 'components/toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
