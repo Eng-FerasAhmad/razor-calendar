@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
-import { ReactElement, useState } from 'react';
+import { ChangeEvent, ReactElement, useState } from 'react';
 import {
     ActionRowWrapper,
     Container,
@@ -123,9 +123,7 @@ export default function NewAppointment(): ReactElement {
         setTitleError(!value.trim());
     };
 
-    const handleNotesChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ): void => {
+    const handleNotesChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setNotes(event.target.value);
     };
 

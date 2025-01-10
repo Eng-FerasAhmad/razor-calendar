@@ -1,4 +1,3 @@
-// useNewAppointment.ts
 import { DateTime } from 'luxon';
 import { useState, useEffect } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
@@ -8,7 +7,7 @@ export interface UseWeekAppointmentReturn {
     title: string;
     notes: string;
     setTitle: (title: string) => void;
-    setNotes: (title: string) => void;
+    setNotes: (notes: string) => void;
     fromTime: DateTime;
     setFromTime: (time: DateTime) => void;
     toTime: DateTime;
@@ -24,8 +23,12 @@ export interface UseWeekAppointmentReturn {
 }
 
 export const useNewAppointment = (): UseWeekAppointmentReturn => {
-    const { config, dialogAppointment, onSaveAppointment } =
-        useCalendarContext();
+    const {
+        config,
+        dialogAppointment,
+        onSaveAppointment,
+        onDialogAppointment,
+    } = useCalendarContext();
 
     const is24Hours = config.hour?.is24HourFormat || false;
     const dateFormat =
@@ -43,22 +46,49 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     const [titleRequired, setTitleRequired] = useState(false);
 
     useEffect(() => {
-        const [year, month, day, time] =
-            dialogAppointment?.slotId?.split('-') || [];
-        const [hour, minute] = time?.split(':').map(Number) || [0, 0];
+        if (dialogAppointment?.slotId) {
+            // Handle slotId logic
+            const [year, month, day, time] =
+                dialogAppointment.slotId.split('-') || [];
+            const [hour, minute] = time?.split(':').map(Number) || [0, 0];
 
-        if (year && month && day && time) {
-            const newFromTime = DateTime.fromObject({
-                year: Number(year),
-                month: Number(month),
-                day: Number(day),
-                hour,
-                minute,
-            });
-            setFromTime(newFromTime);
-            setToTime(newFromTime.plus({ minutes: 30 }));
+            if (year && month && day && time) {
+                const newFromTime = DateTime.fromObject({
+                    year: Number(year),
+                    month: Number(month),
+                    day: Number(day),
+                    hour,
+                    minute,
+                });
+                setFromTime(newFromTime);
+                setToTime(newFromTime.plus({ minutes: 30 }));
+            }
+        } else if (
+            dialogAppointment?.slotId === '' &&
+            dialogAppointment?.appointment
+        ) {
+            // Handle appointment logic
+            const {
+                title: appointmentTitle,
+                notes: appointmentNotes,
+                start,
+                end,
+                isFullDay: appointmentIsFullDay,
+                color: appointmentColor,
+            } = dialogAppointment.appointment;
+
+            setTitle(appointmentTitle || '');
+            setNotes(appointmentNotes || '');
+            setFromTime(start ? DateTime.fromISO(start) : DateTime.now());
+            setToTime(
+                end
+                    ? DateTime.fromISO(end)
+                    : DateTime.now().plus({ minutes: 30 })
+            );
+            setIsFullDay(appointmentIsFullDay || false);
+            setColor(appointmentColor || '#33b679');
         }
-    }, [dialogAppointment?.slotId]);
+    }, [dialogAppointment]);
 
     const handleSave = (): void => {
         setTitleRequired(!title);
@@ -74,6 +104,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             notes,
         };
         onSaveAppointment(appointment);
+        onDialogAppointment(undefined);
     };
 
     return {
