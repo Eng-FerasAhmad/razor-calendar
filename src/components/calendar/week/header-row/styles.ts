@@ -90,7 +90,7 @@ export const DayNumberWrapper = styled('div', {
         cursor: 'pointer',
         backgroundColor: isToday
             ? darken(color, 0.3)
-            : theme.palette.action.hover,
+            : darken(theme.palette.action.hover, 0.1),
     },
 }));
 

@@ -12,8 +12,7 @@ export const NAVIGATE = {
 export const navigate = (
     view: string,
     currentDate: DateTime,
-    action: string,
-    newDate?: DateTime
+    action: string
 ): DateTime => {
     switch (action) {
         case 'TODAY':
@@ -29,7 +28,7 @@ export const navigate = (
             return currentDate.plus({ days: 1 });
         }
         case 'DATE':
-            return newDate || currentDate;
+            return currentDate;
         default:
             return currentDate;
     }

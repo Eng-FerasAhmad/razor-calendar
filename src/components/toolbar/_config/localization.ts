@@ -1,15 +1,19 @@
+import { ViewType } from 'types/appointment';
+
 export const localizedLabels: Record<string, Record<string, string>> = {
     en: {
+        Team: 'Team',
         day: 'Day',
         week: 'Week',
         month: 'Month',
         year: 'Year',
         agenda: 'Agenda',
         today: 'Today',
-        next: 'Next',
-        previous: 'Previous',
+        nextMonth: 'Next',
+        previousMonth: 'Previous',
     },
     de: {
+        Team: 'Team',
         day: 'Tag',
         week: 'Woche',
         month: 'Monat',
@@ -24,3 +28,12 @@ export const localizedLabels: Record<string, Record<string, string>> = {
 export const getLocalizedLabel = (key: string, lang: string = 'en'): string => {
     return localizedLabels[lang]?.[key] || localizedLabels.en[key] || key;
 };
+
+export const options = (lang: string): { value: ViewType; label: string }[] => [
+    { value: 'team', label: getLocalizedLabel('Team', lang) },
+    { value: 'day', label: getLocalizedLabel('day', lang) },
+    { value: 'week', label: getLocalizedLabel('week', lang) },
+    { value: 'month', label: getLocalizedLabel('month', lang) },
+    { value: 'year', label: getLocalizedLabel('year', lang) },
+    { value: 'agenda', label: getLocalizedLabel('agenda', lang) },
+];

@@ -1,12 +1,15 @@
 import { CssBaseline, darken, ThemeProvider, Tooltip } from '@mui/material';
-import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import Button from 'components/shared/button/Button';
 import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
 import InputSelect from 'components/shared/input-select/InputSelect';
 import { baseToolbarConfig } from 'components/toolbar/_config/baseToolbarConfig';
-import { getLocalizedLabel } from 'components/toolbar/_config/localization';
+import {
+    getLocalizedLabel,
+    options,
+} from 'components/toolbar/_config/localization';
+import { ToolbarProps } from 'components/toolbar/_config/types';
 import { mergeToolbarConfig } from 'components/toolbar/_config/utils';
 import {
     NavigationIconsWrapper,
@@ -14,21 +17,11 @@ import {
     TitleWrapper,
     ToolbarContainer,
     ViewWrapper,
-} from 'components/toolbar/styles';
+} from 'components/toolbar/basic-toolbar/styles';
 import { createDynamicTheme } from 'src/theme/theme';
-import { ViewType } from 'types/appointment';
-import { ToolbarConfig } from 'types/toolbarConfig';
-import { NavigateAction } from 'utils/constants';
+import { navigate } from 'utils/constants';
 
-interface ToolbarProps {
-    currentView: ViewType;
-    onViewChange: (view: ViewType) => void;
-    currentDate: DateTime;
-    onNavigate: (action: NavigateAction, newDate?: DateTime) => void;
-    toolbarConfig: Partial<ToolbarConfig>;
-}
-
-export function RazorCalendarToolbar({
+export function RazorToolbarBasic({
     currentView,
     onViewChange,
     currentDate,
@@ -38,24 +31,19 @@ export function RazorCalendarToolbar({
     const config = mergeToolbarConfig(baseToolbarConfig, toolbarConfig);
     const lang = config.lang || 'en';
 
-    const options: { value: ViewType; label: string }[] = [
-        { value: 'day', label: getLocalizedLabel('day', lang) },
-        { value: 'week', label: getLocalizedLabel('week', lang) },
-        { value: 'month', label: getLocalizedLabel('month', lang) },
-        { value: 'year', label: getLocalizedLabel('year', lang) },
-        { value: 'agenda', label: getLocalizedLabel('agenda', lang) },
-    ];
-
     const handleClickToday = (): void => {
-        onNavigate('TODAY');
+        const updatedDate = navigate(currentView, currentDate, 'TODAY');
+        onNavigate(updatedDate);
     };
 
     const handleClickNext = (): void => {
-        onNavigate('NEXT');
+        const updatedDate = navigate(currentView, currentDate, 'NEXT');
+        onNavigate(updatedDate);
     };
 
     const handleClickPrev = (): void => {
-        onNavigate('PREV');
+        const updatedDate = navigate(currentView, currentDate, 'PREV');
+        onNavigate(updatedDate);
     };
 
     const getTitle = (): string => {
@@ -119,7 +107,7 @@ export function RazorCalendarToolbar({
                 <ViewWrapper>
                     <InputSelect
                         value={currentView}
-                        options={options}
+                        options={options(lang)}
                         onChange={onViewChange}
                     />
                 </ViewWrapper>

@@ -1,4 +1,4 @@
-export type ViewType = 'day' | 'week' | 'month' | 'year' | 'agenda';
+export type ViewType = 'team' | 'day' | 'week' | 'month' | 'year' | 'agenda';
 
 export interface Appointment {
     id: string;

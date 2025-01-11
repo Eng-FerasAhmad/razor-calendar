@@ -3,11 +3,11 @@ import { ReactElement, useState } from 'react';
 
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
-import { RazorCalendarToolbar } from 'components/toolbar';
+import { RazorToolbarBasic } from 'components/toolbar/basic-toolbar';
+import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
-import { navigate, NavigateAction } from 'utils/constants';
 
 export default function App(): ReactElement {
     const locale = 'de';
@@ -147,18 +147,8 @@ export default function App(): ReactElement {
         setCurrentView(view);
     };
 
-    const handleNavigate = (
-        action: NavigateAction,
-        newDate?: DateTime
-    ): void => {
-        const updatedDate = navigate(
-            currentView,
-            currentDate,
-            action,
-            newDate || DateTime.now()
-        );
-
-        setCurrentDate(updatedDate);
+    const handleNavigate = (newDate: DateTime): void => {
+        setCurrentDate(newDate);
     };
 
     const onChangeDate = (newDate: DateTime): void => {
@@ -180,7 +170,7 @@ export default function App(): ReactElement {
     return (
         <AppContainer data-testid="app">
             {/* Pass handlers and state to CalendarToolbar */}
-            <RazorCalendarToolbar
+            <RazorToolbarBasic
                 currentView={currentView}
                 onViewChange={handleViewChange}
                 currentDate={currentDate}
@@ -188,7 +178,14 @@ export default function App(): ReactElement {
                 toolbarConfig={toolbarConfig}
             />
 
-            {/* Pass updated values to RazorCalendar */}
+            <RazorToolbarCompact
+                currentView={currentView}
+                onViewChange={handleViewChange}
+                currentDate={currentDate}
+                onNavigate={handleNavigate}
+                toolbarConfig={toolbarConfig}
+            />
+
             <RazorCalendar
                 appointments={appointments}
                 handleChangeAppointment={handleChangeAppointment}

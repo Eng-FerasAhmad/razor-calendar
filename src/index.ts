@@ -1,5 +1,6 @@
 export { RazorCalendar } from './components/calendar/index';
-export { RazorCalendarToolbar } from './components/toolbar/index';
+export { RazorToolbarBasic } from 'components/toolbar/basic-toolbar';
+export { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 
 export type { Appointment, ViewType } from './types/appointment';
 export type { ToolbarConfig } from './types/toolbarConfig';
