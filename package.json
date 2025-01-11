@@ -1,7 +1,7 @@
 {
     "name": "razor-calendar",
     "private": false,
-    "version": "0.0.10",
+    "version": "0.0.11",
     "type": "module",
     "author": {
         "email": "feras.ahmad@gmx.de",
