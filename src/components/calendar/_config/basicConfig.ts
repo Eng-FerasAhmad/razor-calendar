@@ -2,7 +2,7 @@ import { CalendarConfig } from 'types/calendarConfig';
 
 export const commonSize = {
     headerHeight: 73,
-    toolbarHeight: 54,
+    toolbarHeight: 35,
     timeSlotHeight: 40,
 };
 
