@@ -10,12 +10,10 @@ export const ToolbarContainer = styled('div', {
     shouldForwardProp: (prop) => prop !== 'backgroundColor',
 })<Props>(({ theme, backgroundColor }) => ({
     width: '100%',
-    height: '54px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px',
     boxSizing: 'border-box',
     backgroundColor: backgroundColor || theme.palette.background.paper,
 }));
@@ -30,7 +28,7 @@ export const NavigationWrapper = styled('div')({
 });
 
 export const ViewWrapper = styled('div')({
-    width: '150px',
+    width: '140px',
 });
 
 export const NavigationIconsWrapper = styled('div', {

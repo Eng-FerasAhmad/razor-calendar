@@ -84,6 +84,7 @@ export function RazorCalendarToolbar({
                     <Button
                         sx={{ borderColor: darken(config.primaryColor, 0.2) }}
                         variant={'outlined'}
+                        size={'small'}
                         onClick={handleClickToday}
                     >
                         {getLocalizedLabel('today', lang)}

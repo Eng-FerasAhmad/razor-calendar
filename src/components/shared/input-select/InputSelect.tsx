@@ -38,9 +38,11 @@ export default function InputSelect<T extends string | number>({
             sx={{
                 backgroundColor: theme.palette.primary.main,
                 borderRadius: 1,
+                fontSize: '17px',
                 '& .MuiOutlinedInput-root': {
                     color: theme.palette.primary.contrastText,
-                    height: '38px',
+                    height: '34px',
+                    padding: '4px 14px',
                     '& fieldset': {
                         borderColor: theme.palette.primary.dark,
                     },
@@ -49,6 +51,9 @@ export default function InputSelect<T extends string | number>({
                     },
                     '&.Mui-focused fieldset': {
                         borderColor: theme.palette.primary.dark,
+                    },
+                    '& .MuiSelect-icon': {
+                        color: '#fff',
                     },
                 },
             }}
@@ -72,9 +77,11 @@ export default function InputSelect<T extends string | number>({
                     backgroundColor: theme.palette.primary.main,
                     color: theme.palette.primary.contrastText,
                     borderRadius: 1,
-                    height: '38px',
+                    height: '34px',
                     display: 'flex',
                     alignItems: 'center',
+                    fontSize: '17px',
+                    padding: '4px 14px',
                 }}
             >
                 {options.map((option) => (
