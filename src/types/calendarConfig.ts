@@ -43,6 +43,7 @@ export interface StyleConfig {
     secondaryColor: string;
     backgroundColor: string;
     fontFamily: string;
+    topStartFrom: number; // position where start the toolbar to avoid 2 scrollbar
 }
 
 export interface CommonConfig {

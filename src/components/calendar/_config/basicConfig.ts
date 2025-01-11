@@ -2,7 +2,6 @@ import { CalendarConfig } from 'types/calendarConfig';
 
 export const commonSize = {
     headerHeight: 73,
-    toolbarHeight: 35,
     timeSlotHeight: 40,
 };
 
@@ -43,6 +42,7 @@ export const basicConfig: CalendarConfig = {
         secondaryColor: '#33b679',
         backgroundColor: '#fff',
         fontFamily: 'Roboto',
+        topStartFrom: 35,
     },
     common: {
         locale: 'en',
