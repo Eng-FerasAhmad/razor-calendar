@@ -11,7 +11,7 @@ export interface CalendarContextProps {
     language: string;
     onViewChange: (view: ViewType) => void;
     onDateChange: (date: DateTime) => void;
-    onChangeLanguage: (lang: string) => void;
+    onChangeLanguage: (locale: string) => void;
     onChangeAppointments: (appointment: Appointment[]) => void;
     onSaveAppointment: (appointment: Appointment | undefined) => void;
     onDeleteAppointment: (appointment: Appointment) => void;

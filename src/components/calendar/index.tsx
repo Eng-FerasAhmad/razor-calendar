@@ -9,6 +9,7 @@ import DisableScrolling from 'calendar/_scrolling/Scrolling';
 import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
+import '../../i18n/i18n';
 
 export interface Props {
     appointments: Appointment[];

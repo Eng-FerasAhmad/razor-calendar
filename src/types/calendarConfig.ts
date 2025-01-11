@@ -46,7 +46,7 @@ export interface StyleConfig {
 }
 
 export interface CommonConfig {
-    lang: string; // Language code, e.g., "en", "de"
+    locale: string; // Language code, e.g., "en", "de"
     timeZone: string; // Timezone identifier, e.g., "UTC", "Europe/Berlin"
     dateFormat: string; // Custom date format, e.g., "YYYY-MM-DD"
 }

@@ -33,7 +33,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     const is24Hours = config.hour?.is24HourFormat || false;
     const dateFormat =
         config.common?.dateFormat ||
-        (config.common.lang === 'de' ? 'dd.MM.yyyy' : 'dd/MM/yyyy');
+        (config.common.locale === 'de' ? 'dd.MM.yyyy' : 'dd/MM/yyyy');
 
     const [fromTime, setFromTime] = useState<DateTime>(DateTime.now());
     const [toTime, setToTime] = useState<DateTime>(

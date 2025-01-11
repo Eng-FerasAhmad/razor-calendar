@@ -45,7 +45,7 @@ export const basicConfig: CalendarConfig = {
         fontFamily: 'Roboto',
     },
     common: {
-        lang: 'en',
+        locale: 'en',
         timeZone: 'UTC',
         dateFormat: 'YYYY-MM-DD',
     },

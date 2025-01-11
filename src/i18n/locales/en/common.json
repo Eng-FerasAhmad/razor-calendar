@@ -1,0 +1,34 @@
+{
+    "views": {
+        "day": "Day",
+        "week": "Week",
+        "month": "Month",
+        "year": "Year",
+        "team": "Team",
+        "agenda": "Agenda"
+    },
+    "buttons": {
+        "today": "Today"
+    },
+    "navigation": {
+        "next": {
+            "default": "Next Day",
+            "day": "Next Day",
+            "week": "Next Week",
+            "month": "Next Month",
+            "year": "Next Year",
+            "agenda": "Next Agenda"
+        },
+        "prev": {
+            "default": "Previous Day",
+            "day": "Previous Day",
+            "week": "Previous Week",
+            "month": "Previous Month",
+            "year": "Previous Year",
+            "agenda": "Previous Agenda"
+        },
+        "week": {
+            "number": "CW"
+        }
+    }
+}

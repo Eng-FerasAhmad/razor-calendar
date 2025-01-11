@@ -60,7 +60,9 @@ export function CalendarProvider({
 
     const [view, setView] = useState<ViewType>('week');
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
-    const [language, setLanguage] = useState<string>(mergedConfig.common.lang);
+    const [language, setLanguage] = useState<string>(
+        mergedConfig.common.locale
+    );
     const [appointments, setAppointments] = useState<Appointment[]>([]);
     const [savedAppointment, setSavedAppointment] = useState<
         Appointment | undefined

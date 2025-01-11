@@ -58,7 +58,9 @@ export default function WeekHeaderRow({
                         onClick={() => navigateToDay(day)}
                     >
                         <DayShortNameWrapper data-testid="day-short-name-wrapper">
-                            {day.setLocale(config.common.lang).toFormat('ccc')}
+                            {day
+                                .setLocale(config.common.locale)
+                                .toFormat('ccc')}
                         </DayShortNameWrapper>
                         <DayNumberWrapper
                             data-testid="day-number-wrapper"

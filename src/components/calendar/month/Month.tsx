@@ -21,7 +21,7 @@ export default function Month({
 }: Props): React.ReactElement {
     const { config } = useCalendarContext();
 
-    const monthWeekNames = getMonthWeekNames(config.common.lang);
+    const monthWeekNames = getMonthWeekNames(config.common.locale);
     const startOfMonth = selectedDate.startOf('month');
     const endOfMonth = selectedDate.endOf('month');
 

@@ -10,7 +10,7 @@ import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
 
 export default function App(): ReactElement {
-    const locale = 'de';
+    const locale = 'en';
     const appointments = [
         {
             id: '1',
@@ -128,14 +128,14 @@ export default function App(): ReactElement {
             showWeekNumbers: true,
         },
         common: {
-            lang: locale,
+            locale,
             dateFormat: 'dd.MM.yyyy',
         },
     };
 
     const toolbarConfig: Partial<ToolbarConfig> = {
         fontColor: '#fff',
-        lang: locale,
+        locale,
     };
 
     // State for CalendarToolbar and Calendar

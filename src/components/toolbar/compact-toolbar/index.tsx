@@ -6,17 +6,12 @@ import {
     Tooltip,
 } from '@mui/material';
 import { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
 import InputSelect from 'components/shared/input-select/InputSelect';
-
-import { baseToolbarConfig } from 'components/toolbar/_config/baseToolbarConfig';
-import {
-    getLocalizedLabel,
-    options,
-} from 'components/toolbar/_config/localization';
 import { ToolbarProps } from 'components/toolbar/_config/types';
-import { mergeToolbarConfig } from 'components/toolbar/_config/utils';
+import { useToolbar } from 'components/toolbar/_config/useToolbar';
 import {
     NavigationCompactWrapper,
     NavigationIconsCompactWrapper,
@@ -25,7 +20,6 @@ import {
     ViewCompactWrapper,
 } from 'components/toolbar/compact-toolbar/styles';
 import { createDynamicTheme } from 'src/theme/theme';
-import { navigate } from 'utils/constants';
 
 export function RazorToolbarCompact({
     currentView,
@@ -34,42 +28,25 @@ export function RazorToolbarCompact({
     onNavigate,
     toolbarConfig,
 }: ToolbarProps): ReactElement {
-    const config = mergeToolbarConfig(baseToolbarConfig, toolbarConfig);
-    const lang = config.lang || 'en';
-
-    const handleClickToday = (): void => {
-        const updatedDate = navigate(currentView, currentDate, 'TODAY');
-        onNavigate(updatedDate);
-    };
-
-    const handleClickNext = (): void => {
-        const updatedDate = navigate(currentView, currentDate, 'NEXT');
-        onNavigate(updatedDate);
-    };
-
-    const handleClickPrev = (): void => {
-        const updatedDate = navigate(currentView, currentDate, 'PREV');
-        onNavigate(updatedDate);
-    };
-
-    const getTitle = (): string => {
-        switch (currentView) {
-            case 'month':
-                return currentDate.setLocale(lang).toFormat('MMMM yyyy');
-            case 'week': {
-                const weekStart = currentDate.startOf('week');
-                return `KW${currentDate.weekNumber} - ${weekStart
-                    .setLocale(lang)
-                    .toFormat('LLLL yyyy')}`;
-            }
-            case 'day':
-                return currentDate.setLocale(lang).toFormat('dd. LLLL yyyy');
-            default:
-                return currentDate.setLocale(lang).toISODate() || '';
-        }
-    };
-
+    const {
+        config,
+        options,
+        handleClickToday,
+        handleClickNext,
+        handleClickPrev,
+        getTitle,
+        getPrevLabel,
+        getNextLabel,
+    } = useToolbar({
+        currentView,
+        onViewChange,
+        currentDate,
+        onNavigate,
+        toolbarConfig,
+    });
+    const { t } = useTranslation();
     const theme = createDynamicTheme(config);
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -91,10 +68,10 @@ export function RazorToolbarCompact({
                             },
                         }}
                     >
-                        {getLocalizedLabel('today', lang)}
+                        {t('buttons.today', { ns: 'common' })}
                     </Button>
 
-                    <Tooltip title={getLocalizedLabel('previous', lang)}>
+                    <Tooltip title={getPrevLabel()}>
                         <NavigationIconsCompactWrapper
                             onClick={handleClickPrev}
                         >
@@ -105,7 +82,7 @@ export function RazorToolbarCompact({
                         </NavigationIconsCompactWrapper>
                     </Tooltip>
 
-                    <Tooltip title={getLocalizedLabel('next', lang)}>
+                    <Tooltip title={getNextLabel()}>
                         <NavigationIconsCompactWrapper
                             onClick={handleClickNext}
                         >
@@ -121,7 +98,7 @@ export function RazorToolbarCompact({
                 <ViewCompactWrapper>
                     <InputSelect
                         value={currentView}
-                        options={options(lang)}
+                        options={options}
                         onChange={onViewChange}
                         isCompact={true}
                     />
