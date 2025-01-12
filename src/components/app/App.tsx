@@ -3,7 +3,7 @@ import { ReactElement, useState } from 'react';
 
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
-import { RazorToolbarBasic } from 'components/toolbar/basic-toolbar';
+import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
@@ -169,7 +169,7 @@ export default function App(): ReactElement {
     return (
         <AppContainer data-testid="app">
             {/* Pass handlers and state to CalendarToolbar */}
-            <RazorToolbarBasic
+            <RazorToolbarCompact
                 currentView={currentView}
                 onViewChange={handleViewChange}
                 currentDate={currentDate}

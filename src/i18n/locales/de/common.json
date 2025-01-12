@@ -8,7 +8,8 @@
         "agenda": "Agenda"
     },
     "buttons": {
-        "today": "Heute"
+        "today": "Heute",
+        "addEvent": "Neues Termin"
     },
     "navigation": {
         "next": {

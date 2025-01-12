@@ -20,6 +20,7 @@ interface InputSelectProps<T extends string | number> {
     onChange: (value: T) => void;
     label?: string;
     isCompact?: boolean;
+    borderRadius?: number;
 }
 
 export default function InputSelect<T extends string | number>({
@@ -28,6 +29,7 @@ export default function InputSelect<T extends string | number>({
     onChange,
     label,
     isCompact,
+    borderRadius,
 }: InputSelectProps<T>): React.ReactElement {
     const theme = useTheme();
 
@@ -62,6 +64,7 @@ export default function InputSelect<T extends string | number>({
                         borderColor: isCompact
                             ? darken(theme.palette.border, 0.1)
                             : theme.palette.primary.dark,
+                        borderWidth: '1px',
                     },
                     '& .MuiSelect-icon': {
                         color: isCompact
@@ -90,7 +93,7 @@ export default function InputSelect<T extends string | number>({
                 label={label}
                 sx={{
                     color: theme.palette.text.primary,
-                    borderRadius: 1,
+                    borderRadius: borderRadius || 1,
                     height: '34px',
                     display: 'flex',
                     alignItems: 'center',

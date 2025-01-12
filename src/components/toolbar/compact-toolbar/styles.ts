@@ -26,26 +26,26 @@ export const NavigationCompactWrapper = styled('div')({
 });
 
 export const ViewCompactWrapper = styled('div')({
-    width: '140px',
+    width: 'fit-content',
 });
 
 export const NavigationIconsCompactWrapper = styled('div', {
     shouldForwardProp: (prop) => prop !== 'color',
 })<Props>(({ theme }) => ({
-    width: '35px',
-    height: '35px',
+    width: '34px',
+    height: '34px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: '2px',
     boxSizing: 'border-box',
     overflow: 'hidden',
-    borderRadius: '50%',
+    borderRadius: '8px',
     transition: 'background-color 0.3s ease, border-color 0.3s ease',
-    backgroundColor: 'transparent',
+    backgroundColor: theme.palette.action.hover,
     '&:hover': {
         cursor: 'pointer',
-        backgroundColor: darken(theme.palette.action.hover, 0.1),
+        backgroundColor: darken(theme.palette.action.hover, 0.2),
         color: theme.palette.common.white,
     },
 }));

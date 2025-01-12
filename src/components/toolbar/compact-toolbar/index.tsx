@@ -59,6 +59,7 @@ export function RazorToolbarCompact({
                         sx={{
                             textTransform: 'none',
                             color: theme.palette.text.primary,
+                            borderRadius: '8px',
                             borderColor: darken(theme.palette.border, 0.1),
                             '&:hover': {
                                 backgroundColor: darken(
@@ -76,8 +77,8 @@ export function RazorToolbarCompact({
                             onClick={handleClickPrev}
                         >
                             <ArrowPrevSymbol
-                                size={22}
-                                color={darken(theme.palette.border, 0.3)}
+                                size={20}
+                                color={darken(theme.palette.border, 0.4)}
                             />
                         </NavigationIconsCompactWrapper>
                     </Tooltip>
@@ -87,20 +88,21 @@ export function RazorToolbarCompact({
                             onClick={handleClickNext}
                         >
                             <ArrowNextSymbol
-                                size={22}
-                                color={darken(theme.palette.border, 0.3)}
+                                size={20}
+                                color={darken(theme.palette.border, 0.4)}
                             />
                         </NavigationIconsCompactWrapper>
                     </Tooltip>
 
                     <TitleCompactWrapper>{getTitle()}</TitleCompactWrapper>
                 </NavigationCompactWrapper>
-                <ViewCompactWrapper>
+                <ViewCompactWrapper data-testid="view-compact.wrapper">
                     <InputSelect
                         value={currentView}
                         options={options}
                         onChange={onViewChange}
                         isCompact={true}
+                        borderRadius={2}
                     />
                 </ViewCompactWrapper>
             </ToolbarCompactContainer>
