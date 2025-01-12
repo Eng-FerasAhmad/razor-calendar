@@ -57,7 +57,6 @@ export const createDynamicTheme = (
             fontSize: 16,
             fontFamily: 'Roboto, sans-serif',
             body1: {
-                lineHeight: '22px',
                 fontWeight: 200,
             },
         },
@@ -66,9 +65,7 @@ export const createDynamicTheme = (
                 styleOverrides: {
                     html: {
                         fontSize: '16px',
-                        fontFamily:
-                            '"Roboto", "Helvetica", "Arial", sans-serif',
-                        lineHeight: '22px',
+                        fontFamily: 'Roboto, sans-serif',
                         color: '#333333',
                     },
                     body: {
@@ -76,7 +73,6 @@ export const createDynamicTheme = (
                         padding: 0,
                         height: '100%',
                         backgroundColor: '#fff',
-                        fontWeight: 200,
                     },
                     p: {
                         fontWeight: 200,
