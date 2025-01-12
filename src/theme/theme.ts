@@ -59,7 +59,6 @@ export const createDynamicTheme = (
             body1: {
                 lineHeight: '22px',
                 fontWeight: 200,
-                letterSpacing: '0.0625rem',
             },
         },
         components: {
