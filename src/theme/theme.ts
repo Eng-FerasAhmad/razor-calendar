@@ -55,7 +55,7 @@ export const createDynamicTheme = (
         },
         typography: {
             fontSize: 16,
-            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            fontFamily: 'Roboto, sans-serif',
             body1: {
                 lineHeight: '22px',
                 fontWeight: 200,
