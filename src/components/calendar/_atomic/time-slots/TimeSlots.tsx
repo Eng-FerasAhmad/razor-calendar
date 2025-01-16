@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import { ReactElement } from 'react';
 import DroppableTimeSlot from 'calendar/_atomic/drag-and-drop/DroppableTimeSlot';
 
 interface TimeSlotsProps {
@@ -15,12 +15,12 @@ interface TimeSlotsProps {
     };
 }
 
-export const TimeSlots: React.FC<TimeSlotsProps> = ({
+export default function TimeSlots({
     day,
     interval,
     timeSlots,
     config,
-}) => {
+}: TimeSlotsProps): ReactElement {
     return (
         <>
             {timeSlots.map((_, index) => {
@@ -45,4 +45,4 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
             })}
         </>
     );
-};
+}
