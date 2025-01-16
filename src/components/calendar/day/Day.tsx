@@ -11,13 +11,13 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
+import useAppointment from 'calendar/_hooks/useAppointment';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
+import DayHeaderRow from 'day/header-row/DayHeaderRow';
+import { DayContainer, TimeDayWrapper } from 'day/styles';
 import { Appointment } from 'types/appointment';
 import DayColumns from 'week/day-columns/DayColumns';
 import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
-import { TimeDayWrapper, WeekContainer } from 'week/styles';
-import useWeek from 'week/useWeeks';
 
 interface Props {
     appointments: Appointment[];
@@ -31,7 +31,7 @@ export default function Day({
     handleChangeAppointment,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
-    const { fullDayAppointments } = useWeek(appointments, selectedDate);
+    const { fullDayAppointments } = useAppointment(appointments, selectedDate);
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
@@ -120,8 +120,8 @@ export default function Day({
     const sensors = useSensors(mouseSensor);
 
     return (
-        <WeekContainer data-testid="week-container">
-            <TeamHeaderRow
+        <DayContainer data-testid="day-container">
+            <DayHeaderRow
                 selectedDate={selectedDate}
                 fullDayAppointments={fullDayAppointments}
             />
@@ -164,6 +164,6 @@ export default function Day({
                     </DragOverlay>
                 </DndContext>
             </TimeDayWrapper>
-        </WeekContainer>
+        </DayContainer>
     );
 }

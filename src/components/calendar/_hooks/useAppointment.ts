@@ -5,7 +5,7 @@ interface UseWeek {
     fullDayAppointments: Appointment[];
 }
 
-export default function useWeek(
+export default function useAppointment(
     appointments: Appointment[],
     selectedDate: DateTime
 ): UseWeek {

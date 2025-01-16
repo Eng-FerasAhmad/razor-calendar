@@ -6,7 +6,7 @@ interface Props {
     color: string;
 }
 
-export const WeekHeaderRowContainer = styled('div')(({ theme }) => ({
+export const DayHeaderRowContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
@@ -17,13 +17,13 @@ export const WeekHeaderRowContainer = styled('div')(({ theme }) => ({
     zIndex: 10,
 }));
 
-export const WeekHeaderDaysRowWrapper = styled('div')({
+export const DayHeaderDaysRowWrapper = styled('div')({
     display: 'flex',
     width: '100%',
     paddingTop: '10px',
 });
 
-export const WeekHeaderFullDaysRowWrapper = styled('div')({
+export const DayHeaderFullDaysRowWrapper = styled('div')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -32,11 +32,11 @@ export const WeekHeaderFullDaysRowWrapper = styled('div')({
     margin: '2px 0',
 });
 
-export const WidthSpaceWrapper = styled('div')({
+export const DayWidthSpaceWrapper = styled('div')({
     width: '70px',
 });
 
-export const GmtWrapper = styled('div')(({ theme }) => ({
+export const DayGmtWrapper = styled('div')(({ theme }) => ({
     width: '75px',
     height: '100%',
     minWidth: '70px',
@@ -48,7 +48,7 @@ export const GmtWrapper = styled('div')(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export const IconDownWrapper = styled('div', {
+export const DayIconDownWrapper = styled('div', {
     shouldForwardProp: (prop) => prop !== 'isOpen',
 })<{ isOpen: boolean }>(({ theme, isOpen }) => ({
     fontSize: '10px',
@@ -94,7 +94,7 @@ export const DayNumberWrapper = styled('div', {
     },
 }));
 
-export const WeekDayHeaderWrapper = styled('div')(({ theme }) => ({
+export const DayHeaderWrapper = styled('div')(({ theme }) => ({
     flex: 1,
     textAlign: 'center',
     fontWeight: 'bold',

@@ -1,29 +1,29 @@
 import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import {
+    DayHeaderRowContainer,
+    DayNumberWrapper,
+    DayShortNameWrapper,
+    DayGmtWrapper,
+    DayHeaderWrapper,
+    DayWidthSpaceWrapper,
+    DayHeaderDaysRowWrapper,
+    DayHeaderFullDaysRowWrapper,
+    DayIconDownWrapper,
+} from './styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
 import FullDaysAppointment from 'week/display-appointment/full-days-appointment/FullDaysAppointment';
-import {
-    WeekHeaderRowContainer,
-    DayNumberWrapper,
-    DayShortNameWrapper,
-    GmtWrapper,
-    WeekDayHeaderWrapper,
-    WidthSpaceWrapper,
-    WeekHeaderDaysRowWrapper,
-    WeekHeaderFullDaysRowWrapper,
-    IconDownWrapper,
-} from 'week/header-row/styles';
 
 interface Props {
     fullDayAppointments: Appointment[];
     selectedDate: DateTime;
 }
 
-export default function TeamHeaderRow({
+export default function DayHeaderRow({
     fullDayAppointments,
     selectedDate,
 }: Props): ReactElement {
@@ -48,11 +48,11 @@ export default function TeamHeaderRow({
     const handleToggle = (): void => onShowAllFullDays();
 
     return (
-        <WeekHeaderRowContainer data-testid="week-header-row">
-            <WeekHeaderDaysRowWrapper data-testid="week-header-days-row">
-                <WidthSpaceWrapper data-testid="width-space-wrapper" />
+        <DayHeaderRowContainer data-testid="week-header-row">
+            <DayHeaderDaysRowWrapper data-testid="week-header-days-row">
+                <DayWidthSpaceWrapper data-testid="width-space-wrapper" />
 
-                <WeekDayHeaderWrapper
+                <DayHeaderWrapper
                     data-testid="week-day-header-wrapper"
                     key={selectedDate.toISO()}
                     onClick={() => navigateToDay(selectedDate)}
@@ -69,13 +69,13 @@ export default function TeamHeaderRow({
                     >
                         {formatDate(selectedDate, 'dd')}
                     </DayNumberWrapper>
-                </WeekDayHeaderWrapper>
-            </WeekHeaderDaysRowWrapper>
-            <WeekHeaderFullDaysRowWrapper data-testid="week-header-full-days-row-wrapper">
-                <GmtWrapper data-testid="gmt-wrapper">
+                </DayHeaderWrapper>
+            </DayHeaderDaysRowWrapper>
+            <DayHeaderFullDaysRowWrapper data-testid="week-header-full-days-row-wrapper">
+                <DayGmtWrapper data-testid="gmt-wrapper">
                     <div>GMT +{DateTime.now().offset / 60}</div>
                     {fullDaysCount > 2 && (
-                        <IconDownWrapper
+                        <DayIconDownWrapper
                             isOpen={showAllFullDays}
                             onClick={handleToggle}
                         >
@@ -83,15 +83,15 @@ export default function TeamHeaderRow({
                                 size={16}
                                 color={theme.palette.text.primary}
                             />
-                        </IconDownWrapper>
+                        </DayIconDownWrapper>
                     )}
-                </GmtWrapper>
+                </DayGmtWrapper>
 
                 <FullDaysAppointment
                     fullDayAppointments={fullDayAppointments}
                     days={[selectedDate]}
                 />
-            </WeekHeaderFullDaysRowWrapper>
-        </WeekHeaderRowContainer>
+            </DayHeaderFullDaysRowWrapper>
+        </DayHeaderRowContainer>
     );
 }

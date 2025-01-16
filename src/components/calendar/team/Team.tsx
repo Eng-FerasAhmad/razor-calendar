@@ -11,6 +11,7 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import useAppointment from 'calendar/_hooks/useAppointment';
 import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import { Appointment } from 'types/appointment';
@@ -18,7 +19,6 @@ import { getDateRange } from 'utils/dates';
 import DayColumns from 'week/day-columns/DayColumns';
 import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 import { TimeDayWrapper, WeekContainer } from 'week/styles';
-import useWeek from 'week/useWeeks';
 
 interface Props {
     appointments: Appointment[];
@@ -32,7 +32,7 @@ export default function Week({
     handleChangeAppointment,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
-    const { fullDayAppointments } = useWeek(appointments, selectedDate);
+    const { fullDayAppointments } = useAppointment(appointments, selectedDate);
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
