@@ -51,6 +51,7 @@ export default function CalendarLayout({
                     <Day
                         appointments={appointments}
                         selectedDate={selectedDate}
+                        handleChangeAppointment={handleChangeAppointment}
                     />
                 );
             case 'agenda':

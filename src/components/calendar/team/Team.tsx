@@ -25,7 +25,6 @@ export default function Week({
 }: Props): ReactElement {
     const { config } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments, selectedDate);
-
     const { handleDragStart, handleDragEnd, activeDrag, updatedAppointments } =
         useDragAndDropHandler(appointments, handleChangeAppointment);
 
