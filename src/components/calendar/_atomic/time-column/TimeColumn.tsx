@@ -1,11 +1,11 @@
 import { ReactElement } from 'react';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import { isWorkTime } from 'utils/dateTime';
 import {
     TimeColumnContainer,
     TimeLabelTextWrapper,
     TimeLabelWrapper,
-} from 'week/time-column/styles';
+} from 'calendar/_atomic/time-column/styles';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { isWorkTime } from 'utils/dateTime';
 
 interface Props {
     interval: number;

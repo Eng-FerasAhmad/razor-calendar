@@ -10,14 +10,14 @@ import {
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
+import DayColumns from 'calendar/_atomic/day-columns/DayColumns';
+import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
+import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
-import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import DayHeaderRow from 'day/header-row/DayHeaderRow';
 import { DayContainer, TimeDayWrapper } from 'day/styles';
 import { Appointment } from 'types/appointment';
-import DayColumns from 'week/day-columns/DayColumns';
-import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 
 interface Props {
     appointments: Appointment[];

@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
-import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 
 interface Props {
     day: DateTime;

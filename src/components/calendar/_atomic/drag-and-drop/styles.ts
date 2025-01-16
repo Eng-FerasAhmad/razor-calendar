@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
+import { TimeSlotOffset } from 'calendar/_atomic/time-column/styles';
 import { commonSize } from 'calendar/_config/basicConfig';
 import { pixelToRem } from 'utils/common';
-import { TimeSlotOffset } from 'week/time-column/styles';
 
 interface Props {
     workTime?: boolean;

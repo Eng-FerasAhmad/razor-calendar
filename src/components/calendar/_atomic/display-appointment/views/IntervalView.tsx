@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import { Appointment } from 'types/appointment';
 import {
     IntervalViewContainer,
     ShortLabelIntervalViewWrapper,
     ShortTimerIntervalViewWrapper,
-} from 'week/display-appointment/views/styles';
+} from 'calendar/_atomic/display-appointment/views/styles';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { Appointment } from 'types/appointment';
 
 interface Props {
     appointment: Appointment;

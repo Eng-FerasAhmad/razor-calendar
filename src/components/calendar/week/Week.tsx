@@ -11,13 +11,13 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 import { WeekContainer, TimeDayWrapper } from './styles';
+import DayColumns from 'calendar/_atomic/day-columns/DayColumns';
+import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
+import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
-import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import { Appointment } from 'types/appointment';
 import { getDateRange } from 'utils/dates';
-import DayColumns from 'week/day-columns/DayColumns';
-import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
 import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 
 interface Props {

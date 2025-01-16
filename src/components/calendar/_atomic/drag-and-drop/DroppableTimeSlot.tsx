@@ -1,8 +1,8 @@
 import { useDroppable } from '@dnd-kit/core';
 import { ReactElement } from 'react';
+import { DroppableSlotWrapper } from 'calendar/_atomic/drag-and-drop/styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { isWorkTime } from 'utils/dateTime';
-import { DroppableSlotWrapper } from 'week/drag-and-drop/styles';
 
 interface Props {
     slotId: string;

@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon';
 import { ReactElement, useEffect, useMemo } from 'react';
 import { FullDaysEventHeaderContainer } from './styles';
+import FullDaysRow from 'calendar/_atomic/display-appointment/full-days-appointment/full-days-row/FullDaysRow';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
-import FullDaysRow from 'week/display-appointment/full-days-appointment/full-days-row/FullDaysRow';
 
 interface Props {
     days: DateTime<boolean>[];

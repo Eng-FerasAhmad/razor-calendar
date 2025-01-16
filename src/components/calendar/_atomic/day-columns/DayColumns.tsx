@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon';
 import React from 'react';
+import { DaysColumnsContainer } from 'calendar/_atomic/day-columns/styles';
+import DisplayAppointment from 'calendar/_atomic/display-appointment/DisplayAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
-import { DaysColumnsContainer } from 'week/day-columns/styles';
-import DisplayAppointment from 'week/display-appointment/DisplayAppointment';
 import { TimeSlots } from 'week/time-slots/TimeSlots';
 
 interface DayCellProps {

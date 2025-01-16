@@ -2,12 +2,12 @@ import { useDraggable } from '@dnd-kit/core';
 import { DateTime } from 'luxon';
 import { ReactElement, useState, useRef } from 'react';
 import { AppointmentWrapper, DraggableZone } from './styles';
+import IntervalView from 'calendar/_atomic/display-appointment/views/IntervalView';
+import StandardView from 'calendar/_atomic/display-appointment/views/StandardView';
+import ZoomIntervalView from 'calendar/_atomic/display-appointment/views/ZoomIntervalView';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
 import { darkenColor } from 'utils/colorConverter';
-import IntervalView from 'week/display-appointment/views/IntervalView';
-import StandardView from 'week/display-appointment/views/StandardView';
-import ZoomIntervalView from 'week/display-appointment/views/ZoomIntervalView';
 
 interface Props {
     id: string;

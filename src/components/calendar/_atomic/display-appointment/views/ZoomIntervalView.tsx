@@ -1,18 +1,18 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import {
+    ShortLabelZoomIntervalWrapper,
+    ShortTimerZoomIntervalWrapper,
+    ZoomIntervalViewContainer,
+} from 'calendar/_atomic/display-appointment/views/styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
-import {
-    ShortLabelViewWrapper,
-    ShortTimerViewWrapper,
-    StandardViewContainer,
-} from 'week/display-appointment/views/styles';
 
 interface Props {
     appointment: Appointment;
 }
 
-export default function StandardView({ appointment }: Props): ReactElement {
+export default function ZoomIntervalView({ appointment }: Props): ReactElement {
     const { onPopperAppointment, config } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
@@ -28,15 +28,17 @@ export default function StandardView({ appointment }: Props): ReactElement {
     const end = DateTime.fromISO(appointment.end).toFormat('hh:mm');
 
     return (
-        <StandardViewContainer
+        <ZoomIntervalViewContainer
             color={appointment.color || config.style.primaryColor}
-            data-testid="standard-view-container"
+            data-testid="zoom-interval-view-container"
             onClick={popperHandler}
         >
-            <ShortTimerViewWrapper>
+            <ShortTimerZoomIntervalWrapper>
                 {start} -{end}
-            </ShortTimerViewWrapper>
-            <ShortLabelViewWrapper>{appointment.title}</ShortLabelViewWrapper>
-        </StandardViewContainer>
+            </ShortTimerZoomIntervalWrapper>
+            <ShortLabelZoomIntervalWrapper>
+                {appointment.title}
+            </ShortLabelZoomIntervalWrapper>
+        </ZoomIntervalViewContainer>
     );
 }

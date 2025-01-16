@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import React from 'react';
-import DroppableTimeSlot from 'week/drag-and-drop/DroppableTimeSlot';
+import DroppableTimeSlot from 'calendar/_atomic/drag-and-drop/DroppableTimeSlot';
 
 interface TimeSlotsProps {
     day: DateTime;

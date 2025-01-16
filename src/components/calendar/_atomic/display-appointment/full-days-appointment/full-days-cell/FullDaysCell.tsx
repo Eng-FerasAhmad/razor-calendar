@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import { Appointment } from 'types/appointment';
 import {
     FullDaysCellContainer,
     FullDayTitleWrapper,
-} from 'week/display-appointment/full-days-appointment/full-days-cell/styles';
+} from 'calendar/_atomic/display-appointment/full-days-appointment/full-days-cell/styles';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { Appointment } from 'types/appointment';
 
 interface Props {
     appointment: Appointment;

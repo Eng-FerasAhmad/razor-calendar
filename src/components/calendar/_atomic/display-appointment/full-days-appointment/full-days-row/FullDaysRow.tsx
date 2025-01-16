@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
+import FullDaysCell from 'calendar/_atomic/display-appointment/full-days-appointment/full-days-cell/FullDaysCell';
+import { FullDaysRowContainer } from 'calendar/_atomic/display-appointment/full-days-appointment/full-days-row/styles';
 import { Appointment } from 'types/appointment';
-import FullDaysCell from 'week/display-appointment/full-days-appointment/full-days-cell/FullDaysCell';
-import { FullDaysRowContainer } from 'week/display-appointment/full-days-appointment/full-days-row/styles';
 
 interface Props {
     appointments: Appointment[];

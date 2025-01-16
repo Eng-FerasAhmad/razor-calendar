@@ -12,11 +12,11 @@ import {
     DayHeaderFullDaysRowWrapper,
     DayIconDownWrapper,
 } from './styles';
+import FullDaysAppointment from 'calendar/_atomic/display-appointment/full-days-appointment/FullDaysAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
-import FullDaysAppointment from 'week/display-appointment/full-days-appointment/FullDaysAppointment';
 
 interface Props {
     fullDayAppointments: Appointment[];
