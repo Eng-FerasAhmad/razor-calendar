@@ -11,12 +11,12 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
 import TimeColumn from 'components/calendar/week/time-column/TimeColumn';
 import { Appointment } from 'types/appointment';
 import { getDateRange } from 'utils/dates';
 import DayColumns from 'week/day-columns/DayColumns';
 import DraggableAppointment from 'week/drag-and-drop/DraggableAppointment';
-import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 import { TimeDayWrapper, WeekContainer } from 'week/styles';
 import useWeek from 'week/useWeeks';
 
@@ -26,12 +26,7 @@ interface Props {
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-interface TeamMember {
-    id: string;
-    name: string;
-}
-
-export default function Team({
+export default function Week({
     appointments,
     selectedDate,
     handleChangeAppointment,
@@ -39,13 +34,16 @@ export default function Team({
     const { config } = useCalendarContext();
     const { fullDayAppointments } = useWeek(appointments, selectedDate);
 
-    const teamMembers: TeamMember[] = [
-        { id: 'id-max', name: 'Max' },
-        { id: 'id-martin', name: 'Martin' },
-    ];
-
+    // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
     const interval = intervalOptions[config.hour.hourIntervalIndex];
+
+    // Days of the week
+    const days = getDateRange(
+        selectedDate.startOf('week'),
+        selectedDate.endOf('week'),
+        config.week.showWeekend
+    );
 
     const [activeDrag, setActiveDrag] = useState<Appointment | null>(null);
     const [updatedAppointments, setUpdatedAppointments] =
@@ -56,39 +54,61 @@ export default function Team({
 
         if (!over || !activeDrag) return;
 
-        const [dayISO, time] = over.id.split('-');
+        if (typeof over.id !== 'string') return;
+
+        // Parse `over.id` into target day and time
+        const lastDashIndex = over.id.lastIndexOf('-');
+        const targetDayISO = over.id.slice(0, lastDashIndex);
+        const time = over.id.slice(lastDashIndex + 1);
         const [hour, minute] = time.split(':').map(Number);
-        const targetDay = DateTime.fromISO(dayISO);
+
+        if (!targetDayISO || Number.isNaN(hour) || Number.isNaN(minute)) return;
+
+        const targetDay = DateTime.fromISO(targetDayISO);
 
         setUpdatedAppointments((prev) =>
             prev.map((appointment) => {
                 if (appointment.id === active.id) {
-                    const durationInMinutes = DateTime.fromISO(
-                        appointment.end
-                    ).diff(
-                        DateTime.fromISO(appointment.start),
+                    const oldStart = DateTime.fromISO(appointment.start);
+                    const oldEnd = DateTime.fromISO(appointment.end);
+
+                    // Calculate the duration in minutes between start and end
+                    const durationInMinutes = oldEnd.diff(
+                        oldStart,
                         'minutes'
                     ).minutes;
 
-                    const newStart = targetDay.set({ hour, minute });
+                    // Compute new start and end times based on the target day and time
+                    const newStart = targetDay.set({
+                        hour,
+                        minute,
+                        second: 0,
+                        millisecond: 0,
+                    });
+
                     const newEnd = newStart.plus({
                         minutes: durationInMinutes,
                     });
 
-                    const updatedAppointment = {
+                    // Ensure valid times
+                    if (!newStart.isValid || !newEnd.isValid)
+                        return appointment;
+
+                    // Update the appointment
+                    const newAppointment = {
                         ...appointment,
                         start: newStart.toISO(),
                         end: newEnd.toISO(),
                     };
 
-                    handleChangeAppointment(updatedAppointment);
-                    return updatedAppointment;
+                    handleChangeAppointment(newAppointment);
+                    return newAppointment;
                 }
-                return appointment;
+                return appointment; // Keep other appointments unchanged
             })
         );
 
-        setActiveDrag(null);
+        setActiveDrag(null); // Reset the active drag state
     };
 
     const handleDragStart = (event: DragStartEvent): void => {
@@ -100,57 +120,57 @@ export default function Team({
 
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
-            delay: 100,
-            tolerance: 5,
+            delay: 100, // Drag starts after 200ms
+            tolerance: 5, // Drag starts only if moved 5px
         },
     });
 
     const sensors = useSensors(mouseSensor);
 
     return (
-        <WeekContainer data-testid="team-container">
-            <WeekHeaderRow
-                days={[selectedDate]}
+        <WeekContainer data-testid="week-container">
+            <TeamHeaderRow
+                selectedDate={selectedDate}
                 fullDayAppointments={fullDayAppointments}
             />
-            <TimeDayWrapper>
-                {teamMembers.map((member) => (
-                    <div key={member.id} style={{ flex: 1 }}>
-                        <h4>{member.name}</h4>
-                        <DndContext
-                            sensors={sensors}
-                            onDragStart={handleDragStart}
-                            onDragEnd={handleDragEnd}
-                            modifiers={[restrictToWindowEdges]}
-                        >
-                            <TimeColumn interval={interval} />
-                            <DayColumns
-                                day={selectedDate}
-                                interval={interval}
-                                appointments={updatedAppointments.filter(
-                                    (appointment) =>
-                                        appointment.assign === member.id
-                                )}
-                                fullDayAppointments={fullDayAppointments}
+
+            <TimeDayWrapper
+                id="time-day-wrapper"
+                data-testid="time-day-wrapper"
+            >
+                <TimeColumn interval={interval} />
+
+                <DndContext
+                    sensors={sensors}
+                    onDragStart={handleDragStart}
+                    onDragEnd={handleDragEnd}
+                    modifiers={[restrictToWindowEdges]}
+                >
+                    <DayColumns
+                        key={selectedDate.toISO()}
+                        day={selectedDate}
+                        interval={interval}
+                        appointments={updatedAppointments}
+                        fullDayAppointments={fullDayAppointments}
+                    />
+
+                    <DragOverlay dropAnimation={null}>
+                        {activeDrag && (
+                            <DraggableAppointment
+                                id={activeDrag.id}
+                                from={activeDrag.start}
+                                to={activeDrag.end}
+                                appointment={activeDrag}
+                                color={
+                                    activeDrag.color ||
+                                    config.style.primaryColor
+                                }
+                                style={{ top: '0', height: 'auto' }}
+                                isOverlay={true}
                             />
-                            <DragOverlay>
-                                {activeDrag && (
-                                    <DraggableAppointment
-                                        id={activeDrag.id}
-                                        from={activeDrag.start}
-                                        to={activeDrag.end}
-                                        appointment={activeDrag}
-                                        color={
-                                            activeDrag.color ||
-                                            config.style.primaryColor
-                                        }
-                                        isOverlay
-                                    />
-                                )}
-                            </DragOverlay>
-                        </DndContext>
-                    </div>
-                ))}
+                        )}
+                    </DragOverlay>
+                </DndContext>
             </TimeDayWrapper>
         </WeekContainer>
     );

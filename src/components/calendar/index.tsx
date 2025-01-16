@@ -40,6 +40,7 @@ export function RazorCalendar({
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <CalendarProvider
+                currentView={view}
                 config={config}
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}

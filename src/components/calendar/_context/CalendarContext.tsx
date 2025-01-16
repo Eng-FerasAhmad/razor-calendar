@@ -18,6 +18,7 @@ import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
 interface Props {
+    currentView: ViewType;
     children: ReactNode;
     config: RazorCalendarConfig<CalendarConfig>;
     onExternalViewChange: (view: ViewType) => void;
@@ -50,6 +51,7 @@ export const CalendarContext = createContext<CalendarContextProps>({
 });
 
 export function CalendarProvider({
+    currentView,
     children,
     config,
     onExternalViewChange,
@@ -58,7 +60,7 @@ export function CalendarProvider({
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
 
-    const [view, setView] = useState<ViewType>('week');
+    const [view, setView] = useState<ViewType>(currentView);
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
     const [language, setLanguage] = useState<string>(
         mergedConfig.common.locale
