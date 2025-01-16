@@ -106,9 +106,10 @@ export default function App(): ReactElement {
         {
             id: '12',
             title: 'View full day with long long text',
-            start: '2025-01-01T13:00',
-            end: '2025-01-01T14:00',
+            start: '2025-01-16T13:00',
+            end: '2025-01-16T14:00',
             isFullDay: false,
+            assign: 'id-max',
         },
     ];
 
@@ -138,7 +139,7 @@ export default function App(): ReactElement {
     };
 
     // State for CalendarToolbar and Calendar
-    const [currentView, setCurrentView] = useState<ViewType>('week');
+    const [currentView, setCurrentView] = useState<ViewType>('team');
     const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
 
     // Handlers

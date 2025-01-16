@@ -3,6 +3,7 @@ import { ReactElement, useEffect } from 'react';
 import Agenda from 'agenda/Agenda';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { LayoutContainer } from 'calendar/_layout/styles';
+import Team from 'calendar/team/Team';
 import Day from 'day/Day';
 import Month from 'month/Month';
 import { Appointment, ViewType } from 'types/appointment';
@@ -54,6 +55,14 @@ export default function CalendarLayout({
                 );
             case 'agenda':
                 return <Agenda />;
+            case 'team':
+                return (
+                    <Team
+                        appointments={appointments}
+                        selectedDate={selectedDate}
+                        handleChangeAppointment={handleChangeAppointment}
+                    />
+                );
             default:
                 return (
                     <Month
