@@ -10,6 +10,7 @@ import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
+import { TeamUser } from 'calendar/team/types';
 import { Appointment } from 'types/appointment';
 
 interface Props {
@@ -18,6 +19,26 @@ interface Props {
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
+const users: TeamUser[] = [
+    {
+        id: 'max-id',
+        name: 'Max Muster',
+        image: '',
+        color: '#c9eded',
+    },
+    {
+        id: 'martin-id',
+        name: 'Martin Klaus',
+        image: '',
+        color: '#edc9ed',
+    },
+    {
+        id: 'muster-id',
+        name: 'Muster Lux',
+        image: '',
+        color: '#dbedc9',
+    },
+];
 export default function Week({
     appointments,
     selectedDate,
@@ -37,6 +58,7 @@ export default function Week({
             <TeamHeaderRow
                 selectedDate={selectedDate}
                 fullDayAppointments={fullDayAppointments}
+                users={users}
             />
 
             <TimeDayWrapper
@@ -50,13 +72,15 @@ export default function Week({
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
                 >
-                    <DayColumns
-                        key={selectedDate.toISO()}
-                        day={selectedDate}
-                        interval={interval}
-                        appointments={updatedAppointments}
-                        fullDayAppointments={fullDayAppointments}
-                    />
+                    {users.map(() => (
+                        <DayColumns
+                            key={selectedDate.toISO()}
+                            day={selectedDate}
+                            interval={interval}
+                            appointments={updatedAppointments}
+                            fullDayAppointments={fullDayAppointments}
+                        />
+                    ))}
 
                     <DragOverlay dropAnimation={null}>
                         {activeDrag && (

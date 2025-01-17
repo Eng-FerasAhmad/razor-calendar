@@ -1,12 +1,6 @@
-import { darken } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-interface Props {
-    isToday: boolean;
-    color: string;
-}
-
-export const WeekHeaderRowContainer = styled('div')(({ theme }) => ({
+export const TeamHeaderRowContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
@@ -17,7 +11,7 @@ export const WeekHeaderRowContainer = styled('div')(({ theme }) => ({
     zIndex: 10,
 }));
 
-export const WeekHeaderDaysRowWrapper = styled('div')({
+export const TeamHeaderDaysRowWrapper = styled('div')({
     display: 'flex',
     width: '100%',
     paddingTop: '10px',
@@ -72,9 +66,7 @@ export const DayShortNameWrapper = styled('div')(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export const DayNumberWrapper = styled('div', {
-    shouldForwardProp: (prop) => prop !== 'isToday' && prop !== 'color',
-})<Props>(({ theme, isToday, color }) => ({
+export const TeamDayNumberWrapper = styled('div')({
     fontSize: '20px',
     fontWeight: 'normal',
     width: '40px',
@@ -84,17 +76,9 @@ export const DayNumberWrapper = styled('div', {
     justifyContent: 'center',
     alignItems: 'center',
     margin: '0 auto 5px auto',
-    backgroundColor: isToday ? color : 'transparent',
-    color: isToday ? theme.palette.common.white : '',
-    '&:hover': {
-        cursor: 'pointer',
-        backgroundColor: isToday
-            ? darken(color, 0.3)
-            : darken(theme.palette.action.hover, 0.1),
-    },
-}));
+});
 
-export const WeekDayHeaderWrapper = styled('div')(({ theme }) => ({
+export const TeamDayHeaderWrapper = styled('div')(({ theme }) => ({
     flex: 1,
     textAlign: 'center',
     fontWeight: 'bold',
