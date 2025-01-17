@@ -5,4 +5,5 @@ export const baseToolbarConfig: ToolbarConfig = {
     backgroundColor: '#2ba172',
     fontColor: '#fff',
     locale: 'en',
+    dateFormat: 'YYYY-MM-DD',
 };
