@@ -6,6 +6,7 @@ import { AppContainer } from 'components/app/styles';
 import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
+import { TeamConfig } from 'types/teamConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
 
 export default function App(): ReactElement {
@@ -135,6 +136,32 @@ export default function App(): ReactElement {
         },
     };
 
+    const teamConfig: TeamConfig = {
+        teams: [
+            {
+                id: 'max-id',
+                firstName: 'Max',
+                lastName: 'Muster',
+                image: 'https://picsum.photos/200/300?grayscale',
+                color: '#6b5b95',
+            },
+            {
+                id: 'martin-id',
+                firstName: 'Martin',
+                lastName: 'Klaus',
+                image: '',
+                color: '#ff7b25',
+            },
+            {
+                id: 'muster-id',
+                firstName: 'Muster Kurt',
+                lastName: 'Lux',
+                image: 'https://picsum.photos/seed/picsum/200/300',
+                color: '#3e4444',
+            },
+        ],
+    };
+
     const toolbarConfig: Partial<ToolbarConfig> = {
         fontColor: '#fff',
         locale,
@@ -191,6 +218,7 @@ export default function App(): ReactElement {
                 selectedDate={currentDate}
                 onChangeDate={onChangeDate}
                 config={config}
+                teamConfig={teamConfig}
             />
         </AppContainer>
     );

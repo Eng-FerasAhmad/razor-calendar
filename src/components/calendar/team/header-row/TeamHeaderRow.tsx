@@ -8,9 +8,9 @@ import {
     TeamDayHeaderWrapper,
     TeamDayNumberWrapper,
 } from 'calendar/team/header-row/styles';
-import { TeamUser } from 'calendar/team/types';
 import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Appointment } from 'types/appointment';
+import { CalendarUsers, TeamConfig } from 'types/teamConfig';
 import {
     WeekHeaderRowContainer,
     GmtWrapper,
@@ -23,13 +23,13 @@ import {
 interface Props {
     fullDayAppointments: Appointment[];
     selectedDate: DateTime;
-    users: TeamUser[];
+    teamConfig: TeamConfig;
 }
 
 export default function TeamHeaderRow({
     fullDayAppointments,
     selectedDate,
-    users,
+    teamConfig,
 }: Props): ReactElement {
     const { fullDaysCount, showAllFullDays, onShowAllFullDays } =
         useCalendarContext();
@@ -39,7 +39,7 @@ export default function TeamHeaderRow({
 
     const handleToggle = (): void => onShowAllFullDays();
 
-    const getFallbackLetters = (user: TeamUser): string => {
+    const getFallbackLetters = (user: CalendarUsers): string => {
         const f = user.firstName?.trim() || '';
         const l = user.lastName?.trim() || '';
         const firstLetter = f.charAt(0).toUpperCase();
@@ -53,7 +53,7 @@ export default function TeamHeaderRow({
             <WeekHeaderDaysRowWrapper data-testid="week-header-days-row">
                 <WidthSpaceWrapper data-testid="width-space-wrapper"></WidthSpaceWrapper>
 
-                {users.map((user) => (
+                {teamConfig.teams.map((user) => (
                     <TeamDayHeaderWrapper
                         key={user.id}
                         data-testid="team-day-header"

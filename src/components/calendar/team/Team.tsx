@@ -10,41 +10,20 @@ import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
-import { TeamUser } from 'calendar/team/types';
 import { Appointment } from 'types/appointment';
+import { TeamConfig } from 'types/teamConfig';
 
 interface Props {
     appointments: Appointment[];
     selectedDate: DateTime;
+    teamConfig: TeamConfig;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-const users: TeamUser[] = [
-    {
-        id: 'max-id',
-        firstName: 'Max',
-        lastName: 'Muster',
-        image: 'https://picsum.photos/200/300?grayscale',
-        color: '#6b5b95',
-    },
-    {
-        id: 'martin-id',
-        firstName: 'Martin',
-        lastName: 'Klaus',
-        image: '',
-        color: '#ff7b25',
-    },
-    {
-        id: 'muster-id',
-        firstName: 'Muster Kurt',
-        lastName: 'Lux',
-        image: 'https://picsum.photos/seed/picsum/200/300',
-        color: '#3e4444',
-    },
-];
 export default function Week({
     appointments,
     selectedDate,
+    teamConfig,
     handleChangeAppointment,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
@@ -61,7 +40,7 @@ export default function Week({
             <TeamHeaderRow
                 selectedDate={selectedDate}
                 fullDayAppointments={fullDayAppointments}
-                users={users}
+                teamConfig={teamConfig}
             />
 
             <TimeDayWrapper
@@ -75,7 +54,7 @@ export default function Week({
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
                 >
-                    {users.map((user, i) => (
+                    {teamConfig.teams.map((user, i) => (
                         <DayColumns
                             key={user.id + i}
                             day={selectedDate}
