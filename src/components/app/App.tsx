@@ -14,17 +14,19 @@ export default function App(): ReactElement {
         {
             id: '1',
             title: 'Meeting at these times are very important',
-            start: '2025-01-09T13:00',
-            end: '2025-01-09T13:30',
+            start: '2025-01-17T13:00',
+            end: '2025-01-17T14:30',
             isFullDay: false,
+            assign: 'max-id',
         },
         {
             id: '2',
             title: 'Lunch but also long long text',
-            start: '2025-01-09T09:00',
-            end: '2025-01-09T18:00',
+            start: '2025-01-17T09:00',
+            end: '2025-01-17T18:00',
             isFullDay: false,
             color: '#039be5',
+            assign: 'martin-id',
         },
         {
             id: '3',
@@ -136,6 +138,7 @@ export default function App(): ReactElement {
     const toolbarConfig: Partial<ToolbarConfig> = {
         fontColor: '#fff',
         locale,
+        dateFormat: 'dd.MM.yyyy',
     };
 
     // State for CalendarToolbar and Calendar

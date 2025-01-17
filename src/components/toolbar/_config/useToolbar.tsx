@@ -47,6 +47,7 @@ export const useToolbar = ({
 
     const getTitle = (): string => {
         const locale = config.locale || 'en';
+
         switch (currentView) {
             case 'month':
                 return currentDate.setLocale(locale).toFormat('MMMM yyyy');
@@ -58,8 +59,20 @@ export const useToolbar = ({
                     .setLocale(locale)
                     .toFormat('LLLL yyyy')}`;
             }
-            case 'day':
-                return currentDate.setLocale(locale).toFormat('dd. LLLL yyyy');
+            case 'day': {
+                const dayName = currentDate.setLocale(locale).toFormat('EEEE');
+                const dateString = currentDate
+                    .setLocale(locale)
+                    .toFormat(config.dateFormat);
+                return `${dayName}, ${dateString}`;
+            }
+            case 'team': {
+                const dayName = currentDate.setLocale(locale).toFormat('EEEE');
+                const dateString = currentDate
+                    .setLocale(locale)
+                    .toFormat(config.dateFormat);
+                return `${dayName}, ${dateString}`;
+            }
             default:
                 return currentDate.setLocale(locale).toISODate() || '';
         }

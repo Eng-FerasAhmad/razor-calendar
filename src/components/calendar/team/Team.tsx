@@ -22,21 +22,24 @@ interface Props {
 const users: TeamUser[] = [
     {
         id: 'max-id',
-        name: 'Max Muster',
-        image: '',
-        color: '#c9eded',
+        firstName: 'Max',
+        lastName: 'Muster',
+        image: 'https://picsum.photos/200/300?grayscale',
+        color: '#6b5b95',
     },
     {
         id: 'martin-id',
-        name: 'Martin Klaus',
+        firstName: 'Martin',
+        lastName: 'Klaus',
         image: '',
-        color: '#edc9ed',
+        color: '#ff7b25',
     },
     {
         id: 'muster-id',
-        name: 'Muster Lux',
-        image: '',
-        color: '#dbedc9',
+        firstName: 'Muster Kurt',
+        lastName: 'Lux',
+        image: 'https://picsum.photos/seed/picsum/200/300',
+        color: '#3e4444',
     },
 ];
 export default function Week({
@@ -72,12 +75,14 @@ export default function Week({
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
                 >
-                    {users.map(() => (
+                    {users.map((user, i) => (
                         <DayColumns
-                            key={selectedDate.toISO()}
+                            key={user.id + i}
                             day={selectedDate}
                             interval={interval}
-                            appointments={updatedAppointments}
+                            appointments={updatedAppointments.filter(
+                                (appointment) => appointment.assign === user.id
+                            )}
                             fullDayAppointments={fullDayAppointments}
                         />
                     ))}

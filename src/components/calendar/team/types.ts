@@ -1,6 +1,7 @@
 export interface TeamUser {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     image: string;
     color: string;
 }

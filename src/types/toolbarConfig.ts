@@ -3,4 +3,5 @@ export interface ToolbarConfig {
     backgroundColor: string;
     fontColor: string;
     locale: string;
+    dateFormat: string;
 }

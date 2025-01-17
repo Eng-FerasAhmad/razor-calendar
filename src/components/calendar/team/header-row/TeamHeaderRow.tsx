@@ -39,17 +39,33 @@ export default function TeamHeaderRow({
 
     const handleToggle = (): void => onShowAllFullDays();
 
+    const getFallbackLetters = (user: TeamUser): string => {
+        const f = user.firstName?.trim() || '';
+        const l = user.lastName?.trim() || '';
+        const firstLetter = f.charAt(0).toUpperCase();
+        const lastLetter = l.charAt(0).toUpperCase();
+
+        return `${firstLetter}${lastLetter}`;
+    };
+
     return (
         <WeekHeaderRowContainer data-testid="week-header-row">
             <WeekHeaderDaysRowWrapper data-testid="week-header-days-row">
-                <WidthSpaceWrapper data-testid="width-space-wrapper" />
+                <WidthSpaceWrapper data-testid="width-space-wrapper"></WidthSpaceWrapper>
 
                 {users.map((user) => (
-                    <TeamDayHeaderWrapper key={user.id}>
+                    <TeamDayHeaderWrapper
+                        key={user.id}
+                        data-testid="team-day-header"
+                    >
                         <TeamDayNumberWrapper>
-                            <Avatar src={user.image} color={user.color}>
-                                AA
+                            <Avatar
+                                src={user.image}
+                                sx={{ bgcolor: user.color, fontSize: 16 }}
+                            >
+                                {getFallbackLetters(user)}
                             </Avatar>
+                            <span>{`${user.firstName} ${user.lastName}`}</span>
                         </TeamDayNumberWrapper>
                     </TeamDayHeaderWrapper>
                 ))}
