@@ -86,10 +86,17 @@ export default function TeamHeaderRow({
                     )}
                 </GmtWrapper>
 
-                <FullDaysAppointment
-                    fullDayAppointments={fullDayAppointments}
-                    days={[selectedDate]}
-                />
+                {teamConfig.teams.map((user) => {
+                    return (
+                        <FullDaysAppointment
+                            key={user.id}
+                            fullDayAppointments={fullDayAppointments.filter(
+                                (fullDay) => fullDay.assign === user.id
+                            )}
+                            days={[selectedDate]}
+                        />
+                    );
+                })}
             </WeekHeaderFullDaysRowWrapper>
         </WeekHeaderRowContainer>
     );

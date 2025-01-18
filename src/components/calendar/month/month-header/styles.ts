@@ -1,5 +1,9 @@
 import { styled } from '@mui/material/styles';
 
+interface Props {
+    hasWidth: boolean;
+}
+
 export const MonthHeaderContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -19,9 +23,9 @@ export const ContentWrapper = styled('div')({
     height: '50px',
 });
 
-export const SpaceWrapper = styled('div')({
-    width: '41px',
-});
+export const SpaceWrapper = styled('div')<Props>(({ hasWidth }) => ({
+    width: hasWidth ? '41px' : '0',
+}));
 
 export const MonthWeekDaysWrapper = styled('div')(({ theme }) => ({
     flex: 1,

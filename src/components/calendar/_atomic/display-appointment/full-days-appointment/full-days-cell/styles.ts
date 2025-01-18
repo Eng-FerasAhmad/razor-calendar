@@ -8,6 +8,7 @@ interface Props {
 interface FullDaysCellProps {
     width: number;
     left: number;
+    fullWidth: boolean;
 }
 
 const calcBackgroundHoverColor = (props: Props, theme: Theme): string =>
@@ -22,9 +23,9 @@ const calcFontColor = (props: Props, theme: Theme): string =>
     props.color ? theme.palette.common.white : theme.palette.text.primary;
 
 export const FullDaysCellContainer = styled('div')<FullDaysCellProps>(
-    ({ width, left }) => ({
+    ({ width, left, fullWidth }) => ({
         height: '23px',
-        width: `calc(${width}% - 2px)`,
+        width: fullWidth ? `calc(100% - 2px)` : `calc(${width}% - 2px)`,
         left: `${left}%`,
         position: 'absolute',
     })

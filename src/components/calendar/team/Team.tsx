@@ -62,7 +62,9 @@ export default function Week({
                             appointments={updatedAppointments.filter(
                                 (appointment) => appointment.assign === user.id
                             )}
-                            fullDayAppointments={fullDayAppointments}
+                            fullDayAppointments={fullDayAppointments.filter(
+                                (fullDay) => fullDay.assign === user.id
+                            )}
                         />
                     ))}
 

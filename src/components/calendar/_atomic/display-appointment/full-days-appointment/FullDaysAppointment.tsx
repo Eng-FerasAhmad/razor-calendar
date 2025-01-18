@@ -35,10 +35,23 @@ export default function FullDaysAppointment({
             );
 
             // Determine the visible range of the appointment within the current week
-            const visibleStart =
+            let visibleStart =
                 appointmentStart < weekStart ? weekStart : appointmentStart;
-            const visibleEnd =
+            let visibleEnd =
                 appointmentEnd > weekEnd ? weekEnd : appointmentEnd;
+
+            visibleStart = visibleStart.set({
+                hour: 0,
+                minute: 0,
+                second: 0,
+                millisecond: 0,
+            });
+            visibleEnd = visibleEnd.set({
+                hour: 0,
+                minute: 0,
+                second: 0,
+                millisecond: 0,
+            });
 
             if (visibleStart <= visibleEnd) {
                 const fittingRow = rowsInside.find((row) =>

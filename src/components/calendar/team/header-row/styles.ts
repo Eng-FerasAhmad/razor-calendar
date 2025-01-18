@@ -9,6 +9,7 @@ export const TeamDayNumberWrapper = styled('div')({
     justifyContent: 'center',
     alignItems: 'center',
     margin: '0 auto 5px auto',
+    gap: '4px',
 });
 
 export const TeamDayHeaderWrapper = styled('div')(({ theme }) => ({

@@ -19,9 +19,9 @@ export default function FullDaysCell({
     visibleStartIndex,
     visibleEndIndex,
 }: Props): ReactElement {
+    const { onPopperAppointment, view } = useCalendarContext();
     const width = dayWidth * (visibleEndIndex - visibleStartIndex + 1);
     const left = dayWidth * visibleStartIndex;
-    const { onPopperAppointment } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
@@ -35,6 +35,7 @@ export default function FullDaysCell({
     return (
         <FullDaysCellContainer
             width={width}
+            fullWidth={view === 'team' || view === 'day'}
             left={left}
             onClick={popperHandler}
         >

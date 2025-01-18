@@ -28,7 +28,7 @@ export const TimeLabelWrapper = styled('div', {
     width: '60px',
     margin: 'auto',
     paddingLeft: '5px',
-    fontSize: '10px',
+    fontSize: '11px',
     backgroundColor: workTime
         ? theme.palette.workTime
         : theme.palette.outOfWork,
@@ -40,5 +40,5 @@ export const TimeLabelWrapper = styled('div', {
 
 export const TimeLabelTextWrapper = styled('span')({
     position: 'relative',
-    top: '-13px',
+    top: '-9px',
 });

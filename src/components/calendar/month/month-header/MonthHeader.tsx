@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
     ContentWrapper,
     MonthHeaderContainer,
@@ -11,10 +12,15 @@ interface Props {
 }
 
 export default function MonthHeader({ monthWeekNames }: Props): ReactElement {
+    const { config } = useCalendarContext();
+
     return (
         <MonthHeaderContainer data-testid="month-header-container">
             <ContentWrapper data-testid="month-header-content-wrapper">
-                <SpaceWrapper data-testid="month-header-space-wraper" />
+                <SpaceWrapper
+                    hasWidth={config.month.showWeekNumbers}
+                    data-testid="month-header-space-wraper"
+                />
                 {monthWeekNames.map((day, index) => (
                     <MonthWeekDaysWrapper
                         data-testid="month-week-days-warpper"
