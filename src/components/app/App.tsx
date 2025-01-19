@@ -12,7 +12,7 @@ import { TeamConfig } from 'types/teamConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
 
 export default function App(): ReactElement {
-    const locale = 'en';
+    const locale = 'en-GB';
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -220,6 +220,7 @@ export default function App(): ReactElement {
                     onChangeDate={handleChangeDate}
                     weekStartOn={'monday'}
                     showWeekNumber={false}
+                    config={config}
                 />
             </Drawer>
 

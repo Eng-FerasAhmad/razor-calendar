@@ -15,6 +15,7 @@ export function mergeConfig(
         year: { ...config.year, ...userConfig.year },
         agenda: { ...config.agenda, ...userConfig.agenda },
         style: { ...config.style, ...userConfig.style },
+        sidebar: { ...config.sidebar, ...userConfig.sidebar },
         common: { ...config.common, ...userConfig.common },
     };
 }

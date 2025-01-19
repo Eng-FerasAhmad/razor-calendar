@@ -51,6 +51,7 @@ export default function InputSelect<T extends string | number>({
                     height: '34px',
                     padding: '4px 14px',
                     '& fieldset': {
+                        borderWidth: '0px',
                         borderColor: isCompact
                             ? darken(theme.palette.border, 0.1)
                             : theme.palette.primary.dark,
@@ -93,12 +94,20 @@ export default function InputSelect<T extends string | number>({
                 label={label}
                 sx={{
                     color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.background.default,
                     borderRadius: borderRadius || 1,
                     height: '34px',
                     display: 'flex',
                     alignItems: 'center',
                     fontSize: '17px',
                     padding: '4px',
+                    border: 'none',
+                    '&:hover': {
+                        backgroundColor: darken(
+                            theme.palette.action.hover,
+                            0.1
+                        ),
+                    },
                 }}
             >
                 {options.map((option) => (

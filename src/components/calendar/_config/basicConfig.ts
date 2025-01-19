@@ -19,8 +19,8 @@ export const basicConfig: CalendarConfig = {
     },
     week: {
         showWeekNumbers: true,
-
         showWeekend: true,
+        weekStartOn: 'monday',
     },
     month: {
         showWeekNumbers: true,
@@ -43,6 +43,9 @@ export const basicConfig: CalendarConfig = {
         backgroundColor: '#fff',
         fontFamily: 'Roboto',
         topStartFrom: 35,
+    },
+    sidebar: {
+        showWeekNumber: false,
     },
     common: {
         locale: 'en',

@@ -11,6 +11,7 @@ export interface MonthConfig {
 export interface WeekConfig {
     showWeekend: boolean;
     showWeekNumbers: boolean;
+    weekStartOn: 'sunday' | 'monday';
 }
 
 export interface YearConfig {
@@ -52,6 +53,10 @@ export interface CommonConfig {
     dateFormat: string; // Custom date format, e.g., "YYYY-MM-DD"
 }
 
+export interface SidebarConfig {
+    showWeekNumber: boolean;
+}
+
 export interface CalendarConfig {
     hour: HourConfig;
     day: DayConfig;
@@ -60,5 +65,6 @@ export interface CalendarConfig {
     year: YearConfig;
     agenda: AgendaConfig;
     style: StyleConfig;
+    sidebar: SidebarConfig;
     common: CommonConfig;
 }
