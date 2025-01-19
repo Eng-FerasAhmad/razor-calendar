@@ -1,8 +1,10 @@
+import { Button, Drawer } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 
 import { RazorCalendar } from 'calendar/index';
 import { AppContainer } from 'components/app/styles';
+import { RazorCalendarSidebar } from 'components/sidebar/CalendarSidebar';
 import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
@@ -11,6 +13,12 @@ import { ToolbarConfig } from 'types/toolbarConfig';
 
 export default function App(): ReactElement {
     const locale = 'en';
+    const [open, setOpen] = useState(false);
+
+    const toggleDrawer = (newOpen: boolean) => () => {
+        setOpen(newOpen);
+    };
+
     const appointments = [
         {
             id: '1',
@@ -199,9 +207,21 @@ export default function App(): ReactElement {
         console.log('Delete to parent Appointment:', appointment);
     };
 
+    const handleChangeDate = (newDate: DateTime): void => {
+        setCurrentDate(newDate);
+    };
+
     return (
         <AppContainer data-testid="app">
-            {/* Pass handlers and state to CalendarToolbar */}
+            <Button onClick={toggleDrawer(!open)}>drawer</Button>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+                <RazorCalendarSidebar
+                    currentDate={currentDate}
+                    onChangeDate={handleChangeDate}
+                    weekStartOn={'monday'}
+                />
+            </Drawer>
+
             <RazorToolbarCompact
                 currentView={currentView}
                 onViewChange={handleViewChange}
