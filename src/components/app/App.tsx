@@ -219,6 +219,7 @@ export default function App(): ReactElement {
                     currentDate={currentDate}
                     onChangeDate={handleChangeDate}
                     weekStartOn={'monday'}
+                    showWeekNumber={false}
                 />
             </Drawer>
 

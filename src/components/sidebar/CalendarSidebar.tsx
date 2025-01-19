@@ -9,6 +9,7 @@ export function RazorCalendarSidebar({
     currentDate,
     onChangeDate,
     weekStartOn,
+    showWeekNumber,
 }: SidebarProps): ReactElement {
     const locale = weekStartOn === 'sunday' ? 'en-US' : 'en-GB';
 
@@ -22,7 +23,7 @@ export function RazorCalendarSidebar({
             adapterLocale={locale} // Set the locale for week start
         >
             <DateCalendar
-                displayWeekNumber
+                displayWeekNumber={showWeekNumber}
                 value={currentDate}
                 onChange={(newValue) => {
                     if (newValue) {

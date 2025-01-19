@@ -4,4 +4,5 @@ export interface SidebarProps {
     currentDate: DateTime;
     onChangeDate: (newDate: DateTime) => void;
     weekStartOn: 'sunday' | 'monday';
+    showWeekNumber: boolean;
 }
