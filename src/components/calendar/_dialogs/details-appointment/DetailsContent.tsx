@@ -81,25 +81,25 @@ export default function DetailsContent(): ReactElement {
             color={color || '#ccc'}
         >
             <HeaderBox data-testid="header-box" color={color}>
-                <Tooltip title={t('action.edit', { ns: 'common' })}>
+                <Tooltip title={t('actions.edit', { ns: 'common' })}>
                     <IconWrapper color={color} onClick={handleEdit}>
                         <EditSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={t('action.delete', { ns: 'common' })}>
+                <Tooltip title={t('actions.delete', { ns: 'common' })}>
                     <IconWrapper color={color} onClick={onDelete}>
                         <DeleteSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={t('action.options', { ns: 'common' })}>
+                <Tooltip title={t('actions.options', { ns: 'common' })}>
                     <IconWrapper color={color}>
                         <MenuSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={t('action.close', { ns: 'common' })}>
+                <Tooltip title={t('actions.close', { ns: 'common' })}>
                     <IconWrapper color={color} onClick={handleClose}>
                         <CloseSymbol size={18} color="#fff" />
                     </IconWrapper>
@@ -108,7 +108,7 @@ export default function DetailsContent(): ReactElement {
 
             <TitleBox>
                 <CalendarSymbol size={iconSize} />
-                <Typography variant="body1" flex={1}>
+                <Typography sx={{ fontSize: '16px' }} variant="body1" flex={1}>
                     {title}
                 </Typography>
             </TitleBox>
@@ -136,7 +136,7 @@ export default function DetailsContent(): ReactElement {
                 <TextBox>
                     <UserSymbol size={iconSize} />
                     <TextBoxTitle>
-                        {assign || t('action.notAssign', { ns: 'common' })}
+                        {assign || t('actions.notAssign', { ns: 'common' })}
                     </TextBoxTitle>
                 </TextBox>
             </CalendarBox>

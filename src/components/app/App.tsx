@@ -12,7 +12,7 @@ import { TeamConfig } from 'types/teamConfig';
 import { ToolbarConfig } from 'types/toolbarConfig';
 
 export default function App(): ReactElement {
-    const locale = 'en-GB';
+    const locale = 'de-DE';
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {

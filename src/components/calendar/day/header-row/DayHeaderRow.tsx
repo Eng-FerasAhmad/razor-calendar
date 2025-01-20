@@ -60,7 +60,7 @@ export default function DayHeaderRow({
                     <DayShortNameWrapper data-testid="day-short-name-wrapper">
                         {selectedDate
                             .setLocale(config.common.locale)
-                            .toFormat('ccc')}
+                            .toFormat('cccc')}
                     </DayShortNameWrapper>
                     <DayNumberWrapper
                         data-testid="day-number-wrapper"

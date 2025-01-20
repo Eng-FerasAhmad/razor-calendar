@@ -35,7 +35,7 @@ export const FullDayTitleWrapper = styled('div', {
     shouldForwardProp: (prop) => prop !== 'color',
 })<Props>(({ theme, color }) => ({
     width: '100%',
-    padding: '0 5px',
+    padding: '1px 5px',
     display: 'inline-block',
     backgroundColor: calcBackgroundHoverColor({ color }, theme),
     boxSizing: 'border-box',
@@ -43,7 +43,7 @@ export const FullDayTitleWrapper = styled('div', {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    fontSize: '10px',
+    fontSize: '12px',
     color: calcFontColor({ color }, theme),
     margin: '0 1px',
     '&:hover': {

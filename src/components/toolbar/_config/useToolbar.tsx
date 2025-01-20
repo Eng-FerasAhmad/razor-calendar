@@ -60,11 +60,10 @@ export const useToolbar = ({
                     .toFormat('LLLL yyyy')}`;
             }
             case 'day': {
-                const dayName = currentDate.setLocale(locale).toFormat('EEEE');
                 const dateString = currentDate
                     .setLocale(locale)
                     .toFormat(config.dateFormat);
-                return `${dayName}, ${dateString}`;
+                return `${dateString}`;
             }
             case 'team': {
                 const dayName = currentDate.setLocale(locale).toFormat('EEEE');

@@ -89,4 +89,5 @@ export const TextBox = styled('span')(({ theme }) => ({
 export const TextBoxTitle = styled('div')(() => ({
     display: 'flex',
     alignItems: 'center',
+    marginTop: '4px',
 }));

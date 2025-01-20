@@ -84,7 +84,7 @@ export const DayNumberWrapper = styled('div', {
     justifyContent: 'center',
     alignItems: 'center',
     margin: '0 auto 5px auto',
-    backgroundColor: isToday ? color : 'transparent',
+    backgroundColor: isToday ? color : darken(theme.palette.action.hover, 0.1),
     color: isToday ? theme.palette.common.white : '',
     '&:hover': {
         cursor: 'pointer',
