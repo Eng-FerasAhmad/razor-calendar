@@ -31,5 +31,26 @@
         "week": {
             "number": "CW"
         }
+    },
+    "add": {
+        "header": "New Appointment",
+        "title": "Title",
+        "startDate": "Start",
+        "endDate": "End",
+        "startTime": "Time from",
+        "endTime": "Time to",
+        "fullDay": "All Day",
+        "save": "Save",
+        "notes": "Descriptions",
+        "cancel": "Cancel",
+        "errorLaterDate": "Must be later than start date",
+        "errorLaterTime": "Must be later than start time"
+    },
+    "actions": {
+        "close": "close",
+        "edit": "Edit",
+        "delete": "Delete",
+        "options": "Options",
+        "notAssign": "Not assign"
     }
 }

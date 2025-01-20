@@ -1,6 +1,7 @@
 import { Tooltip, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     DetailsContentContainer,
     IconWrapper,
@@ -33,7 +34,7 @@ export default function DetailsContent(): ReactElement {
         onDeleteAppointment,
         onDialogAppointment,
     } = useCalendarContext();
-
+    const { t } = useTranslation();
     const iconSize = 20;
     const { appointment } = popperAppointment || {};
     const { title, start, end, color, assign, isFullDay } = appointment || {};
@@ -80,25 +81,25 @@ export default function DetailsContent(): ReactElement {
             color={color || '#ccc'}
         >
             <HeaderBox data-testid="header-box" color={color}>
-                <Tooltip title={'Edit'}>
+                <Tooltip title={t('action.edit', { ns: 'common' })}>
                     <IconWrapper color={color} onClick={handleEdit}>
                         <EditSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={'Delete'}>
+                <Tooltip title={t('action.delete', { ns: 'common' })}>
                     <IconWrapper color={color} onClick={onDelete}>
                         <DeleteSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={'Options'}>
+                <Tooltip title={t('action.options', { ns: 'common' })}>
                     <IconWrapper color={color}>
                         <MenuSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={'Close'}>
+                <Tooltip title={t('action.close', { ns: 'common' })}>
                     <IconWrapper color={color} onClick={handleClose}>
                         <CloseSymbol size={18} color="#fff" />
                     </IconWrapper>
@@ -134,7 +135,9 @@ export default function DetailsContent(): ReactElement {
             <CalendarBox>
                 <TextBox>
                     <UserSymbol size={iconSize} />
-                    <TextBoxTitle>{assign || 'No Assign'}</TextBoxTitle>
+                    <TextBoxTitle>
+                        {assign || t('action.notAssign', { ns: 'common' })}
+                    </TextBoxTitle>
                 </TextBox>
             </CalendarBox>
         </DetailsContentContainer>

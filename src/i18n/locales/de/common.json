@@ -31,5 +31,24 @@
         "week": {
             "number": "KW"
         }
+    },
+    "add": {
+        "header": "Neu Termin",
+        "title": "Titel",
+        "startDate": "Start",
+        "endDate": "End",
+        "startTime": "Zeit von",
+        "endTime": "Zeit bis",
+        "fullDay": "Ganzer Tag",
+        "save": "Speichern",
+        "notes": "Beschreibung",
+        "cancel": "Abbrechen"
+    },
+    "actions": {
+        "close": "Schließen",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "options": "Weiter Aktionen",
+        "notAssign": "Noch nicht zugewiesen"
     }
 }

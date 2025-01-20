@@ -2,6 +2,7 @@ import { TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
 import { ChangeEvent, ReactElement, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     ActionRowWrapper,
     Container,
@@ -37,6 +38,7 @@ export default function NewAppointment(): ReactElement {
         handleSave,
         titleRequired,
     } = useNewAppointment();
+    const { t } = useTranslation();
     const theme = useTheme();
     const { dialogAppointment, onDialogAppointment } = useCalendarContext();
 
@@ -131,14 +133,14 @@ export default function NewAppointment(): ReactElement {
 
     return (
         <DialogCustom
-            title="Add new Appointment"
+            title={t('add.header', { ns: 'common' })}
             open={dialogAppointment?.open || false}
             handleClose={handleCloseDialog}
         >
             <Container>
                 <TitleRowWrapper>
                     <InputText
-                        label="Title"
+                        label={t('add.title', { ns: 'common' })}
                         value={title}
                         onChange={handleTitleChange}
                         fullWidth
@@ -149,7 +151,7 @@ export default function NewAppointment(): ReactElement {
 
                 <RowWrapper data-testid="date-start-wrapper">
                     <DatePickerInput
-                        label="From Date"
+                        label={t('add.startDate', { ns: 'common' })}
                         value={fromTime}
                         onChange={handleFromDateChange}
                         dateFormat={dateFormat}
@@ -159,7 +161,7 @@ export default function NewAppointment(): ReactElement {
                         }}
                     />
                     <InputTimepicker
-                        label="From Time"
+                        label={t('add.startTime', { ns: 'common' })}
                         value={fromTime}
                         onChange={handleFromTimeChange}
                         is24Hours={is24Hours}
@@ -172,20 +174,20 @@ export default function NewAppointment(): ReactElement {
                     <Checkbox
                         checked={isFullDay}
                         onChange={setIsFullDay}
-                        label="All Day"
+                        label={t('add.fullDay', { ns: 'common' })}
                     />
                 </RowWrapper>
 
                 <RowWrapper data-testid="date-end-wrapper">
                     <DatePickerInput
-                        label="To Date"
+                        label={t('add.endDate', { ns: 'common' })}
                         value={toTime}
                         onChange={handleToDateChange}
                         dateFormat={dateFormat}
                         error={toDateError}
                         helperText={
                             toDateError
-                                ? 'Must be later than start date'
+                                ? t('add.errorLaterDate', { ns: 'common' })
                                 : undefined
                         }
                         sx={{
@@ -194,7 +196,7 @@ export default function NewAppointment(): ReactElement {
                         }}
                     />
                     <InputTimepicker
-                        label="To Time"
+                        label={t('add.endTime', { ns: 'common' })}
                         value={toTime}
                         onChange={handleToTimeChange}
                         is24Hours={is24Hours}
@@ -202,7 +204,7 @@ export default function NewAppointment(): ReactElement {
                         disabled={isFullDay}
                         helperText={
                             toTimeError
-                                ? 'Must be later than start time'
+                                ? t('add.errorLaterTime', { ns: 'common' })
                                 : undefined
                         }
                         sx={{
@@ -216,7 +218,7 @@ export default function NewAppointment(): ReactElement {
                 <TitleRowWrapper>
                     <TextField
                         id="outlined-multiline-flexible"
-                        label="Notes"
+                        label={t('add.notes', { ns: 'common' })}
                         value={notes}
                         onChange={handleNotesChange}
                         multiline
@@ -232,14 +234,14 @@ export default function NewAppointment(): ReactElement {
                         onClick={handleCloseDialog}
                         sx={{ color: theme.palette.text.primary }}
                     >
-                        Cancel
+                        {t('add.cancel', { ns: 'common' })}
                     </Button>
                     <Button
                         variant="contained"
                         onClick={handleSave}
                         disabled={isSaveDisabled}
                     >
-                        Save Appointment
+                        {t('add.save', { ns: 'common' })}
                     </Button>
                 </ActionRowWrapper>
             </Container>
