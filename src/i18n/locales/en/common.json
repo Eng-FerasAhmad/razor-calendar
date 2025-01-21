@@ -51,6 +51,7 @@
         "edit": "Edit",
         "delete": "Delete",
         "options": "Options",
-        "notAssign": "Not assign"
+        "notAssign": "Not assign",
+        "search": "Search"
     }
 }

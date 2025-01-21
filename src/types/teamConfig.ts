@@ -4,6 +4,7 @@ export interface CalendarUsers {
     lastName: string;
     image: string;
     color: string;
+    visible: boolean;
 }
 
 export interface TeamConfig {

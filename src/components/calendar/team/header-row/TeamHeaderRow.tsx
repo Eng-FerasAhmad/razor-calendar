@@ -53,22 +53,24 @@ export default function TeamHeaderRow({
             <WeekHeaderDaysRowWrapper data-testid="week-header-days-row">
                 <WidthSpaceWrapper data-testid="width-space-wrapper"></WidthSpaceWrapper>
 
-                {teamConfig.teams.map((user) => (
-                    <TeamDayHeaderWrapper
-                        key={user.id}
-                        data-testid="team-day-header"
-                    >
-                        <TeamDayNumberWrapper>
-                            <Avatar
-                                src={user.image}
-                                sx={{ bgcolor: user.color, fontSize: 16 }}
-                            >
-                                {getFallbackLetters(user)}
-                            </Avatar>
-                            <span>{`${user.firstName} ${user.lastName}`}</span>
-                        </TeamDayNumberWrapper>
-                    </TeamDayHeaderWrapper>
-                ))}
+                {teamConfig.teams
+                    .filter((item) => item.visible)
+                    .map((user) => (
+                        <TeamDayHeaderWrapper
+                            key={user.id}
+                            data-testid="team-day-header"
+                        >
+                            <TeamDayNumberWrapper>
+                                <Avatar
+                                    src={user.image}
+                                    sx={{ bgcolor: user.color, fontSize: 16 }}
+                                >
+                                    {getFallbackLetters(user)}
+                                </Avatar>
+                                <span>{`${user.firstName} ${user.lastName}`}</span>
+                            </TeamDayNumberWrapper>
+                        </TeamDayHeaderWrapper>
+                    ))}
             </WeekHeaderDaysRowWrapper>
             <WeekHeaderFullDaysRowWrapper data-testid="week-header-full-days-row-wrapper">
                 <GmtWrapper data-testid="gmt-wrapper">
@@ -86,17 +88,19 @@ export default function TeamHeaderRow({
                     )}
                 </GmtWrapper>
 
-                {teamConfig.teams.map((user) => {
-                    return (
-                        <FullDaysAppointment
-                            key={user.id}
-                            fullDayAppointments={fullDayAppointments.filter(
-                                (fullDay) => fullDay.assign === user.id
-                            )}
-                            days={[selectedDate]}
-                        />
-                    );
-                })}
+                {teamConfig.teams
+                    .filter((item) => item.visible)
+                    .map((user) => {
+                        return (
+                            <FullDaysAppointment
+                                key={user.id}
+                                fullDayAppointments={fullDayAppointments.filter(
+                                    (fullDay) => fullDay.assign === user.id
+                                )}
+                                days={[selectedDate]}
+                            />
+                        );
+                    })}
             </WeekHeaderFullDaysRowWrapper>
         </WeekHeaderRowContainer>
     );

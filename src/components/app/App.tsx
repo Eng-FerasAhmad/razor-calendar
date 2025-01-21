@@ -146,7 +146,7 @@ export default function App(): ReactElement {
         },
     };
 
-    const teamConfig: TeamConfig = {
+    const initialTeamConfig: TeamConfig = {
         teams: [
             {
                 id: 'max-id',
@@ -154,6 +154,7 @@ export default function App(): ReactElement {
                 lastName: 'Muster',
                 image: 'https://picsum.photos/200/300?grayscale',
                 color: '#6b5b95',
+                visible: true,
             },
             {
                 id: 'martin-id',
@@ -161,6 +162,7 @@ export default function App(): ReactElement {
                 lastName: 'Klaus',
                 image: '',
                 color: '#ff7b25',
+                visible: true,
             },
             {
                 id: 'muster-id',
@@ -168,9 +170,68 @@ export default function App(): ReactElement {
                 lastName: 'Lux',
                 image: 'https://picsum.photos/seed/picsum/200/300',
                 color: '#3e4444',
+                visible: false,
+            },
+            {
+                id: 'jef-id',
+                firstName: 'Jef',
+                lastName: 'Santos',
+                image: '',
+                color: '#329b9b',
+                visible: false,
+            },
+            {
+                id: 'ermir-id',
+                firstName: 'Ermir',
+                lastName: 'Beto',
+                image: '',
+                color: '#99990c',
+                visible: true,
+            },
+            {
+                id: 'eline-id',
+                firstName: 'Eline',
+                lastName: 'Li',
+                image: '',
+                color: '#7f1db1',
+                visible: true,
+            },
+            {
+                id: 'karina-id',
+                firstName: 'Karina',
+                lastName: 'Melo',
+                image: '',
+                color: '#d25757',
+                visible: false,
+            },
+            {
+                id: 'james-id',
+                firstName: 'James',
+                lastName: 'Macaroni',
+                image: '',
+                color: '#13475d',
+                visible: false,
+            },
+            {
+                id: 'ferdi-id',
+                firstName: 'Ferdi',
+                lastName: 'Mateo',
+                image: '',
+                color: '#bd6638',
+                visible: false,
+            },
+            {
+                id: 'anna-id',
+                firstName: 'Anna',
+                lastName: 'Marie',
+                image: '',
+                color: '#880b73',
+                visible: false,
             },
         ],
     };
+
+    const [teamConfig, setTeamConfig] = useState<TeamConfig>(initialTeamConfig);
 
     const toolbarConfig: Partial<ToolbarConfig> = {
         fontColor: '#fff',
@@ -211,6 +272,17 @@ export default function App(): ReactElement {
         setCurrentDate(newDate);
     };
 
+    const handleChangeTeamList = (userId: string, checked: boolean): void => {
+        const updatedTeams = teamConfig.teams.map((team) =>
+            team.id === userId ? { ...team, visible: checked } : team
+        );
+
+        setTeamConfig({
+            ...teamConfig,
+            teams: updatedTeams,
+        });
+    };
+
     return (
         <AppContainer data-testid="app">
             <Button onClick={toggleDrawer(!open)}>drawer</Button>
@@ -221,6 +293,8 @@ export default function App(): ReactElement {
                     weekStartOn={'monday'}
                     showWeekNumber={false}
                     config={config}
+                    teamConfig={teamConfig}
+                    onChangeTeamList={handleChangeTeamList}
                 />
             </Drawer>
 

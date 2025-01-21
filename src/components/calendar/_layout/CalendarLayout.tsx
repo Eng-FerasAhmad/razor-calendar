@@ -31,6 +31,10 @@ export default function CalendarLayout({
         onViewChange(initView);
     }, [initView, onViewChange]);
 
+    const teamsHasVisibleItems = (): boolean => {
+        return teamConfig.teams.some((user) => user.visible);
+    };
+
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
@@ -60,11 +64,17 @@ export default function CalendarLayout({
             case 'agenda':
                 return <Agenda />;
             case 'team':
-                return (
+                return teamsHasVisibleItems() ? (
                     <Team
                         appointments={appointments}
                         selectedDate={selectedDate}
                         teamConfig={teamConfig}
+                        handleChangeAppointment={handleChangeAppointment}
+                    />
+                ) : (
+                    <Day
+                        appointments={appointments}
+                        selectedDate={selectedDate}
                         handleChangeAppointment={handleChangeAppointment}
                     />
                 );

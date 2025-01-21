@@ -49,6 +49,7 @@
         "edit": "Bearbeiten",
         "delete": "Löschen",
         "options": "Weiter Aktionen",
-        "notAssign": "Noch nicht zugewiesen"
+        "notAssign": "Noch nicht zugewiesen",
+        "search": "Suchen"
     }
 }

@@ -54,19 +54,23 @@ export default function Week({
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
                 >
-                    {teamConfig.teams.map((user, i) => (
-                        <DayColumns
-                            key={user.id + i}
-                            day={selectedDate}
-                            interval={interval}
-                            appointments={updatedAppointments.filter(
-                                (appointment) => appointment.assign === user.id
-                            )}
-                            fullDayAppointments={fullDayAppointments.filter(
-                                (fullDay) => fullDay.assign === user.id
-                            )}
-                        />
-                    ))}
+                    {teamConfig.teams
+                        .filter((item) => item.visible)
+                        .map((user, i) => (
+                            <DayColumns
+                                key={user.id + i}
+                                day={selectedDate}
+                                interval={interval}
+                                appointments={updatedAppointments.filter(
+                                    (appointment) =>
+                                        appointment.assign === user.id &&
+                                        user.visible
+                                )}
+                                fullDayAppointments={fullDayAppointments.filter(
+                                    (fullDay) => fullDay.assign === user.id
+                                )}
+                            />
+                        ))}
 
                     <DragOverlay dropAnimation={null}>
                         {activeDrag && (
