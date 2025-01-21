@@ -12,8 +12,6 @@ import { TeamConfig } from 'types/teamConfig';
 interface SidebarProps {
     currentDate: DateTime;
     onChangeDate: (newDate: DateTime) => void;
-    weekStartOn: 'sunday' | 'monday';
-    showWeekNumber: boolean;
     config: RazorCalendarConfig<CalendarConfig>;
     teamConfig: TeamConfig;
     onChangeTeamList: (userId: string, checked: boolean) => void;

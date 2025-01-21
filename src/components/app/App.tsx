@@ -290,8 +290,6 @@ export default function App(): ReactElement {
                 <RazorCalendarSidebar
                     currentDate={currentDate}
                     onChangeDate={handleChangeDate}
-                    weekStartOn={'monday'}
-                    showWeekNumber={false}
                     config={config}
                     teamConfig={teamConfig}
                     onChangeTeamList={handleChangeTeamList}

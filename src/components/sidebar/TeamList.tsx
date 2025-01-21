@@ -45,7 +45,8 @@ export default function TeamList({
                 sx={{
                     width: '100%',
                     boxShadow: 'none',
-                    backgroundColor: 'transparent',
+                    backgroundColor: '#fff',
+                    position: 'static',
                     color: theme.palette.text.primary,
                     padding: 0,
                     margin: 0, // Ensure no margin is applied by default
@@ -60,7 +61,6 @@ export default function TeamList({
                             minHeight: '30px', // No change in height when expanded
                         },
                     },
-                    position: 'static',
                 }}
             >
                 <AccordionSummary
@@ -78,7 +78,19 @@ export default function TeamList({
                         '& .MuiAccordionSummary-content': {
                             margin: 0,
                             padding: 0, // Remove default content padding
-                            alignItems: 'center', // Ensure content alignment
+                            '&.Mui-expanded': {
+                                margin: 0, // Remove margin for expanded content
+                            },
+                        },
+                        '& .MuiAccordionSummary-contentGutters': {
+                            margin: 0, // Ensure no additional gutter margin
+                            padding: 0, // Remove gutter padding
+                            '&.Mui-expanded': {
+                                margin: 0, // Remove gutter margin on expand
+                            },
+                        },
+                        '& .MuiAccordionSummary-expandIconWrapper': {
+                            marginRight: 0, // Remove right padding for expand icon
                         },
                     }}
                 >
@@ -96,7 +108,7 @@ export default function TeamList({
                 </AccordionSummary>
                 <AccordionDetails
                     sx={{
-                        maxHeight: '300px',
+                        maxHeight: '250px',
                         padding: 0,
                         overflowY: 'auto',
                     }}
