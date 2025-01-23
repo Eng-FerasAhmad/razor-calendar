@@ -49,13 +49,13 @@ export function RazorCalendarSidebar({
                     }}
                     sx={{
                         color: '#4d4d4d',
-                        width: '290px',
-
-                        maxHeight: '300px',
-                        height: '300px',
-
+                        width: '250px', // Adjust the calendar's width
+                        height: '265px',
                         '& .MuiPickersDay-root': {
-                            borderRadius: '50%',
+                            width: '30px', // Set the day cell width
+                            height: '30px', // Set the day cell height
+                            fontSize: '12px', // Adjust font size for day numbers
+                            borderRadius: '50%', // Keep the circular shape
 
                             '&:hover': {
                                 backgroundColor: palette.action.hover, // Hover effect
@@ -63,23 +63,22 @@ export function RazorCalendarSidebar({
                             },
                             '&.Mui-selected': {
                                 color: '#fff', // Selected day text color
+                                // Selected day background
                             },
                         },
                         '& .MuiPickersCalendarHeader-label': {
                             marginRight: 0,
-                            fontSize: '16px',
+                            fontSize: '14px', // Adjust font size for header
                         },
                         '& .MuiPickersYear-yearButton': {
-                            fontSize: '16px', // Smaller font size for year options
+                            fontSize: '12px', // Smaller font size for year options
                         },
                         '& .MuiYearCalendar-root': {
-                            width: '275px',
+                            width: '240px', // Adjust width of the year selection panel
                         },
                         '& .MuiPickersYear-yearButton.Mui-selected': {
                             color: '#fff',
                         },
-                        '& .MuiPickersYear-yearButton:hover': {},
-                        '& .MuiPickersYearPicker-root': {},
                     }}
                 />
 

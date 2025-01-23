@@ -150,8 +150,8 @@ export default function App(): ReactElement {
         teams: [
             {
                 id: 'max-id',
-                firstName: 'Max',
-                lastName: 'Muster',
+                firstName: 'Max Hemlmut',
+                lastName: 'Musterman Bluster',
                 image: 'https://picsum.photos/200/300?grayscale',
                 color: '#6b5b95',
                 visible: true,

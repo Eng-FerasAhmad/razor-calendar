@@ -91,3 +91,8 @@ export const TextBoxTitle = styled('div')(() => ({
     alignItems: 'center',
     marginTop: '4px',
 }));
+
+export const TimeBoxTitle = styled('div')(() => ({
+    display: 'flex',
+    alignItems: 'center',
+}));

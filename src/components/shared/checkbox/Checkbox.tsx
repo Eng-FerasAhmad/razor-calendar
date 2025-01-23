@@ -39,7 +39,7 @@ export default function Checkbox({
             sx={{
                 width: '100%',
                 '& .MuiFormControlLabel-label': {
-                    fontSize: '16px',
+                    fontSize: '14px',
                 },
                 '&:hover': {
                     backgroundColor: theme.palette.action.hover,

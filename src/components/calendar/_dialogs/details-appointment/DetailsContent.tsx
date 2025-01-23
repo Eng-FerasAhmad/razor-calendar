@@ -12,6 +12,7 @@ import {
     DateBox,
     TextBox,
     TextBoxTitle,
+    TimeBoxTitle,
 } from './styles';
 import { formatTimeDifference } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
@@ -116,19 +117,19 @@ export default function DetailsContent(): ReactElement {
             <DateBox data-testid="date-box">
                 <TextBox>
                     <ClockSymbol size={iconSize} />
-                    <TextBoxTitle>{formattedStart}</TextBoxTitle>
+                    <TimeBoxTitle>{formattedStart}</TimeBoxTitle>
                 </TextBox>
 
                 <TextBox>
                     <OutlineClockSymbol size={iconSize} />
-                    <TextBoxTitle>{formattedEnd}</TextBoxTitle>
+                    <TimeBoxTitle>{formattedEnd}</TimeBoxTitle>
                 </TextBox>
             </DateBox>
 
             <ReminderBox>
                 <TextBox>
                     <TimerSymbol size={iconSize} />
-                    <TextBoxTitle>{diffInMinutes}</TextBoxTitle>
+                    <TimeBoxTitle>{diffInMinutes}</TimeBoxTitle>
                 </TextBox>
             </ReminderBox>
 

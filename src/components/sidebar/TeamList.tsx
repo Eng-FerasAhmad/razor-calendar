@@ -42,6 +42,7 @@ export default function TeamList({
             />
 
             <Accordion
+                defaultExpanded
                 sx={{
                     width: '100%',
                     boxShadow: 'none',
@@ -66,7 +67,7 @@ export default function TeamList({
                 <AccordionSummary
                     expandIcon={<ArrowDownSymbol size={16} />}
                     aria-controls="panel1-content"
-                    id="panel1-header"
+                    id="team-panel"
                     data-testid="accordion-summary"
                     sx={{
                         padding: 0,
@@ -91,6 +92,10 @@ export default function TeamList({
                         },
                         '& .MuiAccordionSummary-expandIconWrapper': {
                             marginRight: 0, // Remove right padding for expand icon
+                        },
+                        '&:hover': {
+                            backgroundColor: theme.palette.action.hover,
+                            borderRadius: '3px',
                         },
                     }}
                 >

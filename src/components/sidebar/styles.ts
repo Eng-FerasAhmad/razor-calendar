@@ -13,4 +13,9 @@ export const CheckUsersWrapper = styled('div')({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    width: '220px',
+    maxWidth: '220px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
 });
