@@ -5,7 +5,7 @@ export const TeamListContainer = styled('div')({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    padding: '0 20px',
+    padding: '0 15px',
 });
 
 export const CheckUsersWrapper = styled('div')({
@@ -13,9 +13,4 @@ export const CheckUsersWrapper = styled('div')({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    width: '220px',
-    maxWidth: '220px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
 });

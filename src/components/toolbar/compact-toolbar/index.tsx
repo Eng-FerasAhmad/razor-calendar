@@ -97,7 +97,7 @@ export function RazorToolbarCompact({
                         options={options}
                         onChange={onViewChange}
                         isCompact={true}
-                        borderRadius={1}
+                        borderRadius={10}
                     />
                 </ViewCompactWrapper>
             </ToolbarCompactContainer>

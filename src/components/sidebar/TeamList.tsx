@@ -6,7 +6,7 @@ import {
     Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { ReactElement } from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import Checkbox from 'components/shared/checkbox/Checkbox';
 import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
@@ -28,8 +28,11 @@ export default function TeamList({
     const { t } = useTranslation();
     const theme = useTheme();
 
-    const handleChange = (userId: string, checked: boolean): void => {
-        onChangeTeamList(userId, checked);
+    const handleChange = (
+        userId: string,
+        checked: boolean | ChangeEvent<HTMLInputElement>
+    ): void => {
+        onChangeTeamList(userId, !!checked);
     };
 
     return (
@@ -70,7 +73,8 @@ export default function TeamList({
                     id="team-panel"
                     data-testid="accordion-summary"
                     sx={{
-                        padding: 0,
+                        padding: '0',
+                        borderRadius: '20px',
                         margin: 0,
                         '&.Mui-expanded': {
                             padding: 0,
@@ -81,6 +85,7 @@ export default function TeamList({
                             padding: 0, // Remove default content padding
                             '&.Mui-expanded': {
                                 margin: 0, // Remove margin for expanded content
+                                padding: '0 20px',
                             },
                         },
                         '& .MuiAccordionSummary-contentGutters': {
@@ -88,14 +93,15 @@ export default function TeamList({
                             padding: 0, // Remove gutter padding
                             '&.Mui-expanded': {
                                 margin: 0, // Remove gutter margin on expand
+                                padding: '0 0px',
                             },
                         },
                         '& .MuiAccordionSummary-expandIconWrapper': {
                             marginRight: 0, // Remove right padding for expand icon
+                            padding: '0 20px',
                         },
                         '&:hover': {
                             backgroundColor: theme.palette.action.hover,
-                            borderRadius: '3px',
                         },
                     }}
                 >
@@ -103,7 +109,7 @@ export default function TeamList({
                         data-testid="accordion-text-typography"
                         component="span"
                         sx={{
-                            padding: 0,
+                            padding: '5px 12px',
                             margin: 0, // No margin added
                             flexShrink: 0, // Prevent layout shift
                         }}
@@ -127,6 +133,9 @@ export default function TeamList({
                                 checked={user.visible}
                                 label={`${user.firstName} ${user.lastName}`}
                                 color={user.color}
+                                width="100%"
+                                maxWidth="225px"
+                                fontSize="12px"
                                 size="small"
                                 onChange={(checked) =>
                                     handleChange(user.id, checked)

@@ -45,6 +45,7 @@ export function RazorCalendar({
             <CalendarProvider
                 currentView={view}
                 config={config}
+                teamConfig={teamConfig}
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
                 onExternalSaveAppointment={handleSaveAppointment}

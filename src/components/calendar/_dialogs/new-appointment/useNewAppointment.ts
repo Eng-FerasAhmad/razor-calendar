@@ -16,6 +16,8 @@ export interface UseWeekAppointmentReturn {
     setIsFullDay: (isFullDay: boolean) => void;
     color: string;
     setColor: (color: string) => void;
+    assign: string[];
+    setAssign: (assign: string[]) => void;
     is24Hours: boolean;
     dateFormat: string;
     handleSave: () => void;
@@ -43,6 +45,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     const [notes, setNotes] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
     const [color, setColor] = useState('#33b679');
+    const [assign, setAssign] = useState<string[]>([]);
     const [titleRequired, setTitleRequired] = useState(false);
 
     useEffect(() => {
@@ -102,6 +105,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             isFullDay,
             color,
             notes,
+            assign,
         };
         onSaveAppointment(appointment);
         onDialogAppointment(undefined);
@@ -120,6 +124,8 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         setIsFullDay,
         color,
         setColor,
+        assign,
+        setAssign,
         is24Hours,
         dateFormat,
         handleSave,

@@ -95,7 +95,7 @@ export default function TeamHeaderRow({
                             <FullDaysAppointment
                                 key={user.id}
                                 fullDayAppointments={fullDayAppointments.filter(
-                                    (fullDay) => fullDay.assign === user.id
+                                    (fullDay) => fullDay.assign![0] === user.id
                                 )}
                                 days={[selectedDate]}
                             />

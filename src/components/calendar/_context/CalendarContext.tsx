@@ -16,11 +16,13 @@ import {
 } from 'calendar/_context/types';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
+import { TeamConfig } from 'types/teamConfig';
 
 interface Props {
     currentView: ViewType;
     children: ReactNode;
     config: RazorCalendarConfig<CalendarConfig>;
+    teamConfig: TeamConfig | undefined;
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
     onExternalSaveAppointment: (appointment: Appointment) => void;
@@ -30,6 +32,7 @@ interface Props {
 export const CalendarContext = createContext<CalendarContextProps>({
     view: 'week',
     config: basicConfig,
+    teamConfig: undefined,
     appointments: [],
     savedAppointment: undefined,
     language: 'en',
@@ -54,6 +57,7 @@ export function CalendarProvider({
     currentView,
     children,
     config,
+    teamConfig,
     onExternalViewChange,
     onExternalChangeDate,
     onExternalSaveAppointment,
@@ -144,6 +148,7 @@ export function CalendarProvider({
             value={{
                 view,
                 config: mergedConfig,
+                teamConfig,
                 selectedDate,
                 language,
                 appointments,

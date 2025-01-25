@@ -1,13 +1,16 @@
 import { FormControlLabel, Checkbox as MUICheckbox } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import React from 'react';
+import { ReactElement } from 'react';
 
-interface CheckboxProps {
+interface Props {
     checked: boolean;
     onChange: (checked: boolean) => void;
     label: string;
     size?: 'small' | 'medium';
+    fontSize?: string;
     color?: string;
+    width?: string;
+    maxWidth?: string;
 }
 
 export default function Checkbox({
@@ -16,7 +19,10 @@ export default function Checkbox({
     label,
     size = 'medium',
     color,
-}: CheckboxProps): React.ReactElement {
+    width,
+    maxWidth,
+    fontSize,
+}: Props): ReactElement {
     const theme = useTheme();
 
     return (
@@ -37,9 +43,18 @@ export default function Checkbox({
             }
             label={label}
             sx={{
-                width: '100%',
+                width: width || 'fit-content',
+                maxWidth,
+                padding: '0',
+                margin: 0,
+                borderRadius: '20px',
                 '& .MuiFormControlLabel-label': {
-                    fontSize: '14px',
+                    fontSize: fontSize ? '14px' : '16px',
+                    display: 'block',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    maxWidth: maxWidth || 'inherit',
                 },
                 '&:hover': {
                     backgroundColor: theme.palette.action.hover,

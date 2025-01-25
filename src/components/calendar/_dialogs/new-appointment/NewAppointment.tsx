@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { useNewAppointment } from './useNewAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import AssignLIst from 'calendar/_dialogs/new-appointment/AssignLIst';
 import Button from 'components/shared/button/Button';
 import Checkbox from 'components/shared/checkbox/Checkbox';
 import { DialogCustom } from 'components/shared/dialog/Dialog';
@@ -37,10 +38,13 @@ export default function NewAppointment(): ReactElement {
         dateFormat,
         handleSave,
         titleRequired,
+        assign,
+        setAssign,
     } = useNewAppointment();
     const { t } = useTranslation();
     const theme = useTheme();
-    const { dialogAppointment, onDialogAppointment } = useCalendarContext();
+    const { dialogAppointment, onDialogAppointment, teamConfig } =
+        useCalendarContext();
 
     const [toTimeError, setToTimeError] = useState(false);
     const [toDateError, setToDateError] = useState(false);
@@ -129,6 +133,10 @@ export default function NewAppointment(): ReactElement {
         setNotes(event.target.value);
     };
 
+    const handleAssignChange = (list: string[]): void => {
+        setAssign(list);
+    };
+
     const isSaveDisabled = toTimeError || toDateError || titleError;
 
     return (
@@ -144,7 +152,7 @@ export default function NewAppointment(): ReactElement {
                         value={title}
                         onChange={handleTitleChange}
                         fullWidth
-                        size="medium"
+                        size="small"
                         error={titleError || titleRequired}
                     />
                 </TitleRowWrapper>
@@ -174,6 +182,7 @@ export default function NewAppointment(): ReactElement {
                     <Checkbox
                         checked={isFullDay}
                         onChange={setIsFullDay}
+                        width={'200px'}
                         label={t('add.fullDay', { ns: 'common' })}
                     />
                 </RowWrapper>
@@ -214,6 +223,12 @@ export default function NewAppointment(): ReactElement {
                     />
                     <SelectColor value={color} onChange={setColor} />
                 </RowWrapper>
+
+                <AssignLIst
+                    teamList={teamConfig?.teams}
+                    assign={assign}
+                    onChange={handleAssignChange}
+                />
 
                 <TitleRowWrapper>
                     <TextField
