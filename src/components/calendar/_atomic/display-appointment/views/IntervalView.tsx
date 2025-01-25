@@ -10,9 +10,13 @@ import { Appointment } from 'types/appointment';
 
 interface Props {
     appointment: Appointment;
+    color: string;
 }
 
-export default function IntervalView({ appointment }: Props): ReactElement {
+export default function IntervalView({
+    appointment,
+    color,
+}: Props): ReactElement {
     const { onPopperAppointment, config } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
@@ -29,7 +33,7 @@ export default function IntervalView({ appointment }: Props): ReactElement {
 
     return (
         <IntervalViewContainer
-            color={appointment.color || config.style.primaryColor}
+            color={color || config.style.primaryColor}
             data-testid="interval-view-container"
             onClick={popperHandler}
         >

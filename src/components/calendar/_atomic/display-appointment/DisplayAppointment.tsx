@@ -14,6 +14,7 @@ interface Props {
         overlapIndex: number,
         totalOverlaps: number
     ) => { top: string; height: string; width: string; left: string };
+    userId?: string;
 }
 
 export default function DisplayAppointment({
@@ -21,6 +22,7 @@ export default function DisplayAppointment({
     appointments,
     calculatePosition,
     fullDayAppointments,
+    userId,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
 
@@ -61,6 +63,14 @@ export default function DisplayAppointment({
         }
     );
 
+    const getColor = (appointment: Appointment): string | undefined => {
+        const assignedUser = appointment.assign?.find(
+            (user) => user.id === userId
+        );
+
+        return assignedUser?.color;
+    };
+
     return (
         <>
             {groupedAppointments.map((appointment) => {
@@ -74,7 +84,9 @@ export default function DisplayAppointment({
                         style={appointment.position}
                         from={start.toString()}
                         to={DateTime.fromISO(appointment.end).toString()}
-                        color={appointment.color || config.style.primaryColor}
+                        color={
+                            getColor(appointment) || config.style.primaryColor
+                        }
                         appointment={appointment}
                     />
                 );

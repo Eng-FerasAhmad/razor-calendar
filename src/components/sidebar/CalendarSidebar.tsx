@@ -13,7 +13,7 @@ interface SidebarProps {
     currentDate: DateTime;
     onChangeDate: (newDate: DateTime) => void;
     config: RazorCalendarConfig<CalendarConfig>;
-    teamConfig: TeamModel;
+    teamModel: TeamModel;
     onChangeTeamList: (userId: string, checked: boolean) => void;
 }
 
@@ -21,7 +21,7 @@ export function RazorCalendarSidebar({
     currentDate,
     onChangeDate,
     config,
-    teamConfig,
+    teamModel,
     onChangeTeamList,
 }: SidebarProps): ReactElement {
     const theme = createDynamicTheme(config);
@@ -83,7 +83,7 @@ export function RazorCalendarSidebar({
                 />
 
                 <TeamList
-                    teamConfig={teamConfig}
+                    teamModel={teamModel}
                     onChangeTeamList={onChangeTeamList}
                 />
             </LocalizationProvider>

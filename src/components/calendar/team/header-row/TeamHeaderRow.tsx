@@ -91,13 +91,21 @@ export default function TeamHeaderRow({
                 {teamModel.users
                     .filter((item) => item.visible)
                     .map((user) => {
+                        const userFullDayAppointments =
+                            fullDayAppointments.filter(
+                                (fullDay) =>
+                                    fullDay.assign &&
+                                    fullDay.assign.some(
+                                        (assignee) => assignee.id === user.id
+                                    )
+                            );
+
                         return (
                             <FullDaysAppointment
                                 key={user.id}
-                                fullDayAppointments={fullDayAppointments.filter(
-                                    (fullDay) => fullDay.assign![0] === user.id
-                                )}
+                                fullDayAppointments={userFullDayAppointments}
                                 days={[selectedDate]}
+                                userId={user.id}
                             />
                         );
                     })}

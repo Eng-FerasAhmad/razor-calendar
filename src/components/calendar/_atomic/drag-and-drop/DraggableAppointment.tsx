@@ -77,11 +77,13 @@ export default function DraggableAppointment({
         }[] = [
             {
                 condition: (minutes) => minutes <= 45,
-                view: <IntervalView appointment={appointment} />,
+                view: <IntervalView appointment={appointment} color={color} />,
             },
             {
                 condition: (minutes) => minutes <= 45,
-                view: <ZoomIntervalView appointment={appointment} />,
+                view: (
+                    <ZoomIntervalView appointment={appointment} color={color} />
+                ),
             },
         ];
 
@@ -90,7 +92,7 @@ export default function DraggableAppointment({
             if (condition(diffInMinutes!)) return view;
         }
 
-        return <StandardView appointment={appointment} />;
+        return <StandardView appointment={appointment} color={color} />;
     };
 
     return (

@@ -17,12 +17,12 @@ import {
 import { TeamMember, TeamModel } from 'types/teamModel';
 
 interface Props {
-    teamConfig: TeamModel;
+    teamModel: TeamModel;
     onChangeTeamList: (userId: string, checked: boolean) => void;
 }
 
 export default function TeamList({
-    teamConfig,
+    teamModel,
     onChangeTeamList,
 }: Props): ReactElement {
     const { t } = useTranslation();
@@ -124,7 +124,7 @@ export default function TeamList({
                         overflowY: 'auto',
                     }}
                 >
-                    {teamConfig.users.map((user: TeamMember) => (
+                    {teamModel.users.map((user: TeamMember) => (
                         <CheckUsersWrapper
                             key={user.id}
                             data-testid="check-user"

@@ -10,9 +10,13 @@ import { Appointment } from 'types/appointment';
 
 interface Props {
     appointment: Appointment;
+    color: string;
 }
 
-export default function StandardView({ appointment }: Props): ReactElement {
+export default function StandardView({
+    appointment,
+    color,
+}: Props): ReactElement {
     const { onPopperAppointment, config } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
@@ -29,7 +33,7 @@ export default function StandardView({ appointment }: Props): ReactElement {
 
     return (
         <StandardViewContainer
-            color={appointment.color || config.style.primaryColor}
+            color={color || config.style.primaryColor}
             data-testid="standard-view-container"
             onClick={popperHandler}
         >

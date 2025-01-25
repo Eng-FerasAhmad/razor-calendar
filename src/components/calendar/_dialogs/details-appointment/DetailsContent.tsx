@@ -38,7 +38,7 @@ export default function DetailsContent(): ReactElement {
     const { t } = useTranslation();
     const iconSize = 20;
     const { appointment } = popperAppointment || {};
-    const { title, start, end, color, assign, isFullDay } = appointment || {};
+    const { title, start, end, assign, isFullDay } = appointment || {};
     const { dateFormat } = config.common;
 
     const diffInMinutes = formatTimeDifference(start!, end!, isFullDay!);
@@ -79,29 +79,29 @@ export default function DetailsContent(): ReactElement {
     return (
         <DetailsContentContainer
             data-testid="details-content-container"
-            color={color || '#ccc'}
+            color={assign![0].color || '#ccc'}
         >
-            <HeaderBox data-testid="header-box" color={color}>
+            <HeaderBox data-testid="header-box" color={assign![0].color}>
                 <Tooltip title={t('actions.edit', { ns: 'common' })}>
-                    <IconWrapper color={color} onClick={handleEdit}>
+                    <IconWrapper color={assign![0].color} onClick={handleEdit}>
                         <EditSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.delete', { ns: 'common' })}>
-                    <IconWrapper color={color} onClick={onDelete}>
+                    <IconWrapper color={assign![0].color} onClick={onDelete}>
                         <DeleteSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.options', { ns: 'common' })}>
-                    <IconWrapper color={color}>
+                    <IconWrapper color={assign![0].color}>
                         <MenuSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.close', { ns: 'common' })}>
-                    <IconWrapper color={color} onClick={handleClose}>
+                    <IconWrapper color={assign![0].color} onClick={handleClose}>
                         <CloseSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
@@ -137,7 +137,9 @@ export default function DetailsContent(): ReactElement {
                 <TextBox>
                     <UserSymbol size={iconSize} />
                     <TextBoxTitle>
-                        {assign || t('actions.notAssign', { ns: 'common' })}
+                        {(assign &&
+                            `${assign[0].firstName} ${assign[0].lastName}`) ||
+                            t('actions.notAssign', { ns: 'common' })}
                     </TextBoxTitle>
                 </TextBox>
             </CalendarBox>

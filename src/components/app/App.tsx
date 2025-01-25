@@ -18,15 +18,24 @@ export default function App(): ReactElement {
         setOpen(newOpen);
     };
 
-    const appointments = [
+    const appointments: Appointment[] = [
         {
             id: '1',
             title: 'Meeting at these times are very important',
             start: '2025-01-23T13:00',
             end: '2025-01-23T14:30',
             isFullDay: true,
-            color: '#6b5b95',
-            assign: ['max-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'max-id',
+                    firstName: 'Max Hemlmut',
+                    lastName: 'Musterman Bluster',
+                    image: 'https://picsum.photos/200/300?grayscale',
+                    color: '#6b5b95',
+                    visible: true,
+                },
+            ],
         },
         {
             id: '2',
@@ -34,8 +43,25 @@ export default function App(): ReactElement {
             start: '2025-01-23T09:00',
             end: '2025-01-23T11:00',
             isFullDay: false,
-            color: '#ff7b25',
-            assign: ['martin-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'martin-id',
+                    firstName: 'Martin',
+                    lastName: 'Klaus',
+                    image: '',
+                    color: '#ff7b25',
+                    visible: true,
+                },
+                {
+                    id: 'jef-id',
+                    firstName: 'Jef',
+                    lastName: 'Santos',
+                    image: '',
+                    color: '#329b9b',
+                    visible: false,
+                },
+            ],
         },
         {
             id: '3',
@@ -43,8 +69,17 @@ export default function App(): ReactElement {
             start: '2025-01-23T13:00',
             end: '2025-01-23T14:00',
             isFullDay: false,
-            color: '#919092',
-            assign: ['id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'id',
+                    firstName: '',
+                    lastName: '',
+                    image: '',
+                    color: '#919092',
+                    visible: true,
+                },
+            ],
         },
         {
             id: '4',
@@ -52,8 +87,17 @@ export default function App(): ReactElement {
             start: '2025-01-24T13:00',
             end: '2025-01-24T15:00',
             isFullDay: true,
-            color: '#6b5b95',
-            assign: ['max-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'max-id',
+                    firstName: 'Max Hemlmut',
+                    lastName: 'Musterman Bluster',
+                    image: 'https://picsum.photos/200/300?grayscale',
+                    color: '#6b5b95',
+                    visible: true,
+                },
+            ],
         },
         {
             id: '5',
@@ -61,8 +105,17 @@ export default function App(): ReactElement {
             start: '2025-01-23T14:30',
             end: '2025-01-23T15:30',
             isFullDay: true,
-            color: '#6b5b95',
-            assign: ['max-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'max-id',
+                    firstName: 'Max Hemlmut',
+                    lastName: 'Musterman Bluster',
+                    image: 'https://picsum.photos/200/300?grayscale',
+                    color: '#6b5b95',
+                    visible: true,
+                },
+            ],
         },
         {
             id: '6',
@@ -70,14 +123,23 @@ export default function App(): ReactElement {
             start: '2025-01-24T10:00',
             end: '2025-01-24T12:10',
             isFullDay: false,
-            color: '#880b73',
+            color: '#33b679',
             canceled: false,
             draggable: true,
             editable: true,
             available: false,
             visibility: true,
             location: 'id',
-            assign: ['anna-id'],
+            assign: [
+                {
+                    id: 'anna-id',
+                    firstName: 'Anna',
+                    lastName: 'Marie',
+                    image: '',
+                    color: '#880b73',
+                    visible: false,
+                },
+            ],
         },
         {
             id: '7',
@@ -85,8 +147,17 @@ export default function App(): ReactElement {
             start: '2025-01-24T13:00',
             end: '2025-01-24T14:00',
             isFullDay: false,
-            color: '#919092',
-            assign: ['id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'id',
+                    firstName: '',
+                    lastName: '',
+                    image: '',
+                    color: '#919092',
+                    visible: true,
+                },
+            ],
         },
         {
             id: '8',
@@ -94,8 +165,17 @@ export default function App(): ReactElement {
             start: '2025-01-24T12:00',
             end: '2025-01-24T13:00',
             isFullDay: true,
-            color: '#919092',
-            assign: ['id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'id',
+                    firstName: '',
+                    lastName: '',
+                    image: '',
+                    color: '#919092',
+                    visible: true,
+                },
+            ],
         },
         {
             id: '9',
@@ -103,8 +183,17 @@ export default function App(): ReactElement {
             start: '2025-01-23T13:00',
             end: '2025-01-23T13:30',
             isFullDay: true,
-            color: '#bd6638',
-            assign: ['ferdi-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'ferdi-id',
+                    firstName: 'Ferdi',
+                    lastName: 'Mateo',
+                    image: '',
+                    color: '#bd6638',
+                    visible: false,
+                },
+            ],
         },
         {
             id: '10',
@@ -112,8 +201,17 @@ export default function App(): ReactElement {
             start: '2025-01-24T11:00',
             end: '2025-01-24T13:00',
             isFullDay: true,
-            color: '#880b73',
-            assign: ['anna-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'anna-id',
+                    firstName: 'Anna',
+                    lastName: 'Marie',
+                    image: '',
+                    color: '#880b73',
+                    visible: false,
+                },
+            ],
         },
         {
             id: '11',
@@ -121,8 +219,17 @@ export default function App(): ReactElement {
             start: '2025-01-24T13:00',
             end: '2025-01-24T14:30',
             isFullDay: true,
-            color: '#329b9b',
-            assign: ['jef-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'jef-id',
+                    firstName: 'Jef',
+                    lastName: 'Santos',
+                    image: '',
+                    color: '#329b9b',
+                    visible: false,
+                },
+            ],
         },
         {
             id: '12',
@@ -130,8 +237,17 @@ export default function App(): ReactElement {
             start: '2025-01-23T13:00',
             end: '2025-01-23T14:00',
             isFullDay: false,
-            color: '#3e4444',
-            assign: ['muster-id'],
+            color: '#33b679',
+            assign: [
+                {
+                    id: 'muster-id',
+                    firstName: 'Muster Kurt',
+                    lastName: 'Lux',
+                    image: 'https://picsum.photos/seed/picsum/200/300',
+                    color: '#3e4444',
+                    visible: false,
+                },
+            ],
         },
     ];
 
@@ -297,7 +413,7 @@ export default function App(): ReactElement {
                     currentDate={currentDate}
                     onChangeDate={handleChangeDate}
                     config={config}
-                    teamConfig={teamModel}
+                    teamModel={teamModel}
                     onChangeTeamList={handleChangeTeamList}
                 />
             </Drawer>

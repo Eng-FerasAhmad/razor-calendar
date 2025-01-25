@@ -1,3 +1,5 @@
+import { TeamMember } from 'types/teamModel';
+
 export type ViewType = 'team' | 'day' | 'week' | 'month' | 'year' | 'agenda';
 
 export interface Appointment {
@@ -5,7 +7,7 @@ export interface Appointment {
     title: string;
     start: string; // ISO string
     end: string; // ISO string
-    assign?: string[];
+    assign?: TeamMember[];
     duration?: string;
     status?: string;
     notes?: string;

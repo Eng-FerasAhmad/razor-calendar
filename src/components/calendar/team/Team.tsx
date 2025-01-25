@@ -55,22 +55,39 @@ export default function Week({
                     modifiers={[restrictToWindowEdges]}
                 >
                     {teamModel.users
-                        .filter((item) => item.visible)
-                        .map((user, i) => (
-                            <DayColumns
-                                key={user.id + i}
-                                day={selectedDate}
-                                interval={interval}
-                                appointments={updatedAppointments.filter(
-                                    (appointment) =>
-                                        appointment.assign![0] === user.id &&
-                                        user.visible
-                                )}
-                                fullDayAppointments={fullDayAppointments.filter(
-                                    (fullDay) => fullDay.assign![0] === user.id
-                                )}
-                            />
-                        ))}
+                        .filter((user) => user.visible)
+                        .map((user, i) => {
+                            const userAppointments = updatedAppointments.filter(
+                                (appointment) =>
+                                    appointment.assign &&
+                                    appointment.assign.some(
+                                        (assignee) => assignee.id === user.id
+                                    )
+                            );
+
+                            const userFullDayAppointments =
+                                fullDayAppointments.filter(
+                                    (fullDay) =>
+                                        fullDay.assign &&
+                                        fullDay.assign.some(
+                                            (assignee) =>
+                                                assignee.id === user.id
+                                        )
+                                );
+
+                            return (
+                                <DayColumns
+                                    key={user.id + i}
+                                    day={selectedDate}
+                                    interval={interval}
+                                    appointments={userAppointments}
+                                    fullDayAppointments={
+                                        userFullDayAppointments
+                                    }
+                                    userId={user.id}
+                                />
+                            );
+                        })}
 
                     <DragOverlay dropAnimation={null}>
                         {activeDrag && (
