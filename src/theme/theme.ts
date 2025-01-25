@@ -1,6 +1,5 @@
 import { createTheme, Theme } from '@mui/material/styles';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
-import { ToolbarConfig } from 'types/toolbarConfig';
 
 declare module '@mui/material/styles' {
     interface Palette {
@@ -18,15 +17,9 @@ declare module '@mui/material/styles' {
 }
 
 export const createDynamicTheme = (
-    config: RazorCalendarConfig<CalendarConfig> | Partial<ToolbarConfig>
+    config: RazorCalendarConfig<CalendarConfig>
 ): Theme => {
-    let primaryColor = '#33b679'; // Default color
-
-    if ('primaryColor' in config && config.primaryColor) {
-        primaryColor = config.primaryColor;
-    } else if ('style' in config && config.style?.primaryColor) {
-        primaryColor = config.style.primaryColor;
-    }
+    const primaryColor = config.style!.primaryColor || '#33b679'; // Default color
 
     return createTheme({
         palette: {

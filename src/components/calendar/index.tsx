@@ -10,14 +10,14 @@ import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import '../../i18n/i18n';
-import { TeamConfig } from 'types/teamConfig';
+import { TeamModel } from 'types/teamModel';
 
 export interface Props {
     appointments: Appointment[];
     view: ViewType;
     selectedDate: DateTime;
     config: RazorCalendarConfig<CalendarConfig>;
-    teamConfig: TeamConfig;
+    teamModel: TeamModel;
     handleChangeAppointment: (appointment: Appointment) => void;
     handleSaveAppointment: (appointment: Appointment) => void;
     handleDeleteAppointment: (appointment: Appointment) => void;
@@ -30,7 +30,7 @@ export function RazorCalendar({
     view,
     config,
     selectedDate,
-    teamConfig,
+    teamModel,
     handleChangeAppointment,
     handleSaveAppointment,
     handleDeleteAppointment,
@@ -45,7 +45,7 @@ export function RazorCalendar({
             <CalendarProvider
                 currentView={view}
                 config={config}
-                teamConfig={teamConfig}
+                teamModel={teamModel}
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
                 onExternalSaveAppointment={handleSaveAppointment}
@@ -58,7 +58,7 @@ export function RazorCalendar({
                     initView={view}
                     selectedDate={selectedDate}
                     appointments={appointments}
-                    teamConfig={teamConfig}
+                    teamModel={teamModel}
                     handleChangeAppointment={handleChangeAppointment}
                 />
             </CalendarProvider>

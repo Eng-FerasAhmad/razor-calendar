@@ -8,8 +8,7 @@ import { RazorCalendarSidebar } from 'components/sidebar/CalendarSidebar';
 import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
-import { TeamConfig } from 'types/teamConfig';
-import { ToolbarConfig } from 'types/toolbarConfig';
+import { TeamModel } from 'types/teamModel';
 
 export default function App(): ReactElement {
     const locale = 'de-DE';
@@ -154,10 +153,13 @@ export default function App(): ReactElement {
             locale,
             dateFormat: 'dd.MM.yyyy',
         },
+        style: {
+            primaryColor: '#33b679',
+        },
     };
 
-    const initialTeamConfig: TeamConfig = {
-        teams: [
+    const initialTeam: TeamModel = {
+        users: [
             {
                 id: 'max-id',
                 firstName: 'Max Hemlmut',
@@ -241,13 +243,7 @@ export default function App(): ReactElement {
         ],
     };
 
-    const [teamConfig, setTeamConfig] = useState<TeamConfig>(initialTeamConfig);
-
-    const toolbarConfig: Partial<ToolbarConfig> = {
-        fontColor: '#fff',
-        locale,
-        dateFormat: 'dd.MM.yyyy',
-    };
+    const [teamModel, setTeamModel] = useState<TeamModel>(initialTeam);
 
     // State for CalendarToolbar and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('team');
@@ -283,13 +279,13 @@ export default function App(): ReactElement {
     };
 
     const handleChangeTeamList = (userId: string, checked: boolean): void => {
-        const updatedTeams = teamConfig.teams.map((team) =>
+        const updatedTeams = teamModel.users.map((team) =>
             team.id === userId ? { ...team, visible: checked } : team
         );
 
-        setTeamConfig({
-            ...teamConfig,
-            teams: updatedTeams,
+        setTeamModel({
+            ...teamModel,
+            users: updatedTeams,
         });
     };
 
@@ -301,7 +297,7 @@ export default function App(): ReactElement {
                     currentDate={currentDate}
                     onChangeDate={handleChangeDate}
                     config={config}
-                    teamConfig={teamConfig}
+                    teamConfig={teamModel}
                     onChangeTeamList={handleChangeTeamList}
                 />
             </Drawer>
@@ -311,7 +307,7 @@ export default function App(): ReactElement {
                 onViewChange={handleViewChange}
                 currentDate={currentDate}
                 onNavigate={handleNavigate}
-                toolbarConfig={toolbarConfig}
+                config={config}
             />
 
             <RazorCalendar
@@ -324,7 +320,7 @@ export default function App(): ReactElement {
                 selectedDate={currentDate}
                 onChangeDate={onChangeDate}
                 config={config}
-                teamConfig={teamConfig}
+                teamModel={teamModel}
             />
         </AppContainer>
     );

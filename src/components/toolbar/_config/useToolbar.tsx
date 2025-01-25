@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { baseToolbarConfig } from 'components/toolbar/_config/baseToolbarConfig';
 import { ToolbarProps } from 'components/toolbar/_config/types';
-import { mergeToolbarConfig } from 'components/toolbar/_config/utils';
 import { ViewType } from 'types/appointment';
 import { navigate } from 'utils/constants';
 
 interface UseToolbarLogicReturn {
-    config: ReturnType<typeof mergeToolbarConfig>;
     handleClickToday: () => void;
     handleClickNext: () => void;
     handleClickPrev: () => void;
@@ -21,14 +18,13 @@ export const useToolbar = ({
     currentView,
     currentDate,
     onNavigate,
-    toolbarConfig,
+    config,
 }: ToolbarProps): UseToolbarLogicReturn => {
     const { t, i18n } = useTranslation();
-    const config = mergeToolbarConfig(baseToolbarConfig, toolbarConfig);
 
     useEffect(() => {
-        i18n.changeLanguage(config.locale || 'en');
-    }, [config.locale, i18n]);
+        i18n.changeLanguage(config.common!.locale || 'en');
+    }, [config, i18n]);
 
     const handleClickToday = (): void => {
         const updatedDate = navigate(currentView, currentDate, 'TODAY');
@@ -46,7 +42,7 @@ export const useToolbar = ({
     };
 
     const getTitle = (): string => {
-        const locale = config.locale || 'en';
+        const locale = config.common!.locale || 'en';
 
         switch (currentView) {
             case 'month':
@@ -62,14 +58,14 @@ export const useToolbar = ({
             case 'day': {
                 const dateString = currentDate
                     .setLocale(locale)
-                    .toFormat(config.dateFormat);
+                    .toFormat(config.common!.dateFormat || 'dd-MM-yyy');
                 return `${dateString}`;
             }
             case 'team': {
                 const dayName = currentDate.setLocale(locale).toFormat('EEEE');
                 const dateString = currentDate
                     .setLocale(locale)
-                    .toFormat(config.dateFormat);
+                    .toFormat(config.common!.dateFormat || 'dd-MM-yyy');
                 return `${dayName}, ${dateString}`;
             }
             default:
@@ -123,7 +119,6 @@ export const useToolbar = ({
     ];
 
     return {
-        config,
         options,
         handleClickToday,
         handleClickNext,

@@ -7,13 +7,13 @@ import { ReactElement } from 'react';
 import TeamList from 'components/sidebar/TeamList';
 import { createDynamicTheme } from 'src/theme/theme';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
-import { TeamConfig } from 'types/teamConfig';
+import { TeamModel } from 'types/teamModel';
 
 interface SidebarProps {
     currentDate: DateTime;
     onChangeDate: (newDate: DateTime) => void;
     config: RazorCalendarConfig<CalendarConfig>;
-    teamConfig: TeamConfig;
+    teamConfig: TeamModel;
     onChangeTeamList: (userId: string, checked: boolean) => void;
 }
 

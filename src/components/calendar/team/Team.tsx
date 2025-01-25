@@ -11,19 +11,19 @@ import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
 import { Appointment } from 'types/appointment';
-import { TeamConfig } from 'types/teamConfig';
+import { TeamModel } from 'types/teamModel';
 
 interface Props {
     appointments: Appointment[];
     selectedDate: DateTime;
-    teamConfig: TeamConfig;
+    teamModel: TeamModel;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function Week({
     appointments,
     selectedDate,
-    teamConfig,
+    teamModel,
     handleChangeAppointment,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
@@ -40,7 +40,7 @@ export default function Week({
             <TeamHeaderRow
                 selectedDate={selectedDate}
                 fullDayAppointments={fullDayAppointments}
-                teamConfig={teamConfig}
+                teamModel={teamModel}
             />
 
             <TimeDayWrapper
@@ -54,7 +54,7 @@ export default function Week({
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
                 >
-                    {teamConfig.teams
+                    {teamModel.users
                         .filter((item) => item.visible)
                         .map((user, i) => (
                             <DayColumns

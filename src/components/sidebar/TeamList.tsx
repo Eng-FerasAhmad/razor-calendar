@@ -14,10 +14,10 @@ import {
     CheckUsersWrapper,
     TeamListContainer,
 } from 'components/sidebar/styles';
-import { CalendarUsers, TeamConfig } from 'types/teamConfig';
+import { TeamMember, TeamModel } from 'types/teamModel';
 
 interface Props {
-    teamConfig: TeamConfig;
+    teamConfig: TeamModel;
     onChangeTeamList: (userId: string, checked: boolean) => void;
 }
 
@@ -124,7 +124,7 @@ export default function TeamList({
                         overflowY: 'auto',
                     }}
                 >
-                    {teamConfig.teams.map((user: CalendarUsers) => (
+                    {teamConfig.users.map((user: TeamMember) => (
                         <CheckUsersWrapper
                             key={user.id}
                             data-testid="check-user"

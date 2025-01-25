@@ -4,7 +4,6 @@ export { RazorToolbarCompact } from './components/toolbar/compact-toolbar';
 export { RazorCalendarSidebar } from './components/sidebar/CalendarSidebar';
 
 export type { Appointment, ViewType } from './types/appointment';
-export type { ToolbarConfig } from './types/toolbarConfig';
 export type {
     StyleConfig,
     CalendarConfig,
@@ -19,4 +18,4 @@ export type {
 } from './types/calendarConfig';
 export { navigate } from './utils/constants';
 export type { NavigateAction } from './utils/constants';
-export type { TeamConfig, CalendarUsers } from './types/teamConfig';
+export type { TeamModel, TeamMember } from 'types/teamModel';

@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig } from 'types/calendarConfig';
-import { TeamConfig } from 'types/teamConfig';
+import { TeamModel } from 'types/teamModel';
 
 export interface CalendarContextProps {
     view: ViewType;
     config: CalendarConfig;
-    teamConfig: TeamConfig | undefined;
+    teamModel: TeamModel | undefined;
     selectedDate: DateTime;
     appointments: Appointment[] | undefined;
     savedAppointment: Appointment | undefined;

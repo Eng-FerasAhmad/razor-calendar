@@ -7,14 +7,14 @@ import Team from 'calendar/team/Team';
 import Day from 'day/Day';
 import Month from 'month/Month';
 import { Appointment, ViewType } from 'types/appointment';
-import { TeamConfig } from 'types/teamConfig';
+import { TeamModel } from 'types/teamModel';
 import Week from 'week/Week';
 
 interface Props {
     appointments: Appointment[];
     selectedDate: DateTime;
     initView: ViewType;
-    teamConfig: TeamConfig;
+    teamModel: TeamModel;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
@@ -22,7 +22,7 @@ export default function CalendarLayout({
     selectedDate,
     appointments,
     initView,
-    teamConfig,
+    teamModel,
     handleChangeAppointment,
 }: Props): ReactElement {
     const { view, onViewChange, config } = useCalendarContext();
@@ -32,7 +32,7 @@ export default function CalendarLayout({
     }, [initView, onViewChange]);
 
     const teamsHasVisibleItems = (): boolean => {
-        return teamConfig.teams.some((user) => user.visible);
+        return teamModel.users.some((user) => user.visible);
     };
 
     const renderView = (): ReactElement => {
@@ -68,7 +68,7 @@ export default function CalendarLayout({
                     <Team
                         appointments={appointments}
                         selectedDate={selectedDate}
-                        teamConfig={teamConfig}
+                        teamModel={teamModel}
                         handleChangeAppointment={handleChangeAppointment}
                     />
                 ) : (

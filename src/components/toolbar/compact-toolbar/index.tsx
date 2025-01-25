@@ -2,6 +2,8 @@ import { CssBaseline, darken, ThemeProvider, Tooltip } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
+import { basicConfig } from 'calendar/_config/basicConfig';
+import { mergeConfig } from 'calendar/_config/utils';
 import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
 import CalendarCheckSymbol from 'components/shared/icons/calendar-check/CalendarCheck';
@@ -23,10 +25,9 @@ export function RazorToolbarCompact({
     onViewChange,
     currentDate,
     onNavigate,
-    toolbarConfig,
+    config,
 }: ToolbarProps): ReactElement {
     const {
-        config,
         options,
         handleClickToday,
         handleClickNext,
@@ -39,10 +40,10 @@ export function RazorToolbarCompact({
         onViewChange,
         currentDate,
         onNavigate,
-        toolbarConfig,
+        config,
     });
     const { t } = useTranslation();
-    const theme = createDynamicTheme(config);
+    const theme = createDynamicTheme(mergeConfig(basicConfig, config));
     const today = DateTime.now();
     const isToday = currentDate.hasSame(today, 'day');
 

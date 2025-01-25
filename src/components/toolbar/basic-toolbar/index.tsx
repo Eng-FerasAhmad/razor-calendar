@@ -1,6 +1,8 @@
 import { CssBaseline, darken, ThemeProvider, Tooltip } from '@mui/material';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
+import { basicConfig } from 'calendar/_config/basicConfig';
+import { mergeConfig } from 'calendar/_config/utils';
 import Button from 'components/shared/button/Button';
 import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
@@ -21,10 +23,9 @@ export function RazorToolbarBasic({
     onViewChange,
     currentDate,
     onNavigate,
-    toolbarConfig,
+    config,
 }: ToolbarProps): ReactElement {
     const {
-        config,
         options,
         handleClickToday,
         handleClickNext,
@@ -37,18 +38,23 @@ export function RazorToolbarBasic({
         onViewChange,
         currentDate,
         onNavigate,
-        toolbarConfig,
+        config,
     });
     const { t } = useTranslation();
-
-    const theme = createDynamicTheme(config);
+    const mergedConfig = mergeConfig(basicConfig, config);
+    const theme = createDynamicTheme(mergedConfig);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <ToolbarContainer backgroundColor={config.backgroundColor}>
+            <ToolbarContainer backgroundColor={config.style!.backgroundColor}>
                 <NavigationWrapper>
                     <Button
-                        sx={{ borderColor: darken(config.primaryColor, 0.2) }}
+                        sx={{
+                            borderColor: darken(
+                                config.style!.primaryColor || '',
+                                0.2
+                            ),
+                        }}
                         variant={'outlined'}
                         size={'small'}
                         onClick={handleClickToday}
@@ -59,24 +65,18 @@ export function RazorToolbarBasic({
                     <Tooltip title={getPrevLabel()}>
                         <NavigationIconsWrapper
                             onClick={handleClickPrev}
-                            color={config.primaryColor}
+                            color={config.style!.primaryColor}
                         >
-                            <ArrowPrevSymbol
-                                size={22}
-                                color={config.fontColor}
-                            />
+                            <ArrowPrevSymbol size={22} color={'#fff'} />
                         </NavigationIconsWrapper>
                     </Tooltip>
 
                     <Tooltip title={getNextLabel()}>
                         <NavigationIconsWrapper
                             onClick={handleClickNext}
-                            color={config.primaryColor}
+                            color={'#fff'}
                         >
-                            <ArrowNextSymbol
-                                size={22}
-                                color={config.fontColor}
-                            />
+                            <ArrowNextSymbol size={22} color={'#fff'} />
                         </NavigationIconsWrapper>
                     </Tooltip>
 

@@ -7,7 +7,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
-import { CalendarUsers } from 'types/teamConfig';
+import { TeamMember } from 'types/teamModel';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -29,7 +29,7 @@ function getStyles(id: string, assign: readonly string[], theme: Theme) {
 }
 
 interface Props {
-    teamList: CalendarUsers[] | undefined;
+    teamList: TeamMember[] | undefined;
     assign: string[];
     onChange: (list: string[]) => void;
 }

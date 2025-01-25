@@ -43,7 +43,7 @@ export default function NewAppointment(): ReactElement {
     } = useNewAppointment();
     const { t } = useTranslation();
     const theme = useTheme();
-    const { dialogAppointment, onDialogAppointment, teamConfig } =
+    const { dialogAppointment, onDialogAppointment, teamModel } =
         useCalendarContext();
 
     const [toTimeError, setToTimeError] = useState(false);
@@ -225,7 +225,7 @@ export default function NewAppointment(): ReactElement {
                 </RowWrapper>
 
                 <AssignLIst
-                    teamList={teamConfig?.teams}
+                    teamList={teamModel?.users}
                     assign={assign}
                     onChange={handleAssignChange}
                 />

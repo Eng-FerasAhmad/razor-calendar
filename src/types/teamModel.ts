@@ -1,4 +1,4 @@
-export interface CalendarUsers {
+export interface TeamMember {
     id: string;
     firstName: string;
     lastName: string;
@@ -7,6 +7,6 @@ export interface CalendarUsers {
     visible: boolean;
 }
 
-export interface TeamConfig {
-    teams: CalendarUsers[];
+export interface TeamModel {
+    users: TeamMember[];
 }
