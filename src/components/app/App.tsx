@@ -84,8 +84,8 @@ export default function App(): ReactElement {
         {
             id: '4',
             title: 'Lunch: how about more longer text like this one hier, what you say',
-            start: '2025-01-24T13:00',
-            end: '2025-01-24T15:00',
+            start: '2025-01-23T13:00',
+            end: '2025-01-23T15:00',
             isFullDay: true,
             color: '#33b679',
             assign: [

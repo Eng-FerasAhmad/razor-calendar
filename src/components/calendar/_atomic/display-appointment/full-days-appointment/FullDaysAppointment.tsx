@@ -16,7 +16,7 @@ export default function FullDaysAppointment({
     days,
     userId,
 }: Props): ReactElement {
-    const { config, onUpdateFullDaysCount, showAllFullDays } =
+    const { config, onUpdateFullDaysCount, showAllFullDays, fullDaysCount } =
         useCalendarContext();
     const fullWidth = 100; // Full width in percentage
     const dayWidth = fullWidth / (config.week.showWeekend ? 7 : 5);
@@ -87,8 +87,10 @@ export default function FullDaysAppointment({
 
     // Update the count of rows
     useEffect(() => {
-        onUpdateFullDaysCount(rows.length);
-    }, [rows, onUpdateFullDaysCount]);
+        if (rows.length > fullDaysCount) {
+            onUpdateFullDaysCount(rows.length);
+        }
+    }, [rows, onUpdateFullDaysCount, fullDaysCount]);
 
     // Limit rows based on showAllFullDays
     const visibleRows = showAllFullDays ? rows : rows.slice(0, 2);

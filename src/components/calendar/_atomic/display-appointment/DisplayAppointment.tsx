@@ -63,12 +63,20 @@ export default function DisplayAppointment({
         }
     );
 
-    const getColor = (appointment: Appointment): string | undefined => {
-        const assignedUser = appointment.assign?.find(
-            (user) => user.id === userId
-        );
+    const getColor = (appointment: Appointment): string => {
+        if (userId) {
+            const assignedUser = appointment.assign?.find(
+                (user) => user.id === userId
+            );
 
-        return assignedUser?.color;
+            return assignedUser?.color || config.style.primaryColor;
+        }
+
+        if (appointment.assign?.length === 1) {
+            return appointment.assign[0].color;
+        }
+
+        return config.style.primaryColor;
     };
 
     return (
@@ -84,9 +92,7 @@ export default function DisplayAppointment({
                         style={appointment.position}
                         from={start.toString()}
                         to={DateTime.fromISO(appointment.end).toString()}
-                        color={
-                            getColor(appointment) || config.style.primaryColor
-                        }
+                        color={getColor(appointment)}
                         appointment={appointment}
                     />
                 );

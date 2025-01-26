@@ -1,4 +1,5 @@
 import { Tooltip, Typography } from '@mui/material';
+import Chip from '@mui/material/Chip';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -76,32 +77,40 @@ export default function DetailsContent(): ReactElement {
         });
     };
 
+    const getColor = (): string => {
+        if (assign && assign.length === 1) {
+            return assign[0].color;
+        }
+
+        return config.style.primaryColor;
+    };
+
     return (
         <DetailsContentContainer
             data-testid="details-content-container"
-            color={assign![0].color || '#ccc'}
+            color={getColor()}
         >
-            <HeaderBox data-testid="header-box" color={assign![0].color}>
+            <HeaderBox data-testid="header-box" color={getColor()}>
                 <Tooltip title={t('actions.edit', { ns: 'common' })}>
-                    <IconWrapper color={assign![0].color} onClick={handleEdit}>
+                    <IconWrapper color={getColor()} onClick={handleEdit}>
                         <EditSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.delete', { ns: 'common' })}>
-                    <IconWrapper color={assign![0].color} onClick={onDelete}>
+                    <IconWrapper color={getColor()} onClick={onDelete}>
                         <DeleteSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.options', { ns: 'common' })}>
-                    <IconWrapper color={assign![0].color}>
+                    <IconWrapper color={getColor()}>
                         <MenuSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.close', { ns: 'common' })}>
-                    <IconWrapper color={assign![0].color} onClick={handleClose}>
+                    <IconWrapper color={getColor()} onClick={handleClose}>
                         <CloseSymbol size={18} color="#fff" />
                     </IconWrapper>
                 </Tooltip>
@@ -137,9 +146,26 @@ export default function DetailsContent(): ReactElement {
                 <TextBox>
                     <UserSymbol size={iconSize} />
                     <TextBoxTitle>
-                        {(assign &&
-                            `${assign[0].firstName} ${assign[0].lastName}`) ||
-                            t('actions.notAssign', { ns: 'common' })}
+                        {assign && assign[0].id === 'id' && (
+                            <>{t('actions.notAssign', { ns: 'common' })}</>
+                        )}
+                        {assign &&
+                            assign[0].id !== 'id' &&
+                            assign.map((user) => {
+                                return (
+                                    <Chip
+                                        key={user.id}
+                                        label={`${user.firstName} ${user.lastName}`}
+                                        size={'small'}
+                                        sx={{
+                                            marginRight: '2px',
+                                            bgcolor: user.color,
+                                            color: '#fff',
+                                            fontSize: '12px',
+                                        }}
+                                    />
+                                );
+                            })}
                     </TextBoxTitle>
                 </TextBox>
             </CalendarBox>
