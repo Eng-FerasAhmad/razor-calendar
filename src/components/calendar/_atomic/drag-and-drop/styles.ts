@@ -50,7 +50,7 @@ export const AppointmentWrapper = styled('div', {
         zIndex: 1,
         backgroundColor,
         border: isDragging && isOverlay ? `2px solid gray` : 'none',
-        borderRadius: isDragging && isOverlay ? `5px` : '2px',
+        borderRadius: isDragging && isOverlay ? `5px` : '5px',
         '&:hover': {
             cursor: 'pointer',
         },

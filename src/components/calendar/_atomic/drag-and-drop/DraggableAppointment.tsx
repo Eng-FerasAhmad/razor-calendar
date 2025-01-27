@@ -6,8 +6,8 @@ import IntervalView from 'calendar/_atomic/display-appointment/views/IntervalVie
 import StandardView from 'calendar/_atomic/display-appointment/views/StandardView';
 import ZoomIntervalView from 'calendar/_atomic/display-appointment/views/ZoomIntervalView';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+
 import { Appointment } from 'types/appointment';
-import { darkenColor } from 'utils/colorConverter';
 
 interface Props {
     id: string;
@@ -100,7 +100,7 @@ export default function DraggableAppointment({
             ref={setNodeRef}
             id={id}
             style={dragStyle}
-            backgroundColor={darkenColor(color, 30)}
+            backgroundColor={color}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}

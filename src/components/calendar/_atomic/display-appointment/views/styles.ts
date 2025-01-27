@@ -1,14 +1,17 @@
-import { lighten } from '@mui/material';
 import { styled, Theme } from '@mui/material/styles';
+import {
+    standardLightColor6,
+    standardLightColor7,
+} from 'calendar/_style/colors';
 
 const getBackgroundColor = (theme: Theme, color?: string): string => {
     const baseColor = color || theme.palette.primary.light;
-    return lighten(baseColor, 0.8);
+    return standardLightColor7(baseColor);
 };
 
 const getHoverColor = (theme: Theme, color?: string): string => {
     const baseColor = color || theme.palette.primary.light;
-    return lighten(baseColor, 0.6);
+    return standardLightColor6(baseColor);
 };
 
 // Standard view
@@ -63,7 +66,7 @@ export const IntervalViewContainer = styled('div')<{
     height: '100%',
     padding: 0,
     backgroundColor: getBackgroundColor(theme, color),
-    color: theme.palette.text.primary,
+    color: theme.palette.primary.light,
     transition: 'opacity 0.2s ease',
     '&:hover': {
         backgroundColor: getHoverColor(theme, color),

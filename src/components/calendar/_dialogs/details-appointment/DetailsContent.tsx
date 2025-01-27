@@ -1,4 +1,4 @@
-import { Tooltip, Typography } from '@mui/material';
+import { darken, lighten, Tooltip, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
@@ -17,6 +17,10 @@ import {
 } from './styles';
 import { formatTimeDifference } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import {
+    standardDarkColor7,
+    standardLightColor4,
+} from 'calendar/_style/colors';
 import CalendarSymbol from 'components/shared/icons/calendar/CalendarSymbol';
 import ClockSymbol from 'components/shared/icons/clock/ClockSymbol';
 import OutlineClockSymbol from 'components/shared/icons/clock-outline/OutlineClockSymbol';
@@ -79,10 +83,10 @@ export default function DetailsContent(): ReactElement {
 
     const getColor = (): string => {
         if (assign && assign.length === 1) {
-            return assign[0].color;
+            return standardLightColor4(assign[0].color);
         }
 
-        return config.style.primaryColor;
+        return standardLightColor4(config.style.primaryColor);
     };
 
     return (
@@ -93,25 +97,37 @@ export default function DetailsContent(): ReactElement {
             <HeaderBox data-testid="header-box" color={getColor()}>
                 <Tooltip title={t('actions.edit', { ns: 'common' })}>
                     <IconWrapper color={getColor()} onClick={handleEdit}>
-                        <EditSymbol size={18} color="#fff" />
+                        <EditSymbol
+                            size={18}
+                            color={standardDarkColor7(getColor())}
+                        />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.delete', { ns: 'common' })}>
                     <IconWrapper color={getColor()} onClick={onDelete}>
-                        <DeleteSymbol size={18} color="#fff" />
+                        <DeleteSymbol
+                            size={18}
+                            color={standardDarkColor7(getColor())}
+                        />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.options', { ns: 'common' })}>
                     <IconWrapper color={getColor()}>
-                        <MenuSymbol size={18} color="#fff" />
+                        <MenuSymbol
+                            size={18}
+                            color={standardDarkColor7(getColor())}
+                        />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.close', { ns: 'common' })}>
                     <IconWrapper color={getColor()} onClick={handleClose}>
-                        <CloseSymbol size={18} color="#fff" />
+                        <CloseSymbol
+                            size={18}
+                            color={standardDarkColor7(getColor())}
+                        />
                     </IconWrapper>
                 </Tooltip>
             </HeaderBox>
@@ -159,8 +175,8 @@ export default function DetailsContent(): ReactElement {
                                         size={'small'}
                                         sx={{
                                             marginRight: '2px',
-                                            bgcolor: user.color,
-                                            color: '#fff',
+                                            bgcolor: lighten(user.color, 0.6),
+                                            color: darken(user.color, 0.4),
                                             fontSize: '12px',
                                         }}
                                     />
