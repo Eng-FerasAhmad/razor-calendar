@@ -11,6 +11,13 @@
         "today": "Today",
         "addEvent": "New Event"
     },
+    "labels": {
+        "hours": "Hours",
+        "hour": "Hour",
+        "minutes": "Minutes",
+        "minute": "Minute",
+        "fullDay": "Full Day"
+    },
     "navigation": {
         "next": {
             "default": "Next Day",

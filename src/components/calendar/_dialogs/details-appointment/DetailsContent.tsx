@@ -31,6 +31,7 @@ import MenuSymbol from 'components/shared/icons/menu/MenuSymbol';
 import TimerSymbol from 'components/shared/icons/timer/TimerSymbol';
 import { UserSymbol } from 'components/shared/icons/user/UserSymbol';
 import { Appointment } from 'types/appointment';
+import { timeConverter } from 'utils/timeFormatConverter';
 
 export default function DetailsContent(): ReactElement {
     const {
@@ -50,10 +51,16 @@ export default function DetailsContent(): ReactElement {
 
     // Format the start and end times
     const formattedStart = start
-        ? DateTime.fromISO(start).toFormat(`${dateFormat} HH:mm`)
+        ? `${DateTime.fromISO(start).toFormat(`${dateFormat}`)} - ${timeConverter(
+              DateTime.fromISO(start).toString(),
+              config.hour.is24HourFormat
+          )}`
         : null;
     const formattedEnd = end
-        ? DateTime.fromISO(end).toFormat(`${dateFormat} HH:mm`)
+        ? `${DateTime.fromISO(end).toFormat(`${dateFormat}`)} - ${timeConverter(
+              DateTime.fromISO(end).toString(),
+              config.hour.is24HourFormat
+          )}`
         : null;
 
     const handleClose = (): void => {

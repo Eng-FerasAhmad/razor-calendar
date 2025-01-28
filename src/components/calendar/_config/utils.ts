@@ -1,3 +1,4 @@
+import i18n from 'i18next';
 import { DateTime } from 'luxon';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 
@@ -25,7 +26,10 @@ export function formatTimeDifference(
     end: string,
     isFullDay: boolean
 ): string {
-    if (isFullDay) return 'Full Day';
+    if (isFullDay) {
+        return i18n.t('labels.fullDay', { ns: 'common' });
+    }
+
     const diffInMinutes = Math.abs(
         DateTime.fromISO(start).diff(DateTime.fromISO(end), 'minutes').minutes
     );
@@ -33,14 +37,25 @@ export function formatTimeDifference(
     if (diffInMinutes >= 60) {
         const hours = Math.floor(diffInMinutes / 60);
         const minutes = diffInMinutes % 60;
+
+        const hourLabel =
+            hours > 1
+                ? i18n.t('labels.hours', { ns: 'common' })
+                : i18n.t('labels.hour', { ns: 'common' });
+
         return minutes > 0
-            ? `${hours}:${String(minutes).padStart(2, '0')} Hours`
-            : `${hours} Hours`;
+            ? `${hours}:${String(minutes).padStart(2, '0')} ${hourLabel}`
+            : `${hours} ${hourLabel}`;
     }
 
     if (diffInMinutes > 0) {
-        return `${diffInMinutes} Minute${diffInMinutes > 1 ? 's' : ''}`;
+        const minuteLabel =
+            diffInMinutes > 1
+                ? i18n.t('labels.minutes', { ns: 'common' })
+                : i18n.t('labels.minute', { ns: 'common' });
+
+        return `${diffInMinutes} ${minuteLabel}`;
     }
 
-    return 'No Time Difference';
+    return i18n.t('labels.noTimeDifference', { ns: 'common' });
 }

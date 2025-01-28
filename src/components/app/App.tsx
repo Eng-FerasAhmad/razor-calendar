@@ -11,7 +11,9 @@ import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { TeamModel } from 'types/teamModel';
 
 export default function App(): ReactElement {
+    // const locale = 'en-GB';
     const locale = 'de-DE';
+
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {

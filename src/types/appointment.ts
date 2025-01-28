@@ -7,6 +7,7 @@ export interface Appointment {
     title: string;
     start: string; // ISO string
     end: string; // ISO string
+    reminder?: number;
     assign?: TeamMember[];
     duration?: string;
     status?: string;
