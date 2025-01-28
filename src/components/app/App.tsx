@@ -22,9 +22,9 @@ export default function App(): ReactElement {
         {
             id: '1',
             title: 'Meeting at these times are very important',
-            start: '2025-01-23T13:00',
-            end: '2025-01-23T14:30',
-            isFullDay: true,
+            start: '2025-01-27T13:00',
+            end: '2025-01-27T13:10',
+            isFullDay: false,
             color: '#33b679',
             assign: [
                 {
@@ -40,8 +40,8 @@ export default function App(): ReactElement {
         {
             id: '2',
             title: 'Lunch but also long long text',
-            start: '2025-01-23T09:00',
-            end: '2025-01-23T11:00',
+            start: '2025-01-27T09:00',
+            end: '2025-01-27T09:05',
             isFullDay: false,
             color: '#33b679',
             assign: [
@@ -66,8 +66,8 @@ export default function App(): ReactElement {
         {
             id: '3',
             title: 'Meeting',
-            start: '2025-01-23T13:00',
-            end: '2025-01-23T14:00',
+            start: '2025-01-27T13:00',
+            end: '2025-01-27T14:00',
             isFullDay: false,
             color: '#33b679',
             assign: [
@@ -84,9 +84,9 @@ export default function App(): ReactElement {
         {
             id: '4',
             title: 'Lunch: how about more longer text like this one hier, what you say',
-            start: '2025-01-23T13:00',
-            end: '2025-01-23T15:00',
-            isFullDay: true,
+            start: '2025-01-27T13:00',
+            end: '2025-01-27T15:00',
+            isFullDay: false,
             color: '#33b679',
             assign: [
                 {
@@ -102,8 +102,8 @@ export default function App(): ReactElement {
         {
             id: '5',
             title: 'View 1',
-            start: '2025-01-23T14:30',
-            end: '2025-01-23T15:30',
+            start: '2025-01-28T14:30',
+            end: '2025-01-28T15:30',
             isFullDay: true,
             color: '#33b679',
             assign: [
@@ -120,8 +120,8 @@ export default function App(): ReactElement {
         {
             id: '6',
             title: 'View 2',
-            start: '2025-01-24T10:00',
-            end: '2025-01-24T12:10',
+            start: '2025-01-28T10:00',
+            end: '2025-01-28T12:10',
             isFullDay: false,
             color: '#33b679',
             canceled: false,
@@ -144,8 +144,8 @@ export default function App(): ReactElement {
         {
             id: '7',
             title: 'View 3',
-            start: '2025-01-24T13:00',
-            end: '2025-01-24T14:00',
+            start: '2025-01-29T13:00',
+            end: '2025-01-29T14:00',
             isFullDay: false,
             color: '#33b679',
             assign: [
@@ -162,8 +162,8 @@ export default function App(): ReactElement {
         {
             id: '8',
             title: 'View 4',
-            start: '2025-01-24T12:00',
-            end: '2025-01-24T13:00',
+            start: '2025-01-29T12:00',
+            end: '2025-01-29T13:00',
             isFullDay: true,
             color: '#33b679',
             assign: [
@@ -180,9 +180,9 @@ export default function App(): ReactElement {
         {
             id: '9',
             title: 'View 5',
-            start: '2025-01-23T13:00',
-            end: '2025-01-23T13:30',
-            isFullDay: true,
+            start: '2025-01-29T13:00',
+            end: '2025-01-29T13:30',
+            isFullDay: false,
             color: '#33b679',
             assign: [
                 {
@@ -198,8 +198,8 @@ export default function App(): ReactElement {
         {
             id: '10',
             title: 'View 5 aber also long long text aber also long long text ',
-            start: '2025-01-24T11:00',
-            end: '2025-01-24T13:00',
+            start: '2025-01-29T11:00',
+            end: '2025-01-29T13:00',
             isFullDay: true,
             color: '#33b679',
             assign: [
@@ -216,9 +216,9 @@ export default function App(): ReactElement {
         {
             id: '11',
             title: 'View 2 days',
-            start: '2025-01-24T13:00',
-            end: '2025-01-24T14:30',
-            isFullDay: true,
+            start: '2025-01-30T13:00',
+            end: '2025-01-30T14:30',
+            isFullDay: false,
             color: '#33b679',
             assign: [
                 {
@@ -234,8 +234,8 @@ export default function App(): ReactElement {
         {
             id: '12',
             title: 'View full day with long long text',
-            start: '2025-01-23T13:00',
-            end: '2025-01-23T14:00',
+            start: '2025-01-30T13:00',
+            end: '2025-01-30T14:00',
             isFullDay: false,
             color: '#33b679',
             assign: [
@@ -244,7 +244,7 @@ export default function App(): ReactElement {
                     firstName: 'Muster Kurt',
                     lastName: 'Lux',
                     image: 'https://picsum.photos/seed/picsum/200/300',
-                    color: '#3e4444',
+                    color: '#cb8587',
                     visible: false,
                 },
             ],
@@ -271,6 +271,7 @@ export default function App(): ReactElement {
         },
         style: {
             primaryColor: '#33b679',
+            topStartFrom: 74,
         },
     };
 
@@ -357,6 +358,7 @@ export default function App(): ReactElement {
                 visible: false,
             },
         ],
+        showLastName: false,
     };
 
     const [teamModel, setTeamModel] = useState<TeamModel>(initialTeam);

@@ -42,8 +42,7 @@ export const ShortTimerViewWrapper = styled('div')({
     alignItems: 'center',
     height: '18px',
     minHeight: '18px',
-    fontSize: '10px',
-    fontWeight: 600,
+    fontSize: '12px',
     paddingLeft: '5px',
     paddingTop: '2px',
 });
@@ -86,7 +85,7 @@ export const ShortLabelIntervalViewWrapper = styled('div')({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: 'inline-block',
-    maxWidth: '90px',
+
     fontSize: '10px',
 });
 
@@ -96,8 +95,9 @@ export const ZoomIntervalViewContainer = styled('div')<{
 }>(({ theme, color }) => ({
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    gap: '10px',
     height: '100%',
     color: theme.palette.text.primary,
     backgroundColor: getBackgroundColor(theme, color),
@@ -113,9 +113,9 @@ export const ShortTimerZoomIntervalWrapper = styled('div')({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: 'inline-block',
-    maxWidth: '70px',
-    fontSize: '9px',
+    fontSize: '10px',
     paddingLeft: '3px',
+    width: 'fit-content',
 });
 
 export const ShortLabelZoomIntervalWrapper = styled('div')({
@@ -123,6 +123,6 @@ export const ShortLabelZoomIntervalWrapper = styled('div')({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: 'inline-block',
-    maxWidth: '90px',
-    fontSize: '10px',
+    fontSize: '11px',
+    marginLeft: '3px',
 });

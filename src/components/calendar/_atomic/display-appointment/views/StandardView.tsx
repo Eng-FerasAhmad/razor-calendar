@@ -38,7 +38,7 @@ export default function StandardView({
             onClick={popperHandler}
         >
             <ShortTimerViewWrapper>
-                {start} -{end}
+                {start} - {end}
             </ShortTimerViewWrapper>
             <ShortLabelViewWrapper>{appointment.title}</ShortLabelViewWrapper>
         </StandardViewContainer>

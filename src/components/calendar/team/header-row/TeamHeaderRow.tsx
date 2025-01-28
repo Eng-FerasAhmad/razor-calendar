@@ -67,7 +67,7 @@ export default function TeamHeaderRow({
                                 >
                                     {getFallbackLetters(user)}
                                 </Avatar>
-                                <span>{`${user.firstName} ${user.lastName}`}</span>
+                                <span>{`${user.firstName} ${teamModel.showLastName ? user.lastName : ''}`}</span>
                             </TeamDayNumberWrapper>
                         </TeamDayHeaderWrapper>
                     ))}

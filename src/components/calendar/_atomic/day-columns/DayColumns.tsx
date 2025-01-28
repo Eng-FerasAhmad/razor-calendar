@@ -44,7 +44,9 @@ export default function DayColumns({
         const slotHeightPercentage = 100 / ((24 * 60) / interval);
 
         const top = (minutesFromStart / totalMinutesInDay) * 100; // Percentage of the day
-        const height = (durationInMinutes / interval) * slotHeightPercentage;
+        let height = (durationInMinutes / interval) * slotHeightPercentage;
+
+        height = height < 0.9 ? 1.3 : height;
 
         // Handle overlapping appointments
         const width = 100 / totalOverlaps; // Divide width by total overlaps

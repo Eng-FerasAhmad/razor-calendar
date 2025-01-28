@@ -17,7 +17,7 @@ export default function ZoomIntervalView({
     appointment,
     color,
 }: Props): ReactElement {
-    const { onPopperAppointment, config } = useCalendarContext();
+    const { onPopperAppointment, config, view } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
@@ -37,9 +37,11 @@ export default function ZoomIntervalView({
             data-testid="zoom-interval-view-container"
             onClick={popperHandler}
         >
-            <ShortTimerZoomIntervalWrapper>
-                {start} -{end}
-            </ShortTimerZoomIntervalWrapper>
+            {view === 'day' && (
+                <ShortTimerZoomIntervalWrapper>
+                    {start} -{end}
+                </ShortTimerZoomIntervalWrapper>
+            )}
             <ShortLabelZoomIntervalWrapper>
                 {appointment.title}
             </ShortLabelZoomIntervalWrapper>
