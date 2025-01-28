@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { useState, useEffect } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
+import { TeamMember } from 'types/teamModel';
 
 export interface UseWeekAppointmentReturn {
     title: string;
@@ -16,8 +17,8 @@ export interface UseWeekAppointmentReturn {
     setIsFullDay: (isFullDay: boolean) => void;
     color: string;
     setColor: (color: string) => void;
-    assign: string[];
-    setAssign: (assign: string[]) => void;
+    assign: TeamMember[];
+    setAssign: (assign: TeamMember[]) => void;
     is24Hours: boolean;
     dateFormat: string;
     handleSave: () => void;
@@ -45,7 +46,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     const [notes, setNotes] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
     const [color, setColor] = useState('#33b679');
-    const [assign, setAssign] = useState<string[]>([]);
+    const [assign, setAssign] = useState<TeamMember[]>([]);
     const [titleRequired, setTitleRequired] = useState(false);
 
     useEffect(() => {
@@ -78,6 +79,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
                 end,
                 isFullDay: appointmentIsFullDay,
                 color: appointmentColor,
+                assign: appointmentAssign,
             } = dialogAppointment.appointment;
 
             setTitle(appointmentTitle || '');
@@ -90,6 +92,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             );
             setIsFullDay(appointmentIsFullDay || false);
             setColor(appointmentColor || '#33b679');
+            setAssign(appointmentAssign || []);
         }
     }, [dialogAppointment]);
 
@@ -110,6 +113,8 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         onSaveAppointment(appointment);
         onDialogAppointment(undefined);
     };
+
+    console.log('assign', assign);
 
     return {
         title,

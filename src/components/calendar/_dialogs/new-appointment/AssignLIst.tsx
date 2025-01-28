@@ -20,9 +20,9 @@ const MenuProps = {
     },
 };
 
-function getStyles(id: string, assign: readonly string[], theme: Theme) {
+function getStyles(id: string, assign: readonly TeamMember[], theme: Theme) {
     return {
-        fontWeight: assign.includes(id)
+        fontWeight: assign.some((item) => item.id === id)
             ? theme.typography.fontWeightMedium
             : theme.typography.fontWeightRegular,
     };
@@ -30,8 +30,8 @@ function getStyles(id: string, assign: readonly string[], theme: Theme) {
 
 interface Props {
     teamList: TeamMember[] | undefined;
-    assign: string[];
-    onChange: (list: string[]) => void;
+    assign: TeamMember[]; // Array of selected team members
+    onChange: (list: TeamMember[]) => void;
 }
 
 export default function MultipleSelectChip({
@@ -41,13 +41,14 @@ export default function MultipleSelectChip({
 }: Props): ReactElement {
     const theme = useTheme();
 
-    const handleChange = (event: SelectChangeEvent<typeof assign>): void => {
+    const handleChange = (event: SelectChangeEvent<string[]>): void => {
         const {
             target: { value },
         } = event;
-        // Update the assign list and pass it to the parent component
+
+        // Map selected IDs back to their corresponding team members
         const updatedAssign =
-            typeof value === 'string' ? value.split(',') : value;
+            teamList?.filter((member) => value.includes(member.id)) || [];
         onChange(updatedAssign);
     };
 
@@ -70,12 +71,12 @@ export default function MultipleSelectChip({
                 },
             }}
         >
-            <InputLabel id="demo-multiple-chip-label">Assign</InputLabel>
+            <InputLabel id="multiple-select-chip-label">Assign</InputLabel>
             <Select
-                labelId="demo-multiple-chip-label"
-                id="demo-multiple-chip"
+                labelId="multiple-select-chip-label"
+                id="multiple-select-chip"
                 multiple
-                value={assign}
+                value={assign.map((member) => member.id)} // Use IDs as the value
                 onChange={handleChange}
                 size="small"
                 input={
@@ -84,13 +85,15 @@ export default function MultipleSelectChip({
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                         {selected.map((id) => {
-                            const user =
-                                teamList &&
-                                teamList.find((item) => item.id === id);
+                            const user = teamList?.find(
+                                (member) => member.id === id
+                            );
                             return (
                                 <Chip
                                     key={id}
-                                    label={`${user?.firstName} ${user?.lastName}`}
+                                    label={`${user?.firstName || ''} ${
+                                        user?.lastName || ''
+                                    }`}
                                     sx={{
                                         height: '24px',
                                         marginTop: '2px',
@@ -103,16 +106,15 @@ export default function MultipleSelectChip({
                 )}
                 MenuProps={MenuProps}
             >
-                {teamList &&
-                    teamList.map((user) => (
-                        <MenuItem
-                            key={user.id}
-                            value={user.id}
-                            style={getStyles(user.id, assign, theme)}
-                        >
-                            {`${user.firstName} ${user.lastName}`}
-                        </MenuItem>
-                    ))}
+                {teamList?.map((user) => (
+                    <MenuItem
+                        key={user.id}
+                        value={user.id}
+                        style={getStyles(user.id, assign, theme)}
+                    >
+                        {`${user.firstName} ${user.lastName}`}
+                    </MenuItem>
+                ))}
             </Select>
         </FormControl>
     );

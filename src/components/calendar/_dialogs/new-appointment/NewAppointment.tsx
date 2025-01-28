@@ -19,6 +19,7 @@ import DatePickerInput from 'components/shared/input-datepicker/DatepickerInput'
 import InputText from 'components/shared/input-text/InputText';
 import InputTimepicker from 'components/shared/input-timepicker/InputTimepicker';
 import SelectColor from 'components/shared/select-color/SelectColor';
+import { TeamMember } from 'types/teamModel';
 
 export default function NewAppointment(): ReactElement {
     const {
@@ -133,7 +134,7 @@ export default function NewAppointment(): ReactElement {
         setNotes(event.target.value);
     };
 
-    const handleAssignChange = (list: string[]): void => {
+    const handleAssignChange = (list: TeamMember[]): void => {
         setAssign(list);
     };
 
