@@ -16,7 +16,10 @@
         "hour": "Stunde",
         "minutes": "Minuten",
         "minute": "Minute",
-        "fullDay": "Ganzer Tag"
+        "fullDay": "Ganzer Tag",
+        "minutesBefore": "Minuten vorher",
+        "hoursBefore": "Stunden Vorher",
+        "daysBefore": "Tage Vorher"
     },
     "navigation": {
         "next": {

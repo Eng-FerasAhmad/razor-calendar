@@ -38,6 +38,7 @@ export default function App(): ReactElement {
                     visible: true,
                 },
             ],
+            reminder: 30,
         },
         {
             id: '2',
@@ -46,6 +47,7 @@ export default function App(): ReactElement {
             end: '2025-01-27T09:05',
             isFullDay: false,
             color: '#33b679',
+            reminder: 300,
             assign: [
                 {
                     id: 'martin-id',
@@ -72,6 +74,7 @@ export default function App(): ReactElement {
             end: '2025-01-27T14:00',
             isFullDay: false,
             color: '#33b679',
+            reminder: 3000,
             assign: [
                 {
                     id: 'id',
@@ -90,6 +93,7 @@ export default function App(): ReactElement {
             end: '2025-01-27T15:00',
             isFullDay: false,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'max-id',
@@ -108,6 +112,7 @@ export default function App(): ReactElement {
             end: '2025-01-28T15:30',
             isFullDay: true,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'max-id',
@@ -132,6 +137,7 @@ export default function App(): ReactElement {
             available: false,
             visibility: true,
             location: 'id',
+            reminder: 30,
             assign: [
                 {
                     id: 'anna-id',
@@ -150,6 +156,7 @@ export default function App(): ReactElement {
             end: '2025-01-29T14:00',
             isFullDay: false,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'id',
@@ -168,6 +175,7 @@ export default function App(): ReactElement {
             end: '2025-01-29T13:00',
             isFullDay: true,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'id',
@@ -186,6 +194,7 @@ export default function App(): ReactElement {
             end: '2025-01-29T13:30',
             isFullDay: false,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'ferdi-id',
@@ -204,6 +213,7 @@ export default function App(): ReactElement {
             end: '2025-01-29T13:00',
             isFullDay: true,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'anna-id',
@@ -222,6 +232,7 @@ export default function App(): ReactElement {
             end: '2025-01-30T14:30',
             isFullDay: false,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'jef-id',
@@ -240,6 +251,7 @@ export default function App(): ReactElement {
             end: '2025-01-30T14:00',
             isFullDay: false,
             color: '#33b679',
+            reminder: 30,
             assign: [
                 {
                     id: 'muster-id',

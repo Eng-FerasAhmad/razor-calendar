@@ -21,6 +21,7 @@ import {
     standardDarkColor7,
     standardLightColor4,
 } from 'calendar/_style/colors';
+import BellSymbol from 'components/shared/icons/add-circle/AddCircleSymbol';
 import CalendarSymbol from 'components/shared/icons/calendar/CalendarSymbol';
 import ClockSymbol from 'components/shared/icons/clock/ClockSymbol';
 import OutlineClockSymbol from 'components/shared/icons/clock-outline/OutlineClockSymbol';
@@ -31,7 +32,7 @@ import MenuSymbol from 'components/shared/icons/menu/MenuSymbol';
 import TimerSymbol from 'components/shared/icons/timer/TimerSymbol';
 import { UserSymbol } from 'components/shared/icons/user/UserSymbol';
 import { Appointment } from 'types/appointment';
-import { timeConverter } from 'utils/timeFormatConverter';
+import { formatReminderTime, timeConverter } from 'utils/timeFormatConverter';
 
 export default function DetailsContent(): ReactElement {
     const {
@@ -138,14 +139,12 @@ export default function DetailsContent(): ReactElement {
                     </IconWrapper>
                 </Tooltip>
             </HeaderBox>
-
             <TitleBox>
                 <CalendarSymbol size={iconSize} />
                 <Typography sx={{ fontSize: '16px' }} variant="body1" flex={1}>
                     {title}
                 </Typography>
             </TitleBox>
-
             <DateBox data-testid="date-box">
                 <TextBox>
                     <ClockSymbol size={iconSize} />
@@ -157,7 +156,6 @@ export default function DetailsContent(): ReactElement {
                     <TimeBoxTitle>{formattedEnd}</TimeBoxTitle>
                 </TextBox>
             </DateBox>
-
             <ReminderBox>
                 <TextBox>
                     <TimerSymbol size={iconSize} />
@@ -165,6 +163,16 @@ export default function DetailsContent(): ReactElement {
                 </TextBox>
             </ReminderBox>
 
+            {appointment!.reminder && (
+                <ReminderBox>
+                    <TextBox>
+                        <BellSymbol size={iconSize} />
+                        <TimeBoxTitle>
+                            {formatReminderTime(appointment!.reminder)}
+                        </TimeBoxTitle>
+                    </TextBox>
+                </ReminderBox>
+            )}
             <CalendarBox>
                 <TextBox>
                     <UserSymbol size={iconSize} />
