@@ -7,6 +7,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
+import {
+    standardDarkColor4,
+    standardLightColor7,
+} from 'calendar/_style/colors';
 import { TeamMember } from 'types/teamModel';
 
 const ITEM_HEIGHT = 48;
@@ -98,6 +102,12 @@ export default function MultipleSelectChip({
                                         height: '24px',
                                         marginTop: '2px',
                                         fontSize: '14px',
+                                        backgroundColor: user!.color
+                                            ? standardLightColor7(user!.color)
+                                            : '',
+                                        color: user!.color
+                                            ? standardDarkColor4(user!.color)
+                                            : '',
                                     }}
                                 />
                             );

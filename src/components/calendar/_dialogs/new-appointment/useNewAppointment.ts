@@ -114,8 +114,6 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         onDialogAppointment(undefined);
     };
 
-    console.log('assign', assign);
-
     return {
         title,
         notes,
