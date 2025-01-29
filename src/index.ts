@@ -18,4 +18,4 @@ export type {
 } from './types/calendarConfig';
 export { navigate } from './utils/constants';
 export type { NavigateAction } from './utils/constants';
-export type { TeamModel, TeamMember } from 'types/teamModel';
+export type { TeamModel, TeamMember } from './types/teamModel';
