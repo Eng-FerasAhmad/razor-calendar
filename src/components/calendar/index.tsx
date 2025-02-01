@@ -39,7 +39,6 @@ export function RazorCalendar({
 }: Props): ReactElement {
     const theme = createDynamicTheme(config);
 
-    console.log(teamModel.users.filter((item) => item.visible));
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
