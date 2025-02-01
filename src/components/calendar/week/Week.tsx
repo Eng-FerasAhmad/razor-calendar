@@ -9,23 +9,18 @@ import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
-import { Appointment } from 'types/appointment';
 import { getDateRange } from 'utils/dates';
 import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 
 interface Props {
     selectedDate: DateTime;
-    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-export default function Week({
-    selectedDate,
-    handleChangeAppointment,
-}: Props): ReactElement {
+export default function Week({ selectedDate }: Props): ReactElement {
     const { config, appointments } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
-    const { handleDragStart, handleDragEnd, activeDrag, updatedAppointments } =
-        useDragAndDropHandler(appointments!, handleChangeAppointment);
+    const { handleDragStart, handleDragEnd, activeDrag } =
+        useDragAndDropHandler();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
@@ -61,7 +56,7 @@ export default function Week({
                             key={day.toISO()}
                             day={day}
                             interval={interval}
-                            appointments={updatedAppointments}
+                            appointments={appointments!}
                             fullDayAppointments={fullDayAppointments}
                         />
                     ))}

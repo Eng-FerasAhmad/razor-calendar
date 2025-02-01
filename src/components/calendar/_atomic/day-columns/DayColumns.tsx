@@ -96,6 +96,7 @@ export default function DayColumns({
 
     const updatedAppointmentsWithPositions = groupOverlappingAppointments();
 
+    console.log('DayColumns', appointments);
     return (
         <DaysColumnsContainer
             timSlotsCount={timeSlots.length}

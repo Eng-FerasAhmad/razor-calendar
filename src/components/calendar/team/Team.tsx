@@ -10,24 +10,18 @@ import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
-import { Appointment } from 'types/appointment';
 import { TeamModel } from 'types/teamModel';
 
 interface Props {
     selectedDate: DateTime;
     teamModel: TeamModel;
-    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-export default function Week({
-    selectedDate,
-    teamModel,
-    handleChangeAppointment,
-}: Props): ReactElement {
+export default function Week({ selectedDate, teamModel }: Props): ReactElement {
     const { config, appointments } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
-    const { handleDragStart, handleDragEnd, activeDrag, updatedAppointments } =
-        useDragAndDropHandler(appointments!, handleChangeAppointment);
+    const { handleDragStart, handleDragEnd, activeDrag } =
+        useDragAndDropHandler();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
@@ -55,7 +49,7 @@ export default function Week({
                     {teamModel.users
                         .filter((user) => user.visible)
                         .map((user, i) => {
-                            const userAppointments = updatedAppointments.filter(
+                            const userAppointments = appointments!.filter(
                                 (appointment) =>
                                     appointment.assign &&
                                     appointment.assign.some(

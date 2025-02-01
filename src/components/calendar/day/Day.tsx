@@ -10,21 +10,16 @@ import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import DayHeaderRow from 'day/header-row/DayHeaderRow';
 import { DayContainer, TimeDayWrapper } from 'day/styles';
-import { Appointment } from 'types/appointment';
 
 interface Props {
     selectedDate: DateTime;
-    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-export default function Day({
-    selectedDate,
-    handleChangeAppointment,
-}: Props): ReactElement {
+export default function Day({ selectedDate }: Props): ReactElement {
     const { config, appointments } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
-    const { handleDragStart, handleDragEnd, activeDrag, updatedAppointments } =
-        useDragAndDropHandler(appointments!, handleChangeAppointment);
+    const { handleDragStart, handleDragEnd, activeDrag } =
+        useDragAndDropHandler();
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
@@ -52,7 +47,7 @@ export default function Day({
                         key={selectedDate.toISO()}
                         day={selectedDate}
                         interval={interval}
-                        appointments={updatedAppointments}
+                        appointments={appointments!}
                         fullDayAppointments={fullDayAppointments}
                     />
 

@@ -6,6 +6,7 @@ import {
     useCallback,
     ReactNode,
     useContext,
+    useMemo,
 } from 'react';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
@@ -146,6 +147,20 @@ export function CalendarProvider({
         []
     );
 
+    //
+    const filteredAppointments = useMemo(() => {
+        return appointments.filter((appointment) => {
+            if (!appointment.assign || appointment.assign.length === 0) {
+                return true;
+            }
+            return appointment.assign.some((member) =>
+                teamModel?.users.some(
+                    (user) => user.id === member.id && user.visible
+                )
+            );
+        });
+    }, [appointments, teamModel]);
+
     return (
         <CalendarContext.Provider
             value={{
@@ -154,7 +169,7 @@ export function CalendarProvider({
                 teamModel,
                 selectedDate,
                 language,
-                appointments,
+                appointments: filteredAppointments,
                 savedAppointment,
                 showAllFullDays,
                 fullDaysCount,

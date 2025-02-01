@@ -43,33 +43,16 @@ export default function CalendarLayout({
                     />
                 );
             case 'week':
-                return (
-                    <Week
-                        selectedDate={selectedDate}
-                        handleChangeAppointment={handleChangeAppointment}
-                    />
-                );
+                return <Week selectedDate={selectedDate} />;
             case 'day':
-                return (
-                    <Day
-                        selectedDate={selectedDate}
-                        handleChangeAppointment={handleChangeAppointment}
-                    />
-                );
+                return <Day selectedDate={selectedDate} />;
             case 'agenda':
                 return <Agenda />;
             case 'team':
                 return teamsHasVisibleItems() ? (
-                    <Team
-                        selectedDate={selectedDate}
-                        teamModel={teamModel}
-                        handleChangeAppointment={handleChangeAppointment}
-                    />
+                    <Team selectedDate={selectedDate} teamModel={teamModel} />
                 ) : (
-                    <Day
-                        selectedDate={selectedDate}
-                        handleChangeAppointment={handleChangeAppointment}
-                    />
+                    <Day selectedDate={selectedDate} />
                 );
             default:
                 return (
