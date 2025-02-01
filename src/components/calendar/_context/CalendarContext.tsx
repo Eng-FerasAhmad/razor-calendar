@@ -111,16 +111,41 @@ export function CalendarProvider({
     }, []);
 
     const onSaveAppointment = useCallback(
-        (newEvents: Appointment | undefined) => {
-            setSavedAppointment(newEvents);
-            if (newEvents) onExternalSaveAppointment(newEvents);
+        (newAppointment: Appointment | undefined) => {
+            if (!newAppointment) return;
+
+            setAppointments((prevAppointments) => {
+                // Find the index of the existing appointment
+                const existingIndex = prevAppointments.findIndex(
+                    (appointment) => appointment.id === newAppointment.id
+                );
+
+                if (existingIndex !== -1) {
+                    // If found, create a new array with the updated appointment
+                    const updatedAppointments = [...prevAppointments];
+                    updatedAppointments[existingIndex] = newAppointment;
+                    return updatedAppointments;
+                }
+                // If not found, add the new appointment
+                return [...prevAppointments, newAppointment];
+            });
+
+            setSavedAppointment(newAppointment);
+            onExternalSaveAppointment(newAppointment);
         },
         [onExternalSaveAppointment]
     );
 
     const onDeleteAppointment = useCallback(
-        (newEvents: Appointment) => {
-            onExternalSaveAppointment(newEvents);
+        (appointmentToDelete: Appointment) => {
+            setAppointments((prevAppointments) =>
+                prevAppointments.filter(
+                    (appointment) => appointment.id !== appointmentToDelete.id
+                )
+            );
+
+            onExternalSaveAppointment(appointmentToDelete);
+            setPopperAppointment(undefined);
         },
         [onExternalSaveAppointment]
     );

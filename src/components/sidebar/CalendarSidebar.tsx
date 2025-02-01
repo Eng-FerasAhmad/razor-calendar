@@ -38,6 +38,7 @@ export function RazorCalendarSidebar({
                 adapterLocale={config.common?.locale}
             >
                 <DateCalendar
+                    showDaysOutsideCurrentMonth
                     displayWeekNumber={config.sidebar?.showWeekNumber}
                     value={currentDate}
                     onChange={(newValue) => {
