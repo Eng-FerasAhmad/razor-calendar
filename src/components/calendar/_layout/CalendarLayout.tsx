@@ -11,7 +11,6 @@ import { TeamModel } from 'types/teamModel';
 import Week from 'week/Week';
 
 interface Props {
-    appointments: Appointment[];
     selectedDate: DateTime;
     initView: ViewType;
     teamModel: TeamModel;
@@ -20,7 +19,6 @@ interface Props {
 
 export default function CalendarLayout({
     selectedDate,
-    appointments,
     initView,
     teamModel,
     handleChangeAppointment,
@@ -40,7 +38,6 @@ export default function CalendarLayout({
             case 'month':
                 return (
                     <Month
-                        appointments={appointments}
                         selectedDate={selectedDate}
                         handleChangeAppointment={handleChangeAppointment}
                     />
@@ -48,7 +45,6 @@ export default function CalendarLayout({
             case 'week':
                 return (
                     <Week
-                        appointments={appointments}
                         selectedDate={selectedDate}
                         handleChangeAppointment={handleChangeAppointment}
                     />
@@ -56,7 +52,6 @@ export default function CalendarLayout({
             case 'day':
                 return (
                     <Day
-                        appointments={appointments}
                         selectedDate={selectedDate}
                         handleChangeAppointment={handleChangeAppointment}
                     />
@@ -66,14 +61,12 @@ export default function CalendarLayout({
             case 'team':
                 return teamsHasVisibleItems() ? (
                     <Team
-                        appointments={appointments}
                         selectedDate={selectedDate}
                         teamModel={teamModel}
                         handleChangeAppointment={handleChangeAppointment}
                     />
                 ) : (
                     <Day
-                        appointments={appointments}
                         selectedDate={selectedDate}
                         handleChangeAppointment={handleChangeAppointment}
                     />
@@ -81,7 +74,6 @@ export default function CalendarLayout({
             default:
                 return (
                     <Month
-                        appointments={appointments}
                         selectedDate={selectedDate}
                         handleChangeAppointment={handleChangeAppointment}
                     />

@@ -23,6 +23,7 @@ interface Props {
     children: ReactNode;
     config: RazorCalendarConfig<CalendarConfig>;
     teamModel: TeamModel | undefined;
+    incomingAppointments: Appointment[] | [];
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
     onExternalSaveAppointment: (appointment: Appointment) => void;
@@ -58,6 +59,7 @@ export function CalendarProvider({
     children,
     config,
     teamModel,
+    incomingAppointments,
     onExternalViewChange,
     onExternalChangeDate,
     onExternalSaveAppointment,
@@ -69,7 +71,8 @@ export function CalendarProvider({
     const [language, setLanguage] = useState<string>(
         mergedConfig.common.locale
     );
-    const [appointments, setAppointments] = useState<Appointment[]>([]);
+    const [appointments, setAppointments] =
+        useState<Appointment[]>(incomingAppointments);
     const [savedAppointment, setSavedAppointment] = useState<
         Appointment | undefined
     >();

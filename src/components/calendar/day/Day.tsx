@@ -13,20 +13,18 @@ import { DayContainer, TimeDayWrapper } from 'day/styles';
 import { Appointment } from 'types/appointment';
 
 interface Props {
-    appointments: Appointment[];
     selectedDate: DateTime;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function Day({
-    appointments,
     selectedDate,
     handleChangeAppointment,
 }: Props): ReactElement {
-    const { config } = useCalendarContext();
-    const { fullDayAppointments } = useAppointment(appointments, selectedDate);
+    const { config, appointments } = useCalendarContext();
+    const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
     const { handleDragStart, handleDragEnd, activeDrag, updatedAppointments } =
-        useDragAndDropHandler(appointments, handleChangeAppointment);
+        useDragAndDropHandler(appointments!, handleChangeAppointment);
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];

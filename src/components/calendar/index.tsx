@@ -46,6 +46,7 @@ export function RazorCalendar({
                 currentView={view}
                 config={config}
                 teamModel={teamModel}
+                incomingAppointments={appointments}
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
                 onExternalSaveAppointment={handleSaveAppointment}
@@ -57,7 +58,6 @@ export function RazorCalendar({
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}
-                    appointments={appointments}
                     teamModel={teamModel}
                     handleChangeAppointment={handleChangeAppointment}
                 />

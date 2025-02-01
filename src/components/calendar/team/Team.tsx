@@ -14,22 +14,20 @@ import { Appointment } from 'types/appointment';
 import { TeamModel } from 'types/teamModel';
 
 interface Props {
-    appointments: Appointment[];
     selectedDate: DateTime;
     teamModel: TeamModel;
     handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function Week({
-    appointments,
     selectedDate,
     teamModel,
     handleChangeAppointment,
 }: Props): ReactElement {
-    const { config } = useCalendarContext();
-    const { fullDayAppointments } = useAppointment(appointments, selectedDate);
+    const { config, appointments } = useCalendarContext();
+    const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
     const { handleDragStart, handleDragEnd, activeDrag, updatedAppointments } =
-        useDragAndDropHandler(appointments, handleChangeAppointment);
+        useDragAndDropHandler(appointments!, handleChangeAppointment);
 
     // Interval options
     const intervalOptions = [60, 30, 15, 10, 5];
