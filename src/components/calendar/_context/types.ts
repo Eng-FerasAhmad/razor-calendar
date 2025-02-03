@@ -9,7 +9,6 @@ export interface CalendarContextProps {
     teamModel: TeamModel | undefined;
     selectedDate: DateTime;
     appointments: Appointment[] | undefined;
-    savedAppointment: Appointment | undefined;
     language: string;
     onViewChange: (view: ViewType) => void;
     onDateChange: (date: DateTime) => void;

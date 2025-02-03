@@ -7,6 +7,7 @@ import {
     ReactNode,
     useContext,
     useMemo,
+    useEffect,
 } from 'react';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
@@ -27,6 +28,7 @@ interface Props {
     incomingAppointments: Appointment[] | [];
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
+    onExternalChangeAppointment: (appointment: Appointment[]) => void;
     onExternalSaveAppointment: (appointment: Appointment) => void;
     onExternalDeleteAppointment: (appointment: Appointment) => void;
 }
@@ -36,7 +38,6 @@ export const CalendarContext = createContext<CalendarContextProps>({
     config: basicConfig,
     teamModel: undefined,
     appointments: [],
-    savedAppointment: undefined,
     language: 'en',
     selectedDate: DateTime.now(),
     showAllFullDays: false,
@@ -62,11 +63,11 @@ export function CalendarProvider({
     teamModel,
     incomingAppointments,
     onExternalViewChange,
+    onExternalChangeAppointment,
     onExternalChangeDate,
     onExternalSaveAppointment,
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
-
     const [view, setView] = useState<ViewType>(currentView);
     const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
     const [language, setLanguage] = useState<string>(
@@ -74,9 +75,7 @@ export function CalendarProvider({
     );
     const [appointments, setAppointments] =
         useState<Appointment[]>(incomingAppointments);
-    const [savedAppointment, setSavedAppointment] = useState<
-        Appointment | undefined
-    >();
+
     const [showAllFullDays, setShowAllFullDays] = useState<boolean>(false);
     const [fullDaysCount, setFullDaysCount] = useState<number>(0);
     const [dialogAppointment, setDialogAppointment] = useState<
@@ -106,50 +105,6 @@ export function CalendarProvider({
         setLanguage(newLanguage);
     }, []);
 
-    const onChangeAppointments = useCallback((newEvents: Appointment[]) => {
-        setAppointments(newEvents);
-    }, []);
-
-    const onSaveAppointment = useCallback(
-        (newAppointment: Appointment | undefined) => {
-            if (!newAppointment) return;
-
-            setAppointments((prevAppointments) => {
-                // Find the index of the existing appointment
-                const existingIndex = prevAppointments.findIndex(
-                    (appointment) => appointment.id === newAppointment.id
-                );
-
-                if (existingIndex !== -1) {
-                    // If found, create a new array with the updated appointment
-                    const updatedAppointments = [...prevAppointments];
-                    updatedAppointments[existingIndex] = newAppointment;
-                    return updatedAppointments;
-                }
-                // If not found, add the new appointment
-                return [...prevAppointments, newAppointment];
-            });
-
-            setSavedAppointment(newAppointment);
-            onExternalSaveAppointment(newAppointment);
-        },
-        [onExternalSaveAppointment]
-    );
-
-    const onDeleteAppointment = useCallback(
-        (appointmentToDelete: Appointment) => {
-            setAppointments((prevAppointments) =>
-                prevAppointments.filter(
-                    (appointment) => appointment.id !== appointmentToDelete.id
-                )
-            );
-
-            onExternalSaveAppointment(appointmentToDelete);
-            setPopperAppointment(undefined);
-        },
-        [onExternalSaveAppointment]
-    );
-
     const onShowAllFullDays = useCallback(() => {
         setShowAllFullDays((prev) => !prev);
     }, []);
@@ -172,7 +127,6 @@ export function CalendarProvider({
         []
     );
 
-    //
     const filteredAppointments = useMemo(() => {
         return appointments.filter((appointment) => {
             if (!appointment.assign || appointment.assign.length === 0) {
@@ -186,6 +140,33 @@ export function CalendarProvider({
         });
     }, [appointments, teamModel]);
 
+    // user interactions: change (Dra & drop), add, edit and delete:
+    const onChangeAppointments = useCallback(
+        (newAppointment: Appointment[]) => {
+            onExternalChangeAppointment(newAppointment);
+        },
+        [onExternalChangeAppointment]
+    );
+
+    const onSaveAppointment = useCallback(
+        (newAppointment: Appointment | undefined) => {
+            onExternalSaveAppointment(newAppointment!);
+        },
+        [onExternalSaveAppointment]
+    );
+
+    const onDeleteAppointment = useCallback(
+        (appointmentToDelete: Appointment) => {
+            onExternalSaveAppointment(appointmentToDelete);
+            setPopperAppointment(undefined);
+        },
+        [onExternalSaveAppointment]
+    );
+
+    useEffect(() => {
+        setAppointments(incomingAppointments);
+    }, [incomingAppointments]);
+
     return (
         <CalendarContext.Provider
             value={{
@@ -195,7 +176,6 @@ export function CalendarProvider({
                 selectedDate,
                 language,
                 appointments: filteredAppointments,
-                savedAppointment,
                 showAllFullDays,
                 fullDaysCount,
                 dialogAppointment,

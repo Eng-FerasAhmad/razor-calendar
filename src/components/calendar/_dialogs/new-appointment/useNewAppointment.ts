@@ -44,6 +44,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     );
     const [title, setTitle] = useState('');
     const [notes, setNotes] = useState('');
+    const [appointmentId, setAppointmentId] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
     const [color, setColor] = useState('#33b679');
     const [assign, setAssign] = useState<TeamMember[]>([]);
@@ -73,6 +74,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         ) {
             // Handle appointment logic
             const {
+                id,
                 title: appointmentTitle,
                 notes: appointmentNotes,
                 start,
@@ -82,6 +84,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
                 assign: appointmentAssign,
             } = dialogAppointment.appointment;
 
+            setAppointmentId(id || '');
             setTitle(appointmentTitle || '');
             setNotes(appointmentNotes || '');
             setFromTime(start ? DateTime.fromISO(start) : DateTime.now());
@@ -101,7 +104,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         if (!title) return;
 
         const appointment: Appointment = {
-            id: 'new',
+            id: appointmentId,
             title,
             start: fromTime.toISO()!,
             end: toTime.toISO()!,

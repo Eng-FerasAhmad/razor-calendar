@@ -6,7 +6,7 @@ import { LayoutContainer } from 'calendar/_layout/styles';
 import Team from 'calendar/team/Team';
 import Day from 'day/Day';
 import Month from 'month/Month';
-import { Appointment, ViewType } from 'types/appointment';
+import { ViewType } from 'types/appointment';
 import { TeamModel } from 'types/teamModel';
 import Week from 'week/Week';
 
@@ -14,14 +14,12 @@ interface Props {
     selectedDate: DateTime;
     initView: ViewType;
     teamModel: TeamModel;
-    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
 export default function CalendarLayout({
     selectedDate,
     initView,
     teamModel,
-    handleChangeAppointment,
 }: Props): ReactElement {
     const { view, onViewChange, config } = useCalendarContext();
 
@@ -36,12 +34,7 @@ export default function CalendarLayout({
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
-                return (
-                    <Month
-                        selectedDate={selectedDate}
-                        handleChangeAppointment={handleChangeAppointment}
-                    />
-                );
+                return <Month selectedDate={selectedDate} />;
             case 'week':
                 return <Week selectedDate={selectedDate} />;
             case 'day':
@@ -55,12 +48,7 @@ export default function CalendarLayout({
                     <Day selectedDate={selectedDate} />
                 );
             default:
-                return (
-                    <Month
-                        selectedDate={selectedDate}
-                        handleChangeAppointment={handleChangeAppointment}
-                    />
-                );
+                return <Month selectedDate={selectedDate} />;
         }
     };
 

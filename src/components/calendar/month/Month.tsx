@@ -5,19 +5,14 @@ import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
 import { MonthContainer } from 'month/styles';
 import { getMonthWeekNames, getMonthWeeksRow } from 'month/utils';
-import { Appointment } from 'types/appointment';
 import { getDateRange } from 'utils/dates';
 
 interface Props {
     selectedDate: DateTime;
-    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-export default function Month({
-    selectedDate,
-    handleChangeAppointment,
-}: Props): React.ReactElement {
-    const { config, appointments } = useCalendarContext();
+export default function Month({ selectedDate }: Props): React.ReactElement {
+    const { config } = useCalendarContext();
 
     const monthWeekNames = getMonthWeekNames(config.common.locale);
     const startOfMonth = selectedDate.startOf('month');
@@ -31,11 +26,7 @@ export default function Month({
     return (
         <MonthContainer data-testid="month-container">
             <MonthHeader monthWeekNames={monthWeekNames} />
-            <MonthGrid
-                weeksRow={getMonthWeeksRow(days)}
-                appointments={appointments!}
-                handleChangeAppointment={handleChangeAppointment}
-            />
+            <MonthGrid weeksRow={getMonthWeeksRow(days)} />
         </MonthContainer>
     );
 }

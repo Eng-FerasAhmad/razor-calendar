@@ -43,24 +43,23 @@ export default function App(): ReactElement {
     };
 
     // Update an existing appointment
-    const handleChangeAppointment = (updatedAppointment: Appointment): void => {
-        setAppointments((prevAppointments) =>
-            prevAppointments.map((appointment) =>
-                appointment.id === updatedAppointment.id
-                    ? updatedAppointment
-                    : appointment
-            )
-        );
-        console.log('Updated Appointments:', appointments);
+    const handleChangeAppointment = (
+        updatedAppointment: Appointment[]
+    ): void => {
+        setAppointments(updatedAppointment);
+        console.log('from drag and dropo Appointments:', appointments);
     };
 
     // Add a new appointment
     const handleSaveAppointment = (newAppointment: Appointment): void => {
-        setAppointments((prevAppointments) => [
-            ...prevAppointments,
-            newAppointment,
-        ]);
-        console.log('Appointment Added:', newAppointment);
+        setAppointments((prevAppointments) =>
+            prevAppointments.map((appointment) => {
+                return appointment.id === newAppointment.id
+                    ? newAppointment
+                    : appointment;
+            })
+        );
+        console.log('Appointment Updated:', newAppointment);
     };
 
     // Delete an appointment

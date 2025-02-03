@@ -18,7 +18,7 @@ export interface Props {
     selectedDate: DateTime;
     config: RazorCalendarConfig<CalendarConfig>;
     teamModel: TeamModel;
-    handleChangeAppointment: (appointment: Appointment) => void;
+    handleChangeAppointment: (appointment: Appointment[]) => void;
     handleSaveAppointment: (appointment: Appointment) => void;
     handleDeleteAppointment: (appointment: Appointment) => void;
     onViewChange: (view: ViewType) => void;
@@ -47,6 +47,7 @@ export function RazorCalendar({
                 config={config}
                 teamModel={teamModel}
                 incomingAppointments={appointments}
+                onExternalChangeAppointment={handleChangeAppointment}
                 onExternalViewChange={onViewChange}
                 onExternalChangeDate={onChangeDate}
                 onExternalSaveAppointment={handleSaveAppointment}
@@ -59,7 +60,6 @@ export function RazorCalendar({
                     initView={view}
                     selectedDate={selectedDate}
                     teamModel={teamModel}
-                    handleChangeAppointment={handleChangeAppointment}
                 />
             </CalendarProvider>
         </ThemeProvider>

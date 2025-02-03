@@ -63,10 +63,9 @@ export default function useDragAndDropHandler(): UseDragAndDropHandler {
                         end: newEnd.toISO(),
                     };
                 }
-                return appointment; // Keep other appointments unchanged
+                return appointment;
             });
 
-        // Update global state using context
         onChangeAppointments(updatedAppointments!);
         setActiveDrag(null);
     };

@@ -1,35 +1,25 @@
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
-import { useDragAndDrop } from 'month/drag-and-drop/useDragAndDrop';
+import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
 import {
     MonthGridContainer,
     MonthGridContentWrapper,
 } from 'month/month-grid/styles';
-import { Appointment } from 'types/appointment';
 
 interface Props {
     weeksRow: DateTime[][];
-    appointments: Appointment[];
-    handleChangeAppointment: (appointment: Appointment) => void;
 }
 
-export default function MonthGrid({
-    weeksRow,
-    appointments,
-    handleChangeAppointment,
-}: Props): ReactElement {
+export default function MonthGrid({ weeksRow }: Props): ReactElement {
     const { config } = useCalendarContext();
-
-    const { updatedAppointments, handleDragStart, handleDragEnd } =
-        useDragAndDrop({
-            appointments,
-            handleChangeAppointment,
-        });
+    const { handleDragStart, handleDragEnd, activeDrag } =
+        useDragAndDropHandler();
 
     return (
         <DndContext
@@ -46,12 +36,23 @@ export default function MonthGrid({
                         {config.month.showWeekNumbers && (
                             <WeekNumber weekStart={week[0]} />
                         )}
-                        <DaysInTheWeek
-                            week={week}
-                            appointments={updatedAppointments}
-                        />
+                        <DaysInTheWeek week={week} />
                     </MonthGridContentWrapper>
                 ))}
+
+                <DragOverlay dropAnimation={null}>
+                    {activeDrag && (
+                        <DraggableEvent
+                            key={activeDrag.id}
+                            id={activeDrag.id}
+                            appointment={activeDrag}
+                            title={activeDrag.title}
+                            color={
+                                activeDrag.color || config.style.primaryColor
+                            }
+                        />
+                    )}
+                </DragOverlay>
             </MonthGridContainer>
         </DndContext>
     );
