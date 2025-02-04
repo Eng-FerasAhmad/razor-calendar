@@ -66,6 +66,7 @@ export function CalendarProvider({
     onExternalChangeAppointment,
     onExternalChangeDate,
     onExternalSaveAppointment,
+    onExternalDeleteAppointment,
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
     const [view, setView] = useState<ViewType>(currentView);
@@ -157,10 +158,10 @@ export function CalendarProvider({
 
     const onDeleteAppointment = useCallback(
         (appointmentToDelete: Appointment) => {
-            onExternalSaveAppointment(appointmentToDelete);
+            onExternalDeleteAppointment(appointmentToDelete);
             setPopperAppointment(undefined);
         },
-        [onExternalSaveAppointment]
+        [onExternalDeleteAppointment]
     );
 
     useEffect(() => {

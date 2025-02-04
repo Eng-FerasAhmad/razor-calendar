@@ -114,7 +114,17 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             assign,
         };
         onSaveAppointment(appointment);
+
+        // reset all values:
         onDialogAppointment(undefined);
+        setTitle('');
+        setFromTime(DateTime.now());
+        setToTime(DateTime.now().plus({ minutes: 30 }));
+        setNotes('');
+        setAppointmentId('');
+        setIsFullDay(false);
+        setAssign([]);
+        setColor('#33b679');
     };
 
     return {
