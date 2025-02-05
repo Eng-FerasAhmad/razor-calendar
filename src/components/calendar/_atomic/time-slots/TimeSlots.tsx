@@ -13,6 +13,7 @@ interface TimeSlotsProps {
             hourIntervalIndex: number;
         };
     };
+    userId?: string;
 }
 
 export default function TimeSlots({
@@ -20,6 +21,7 @@ export default function TimeSlots({
     interval,
     timeSlots,
     config,
+    userId,
 }: TimeSlotsProps): ReactElement {
     return (
         <>
@@ -27,7 +29,7 @@ export default function TimeSlots({
                 const hour = Math.floor((index * interval) / 60);
                 const minute = (index * interval) % 60;
 
-                const slotId = `${day.toISODate()}-${hour}:${minute}`;
+                const slotId = `${day.toISODate()}$${hour}:${minute}$${userId}`;
 
                 return (
                     <DroppableTimeSlot

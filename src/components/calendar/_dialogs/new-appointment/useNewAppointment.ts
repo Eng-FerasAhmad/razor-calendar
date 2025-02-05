@@ -29,6 +29,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     const {
         config,
         dialogAppointment,
+        teamModel,
         onSaveAppointment,
         onDialogAppointment,
     } = useCalendarContext();
@@ -52,16 +53,28 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
 
     useEffect(() => {
         if (dialogAppointment?.slotId) {
-            // Handle slotId logic
-            const [year, month, day, time] =
-                dialogAppointment.slotId.split('-') || [];
-            const [hour, minute] = time?.split(':').map(Number) || [0, 0];
+            // Extract slotId components
+            const [datePart, timePart, userId] =
+                dialogAppointment.slotId.split('$') || [];
+            const [year, month, day] = datePart?.split('-').map(Number) || [];
+            const [hour, minute] = timePart?.split(':').map(Number) || [0, 0];
 
-            if (year && month && day && time) {
+            // Find the assigned user from teamModel.users
+            const assignedUser = teamModel?.users.find(
+                (user) => user.id === userId
+            );
+
+            if (assignedUser) {
+                setAssign([assignedUser]); // Assign the found user
+            } else {
+                setAssign([]); // Clear assignment if no match
+            }
+
+            if (year && month && day && timePart) {
                 const newFromTime = DateTime.fromObject({
-                    year: Number(year),
-                    month: Number(month),
-                    day: Number(day),
+                    year,
+                    month,
+                    day,
                     hour,
                     minute,
                 });
@@ -97,7 +110,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             setColor(appointmentColor || '#33b679');
             setAssign(appointmentAssign || []);
         }
-    }, [dialogAppointment]);
+    }, [dialogAppointment, teamModel?.users]);
 
     const handleSave = (): void => {
         setTitleRequired(!title);

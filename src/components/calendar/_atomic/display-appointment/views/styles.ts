@@ -126,3 +126,19 @@ export const ShortLabelZoomIntervalWrapper = styled('div')({
     fontSize: '11px',
     marginLeft: '3px',
 });
+
+export const MultiAssigneeWrapper = styled('div')<{
+    color?: string;
+}>(({ color }) => ({
+    width: '7px',
+    height: '7px',
+    borderRadius: '50%',
+    backgroundColor: color,
+}));
+
+export const AssigneeWrapper = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '2px',
+    marginLeft: '5px',
+});

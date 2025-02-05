@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import {
+    AssigneeWrapper,
+    MultiAssigneeWrapper,
     ShortLabelViewWrapper,
     ShortTimerViewWrapper,
     StandardViewContainer,
@@ -37,17 +39,31 @@ export default function StandardView({
         DateTime.fromISO(appointment.end).toString(),
         config.hour.is24HourFormat
     );
-
+    const multiAssignees =
+        Array.isArray(appointment.assign) && appointment.assign.length > 1;
     return (
         <StandardViewContainer
             color={color || config.style.primaryColor}
             data-testid="standard-view-container"
             onClick={popperHandler}
         >
-            <ShortTimerViewWrapper>
-                {start} - {end}
-            </ShortTimerViewWrapper>
-            <ShortLabelViewWrapper>{appointment.title}</ShortLabelViewWrapper>
+            <div>
+                <ShortTimerViewWrapper>
+                    {start} - {end}
+                </ShortTimerViewWrapper>
+                <ShortLabelViewWrapper>
+                    {appointment.title}
+                </ShortLabelViewWrapper>
+            </div>
+            <AssigneeWrapper>
+                {multiAssignees &&
+                    appointment.assign?.map((user) => (
+                        <MultiAssigneeWrapper
+                            key={user.id}
+                            color={user.color}
+                        ></MultiAssigneeWrapper>
+                    ))}
+            </AssigneeWrapper>
         </StandardViewContainer>
     );
 }

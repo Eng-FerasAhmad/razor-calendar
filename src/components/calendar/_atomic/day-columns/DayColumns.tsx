@@ -107,6 +107,7 @@ export default function DayColumns({
                 interval={interval}
                 timeSlots={timeSlots}
                 config={config}
+                userId={userId}
             />
             <DisplayAppointment
                 day={day}
