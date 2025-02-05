@@ -63,5 +63,15 @@
         "options": "Options",
         "notAssign": "Not assign",
         "search": "Search"
+    },
+    "reminder" : {
+        "amount": "Reminder",
+        "minutes": "Minutes",
+        "hours": "Hours",
+        "days": "Days",
+        "weeks": "Weeks"
+    },
+    "category": {
+        "label": "Category"
     }
 }

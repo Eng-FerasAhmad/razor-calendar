@@ -26,6 +26,15 @@ export const RowWrapper = styled(Box)({
     gap: '20px',
 });
 
+export const RowReminderWrapper = styled(Box)({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    gap: '20px',
+    marginBottom: '28px',
+});
+
 export const ActionRowWrapper = styled(Box)({
     display: 'flex',
     flexDirection: 'row',

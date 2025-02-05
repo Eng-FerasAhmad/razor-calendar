@@ -61,5 +61,15 @@
         "options": "Weiter Aktionen",
         "notAssign": "Noch nicht zugewiesen",
         "search": "Suchen"
+    },
+    "reminder" : {
+        "amount": "Benachrichtigung",
+        "minutes": "Minuten",
+        "hours": "Stunden",
+        "days": "Tage",
+        "weeks": "Wochen"
+    },
+    "category": {
+        "label": "Kategorie"
     }
 }

@@ -4,8 +4,10 @@ import {
     MenuItem,
     Box,
     SelectChangeEvent,
+    InputLabel,
 } from '@mui/material';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface SelectColorProps {
     value: string;
@@ -16,6 +18,7 @@ export default function SelectColor({
     value,
     onChange,
 }: SelectColorProps): React.ReactElement {
+    const { t } = useTranslation();
     const colors = useMemo(
         () => [
             { name: 'Salbei', value: '#33b679' },
@@ -38,11 +41,13 @@ export default function SelectColor({
     };
 
     return (
-        <FormControl sx={{ width: '70px' }}>
+        <FormControl sx={{ width: '100px' }}>
+            <InputLabel>{t('category.label', { ns: 'common' })}</InputLabel>
             <Select
                 value={value}
                 onChange={handleChange}
                 displayEmpty
+                label={t('category.label', { ns: 'common' })}
                 sx={{
                     height: 44,
                     borderRadius: 1,

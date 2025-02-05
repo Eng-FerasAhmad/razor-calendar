@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import { useState, useEffect } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { ReminderValue } from 'components/shared/reminder-select/types';
 import { Appointment } from 'types/appointment';
 import { TeamMember } from 'types/teamModel';
 
@@ -23,6 +24,8 @@ export interface UseWeekAppointmentReturn {
     dateFormat: string;
     handleSave: () => void;
     titleRequired: boolean;
+    reminder: ReminderValue;
+    setReminder: (value: ReminderValue) => void;
 }
 
 export const useNewAppointment = (): UseWeekAppointmentReturn => {
@@ -45,6 +48,10 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     );
     const [title, setTitle] = useState('');
     const [notes, setNotes] = useState('');
+    const [reminder, setReminder] = useState<ReminderValue>({
+        amount: 15,
+        unit: 'minutes',
+    });
     const [appointmentId, setAppointmentId] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
     const [color, setColor] = useState('#33b679');
@@ -65,9 +72,9 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             );
 
             if (assignedUser) {
-                setAssign([assignedUser]); // Assign the found user
+                setAssign([assignedUser]);
             } else {
-                setAssign([]); // Clear assignment if no match
+                setAssign([]);
             }
 
             if (year && month && day && timePart) {
@@ -95,8 +102,10 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
                 isFullDay: appointmentIsFullDay,
                 color: appointmentColor,
                 assign: appointmentAssign,
+                reminder: appointmentReminder,
             } = dialogAppointment.appointment;
 
+            setReminder(appointmentReminder!);
             setAppointmentId(id || '');
             setTitle(appointmentTitle || '');
             setNotes(appointmentNotes || '');
@@ -125,12 +134,14 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             color,
             notes,
             assign,
+            reminder,
         };
         onSaveAppointment(appointment);
 
         // reset all values:
         onDialogAppointment(undefined);
         setTitle('');
+        setReminder({ amount: 15, unit: 'minutes' });
         setFromTime(DateTime.now());
         setToTime(DateTime.now().plus({ minutes: 30 }));
         setNotes('');
@@ -159,5 +170,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         dateFormat,
         handleSave,
         titleRequired,
+        reminder,
+        setReminder,
     };
 };

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {
     ActionRowWrapper,
     Container,
+    RowReminderWrapper,
     RowWrapper,
     TitleRowWrapper,
 } from './styles';
@@ -18,6 +19,7 @@ import { DialogCustom } from 'components/shared/dialog/Dialog';
 import DatePickerInput from 'components/shared/input-datepicker/DatepickerInput';
 import InputText from 'components/shared/input-text/InputText';
 import InputTimepicker from 'components/shared/input-timepicker/InputTimepicker';
+import ReminderSelect from 'components/shared/reminder-select/ReminderSelect';
 import SelectColor from 'components/shared/select-color/SelectColor';
 import { TeamMember } from 'types/teamModel';
 
@@ -41,6 +43,8 @@ export default function NewAppointment(): ReactElement {
         titleRequired,
         assign,
         setAssign,
+        reminder,
+        setReminder,
     } = useNewAppointment();
     const { t } = useTranslation();
     const theme = useTheme();
@@ -224,6 +228,10 @@ export default function NewAppointment(): ReactElement {
                     />
                     <SelectColor value={color} onChange={setColor} />
                 </RowWrapper>
+
+                <RowReminderWrapper>
+                    <ReminderSelect value={reminder} onChange={setReminder} />
+                </RowReminderWrapper>
 
                 <AssignLIst
                     teamList={teamModel?.users}

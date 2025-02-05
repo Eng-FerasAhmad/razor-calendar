@@ -18,7 +18,7 @@ export const initAppointments: Appointment[] = [
                 visible: true,
             },
         ],
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
     },
     {
         id: '2',
@@ -27,7 +27,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-27T09:05',
         isFullDay: false,
         color: '#33b679',
-        reminder: 300,
+        reminder: { amount: 3, unit: 'hours' },
         assign: [
             {
                 id: 'martin-id',
@@ -54,7 +54,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-27T14:00',
         isFullDay: false,
         color: '#33b679',
-        reminder: 3000,
+        reminder: { amount: 1, unit: 'days' },
         assign: [
             {
                 id: 'id',
@@ -73,7 +73,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-27T15:00',
         isFullDay: false,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 2, unit: 'weeks' },
         assign: [
             {
                 id: 'max-id',
@@ -92,7 +92,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-28T15:30',
         isFullDay: true,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'max-id',
@@ -117,7 +117,7 @@ export const initAppointments: Appointment[] = [
         available: false,
         visibility: true,
         location: 'id',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'anna-id',
@@ -144,7 +144,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-29T14:00',
         isFullDay: false,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'id',
@@ -163,7 +163,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-29T13:00',
         isFullDay: true,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'id',
@@ -182,7 +182,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-29T13:30',
         isFullDay: false,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'ferdi-id',
@@ -201,7 +201,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-29T13:00',
         isFullDay: true,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'anna-id',
@@ -220,7 +220,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-30T14:30',
         isFullDay: false,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'jef-id',
@@ -239,7 +239,7 @@ export const initAppointments: Appointment[] = [
         end: '2025-01-30T14:00',
         isFullDay: false,
         color: '#33b679',
-        reminder: 30,
+        reminder: { amount: 30, unit: 'minutes' },
         assign: [
             {
                 id: 'muster-id',

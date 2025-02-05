@@ -1,3 +1,4 @@
+import { ReminderValue } from 'components/shared/reminder-select/types';
 import { TeamMember } from 'types/teamModel';
 
 export type ViewType = 'team' | 'day' | 'week' | 'month' | 'year' | 'agenda';
@@ -7,7 +8,7 @@ export interface Appointment {
     title: string;
     start: string; // ISO string
     end: string; // ISO string
-    reminder?: number;
+    reminder?: ReminderValue;
     assign?: TeamMember[];
     duration?: string;
     status?: string;

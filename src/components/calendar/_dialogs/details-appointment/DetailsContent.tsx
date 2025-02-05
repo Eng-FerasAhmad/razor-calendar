@@ -32,7 +32,7 @@ import MenuSymbol from 'components/shared/icons/menu/MenuSymbol';
 import TimerSymbol from 'components/shared/icons/timer/TimerSymbol';
 import { UserSymbol } from 'components/shared/icons/user/UserSymbol';
 import { Appointment } from 'types/appointment';
-import { formatReminderTime, timeConverter } from 'utils/timeFormatConverter';
+import { timeConverter } from 'utils/timeFormatConverter';
 
 export default function DetailsContent(): ReactElement {
     const {
@@ -168,7 +168,8 @@ export default function DetailsContent(): ReactElement {
                     <TextBox>
                         <BellSymbol size={iconSize} />
                         <TimeBoxTitle>
-                            {formatReminderTime(appointment!.reminder)}
+                            {appointment!.reminder.amount}{' '}
+                            {appointment!.reminder.unit}
                         </TimeBoxTitle>
                     </TextBox>
                 </ReminderBox>
