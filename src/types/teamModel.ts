@@ -6,6 +6,7 @@ export interface TeamMember {
     color: string;
     visible: boolean;
     isPassive?: boolean;
+    notAvailable?: boolean;
 }
 
 export interface TeamModel {

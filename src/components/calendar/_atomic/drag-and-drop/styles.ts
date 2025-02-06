@@ -1,3 +1,4 @@
+import { darken } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { TimeSlotOffset } from 'calendar/_atomic/time-column/styles';
 import { commonSize } from 'calendar/_config/basicConfig';
@@ -10,6 +11,7 @@ interface Props {
     intervalIndex?: number;
     isFirstRow?: boolean;
     isLastRow?: boolean;
+    isPassive?: boolean;
 }
 
 interface AppointmentProps {
@@ -22,7 +24,8 @@ const calcTimeSlotHeight = (props: Props): string => {
 };
 
 const calcBorder = (props: Props): string => {
-    const currColor = props.isFullHour ? '#ddd' : '#f0f0f0';
+    let currColor = props.isFullHour ? '#ddd' : '#f0f0f0';
+    currColor = props.isPassive ? darken('#f8f8f8', 0.1) : currColor;
     return !props.isFirstRow ? `1px solid ${currColor}` : 'none';
 };
 
@@ -69,6 +72,7 @@ export const DroppableSlotWrapper = styled('div', {
             'intervalIndex',
             'isFirstRow',
             'isLastRow',
+            'isPassive',
         ].includes(prop.toString()),
 })<Props>(
     ({
@@ -78,13 +82,14 @@ export const DroppableSlotWrapper = styled('div', {
         isFirstRow,
         isLastRow,
         isFullHour,
+        isPassive,
     }) => ({
         height: calcTimeSlotHeight({ intervalIndex }),
         minHeight: pixelToRem(20),
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderTop: calcBorder({ isFirstRow, isFullHour }),
+        borderTop: calcBorder({ isFirstRow, isFullHour, isPassive }),
         borderBottom: calcBorderBottom({ isLastRow }),
         backgroundColor: workTime
             ? theme.palette.workTime

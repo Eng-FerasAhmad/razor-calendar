@@ -35,6 +35,7 @@ export default function TimeSlots({
                     <DroppableTimeSlot
                         key={slotId}
                         slotId={slotId}
+                        userId={userId}
                         hour={hour}
                         minute={minute}
                         isFirstRow={index === 0}

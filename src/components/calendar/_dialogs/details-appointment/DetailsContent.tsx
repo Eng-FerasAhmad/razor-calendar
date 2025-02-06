@@ -169,7 +169,9 @@ export default function DetailsContent(): ReactElement {
                         <BellSymbol size={iconSize} />
                         <TimeBoxTitle>
                             {appointment!.reminder.amount}{' '}
-                            {appointment!.reminder.unit}
+                            {t(`reminder.${appointment!.reminder.unit}`, {
+                                ns: 'common',
+                            })}
                         </TimeBoxTitle>
                     </TextBox>
                 </ReminderBox>

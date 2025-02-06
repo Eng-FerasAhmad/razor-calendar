@@ -13,6 +13,7 @@ interface Props {
     intervalIndex: number;
     workHoursStart: number;
     workHoursEnd: number;
+    userId?: string;
 }
 
 export default function DroppableTimeSlot({
@@ -24,9 +25,26 @@ export default function DroppableTimeSlot({
     intervalIndex,
     workHoursStart,
     workHoursEnd,
+    userId,
 }: Props): ReactElement {
     const { setNodeRef, isOver } = useDroppable({ id: slotId });
-    const { onDialogAppointment } = useCalendarContext();
+    const { onDialogAppointment, teamModel } = useCalendarContext();
+
+    // Find user safely (handle case where userId is undefined)
+    const currUser = userId
+        ? teamModel?.users.find((user) => user.id === userId)
+        : undefined;
+
+    // Check if user is not available or passive (avoid accessing undefined properties)
+    const isNotAvailable = currUser?.notAvailable ?? false;
+    const isPassive = currUser?.isPassive ?? false;
+
+    // Background color logic
+    const getBackgroundColor = (): string | undefined => {
+        if (isOver) return '#e3f2fd';
+        if (isNotAvailable || isPassive) return '#f8f8f8';
+        return undefined;
+    };
 
     const handleOpenClick = (): void => {
         onDialogAppointment({
@@ -45,11 +63,10 @@ export default function DroppableTimeSlot({
             isFirstRow={isFirstRow}
             intervalIndex={intervalIndex}
             isLastRow={isLastRow}
+            isPassive={isPassive} // Use checked value
             workTime={isWorkTime(hour, workHoursStart, workHoursEnd)}
-            style={{
-                backgroundColor: isOver ? '#e3f2fd' : '',
-            }}
+            style={{ backgroundColor: getBackgroundColor() }}
             onDoubleClick={handleOpenClick}
-        ></DroppableSlotWrapper>
+        />
     );
 }

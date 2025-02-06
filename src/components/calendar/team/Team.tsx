@@ -17,7 +17,7 @@ interface Props {
     teamModel: TeamModel;
 }
 
-export default function Week({ selectedDate, teamModel }: Props): ReactElement {
+export default function Team({ selectedDate, teamModel }: Props): ReactElement {
     const { config, appointments } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
     const { handleDragStart, handleDragEnd, activeDrag } =

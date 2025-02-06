@@ -9,6 +9,7 @@ export const initialTeamModel: TeamModel = {
             image: 'https://picsum.photos/200/300?grayscale',
             color: '#6b5b95',
             visible: true,
+            notAvailable: true,
         },
         {
             id: 'martin-id',
