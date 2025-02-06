@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { formControlStyles, selectStyles, colorBoxStyles } from './styles';
 
 interface SelectColorProps {
     value: string;
@@ -19,6 +20,7 @@ export default function SelectColor({
     onChange,
 }: SelectColorProps): React.ReactElement {
     const { t } = useTranslation();
+
     const colors = useMemo(
         () => [
             { name: 'Salbei', value: '#33b679' },
@@ -41,33 +43,18 @@ export default function SelectColor({
     };
 
     return (
-        <FormControl sx={{ width: '100px' }}>
+        <FormControl sx={formControlStyles}>
             <InputLabel>{t('category.label', { ns: 'common' })}</InputLabel>
             <Select
                 value={value}
                 onChange={handleChange}
                 displayEmpty
                 label={t('category.label', { ns: 'common' })}
-                sx={{
-                    height: 44,
-                    borderRadius: 1,
-                    '& .MuiSelect-outlined': {
-                        display: 'flex',
-                        alignItems: 'center',
-                    },
-                }}
+                sx={selectStyles}
             >
                 {colors.map((color) => (
                     <MenuItem key={color.name} value={color.value}>
-                        <Box
-                            sx={{
-                                width: 20,
-                                height: 20,
-                                backgroundColor: color.value,
-                                borderRadius: '50%',
-                                margin: 'auto',
-                            }}
-                        />
+                        <Box sx={colorBoxStyles(color.value)} />
                     </MenuItem>
                 ))}
             </Select>

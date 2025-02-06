@@ -6,16 +6,19 @@ import {
     Box,
     SelectChangeEvent,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReminderValue } from 'components/shared/reminder-select/types';
 
-interface ReminderSelectProps {
+interface Props {
     value: ReminderValue;
     onChange: (newValue: ReminderValue) => void;
 }
 
-const ReminderSelect: React.FC<ReminderSelectProps> = ({ value, onChange }) => {
+export default function ReminderSelect({
+    value,
+    onChange,
+}: Props): ReactElement {
     const { t } = useTranslation();
     const [amount, setAmount] = useState<number>(value.amount);
     const [unit, setUnit] = useState<ReminderValue['unit']>(value.unit);
@@ -43,7 +46,7 @@ const ReminderSelect: React.FC<ReminderSelectProps> = ({ value, onChange }) => {
         <Box display="flex" alignItems="center" gap={2}>
             <TextField
                 type="number"
-                label={t('reminder.amount', { ns: 'common' })} // Dynamic Label
+                label={t('reminder.amount', { ns: 'common' })}
                 variant="outlined"
                 value={amount}
                 onChange={handleAmountChange}
@@ -72,6 +75,4 @@ const ReminderSelect: React.FC<ReminderSelectProps> = ({ value, onChange }) => {
             </FormControl>
         </Box>
     );
-};
-
-export default ReminderSelect;
+}

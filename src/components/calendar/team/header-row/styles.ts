@@ -12,6 +12,12 @@ export const TeamDayNumberWrapper = styled('div')({
     gap: '4px',
 });
 
+export const NameWrapper = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active }) => ({
+    color: active ? theme.palette.text.disabled : theme.palette.text.primary,
+}));
+
 export const TeamDayHeaderWrapper = styled('div')(({ theme }) => ({
     flex: 1,
     textAlign: 'center',

@@ -5,6 +5,7 @@ import { ReactElement } from 'react';
 import FullDaysAppointment from 'calendar/_atomic/display-appointment/full-days-appointment/FullDaysAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
+    NameWrapper,
     TeamDayHeaderWrapper,
     TeamDayNumberWrapper,
 } from 'calendar/team/header-row/styles';
@@ -67,7 +68,9 @@ export default function TeamHeaderRow({
                                 >
                                     {getFallbackLetters(user)}
                                 </Avatar>
-                                <span>{`${user.firstName} ${teamModel.showLastName ? user.lastName : ''}`}</span>
+                                <NameWrapper
+                                    active={user.notAvailable || user.isPassive}
+                                >{`${user.firstName} ${teamModel.showLastName ? user.lastName : ''}`}</NameWrapper>
                             </TeamDayNumberWrapper>
                         </TeamDayHeaderWrapper>
                     ))}

@@ -4,10 +4,15 @@ import {
     MenuItem,
     InputLabel,
     SelectChangeEvent,
-    darken,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import React from 'react';
+import {
+    formControlStyles,
+    inputLabelStyles,
+    selectStyles,
+    menuItemStyles,
+} from './styles';
 
 interface Option<T extends string | number> {
     value: T;
@@ -31,7 +36,7 @@ export default function InputSelect<T extends string | number>({
     isCompact,
     borderRadius,
 }: InputSelectProps<T>): React.ReactElement {
-    const theme = useTheme();
+    const theme = useTheme(); // Get theme inside the component
 
     const handleChange = (event: SelectChangeEvent<T>): void => {
         onChange(event.target.value as T);
@@ -41,46 +46,12 @@ export default function InputSelect<T extends string | number>({
         <FormControl
             data-testid="form-control"
             fullWidth
-            sx={{
-                fontSize: '17px',
-                '& .MuiOutlinedInput-root': {
-                    overflow: 'none',
-                    color: isCompact
-                        ? theme.palette.text.primary
-                        : theme.palette.primary.contrastText,
-                    height: '34px',
-                    padding: '4px 14px',
-                    '& fieldset': {
-                        borderWidth: '0px',
-                        borderColor: isCompact
-                            ? darken(theme.palette.border, 0.1)
-                            : theme.palette.primary.dark,
-                    },
-                    '&:hover fieldset': {
-                        borderColor: isCompact
-                            ? darken(theme.palette.border, 0.1)
-                            : theme.palette.primary.dark,
-                    },
-                    '&.Mui-focused fieldset': {
-                        borderColor: isCompact
-                            ? darken(theme.palette.border, 0.1)
-                            : theme.palette.primary.dark,
-                        borderWidth: '1px',
-                    },
-                    '& .MuiSelect-icon': {
-                        color: isCompact
-                            ? darken(theme.palette.border, 0.3)
-                            : '#fff',
-                    },
-                },
-            }}
+            sx={formControlStyles(theme, isCompact)}
         >
             {label && (
                 <InputLabel
                     data-testid="input-label"
-                    sx={{
-                        color: theme.palette.primary.contrastText,
-                    }}
+                    sx={inputLabelStyles(theme)}
                 >
                     {label}
                 </InputLabel>
@@ -92,30 +63,14 @@ export default function InputSelect<T extends string | number>({
                 variant="outlined"
                 size="small"
                 label={label}
-                sx={{
-                    color: theme.palette.text.primary,
-                    backgroundColor: theme.palette.background.default,
-                    borderRadius: borderRadius || 1,
-                    height: '34px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '17px',
-                    padding: '4px',
-                    border: 'none',
-                    '&:hover': {
-                        backgroundColor: darken(
-                            theme.palette.action.hover,
-                            0.1
-                        ),
-                    },
-                }}
+                sx={selectStyles(theme, borderRadius)}
             >
                 {options.map((option) => (
                     <MenuItem
                         data-testid="menu-item"
                         key={String(option.value)}
                         value={option.value}
-                        sx={{ color: theme.palette.text.primary }}
+                        sx={menuItemStyles(theme)}
                     >
                         {option.label}
                     </MenuItem>

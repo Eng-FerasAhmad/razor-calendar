@@ -47,6 +47,7 @@ export default function DroppableTimeSlot({
     };
 
     const handleOpenClick = (): void => {
+        if (isNotAvailable || isPassive) return;
         onDialogAppointment({
             open: true,
             slotId,
