@@ -58,13 +58,23 @@ export default function DraggableAppointment({
     const handlePointerUp = (): void => {
         dragTimeoutRef.current = setTimeout(() => setIsDragging(false), 150);
     };
+    const multiAssignees =
+        Array.isArray(appointment.assign) && appointment.assign.length > 1;
+    const colorSelected = multiAssignees ? color : appointment.assign![0].color;
 
     const dragStyle = isOverlay
         ? {
+              backgroundColor: colorSelected,
               transform: transform
                   ? `translate(${transform.x}px, ${transform.y}px)`
                   : undefined,
-              zIndex: isDragging || dndDragging ? 2 : 'auto',
+              zIndex: isDragging || dndDragging ? 10 : 'auto',
+              opacity: isDragging || dndDragging ? 0.6 : 1,
+              boxShadow:
+                  isDragging || dndDragging
+                      ? '0px 4px 10px rgba(0,0,0,0.2)'
+                      : 'none',
+              cursor: 'grabbing',
               ...style,
           }
         : { ...style };
@@ -77,12 +87,20 @@ export default function DraggableAppointment({
         }[] = [
             {
                 condition: (minutes) => minutes <= 45,
-                view: <IntervalView appointment={appointment} color={color} />,
+                view: (
+                    <IntervalView
+                        appointment={appointment}
+                        color={colorSelected}
+                    />
+                ),
             },
             {
                 condition: (minutes) => minutes <= 45,
                 view: (
-                    <ZoomIntervalView appointment={appointment} color={color} />
+                    <ZoomIntervalView
+                        appointment={appointment}
+                        color={colorSelected}
+                    />
                 ),
             },
         ];
@@ -92,7 +110,7 @@ export default function DraggableAppointment({
             if (condition(diffInMinutes!)) return view;
         }
 
-        return <StandardView appointment={appointment} color={color} />;
+        return <StandardView appointment={appointment} color={colorSelected} />;
     };
 
     return (

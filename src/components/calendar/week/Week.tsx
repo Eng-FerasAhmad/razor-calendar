@@ -67,10 +67,7 @@ export default function Week({ selectedDate }: Props): ReactElement {
                                 from={activeDrag.start}
                                 to={activeDrag.end}
                                 appointment={activeDrag}
-                                color={
-                                    activeDrag.color ||
-                                    config.style.primaryColor
-                                }
+                                color={activeDrag.color!}
                                 style={{ top: '0', height: 'auto' }}
                                 isOverlay={true}
                             />

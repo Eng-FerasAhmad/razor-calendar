@@ -144,6 +144,7 @@ export function CalendarProvider({
     // user interactions: change (Dra & drop), add, edit and delete:
     const onChangeAppointments = useCallback(
         (newAppointment: Appointment[]) => {
+            console.log('onChangeAppointments from calendar context ');
             onExternalChangeAppointment(newAppointment);
         },
         [onExternalChangeAppointment]

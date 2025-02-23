@@ -17,7 +17,7 @@ export default function IntervalView({
     appointment,
     color,
 }: Props): ReactElement {
-    const { onPopperAppointment, config } = useCalendarContext();
+    const { onPopperAppointment } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
@@ -33,7 +33,7 @@ export default function IntervalView({
 
     return (
         <IntervalViewContainer
-            color={color || config.style.primaryColor}
+            color={color}
             data-testid="interval-view-container"
             onClick={popperHandler}
         >

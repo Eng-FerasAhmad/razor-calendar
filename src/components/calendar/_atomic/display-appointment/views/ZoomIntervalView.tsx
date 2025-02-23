@@ -17,7 +17,7 @@ export default function ZoomIntervalView({
     appointment,
     color,
 }: Props): ReactElement {
-    const { onPopperAppointment, config, view } = useCalendarContext();
+    const { onPopperAppointment, view } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
@@ -33,7 +33,7 @@ export default function ZoomIntervalView({
 
     return (
         <ZoomIntervalViewContainer
-            color={color || config.style.primaryColor}
+            color={color}
             data-testid="zoom-interval-view-container"
             onClick={popperHandler}
         >

@@ -16,66 +16,91 @@ export default function useDragAndDropHandler(): UseDragAndDropHandler {
 
     const handleDragEnd = (event: DragEndEvent): void => {
         const { active, over } = event;
-
         if (!over || !activeDrag) return;
-        if (typeof over.id !== 'string') return;
 
-        const lastDashIndex = over.id.lastIndexOf('-');
-        const targetDayISO = over.id.slice(0, lastDashIndex);
-        const time = over.id.slice(lastDashIndex + 1);
-        const [hour, minute] = time.split(':').map(Number);
+        const overId = String(over.id);
+
+        if (!overId.includes('$')) {
+            return;
+        }
+
+        const [targetDayISO, timeString] = overId.split('$');
+        const [hour, minute] = timeString.split(':').map(Number);
 
         if (!targetDayISO || Number.isNaN(hour) || Number.isNaN(minute)) return;
 
         const targetDay = DateTime.fromISO(targetDayISO);
 
-        const updatedAppointments =
-            appointments &&
-            appointments.map((appointment) => {
-                if (appointment.id === active.id) {
-                    const oldStart = DateTime.fromISO(appointment.start);
-                    const oldEnd = DateTime.fromISO(appointment.end);
+        // Compute updated appointments array
+        const updatedAppointments: Appointment[] = appointments!.map(
+            (appointment) =>
+                String(appointment.id) === String(active.id)
+                    ? {
+                          ...appointment,
+                          start:
+                              targetDay
+                                  .set({
+                                      hour,
+                                      minute,
+                                      second: 0,
+                                      millisecond: 0,
+                                  })
+                                  .toISO() ??
+                              targetDay
+                                  .set({
+                                      hour,
+                                      minute,
+                                      second: 0,
+                                      millisecond: 0,
+                                  })
+                                  .toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+                          end:
+                              targetDay
+                                  .set({
+                                      hour,
+                                      minute,
+                                      second: 0,
+                                      millisecond: 0,
+                                  })
+                                  .plus({
+                                      minutes: DateTime.fromISO(
+                                          appointment.end
+                                      ).diff(
+                                          DateTime.fromISO(appointment.start),
+                                          'minutes'
+                                      ).minutes,
+                                  })
+                                  .toISO() ??
+                              targetDay
+                                  .set({
+                                      hour,
+                                      minute,
+                                      second: 0,
+                                      millisecond: 0,
+                                  })
+                                  .plus({
+                                      minutes: DateTime.fromISO(
+                                          appointment.end
+                                      ).diff(
+                                          DateTime.fromISO(appointment.start),
+                                          'minutes'
+                                      ).minutes,
+                                  })
+                                  .toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+                      }
+                    : appointment
+        );
 
-                    // Calculate duration in minutes
-                    const durationInMinutes = oldEnd.diff(
-                        oldStart,
-                        'minutes'
-                    ).minutes;
+        onChangeAppointments(updatedAppointments);
 
-                    // Compute new start and end times based on target date
-                    const newStart = targetDay.set({
-                        hour,
-                        minute,
-                        second: 0,
-                        millisecond: 0,
-                    });
-
-                    const newEnd = newStart.plus({
-                        minutes: durationInMinutes,
-                    });
-
-                    if (!newStart.isValid || !newEnd.isValid)
-                        return appointment;
-
-                    return {
-                        ...appointment,
-                        start: newStart.toISO(),
-                        end: newEnd.toISO(),
-                    };
-                }
-                return appointment;
-            });
-
-        onChangeAppointments(updatedAppointments!);
         setActiveDrag(null);
     };
 
     const handleDragStart = (event: DragStartEvent): void => {
-        const draggedAppointment =
-            appointments &&
-            appointments.find(
-                (appointment) => appointment.id === String(event.active.id)
-            );
+        const draggedAppointment = appointments?.find(
+            (appointment) => String(appointment.id) === String(event.active.id)
+        );
+        console.log('draggedAppointment', draggedAppointment);
         setActiveDrag(draggedAppointment || null);
     };
 

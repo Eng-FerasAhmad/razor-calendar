@@ -35,6 +35,7 @@ export default function StandardView({
         DateTime.fromISO(appointment.start).toString(),
         config.hour.is24HourFormat
     );
+
     const end = timeConverter(
         DateTime.fromISO(appointment.end).toString(),
         config.hour.is24HourFormat
@@ -43,7 +44,7 @@ export default function StandardView({
         Array.isArray(appointment.assign) && appointment.assign.length > 1;
     return (
         <StandardViewContainer
-            color={color || config.style.primaryColor}
+            color={color}
             data-testid="standard-view-container"
             onClick={popperHandler}
         >
