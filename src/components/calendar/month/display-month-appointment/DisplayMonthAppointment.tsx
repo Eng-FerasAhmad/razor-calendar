@@ -13,6 +13,7 @@ export default function DisplayMonthAppointments({
     appointments,
 }: Props): ReactElement {
     const { config } = useCalendarContext();
+
     // Limit to first 3 events
     const visibleAppointments = appointments.slice(0, 3);
     const remainingCount = appointments.length - visibleAppointments.length;
@@ -25,7 +26,7 @@ export default function DisplayMonthAppointments({
                     id={appointment.id}
                     appointment={appointment}
                     title={appointment.title}
-                    color={appointment.color || config.style.primaryColor}
+                    color={appointment.color!}
                 />
             ))}
 

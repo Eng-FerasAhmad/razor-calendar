@@ -50,6 +50,7 @@ export default function Week({ selectedDate }: Props): ReactElement {
                     onDragStart={handleDragStart}
                     onDragEnd={handleDragEnd}
                     modifiers={[restrictToWindowEdges]}
+                    autoScroll={false}
                 >
                     {days.map((day) => (
                         <DayColumns

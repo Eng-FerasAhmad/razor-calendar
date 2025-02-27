@@ -100,7 +100,6 @@ export default function useDragAndDropHandler(): UseDragAndDropHandler {
         const draggedAppointment = appointments?.find(
             (appointment) => String(appointment.id) === String(event.active.id)
         );
-        console.log('draggedAppointment', draggedAppointment);
         setActiveDrag(draggedAppointment || null);
     };
 

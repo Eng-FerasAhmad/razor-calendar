@@ -47,7 +47,6 @@ export default function App(): ReactElement {
         updatedAppointment: Appointment[]
     ): void => {
         setAppointments(updatedAppointment);
-        console.log('from drag and dropo Appointments:', appointments);
     };
 
     // Add a new appointment

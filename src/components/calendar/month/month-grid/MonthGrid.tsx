@@ -3,10 +3,10 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import DaysInTheWeek from 'components/calendar/month/month-days-in-week/MonthDaysInWeek';
 import WeekNumber from 'components/calendar/month/month-week-number/MonthWeekNumber';
 import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
+import { useDragAndDrop } from 'month/drag-and-drop/useDragAndDrop';
 import {
     MonthGridContainer,
     MonthGridContentWrapper,
@@ -18,8 +18,7 @@ interface Props {
 
 export default function MonthGrid({ weeksRow }: Props): ReactElement {
     const { config } = useCalendarContext();
-    const { handleDragStart, handleDragEnd, activeDrag } =
-        useDragAndDropHandler();
+    const { handleDragStart, handleDragEnd, activeDrag } = useDragAndDrop();
 
     return (
         <DndContext

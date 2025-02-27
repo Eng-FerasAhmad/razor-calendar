@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { ReactElement } from 'react';
+import { MouseEvent, ReactElement } from 'react';
 import {
     AssigneeWrapper,
     MultiAssigneeWrapper,
@@ -22,7 +22,7 @@ export default function StandardView({
 }: Props): ReactElement {
     const { onPopperAppointment, config } = useCalendarContext();
 
-    const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
+    const popperHandler = (event: MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
             open: true,
             id: appointment.id,

@@ -7,6 +7,7 @@ import {
 } from 'calendar/_atomic/display-appointment/views/styles';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
+import { timeConverter } from 'utils/timeFormatConverter';
 
 interface Props {
     appointment: Appointment;
@@ -17,7 +18,7 @@ export default function IntervalView({
     appointment,
     color,
 }: Props): ReactElement {
-    const { onPopperAppointment } = useCalendarContext();
+    const { onPopperAppointment, config } = useCalendarContext();
 
     const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
@@ -28,8 +29,15 @@ export default function IntervalView({
         });
     };
 
-    const start = DateTime.fromISO(appointment.start).toFormat('hh:mm');
-    const end = DateTime.fromISO(appointment.end).toFormat('hh:mm');
+    const start = timeConverter(
+        DateTime.fromISO(appointment.start).toString(),
+        config.hour.is24HourFormat
+    );
+
+    const end = timeConverter(
+        DateTime.fromISO(appointment.end).toString(),
+        config.hour.is24HourFormat
+    );
 
     return (
         <IntervalViewContainer

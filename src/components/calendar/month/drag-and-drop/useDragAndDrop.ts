@@ -1,12 +1,8 @@
 import { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
-
-interface UseDragAndDropParams {
-    appointments: Appointment[];
-    handleChangeAppointment: (appointment: Appointment) => void;
-}
 
 interface UseDragAndDrops {
     updatedAppointments: Appointment[];
@@ -14,70 +10,78 @@ interface UseDragAndDrops {
     handleDragStart: (event: DragStartEvent) => void;
     handleDragEnd: (event: DragEndEvent) => void;
 }
-export const useDragAndDrop = ({
-    appointments,
-    handleChangeAppointment,
-}: UseDragAndDropParams): UseDragAndDrops => {
-    const [updatedAppointments, setUpdatedAppointments] =
-        useState(appointments);
+
+export const useDragAndDrop = (): UseDragAndDrops => {
+    const { appointments, onChangeAppointments } = useCalendarContext();
+
+    const [updatedAppointments, setUpdatedAppointments] = useState<
+        Appointment[]
+    >(appointments!);
     const [activeDrag, setActiveDrag] = useState<Appointment | null>(null);
 
     const handleDragStart = (event: DragStartEvent): void => {
         const draggedAppointment = updatedAppointments.find(
-            (appointment) => appointment.id === String(event.active.id)
+            (appointment) => String(appointment.id) === String(event.active.id)
         );
         setActiveDrag(draggedAppointment || null);
     };
 
     const handleDragEnd = (event: DragEndEvent): void => {
         const { active, over } = event;
-
         if (!over || !activeDrag) return;
 
-        const targetDayISO = over.id as string; // The target day in ISO format (date only)
-        const targetDay = DateTime.fromISO(targetDayISO); // Convert to DateTime
+        const targetDayISO = String(over.id);
+        if (!targetDayISO) return;
 
-        setUpdatedAppointments((prev) =>
-            prev.map((appointment) => {
-                if (appointment.id === active.id) {
-                    const oldStart = DateTime.fromISO(appointment.start);
-                    const oldEnd = DateTime.fromISO(appointment.end);
+        const targetDay = DateTime.fromISO(targetDayISO);
 
-                    // Calculate the number of days between start and end
-                    const daysDifference = oldEnd.diff(oldStart, 'days').days;
-
-                    // Set the new start and end dates
-                    const newStart = targetDay
-                        .set({
-                            hour: oldStart.hour,
-                            minute: oldStart.minute,
-                            second: oldStart.second,
-                        })
-                        .toISO() as string;
-
-                    const newEnd = targetDay
-                        .plus({ days: daysDifference })
-                        .set({
-                            hour: oldEnd.hour,
-                            minute: oldEnd.minute,
-                            second: oldEnd.second,
-                        })
-                        .toISO() as string;
-
-                    const newAppointment = {
-                        ...appointment,
-                        start: newStart,
-                        end: newEnd,
-                    };
-
-                    handleChangeAppointment(newAppointment);
-                    return newAppointment;
-                }
-                return appointment; // Keep other appointments unchanged
-            })
+        const updatedList: Appointment[] = updatedAppointments.map(
+            (appointment) =>
+                String(appointment.id) === String(active.id)
+                    ? {
+                          ...appointment,
+                          start:
+                              targetDay
+                                  .set({
+                                      hour: DateTime.fromISO(appointment.start)
+                                          .hour,
+                                      minute: DateTime.fromISO(
+                                          appointment.start
+                                      ).minute,
+                                      second: DateTime.fromISO(
+                                          appointment.start
+                                      ).second,
+                                  })
+                                  .toISO() ??
+                              targetDay.toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+                          end:
+                              targetDay
+                                  .plus({
+                                      days: DateTime.fromISO(
+                                          appointment.end
+                                      ).diff(
+                                          DateTime.fromISO(appointment.start),
+                                          'days'
+                                      ).days,
+                                  })
+                                  .set({
+                                      hour: DateTime.fromISO(appointment.end)
+                                          .hour,
+                                      minute: DateTime.fromISO(appointment.end)
+                                          .minute,
+                                      second: DateTime.fromISO(appointment.end)
+                                          .second,
+                                  })
+                                  .toISO() ??
+                              targetDay.toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+                      }
+                    : appointment
         );
 
-        setActiveDrag(null); // Reset the active drag state
+        setUpdatedAppointments(updatedList);
+        onChangeAppointments(updatedList);
+
+        setActiveDrag(null); // Reset drag state
     };
 
     return {

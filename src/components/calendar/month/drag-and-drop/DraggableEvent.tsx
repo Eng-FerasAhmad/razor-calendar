@@ -1,5 +1,5 @@
 import { useDraggable } from '@dnd-kit/core';
-import { ReactElement } from 'react';
+import { MouseEvent, ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
     DraggableEventContainer,
@@ -34,7 +34,7 @@ export default function DraggableEvent({
 
     const { onPopperAppointment } = useCalendarContext();
 
-    const popperHandler = (event: React.MouseEvent<HTMLElement>): void => {
+    const popperHandler = (event: MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
             open: true,
             id: 'id',
@@ -43,17 +43,27 @@ export default function DraggableEvent({
         });
     };
 
+    const multiAssignees =
+        Array.isArray(appointment.assign) && appointment.assign.length > 1;
+    const selectedColor = multiAssignees
+        ? appointment.color!
+        : appointment.assign![0].color;
+
     return (
         <DraggableEventContainer
             ref={setNodeRef}
             style={style}
-            {...attributes}
-            {...listeners}
             color={color}
             data-testid="draggable-event-container"
             onClick={popperHandler}
         >
-            <PointWrapper color={color} />
+            <PointWrapper
+                {...attributes}
+                {...listeners}
+                data-testid="draggable-zone"
+                color={selectedColor}
+            />
+
             <EventTitleWrapper>{title}</EventTitleWrapper>
         </DraggableEventContainer>
     );

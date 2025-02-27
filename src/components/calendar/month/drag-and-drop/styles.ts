@@ -41,6 +41,11 @@ export const PointWrapper = styled('span', {
     minWidth: '7px',
     backgroundColor: color,
     borderRadius: '50%',
+    position: 'static',
+    top: 0,
+    left: 0,
+    cursor: 'move',
+    zIndex: 2,
 }));
 
 export const EventTitleWrapper = styled('span')({
