@@ -46,7 +46,7 @@ export default function IntervalView({
             onClick={popperHandler}
         >
             <ShortTimerIntervalViewWrapper data-testid="short-timer-interval-view-wrapper">
-                {start} -{end}
+                {start} - {end}
             </ShortTimerIntervalViewWrapper>
             <ShortLabelIntervalViewWrapper>
                 {appointment.title}

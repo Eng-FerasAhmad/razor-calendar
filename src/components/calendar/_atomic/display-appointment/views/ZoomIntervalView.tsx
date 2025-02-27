@@ -47,7 +47,7 @@ export default function ZoomIntervalView({
         >
             {view === 'day' && (
                 <ShortTimerZoomIntervalWrapper>
-                    {start} -{end}
+                    {start} - {end}
                 </ShortTimerZoomIntervalWrapper>
             )}
             <ShortLabelZoomIntervalWrapper>
