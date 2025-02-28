@@ -9,7 +9,8 @@
     },
     "buttons": {
         "today": "Today",
-        "addEvent": "New Event"
+        "addEvent": "New Event",
+        "more": "more Events"
     },
     "labels": {
         "hours": "Hours",

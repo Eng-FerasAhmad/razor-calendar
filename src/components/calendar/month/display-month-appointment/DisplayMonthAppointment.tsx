@@ -1,5 +1,8 @@
+import { Tooltip } from '@mui/material';
 import { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import { MoreSymbol } from 'components/shared/icons/more/MoreSymbol';
 import { MoreEventsButtonWrapper } from 'month/display-month-appointment/styles';
 
 import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
@@ -12,6 +15,7 @@ interface Props {
 export default function DisplayMonthAppointments({
     appointments,
 }: Props): ReactElement {
+    const { t } = useTranslation();
     const { config } = useCalendarContext();
 
     // Limit to first 3 events
@@ -31,12 +35,18 @@ export default function DisplayMonthAppointments({
             ))}
 
             {remainingCount > 0 && (
-                <MoreEventsButtonWrapper
-                    color={config.style.primaryColor}
-                    data-testid="more-events-button-wrapper"
+                <Tooltip
+                    title={`${remainingCount} ${t('buttons.more', {
+                        ns: 'common',
+                    })}`}
                 >
-                    {`${remainingCount} more events`}
-                </MoreEventsButtonWrapper>
+                    <MoreEventsButtonWrapper
+                        color={config.style.primaryColor}
+                        data-testid="more-events-button-wrapper"
+                    >
+                        <MoreSymbol size={24} color="#b3b3b3" />
+                    </MoreEventsButtonWrapper>
+                </Tooltip>
             )}
         </>
     );

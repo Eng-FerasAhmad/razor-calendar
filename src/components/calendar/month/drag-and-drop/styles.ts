@@ -9,10 +9,10 @@ interface Props {
 export const DraggableEventContainer = styled('div', {
     shouldForwardProp: (prop) => prop !== 'color' && prop !== 'isToday',
 })<Props>(({ theme }) => ({
-    fontSize: '10px',
+    fontSize: '12px',
     whiteSpace: 'nowrap',
     height: '24px',
-    margin: '1px 0',
+    margin: '2px',
     padding: '1px 3px 1px 5px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -22,7 +22,7 @@ export const DraggableEventContainer = styled('div', {
     gap: '4px',
     cursor: 'grab',
     userSelect: 'none',
-    borderRadius: '3px',
+    borderRadius: '6px',
     '&:hover': {
         cursor: 'pointer',
         backgroundColor: theme.palette.action.hover,
@@ -48,12 +48,18 @@ export const PointWrapper = styled('span', {
     zIndex: 2,
 }));
 
-export const EventTitleWrapper = styled('span')({
+export const EventTitleWrapper = styled('div')(({ theme }) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: 'inline-block',
     width: 'auto',
+    fontWeight: 'bold',
+    color: theme.palette.text.secondary,
+}));
+
+export const EventStartWrapper = styled('span')({
+    marginRight: '5px',
 });
 
 // Droppable

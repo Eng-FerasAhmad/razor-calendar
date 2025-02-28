@@ -4,6 +4,7 @@ import Agenda from 'agenda/Agenda';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { LayoutContainer } from 'calendar/_layout/styles';
 import Team from 'calendar/team/Team';
+import YearView from 'calendar/year/Year';
 import Day from 'day/Day';
 import Month from 'month/Month';
 import { ViewType } from 'types/appointment';
@@ -41,6 +42,8 @@ export default function CalendarLayout({
                 return <Day selectedDate={selectedDate} />;
             case 'agenda':
                 return <Agenda />;
+            case 'year':
+                return <YearView />;
             case 'team':
                 return teamsHasVisibleItems() ? (
                     <Team selectedDate={selectedDate} teamModel={teamModel} />

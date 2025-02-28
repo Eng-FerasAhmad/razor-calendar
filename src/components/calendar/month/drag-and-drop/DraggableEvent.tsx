@@ -1,12 +1,15 @@
 import { useDraggable } from '@dnd-kit/core';
+import { DateTime } from 'luxon';
 import { MouseEvent, ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import {
     DraggableEventContainer,
+    EventStartWrapper,
     EventTitleWrapper,
     PointWrapper,
 } from 'month/drag-and-drop/styles';
 import { Appointment } from 'types/appointment';
+import { timeConverter } from 'utils/timeFormatConverter';
 
 interface Props {
     id: string;
@@ -21,6 +24,7 @@ export default function DraggableEvent({
     color,
     appointment,
 }: Props): ReactElement {
+    const { config } = useCalendarContext();
     const { attributes, listeners, setNodeRef, transform, isDragging } =
         useDraggable({
             id,
@@ -48,6 +52,10 @@ export default function DraggableEvent({
     const selectedColor = multiAssignees
         ? appointment.color!
         : appointment.assign![0].color;
+    const start = timeConverter(
+        DateTime.fromISO(appointment.start).toString(),
+        config.hour.is24HourFormat
+    );
 
     return (
         <DraggableEventContainer
@@ -64,7 +72,9 @@ export default function DraggableEvent({
                 color={selectedColor}
             />
 
-            <EventTitleWrapper>{title}</EventTitleWrapper>
+            <EventTitleWrapper>
+                <EventStartWrapper>{start}</EventStartWrapper> {title}
+            </EventTitleWrapper>
         </DraggableEventContainer>
     );
 }
