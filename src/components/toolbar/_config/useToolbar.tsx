@@ -32,18 +32,26 @@ export const useToolbar = ({
     };
 
     const handleClickNext = (): void => {
-        const updatedDate =
-            currentView === 'year'
-                ? currentDate.plus({ years: 1 })
-                : navigate(currentView, currentDate, 'NEXT');
+        let updatedDate;
+        if (currentView === 'year') {
+            updatedDate = currentDate.plus({ years: 1 });
+        } else if (currentView === 'agenda') {
+            updatedDate = currentDate.plus({ months: 1 });
+        } else {
+            updatedDate = navigate(currentView, currentDate, 'NEXT');
+        }
         onNavigate(updatedDate);
     };
 
     const handleClickPrev = (): void => {
-        const updatedDate =
-            currentView === 'year'
-                ? currentDate.minus({ years: 1 })
-                : navigate(currentView, currentDate, 'PREV');
+        let updatedDate;
+        if (currentView === 'year') {
+            updatedDate = currentDate.minus({ years: 1 });
+        } else if (currentView === 'agenda') {
+            updatedDate = currentDate.minus({ months: 1 });
+        } else {
+            updatedDate = navigate(currentView, currentDate, 'PREV');
+        }
         onNavigate(updatedDate);
     };
 
@@ -61,11 +69,10 @@ export const useToolbar = ({
                     .setLocale(locale)
                     .toFormat('LLLL yyyy')}`;
             }
-            case 'day': {
+            case 'day':
                 return currentDate
                     .setLocale(locale)
                     .toFormat(config.common!.dateFormat || 'dd-MM-yyyy');
-            }
             case 'team': {
                 const dayName = currentDate.setLocale(locale).toFormat('EEEE');
                 return `${dayName}, ${currentDate
@@ -74,6 +81,8 @@ export const useToolbar = ({
             }
             case 'year':
                 return currentDate.setLocale(locale).toFormat('yyyy');
+            case 'agenda':
+                return currentDate.setLocale(locale).toFormat('MMMM yyyy');
             default:
                 return currentDate.setLocale(locale).toISODate() || '';
         }
@@ -89,6 +98,8 @@ export const useToolbar = ({
                 return t('navigation.prev.month', { ns: 'common' });
             case 'year':
                 return t('navigation.prev.year', { ns: 'common' });
+            case 'agenda':
+                return t('navigation.prev.month', { ns: 'common' });
             default:
                 return t('navigation.prev.default', { ns: 'common' });
         }
@@ -104,6 +115,8 @@ export const useToolbar = ({
                 return t('navigation.next.month', { ns: 'common' });
             case 'year':
                 return t('navigation.next.year', { ns: 'common' });
+            case 'agenda':
+                return t('navigation.next.month', { ns: 'common' });
             default:
                 return t('navigation.next.default', { ns: 'common' });
         }

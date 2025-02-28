@@ -11,7 +11,8 @@ import {
 } from 'calendar/team/header-row/styles';
 import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Appointment } from 'types/appointment';
-import { TeamMember, TeamModel } from 'types/teamModel';
+import { TeamModel } from 'types/teamModel';
+import { getFallbackLetters } from 'utils/common';
 import {
     WeekHeaderRowContainer,
     GmtWrapper,
@@ -39,15 +40,6 @@ export default function TeamHeaderRow({
     const theme = useTheme();
 
     const handleToggle = (): void => onShowAllFullDays();
-
-    const getFallbackLetters = (user: TeamMember): string => {
-        const f = user.firstName?.trim() || '';
-        const l = user.lastName?.trim() || '';
-        const firstLetter = f.charAt(0).toUpperCase();
-        const lastLetter = l.charAt(0).toUpperCase();
-
-        return `${firstLetter}${lastLetter}`;
-    };
 
     return (
         <WeekHeaderRowContainer data-testid="week-header-row">

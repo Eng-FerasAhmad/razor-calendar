@@ -41,7 +41,7 @@ export default function CalendarLayout({
             case 'day':
                 return <Day selectedDate={selectedDate} />;
             case 'agenda':
-                return <Agenda />;
+                return <Agenda selectedDate={selectedDate} />;
             case 'year':
                 return <YearView selectedDate={selectedDate} />;
             case 'team':
