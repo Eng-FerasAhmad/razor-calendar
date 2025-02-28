@@ -43,7 +43,7 @@ export default function CalendarLayout({
             case 'agenda':
                 return <Agenda />;
             case 'year':
-                return <YearView />;
+                return <YearView selectedDate={selectedDate} />;
             case 'team':
                 return teamsHasVisibleItems() ? (
                     <Team selectedDate={selectedDate} teamModel={teamModel} />

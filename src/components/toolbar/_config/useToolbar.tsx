@@ -32,12 +32,18 @@ export const useToolbar = ({
     };
 
     const handleClickNext = (): void => {
-        const updatedDate = navigate(currentView, currentDate, 'NEXT');
+        const updatedDate =
+            currentView === 'year'
+                ? currentDate.plus({ years: 1 })
+                : navigate(currentView, currentDate, 'NEXT');
         onNavigate(updatedDate);
     };
 
     const handleClickPrev = (): void => {
-        const updatedDate = navigate(currentView, currentDate, 'PREV');
+        const updatedDate =
+            currentView === 'year'
+                ? currentDate.minus({ years: 1 })
+                : navigate(currentView, currentDate, 'PREV');
         onNavigate(updatedDate);
     };
 
@@ -56,18 +62,18 @@ export const useToolbar = ({
                     .toFormat('LLLL yyyy')}`;
             }
             case 'day': {
-                const dateString = currentDate
+                return currentDate
                     .setLocale(locale)
-                    .toFormat(config.common!.dateFormat || 'dd-MM-yyy');
-                return `${dateString}`;
+                    .toFormat(config.common!.dateFormat || 'dd-MM-yyyy');
             }
             case 'team': {
                 const dayName = currentDate.setLocale(locale).toFormat('EEEE');
-                const dateString = currentDate
+                return `${dayName}, ${currentDate
                     .setLocale(locale)
-                    .toFormat(config.common!.dateFormat || 'dd-MM-yyy');
-                return `${dayName}, ${dateString}`;
+                    .toFormat(config.common!.dateFormat || 'dd-MM-yyyy')}`;
             }
+            case 'year':
+                return currentDate.setLocale(locale).toFormat('yyyy');
             default:
                 return currentDate.setLocale(locale).toISODate() || '';
         }
@@ -107,15 +113,9 @@ export const useToolbar = ({
         { value: 'team', label: t('views.team', { ns: 'common' }) },
         { value: 'day', label: t('views.day', { ns: 'common' }) },
         { value: 'week', label: t('views.week', { ns: 'common' }) },
-        {
-            value: 'month',
-            label: t('views.month', { ns: 'common' }),
-        },
+        { value: 'month', label: t('views.month', { ns: 'common' }) },
         { value: 'year', label: t('views.year', { ns: 'common' }) },
-        {
-            value: 'agenda',
-            label: t('views.agenda', { ns: 'common' }),
-        },
+        { value: 'agenda', label: t('views.agenda', { ns: 'common' }) },
     ];
 
     return {
