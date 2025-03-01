@@ -74,5 +74,9 @@
     },
     "category": {
         "label": "Category"
+    },
+    "agenda": {
+        "fullDay": "Full day",
+        "noAppointments": "No events this month!"
     }
 }

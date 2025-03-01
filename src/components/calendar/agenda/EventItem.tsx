@@ -13,15 +13,16 @@ import {
 } from 'calendar/agenda/styles';
 import { Appointment } from 'types/appointment';
 import { getFallbackLetters } from 'utils/common';
+import { timeConverter } from 'utils/timeFormatConverter';
 
 interface Props {
     appointment: Appointment;
     lang: string;
 }
 
-export default function EventItem({ appointment, lang }: Props): ReactElement {
+export default function EventItem({ appointment }: Props): ReactElement {
     const { t } = useTranslation();
-    const { onPopperAppointment } = useCalendarContext();
+    const { onPopperAppointment, config } = useCalendarContext();
 
     const multiAssignees =
         Array.isArray(appointment.assign) && appointment.assign.length > 1;
@@ -39,6 +40,17 @@ export default function EventItem({ appointment, lang }: Props): ReactElement {
         });
     };
 
+    // Format the start and end times
+    const start = timeConverter(
+        DateTime.fromISO(appointment.start).toString(),
+        config.hour.is24HourFormat
+    );
+
+    const end = timeConverter(
+        DateTime.fromISO(appointment.end).toString(),
+        config.hour.is24HourFormat
+    );
+
     return (
         <EventItemContainer
             onClick={popperHandler}
@@ -49,7 +61,7 @@ export default function EventItem({ appointment, lang }: Props): ReactElement {
                 <EventTime>
                     {appointment.isFullDay
                         ? t('agenda.fullDay')
-                        : `${DateTime.fromISO(appointment.start).setLocale(lang).toFormat('HH:mm')} - ${DateTime.fromISO(appointment.end).setLocale(lang).toFormat('HH:mm')}`}
+                        : `${start} - ${end}`}
                 </EventTime>
                 <EventTitle>{appointment.title}</EventTitle>
             </LeftSectionWrapper>

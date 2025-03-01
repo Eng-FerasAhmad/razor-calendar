@@ -72,5 +72,9 @@
     },
     "category": {
         "label": "Kategorie"
+    },
+    "agenda": {
+        "fullDay": "Ganzer Tag",
+        "noAppointments": "Keine Termine dieser Monat!"
     }
 }

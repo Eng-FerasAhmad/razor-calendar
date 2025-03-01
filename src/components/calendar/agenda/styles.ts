@@ -5,22 +5,18 @@ export const AgendaContainer = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     padding: '20px',
+    fontSize: '16px',
 });
 
-export const AgendaRowContainer = styled('div')(({ theme }) => ({
+export const AgendaRowContainer = styled('div')({
     display: 'flex',
     width: '100%',
     borderBottom: '1px solid #ddd',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     padding: '8px',
     gap: '12px',
-
-    '&:hover': {
-        cursor: 'pointer',
-        backgroundColor: theme.palette.action.hover,
-    },
-}));
+});
 
 export const DateColumn = styled('div')({
     minWidth: '140px',
@@ -47,13 +43,20 @@ export const EventList = styled('div')({
     gap: '6px',
 });
 
-export const EventItemContainer = styled('div')({
+export const EventItemContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: '100%',
-});
+    borderRadius: '10px',
+    padding: '0 5px',
+
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: theme.palette.action.hover,
+    },
+}));
 
 export const LeftSectionWrapper = styled('div')({
     display: 'flex',
@@ -79,12 +82,10 @@ export const EventIndicator = styled('div')<{ color: string }>(({ color }) => ({
 }));
 
 export const EventTime = styled('div')(({ theme }) => ({
-    fontSize: '14px',
     color: theme.palette.text.secondary,
     minWidth: '90px',
 }));
 
 export const EventTitle = styled('div')({
-    fontSize: '14px',
     flexGrow: 1,
 });

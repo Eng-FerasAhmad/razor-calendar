@@ -1,6 +1,5 @@
 import { darken, lighten, Tooltip, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -32,7 +31,7 @@ import MenuSymbol from 'components/shared/icons/menu/MenuSymbol';
 import TimerSymbol from 'components/shared/icons/timer/TimerSymbol';
 import { UserSymbol } from 'components/shared/icons/user/UserSymbol';
 import { Appointment } from 'types/appointment';
-import { timeConverter } from 'utils/timeFormatConverter';
+import { formattedStart } from 'utils/dateFormater';
 
 export default function DetailsContent(): ReactElement {
     const {
@@ -46,23 +45,21 @@ export default function DetailsContent(): ReactElement {
     const iconSize = 20;
     const { appointment } = popperAppointment || {};
     const { title, start, end, assign, isFullDay } = appointment || {};
-    const { dateFormat } = config.common;
 
     const diffInMinutes = formatTimeDifference(start!, end!, isFullDay!);
 
     // Format the start and end times
-    const formattedStart = start
-        ? `${DateTime.fromISO(start).toFormat(`${dateFormat}`)} - ${timeConverter(
-              DateTime.fromISO(start).toString(),
-              config.hour.is24HourFormat
-          )}`
-        : null;
-    const formattedEnd = end
-        ? `${DateTime.fromISO(end).toFormat(`${dateFormat}`)} - ${timeConverter(
-              DateTime.fromISO(end).toString(),
-              config.hour.is24HourFormat
-          )}`
-        : null;
+    const startDate = formattedStart(
+        start!,
+        config.common.dateFormat,
+        config.hour.is24HourFormat
+    );
+
+    const endDate = formattedStart(
+        end!,
+        config.common.dateFormat,
+        config.hour.is24HourFormat
+    );
 
     const handleClose = (): void => {
         onPopperAppointment(undefined);
@@ -148,12 +145,12 @@ export default function DetailsContent(): ReactElement {
             <DateBox data-testid="date-box">
                 <TextBox>
                     <ClockSymbol size={iconSize} />
-                    <TimeBoxTitle>{formattedStart}</TimeBoxTitle>
+                    <TimeBoxTitle>{startDate}</TimeBoxTitle>
                 </TextBox>
 
                 <TextBox>
                     <OutlineClockSymbol size={iconSize} />
-                    <TimeBoxTitle>{formattedEnd}</TimeBoxTitle>
+                    <TimeBoxTitle>{endDate}</TimeBoxTitle>
                 </TextBox>
             </DateBox>
             <ReminderBox>
