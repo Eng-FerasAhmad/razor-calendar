@@ -76,5 +76,6 @@
     "agenda": {
         "fullDay": "Ganzer Tag",
         "noAppointments": "Keine Termine dieser Monat!"
-    }
+    },
+    "noItemsFound": "Keine Ergebnis gefunden"
 }

@@ -84,6 +84,7 @@ export const EventIndicator = styled('div')<{ color: string }>(({ color }) => ({
 export const EventTime = styled('div')(({ theme }) => ({
     color: theme.palette.text.secondary,
     minWidth: '90px',
+    fontSize: '14px',
 }));
 
 export const EventTitle = styled('div')({

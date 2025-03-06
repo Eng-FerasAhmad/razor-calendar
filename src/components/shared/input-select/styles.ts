@@ -51,7 +51,7 @@ export const selectStyles = (
     alignItems: 'center',
     fontSize: '17px',
     padding: '4px',
-    border: 'none',
+    border: `1px solid ${theme.palette.borderLight}`,
     '&:hover': {
         backgroundColor: darken(theme.palette.action.hover, 0.1),
     },

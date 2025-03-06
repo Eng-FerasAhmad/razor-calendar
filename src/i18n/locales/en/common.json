@@ -78,5 +78,6 @@
     "agenda": {
         "fullDay": "Full day",
         "noAppointments": "No events this month!"
-    }
+    },
+    "noItemsFound": "No matches found"
 }
