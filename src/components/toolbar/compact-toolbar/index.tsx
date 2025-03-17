@@ -4,6 +4,8 @@ import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
+import Button from 'components/shared/button/Button';
+import { AddSquare } from 'components/shared/icons/add-square/AddSquare';
 import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
 import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
 import CalendarCheckSymbol from 'components/shared/icons/calendar-check/CalendarCheck';
@@ -46,6 +48,8 @@ export function RazorToolbarCompact({
     const theme = createDynamicTheme(mergeConfig(basicConfig, config));
     const today = DateTime.now();
     const isToday = currentDate.hasSame(today, 'day');
+
+    const addHandler = (): void => {};
 
     return (
         <ThemeProvider theme={theme}>
@@ -92,7 +96,27 @@ export function RazorToolbarCompact({
 
                     <TitleCompactWrapper>{getTitle()}</TitleCompactWrapper>
                 </NavigationCompactWrapper>
-                <ViewCompactWrapper data-testid="view-compact.wrapper">
+
+                <ViewCompactWrapper data-testid="view-compact-wrapper">
+                    <Button
+                        variant={'contained'}
+                        startIcon={<AddSquare size={20} color="#fff" />}
+                        size={'medium'}
+                        onClick={addHandler}
+                        sx={{
+                            color: '#fff',
+                            borderRadius: '40px',
+                            height: '33px',
+                            padding: '0 40px',
+                            margin: '0',
+                            boxShadow: 'unset',
+                            '&:hover': {
+                                boxShadow: 'unset',
+                            },
+                        }}
+                    >
+                        {t('actions.new', { ns: 'common' })}
+                    </Button>
                     <InputSelect
                         value={currentView}
                         options={options}

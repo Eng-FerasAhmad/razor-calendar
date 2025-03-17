@@ -63,7 +63,9 @@
         "delete": "Delete",
         "options": "Options",
         "notAssign": "Not assign",
-        "search": "Search"
+        "search": "Search",
+        "new": "New",
+        "add": "Add"
     },
     "reminder" : {
         "amount": "Reminder",

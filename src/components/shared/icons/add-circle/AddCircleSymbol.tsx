@@ -5,7 +5,7 @@ interface IconProps {
     color?: string;
 }
 
-export default function BellSymbol({
+export default function AddCircleSymbol({
     size = 25,
     color = '#171717',
 }: IconProps): ReactElement {

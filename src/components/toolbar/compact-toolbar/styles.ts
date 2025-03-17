@@ -15,6 +15,8 @@ export const ToolbarCompactContainer = styled('div')(({ theme }) => ({
     alignItems: 'center',
     boxSizing: 'border-box',
     color: theme.palette.text.primary,
+    borderBottom: `1px solid ${theme.palette.borderLight}`,
+    paddingBottom: '10px',
 }));
 
 export const NavigationCompactWrapper = styled('div')({
@@ -28,6 +30,11 @@ export const NavigationCompactWrapper = styled('div')({
 
 export const ViewCompactWrapper = styled('div')({
     width: 'fit-content',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: '20px',
 });
 
 export const NavigationIconsCompactWrapper = styled('div', {

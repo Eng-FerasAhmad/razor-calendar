@@ -8,7 +8,6 @@ import { initAppointments } from 'components/app/mockAppointment';
 import { initialTeamModel } from 'components/app/mockTeam';
 import { AppContainer } from 'components/app/styles';
 import { RazorCalendarSidebar } from 'components/sidebar/CalendarSidebar';
-import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { Appointment, ViewType } from 'types/appointment';
 import { TeamModel } from 'types/teamModel';
 
@@ -34,9 +33,9 @@ export default function App(): ReactElement {
         setCurrentView(view);
     };
 
-    const handleNavigate = (newDate: DateTime): void => {
+    /* const handleNavigate = (newDate: DateTime): void => {
         setCurrentDate(newDate);
-    };
+    }; */
 
     const onChangeDate = (newDate: DateTime): void => {
         setCurrentDate(newDate);
@@ -99,14 +98,6 @@ export default function App(): ReactElement {
                 />
             </Drawer>
 
-            <RazorToolbarCompact
-                currentView={currentView}
-                onViewChange={handleViewChange}
-                currentDate={currentDate}
-                onNavigate={handleNavigate}
-                config={config}
-            />
-
             <RazorCalendar
                 appointments={appointments}
                 handleChangeAppointment={handleChangeAppointment}
@@ -118,6 +109,7 @@ export default function App(): ReactElement {
                 onChangeDate={onChangeDate}
                 config={config}
                 teamModel={teamModel}
+                hasCompactToolbar={true}
             />
         </AppContainer>
     );

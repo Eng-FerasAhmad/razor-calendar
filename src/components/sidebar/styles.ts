@@ -1,4 +1,3 @@
-import { grey } from '@mui/material/colors';
 import { styled, SxProps, Theme } from '@mui/material/styles';
 
 export const TeamListContainer = styled('div')({
@@ -31,8 +30,8 @@ export const dateCalendarStyles = (
     width: '250px',
     height: '265px',
     '& .MuiPickersDay-root': {
-        width: '30px',
-        height: '30px',
+        width: '28px',
+        height: '28px',
         fontSize: '12px',
         borderRadius: '50%',
         '&:hover': {
@@ -57,8 +56,8 @@ export const dateCalendarStyles = (
         color: '#fff',
     },
     '& .MuiPickersCalendarHeader-root': {
-        paddingLeft: '12px',
-        paddingRight: '10px',
+        paddingLeft: '22px',
+        paddingRight: '13px',
     },
     '& .MuiPickersArrowSwitcher-nextIconButton': {
         width: '30px',
@@ -85,42 +84,19 @@ export const dateCalendarStyles = (
         borderRadius: '8px',
         marginLeft: '3px',
     },
+    '& .MuiDayCalendar-weekDayLabel': {
+        width: '28px',
+        height: '32px',
+        fontSize: '12px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    '& .MuiPickersDay-root.MuiPickersDay-dayOutsideMonth': {
+        color: palette.text.disabled,
+        opacity: 0.5,
+    },
 });
-
-export const textFieldStyles: SxProps<Theme> = {
-    mb: 2,
-    width: '100%',
-
-    '& .MuiOutlinedInput-root': {
-        borderRadius: '10px',
-        height: '45px',
-        color: (theme) => theme.palette.text.primary,
-        '& fieldset': {
-            borderColor: (theme) => theme.palette.border,
-        },
-        '&:hover fieldset': {
-            borderColor: (theme) => theme.palette.border,
-        },
-        '&.Mui-focused fieldset': {
-            border: '1px solid',
-            borderColor: (theme) => theme.palette.border,
-        },
-    },
-
-    '& .MuiInputLabel-root': {
-        color: grey[500],
-        transition: 'opacity 0.2s ease-in-out',
-    },
-    '& .MuiInputLabel-root.Mui-focused, & .MuiInputLabel-root.MuiFormLabel-filled':
-        {
-            opacity: 0,
-        },
-
-    '& .MuiInputBase-input': {
-        color: (theme) => theme.palette.text.primary,
-        fontSize: '17px',
-    },
-};
 
 export const accordionStyles = (theme: Theme): SxProps<Theme> => ({
     width: '100%',

@@ -61,7 +61,9 @@
         "delete": "Löschen",
         "options": "Weiter Aktionen",
         "notAssign": "Noch nicht zugewiesen",
-        "search": "Suchen"
+        "search": "Suchen",
+        "new": "Neue",
+        "add": "Einfügen"
     },
     "reminder" : {
         "amount": "Benachrichtigung",

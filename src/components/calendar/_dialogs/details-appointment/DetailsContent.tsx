@@ -20,7 +20,7 @@ import {
     standardDarkColor7,
     standardLightColor4,
 } from 'calendar/_style/colors';
-import BellSymbol from 'components/shared/icons/add-circle/AddCircleSymbol';
+import AddCircleSymbol from 'components/shared/icons/add-circle/AddCircleSymbol';
 import CalendarSymbol from 'components/shared/icons/calendar/CalendarSymbol';
 import ClockSymbol from 'components/shared/icons/clock/ClockSymbol';
 import OutlineClockSymbol from 'components/shared/icons/clock-outline/OutlineClockSymbol';
@@ -163,7 +163,7 @@ export default function DetailsContent(): ReactElement {
             {appointment!.reminder && (
                 <ReminderBox>
                     <TextBox>
-                        <BellSymbol size={iconSize} />
+                        <AddCircleSymbol size={iconSize} />
                         <TimeBoxTitle>
                             {appointment!.reminder.amount}{' '}
                             {t(`reminder.${appointment!.reminder.unit}`, {

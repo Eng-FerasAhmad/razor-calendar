@@ -51,7 +51,6 @@ export function RazorCalendarSidebar({
                     }}
                     sx={dateCalendarStyles(palette)}
                 />
-
                 <TeamList
                     teamModel={teamModel}
                     onChangeTeamList={onChangeTeamList}
