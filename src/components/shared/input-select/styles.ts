@@ -49,9 +49,13 @@ export const selectStyles = (
     height: '34px',
     display: 'flex',
     alignItems: 'center',
-    fontSize: '17px',
-    padding: '4px',
+    fontSize: '16px',
+    padding: 0,
+    width: '100%',
     border: `1px solid ${theme.palette.borderLight}`,
+    '& .MuiSelect-select': {
+        paddingRight: '4px !important',
+    },
     '&:hover': {
         backgroundColor: darken(theme.palette.action.hover, 0.1),
     },

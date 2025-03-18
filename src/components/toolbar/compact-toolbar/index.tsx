@@ -14,6 +14,7 @@ import InputSelect from 'components/shared/input-select/InputSelect';
 import { ToolbarProps } from 'components/toolbar/_config/types';
 import { useToolbar } from 'components/toolbar/_config/useToolbar';
 import {
+    buttonStyles,
     NavigationCompactWrapper,
     NavigationIconsCompactWrapper,
     TitleCompactWrapper,
@@ -106,21 +107,16 @@ export function RazorToolbarCompact({
 
                 <ViewCompactWrapper data-testid="view-compact-wrapper">
                     <Button
-                        variant={'contained'}
-                        startIcon={<AddSquare size={20} color="#fff" />}
+                        variant={'outlined'}
+                        startIcon={
+                            <AddSquare
+                                size={18}
+                                color={darken(theme.palette.border, 0.4)}
+                            />
+                        }
                         size={'medium'}
                         onClick={addHandler}
-                        sx={{
-                            color: '#fff',
-                            borderRadius: '40px',
-                            height: '33px',
-                            padding: '0 40px',
-                            margin: '0',
-                            boxShadow: 'unset',
-                            '&:hover': {
-                                boxShadow: 'unset',
-                            },
-                        }}
+                        sx={buttonStyles(theme)}
                     >
                         {t('actions.new', { ns: 'common' })}
                     </Button>

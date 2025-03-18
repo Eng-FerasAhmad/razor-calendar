@@ -1,5 +1,5 @@
 import { darken } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, SxProps, Theme } from '@mui/material/styles';
 
 interface Props {
     color?: string;
@@ -16,7 +16,8 @@ export const ToolbarCompactContainer = styled('div')(({ theme }) => ({
     boxSizing: 'border-box',
     color: theme.palette.text.primary,
     borderBottom: `1px solid ${theme.palette.borderLight}`,
-    paddingBottom: '10px',
+    height: '60px',
+    padding: '0 20px',
 }));
 
 export const NavigationCompactWrapper = styled('div')({
@@ -87,3 +88,18 @@ export const TitleCompactWrapper = styled('div')(() => ({
     fontSize: '18px',
     margin: 0,
 }));
+
+export const buttonStyles = (theme: Theme): SxProps<Theme> => ({
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.background.default,
+    borderRadius: 20,
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '15px',
+    height: '33px',
+    padding: '0 40px',
+    border: `1px solid ${theme.palette.borderLight}`,
+    '&:hover': {
+        backgroundColor: darken(theme.palette.action.hover, 0.1),
+    },
+});
