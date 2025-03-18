@@ -4,6 +4,7 @@ import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import Button from 'components/shared/button/Button';
 import { AddSquare } from 'components/shared/icons/add-square/AddSquare';
 import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
@@ -46,10 +47,16 @@ export function RazorToolbarCompact({
     });
     const { t } = useTranslation();
     const theme = createDynamicTheme(mergeConfig(basicConfig, config));
+    const { onDialogAppointment } = useCalendarContext();
     const today = DateTime.now();
     const isToday = currentDate.hasSame(today, 'day');
 
-    const addHandler = (): void => {};
+    const addHandler = (): void => {
+        onDialogAppointment({
+            open: true,
+            slotId: '',
+        });
+    };
 
     return (
         <ThemeProvider theme={theme}>

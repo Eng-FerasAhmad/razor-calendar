@@ -12,7 +12,7 @@ import {
 } from './styles';
 import { useNewAppointment } from './useNewAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import AssignLIst from 'calendar/_dialogs/new-appointment/AssignLIst';
+import AssignLIst from 'calendar/_dialogs/new-appointment/AssignList';
 import Button from 'components/shared/button/Button';
 import Checkbox from 'components/shared/checkbox/Checkbox';
 import { DialogCustom } from 'components/shared/dialog/Dialog';
