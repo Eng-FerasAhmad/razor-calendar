@@ -50,7 +50,7 @@ export const createDynamicTheme = (
             fontSize: 16,
             fontFamily: 'Roboto, sans-serif',
             body1: {
-                fontWeight: 200,
+                fontWeight: 400,
             },
         },
         components: {
@@ -68,8 +68,8 @@ export const createDynamicTheme = (
                         backgroundColor: '#fff',
                     },
                     p: {
-                        fontWeight: 200,
-                        letterSpacing: '0.0625rem',
+                        fontWeight: 560,
+                        letterSpacing: '0',
                     },
                     '#root': {
                         height: '100%',

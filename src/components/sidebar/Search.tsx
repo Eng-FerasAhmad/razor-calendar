@@ -42,10 +42,10 @@ export function Search({
             variant="outlined"
             component="form"
             sx={{
-                p: '2px 2px 0px 0px',
+                p: '4px 2px 0px 0px',
                 display: 'flex',
                 alignItems: 'center',
-                height: 40,
+                height: 37,
                 width: 225,
                 mb: 2,
                 mt: 2,
