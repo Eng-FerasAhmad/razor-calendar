@@ -1,8 +1,8 @@
 import { Tooltip } from '@mui/material';
+import { MenuOutline } from 'razor-icon-library';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import { MoreSymbol } from 'components/shared/icons/more/MoreSymbol';
 import { MoreEventsButtonWrapper } from 'month/display-month-appointment/styles';
 
 import DraggableEvent from 'month/drag-and-drop/DraggableEvent';
@@ -44,7 +44,7 @@ export default function DisplayMonthAppointments({
                         color={config.style.primaryColor}
                         data-testid="more-events-button-wrapper"
                     >
-                        <MoreSymbol size={24} color="#b3b3b3" />
+                        <MenuOutline size={24} color="#b3b3b3" />
                     </MoreEventsButtonWrapper>
                 </Tooltip>
             )}

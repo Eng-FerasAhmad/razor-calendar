@@ -8,6 +8,13 @@ interface Props {
 
 export const YearContainer = styled('div')({
     display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
+});
+
+export const YearContentContainer = styled('div')({
+    display: 'flex',
     flexWrap: 'wrap',
     gap: '16px',
     padding: '16px',
@@ -55,7 +62,7 @@ export const DaysGrid = styled('div')({
 export const DayBox = styled('div', {
     shouldForwardProp: (prop) => prop !== 'color' && prop !== 'isToday',
 })<Props>(({ theme, color, isToday }) => ({
-    borderRadius: '50%',
+    borderRadius: '8px',
     padding: '5px',
     fontSize: '12px',
     width: '34px',

@@ -1,5 +1,6 @@
 import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
+import { ArrowDownOutline } from 'razor-icon-library';
 import { ReactElement } from 'react';
 import {
     DayHeaderRowContainer,
@@ -14,7 +15,6 @@ import {
 } from './styles';
 import FullDaysAppointment from 'calendar/_atomic/display-appointment/full-days-appointment/FullDaysAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Appointment } from 'types/appointment';
 import { formatDate } from 'utils/dates';
 
@@ -79,7 +79,7 @@ export default function DayHeaderRow({
                             isOpen={showAllFullDays}
                             onClick={handleToggle}
                         >
-                            <ArrowDownSymbol
+                            <ArrowDownOutline
                                 size={16}
                                 color={theme.palette.text.primary}
                             />

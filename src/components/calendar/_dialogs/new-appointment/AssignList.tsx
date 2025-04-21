@@ -1,16 +1,18 @@
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
+import { RowItemWrapper } from 'calendar/_dialogs/new-appointment/styles';
 import {
     standardDarkColor4,
     standardLightColor7,
 } from 'calendar/_style/colors';
+import InputTextLabel from 'components/shared/input-label/InputTextLabel';
 import { TeamMember } from 'types/teamModel';
 
 const ITEM_HEIGHT = 48;
@@ -43,6 +45,7 @@ export default function MultipleSelectChip({
     assign,
     onChange,
 }: Props): ReactElement {
+    const { t } = useTranslation();
     const theme = useTheme();
 
     const handleChange = (event: SelectChangeEvent<string[]>): void => {
@@ -57,75 +60,72 @@ export default function MultipleSelectChip({
     };
 
     return (
-        <FormControl
-            sx={{
-                width: '100%',
-                marginBottom: '28px',
-                '& .MuiInputBase-root': {
-                    display: 'flex',
-                    alignItems: 'center',
-                },
-                '& .MuiInputLabel-root': {
-                    lineHeight: '1.5',
-                    transform: 'translate(14px, 8px) scale(1)',
-                    transition: 'all 0.2s ease-in-out',
-                },
-                '& .MuiInputLabel-shrink': {
-                    transform: 'translate(14px, -10px) scale(0.75)',
-                },
-            }}
-        >
-            <InputLabel id="multiple-select-chip-label">Assign</InputLabel>
-            <Select
-                labelId="multiple-select-chip-label"
-                id="multiple-select-chip"
-                multiple
-                value={assign.map((member) => member.id)} // Use IDs as the value
-                onChange={handleChange}
-                size="small"
-                input={
-                    <OutlinedInput id="select-multiple-chip" label="Assign" />
-                }
-                renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map((id) => {
-                            const user = teamList?.find(
-                                (member) => member.id === id
-                            );
-                            return (
-                                <Chip
-                                    key={id}
-                                    label={`${user?.firstName || ''} ${
-                                        user?.lastName || ''
-                                    }`}
-                                    sx={{
-                                        height: '24px',
-                                        marginTop: '2px',
-                                        fontSize: '14px',
-                                        backgroundColor: user!.color
-                                            ? standardLightColor7(user!.color)
-                                            : '',
-                                        color: user!.color
-                                            ? standardDarkColor4(user!.color)
-                                            : '',
-                                    }}
-                                />
-                            );
-                        })}
-                    </Box>
-                )}
-                MenuProps={MenuProps}
+        <RowItemWrapper>
+            <InputTextLabel text={t('add.assign', { ns: 'common' })} />
+            <FormControl
+                sx={{
+                    width: '100%',
+                    '& .MuiInputBase-root': {
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: '8px',
+                    },
+                }}
             >
-                {teamList?.map((user) => (
-                    <MenuItem
-                        key={user.id}
-                        value={user.id}
-                        style={getStyles(user.id, assign, theme)}
-                    >
-                        {`${user.firstName} ${user.lastName}`}
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
+                <Select
+                    id="multiple-select-chip"
+                    multiple
+                    value={assign.map((member) => member.id)}
+                    onChange={handleChange}
+                    size="small"
+                    input={<OutlinedInput id="select-multiple-chip" />}
+                    renderValue={(selected) => (
+                        <Box
+                            sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}
+                        >
+                            {selected.map((id) => {
+                                const user = teamList?.find(
+                                    (member) => member.id === id
+                                );
+                                return (
+                                    <Chip
+                                        key={id}
+                                        label={`${user?.firstName || ''} ${
+                                            user?.lastName || ''
+                                        }`}
+                                        sx={{
+                                            height: '24px',
+                                            marginTop: '2px',
+                                            fontSize: '14px',
+                                            backgroundColor: user!.color
+                                                ? standardLightColor7(
+                                                      user!.color
+                                                  )
+                                                : '',
+                                            color: user!.color
+                                                ? standardDarkColor4(
+                                                      user!.color
+                                                  )
+                                                : '',
+                                        }}
+                                    />
+                                );
+                            })}
+                        </Box>
+                    )}
+                    MenuProps={MenuProps}
+                >
+                    {teamList?.map((user) => (
+                        <MenuItem
+                            key={user.id}
+                            value={user.id}
+                            style={getStyles(user.id, assign, theme)}
+                        >
+                            {`${user.firstName} ${user.lastName}`}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </RowItemWrapper>
     );
 }

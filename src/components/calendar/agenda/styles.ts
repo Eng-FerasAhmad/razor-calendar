@@ -2,6 +2,10 @@ import { styled } from '@mui/material/styles';
 
 export const AgendaContainer = styled('div')({
     width: '100%',
+});
+
+export const AgendaContentContainer = styled('div')({
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     padding: '20px',

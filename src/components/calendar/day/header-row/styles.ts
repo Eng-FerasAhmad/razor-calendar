@@ -75,11 +75,11 @@ export const DayShortNameWrapper = styled('div')(({ theme }) => ({
 export const DayNumberWrapper = styled('div', {
     shouldForwardProp: (prop) => prop !== 'isToday' && prop !== 'color',
 })<Props>(({ theme, isToday, color }) => ({
-    fontSize: '20px',
+    fontSize: '19px',
     fontWeight: 'normal',
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
+    width: '37px',
+    height: '37px',
+    borderRadius: '12px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

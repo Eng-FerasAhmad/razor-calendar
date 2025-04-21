@@ -4,13 +4,13 @@ import { styled } from '@mui/material/styles';
 export const StyledTextField = styled(TextField)(({ theme }) => ({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: theme.palette.border, // Default border color from theme
+            borderRadius: '8px',
         },
         '&:hover fieldset': {
-            borderColor: theme.palette.primary.main, // Hover color from theme
+            borderColor: theme.palette.primary.main,
         },
         '&.Mui-focused fieldset': {
-            borderColor: theme.palette.primary.main, // Focus color from theme
+            borderColor: theme.palette.primary.main,
         },
     },
 }));

@@ -46,6 +46,7 @@
     "add": {
         "header": "New Appointment",
         "title": "Title",
+        "description": "Add an appointment to your calendar",
         "startDate": "Start",
         "endDate": "End",
         "startTime": "Time from",
@@ -55,7 +56,9 @@
         "notes": "Descriptions",
         "cancel": "Cancel",
         "errorLaterDate": "Must be later than start date",
-        "errorLaterTime": "Must be later than start time"
+        "errorLaterTime": "Must be later than start time",
+        "assign": "Assign",
+        "reminder": "Reminder"
     },
     "actions": {
         "close": "close",

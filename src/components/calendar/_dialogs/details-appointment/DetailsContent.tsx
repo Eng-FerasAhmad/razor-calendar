@@ -1,5 +1,16 @@
 import { darken, lighten, Tooltip, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
+import {
+    AddCircleOutline,
+    CalendarCheckTwotone,
+    ClockOutline,
+    CloseOutline,
+    DeleteOutline,
+    EditOutline,
+    MenuOutline,
+    TimerBulk,
+    UserCardOutline,
+} from 'razor-icon-library';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -20,16 +31,6 @@ import {
     standardDarkColor7,
     standardLightColor4,
 } from 'calendar/_style/colors';
-import AddCircleSymbol from 'components/shared/icons/add-circle/AddCircleSymbol';
-import CalendarSymbol from 'components/shared/icons/calendar/CalendarSymbol';
-import ClockSymbol from 'components/shared/icons/clock/ClockSymbol';
-import OutlineClockSymbol from 'components/shared/icons/clock-outline/OutlineClockSymbol';
-import CloseSymbol from 'components/shared/icons/close/CloseSymbol';
-import DeleteSymbol from 'components/shared/icons/delete/DeleteSymbol';
-import EditSymbol from 'components/shared/icons/edit/EditSymbol';
-import MenuSymbol from 'components/shared/icons/menu/MenuSymbol';
-import TimerSymbol from 'components/shared/icons/timer/TimerSymbol';
-import { UserSymbol } from 'components/shared/icons/user/UserSymbol';
 import { Appointment } from 'types/appointment';
 import { formattedStart } from 'utils/dateFormater';
 
@@ -102,7 +103,7 @@ export default function DetailsContent(): ReactElement {
             <HeaderBox data-testid="header-box" color={getColor()}>
                 <Tooltip title={t('actions.edit', { ns: 'common' })}>
                     <IconWrapper color={getColor()} onClick={handleEdit}>
-                        <EditSymbol
+                        <EditOutline
                             size={18}
                             color={standardDarkColor7(getColor())}
                         />
@@ -111,7 +112,7 @@ export default function DetailsContent(): ReactElement {
 
                 <Tooltip title={t('actions.delete', { ns: 'common' })}>
                     <IconWrapper color={getColor()} onClick={onDelete}>
-                        <DeleteSymbol
+                        <DeleteOutline
                             size={18}
                             color={standardDarkColor7(getColor())}
                         />
@@ -120,7 +121,7 @@ export default function DetailsContent(): ReactElement {
 
                 <Tooltip title={t('actions.options', { ns: 'common' })}>
                     <IconWrapper color={getColor()}>
-                        <MenuSymbol
+                        <MenuOutline
                             size={18}
                             color={standardDarkColor7(getColor())}
                         />
@@ -129,7 +130,7 @@ export default function DetailsContent(): ReactElement {
 
                 <Tooltip title={t('actions.close', { ns: 'common' })}>
                     <IconWrapper color={getColor()} onClick={handleClose}>
-                        <CloseSymbol
+                        <CloseOutline
                             size={18}
                             color={standardDarkColor7(getColor())}
                         />
@@ -137,25 +138,25 @@ export default function DetailsContent(): ReactElement {
                 </Tooltip>
             </HeaderBox>
             <TitleBox>
-                <CalendarSymbol size={iconSize} />
+                <CalendarCheckTwotone size={iconSize} />
                 <Typography sx={{ fontSize: '16px' }} variant="body1" flex={1}>
                     {title}
                 </Typography>
             </TitleBox>
             <DateBox data-testid="date-box">
                 <TextBox>
-                    <ClockSymbol size={iconSize} />
+                    <ClockOutline size={iconSize} />
                     <TimeBoxTitle>{startDate}</TimeBoxTitle>
                 </TextBox>
 
                 <TextBox>
-                    <OutlineClockSymbol size={iconSize} />
+                    <ClockOutline size={iconSize} />
                     <TimeBoxTitle>{endDate}</TimeBoxTitle>
                 </TextBox>
             </DateBox>
             <ReminderBox>
                 <TextBox>
-                    <TimerSymbol size={iconSize} />
+                    <TimerBulk size={iconSize} />
                     <TimeBoxTitle>{diffInMinutes}</TimeBoxTitle>
                 </TextBox>
             </ReminderBox>
@@ -163,7 +164,7 @@ export default function DetailsContent(): ReactElement {
             {appointment!.reminder && (
                 <ReminderBox>
                     <TextBox>
-                        <AddCircleSymbol size={iconSize} />
+                        <AddCircleOutline size={iconSize} />
                         <TimeBoxTitle>
                             {appointment!.reminder.amount}{' '}
                             {t(`reminder.${appointment!.reminder.unit}`, {
@@ -175,7 +176,7 @@ export default function DetailsContent(): ReactElement {
             )}
             <CalendarBox>
                 <TextBox>
-                    <UserSymbol size={iconSize} />
+                    <UserCardOutline size={iconSize} />
                     <TextBoxTitle>
                         {assign && assign[0].id === 'id' && (
                             <>{t('actions.notAssign', { ns: 'common' })}</>

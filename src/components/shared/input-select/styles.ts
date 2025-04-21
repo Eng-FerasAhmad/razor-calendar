@@ -1,66 +1,61 @@
-import { SxProps, Theme, darken } from '@mui/material/styles';
+import { SxProps, Theme } from '@mui/material/styles';
+import { darken } from '@mui/system';
 
 export const formControlStyles = (
     theme: Theme,
     isCompact?: boolean
 ): SxProps<Theme> => ({
-    fontSize: '17px',
+    width: '100px',
     '& .MuiOutlinedInput-root': {
-        overflow: 'none',
-        color: isCompact
-            ? theme.palette.text.primary
-            : theme.palette.primary.contrastText,
-        height: '34px',
-        padding: '4px 14px',
+        height: isCompact ? '32px' : '40px',
+        padding: '0 12px',
+        fontSize: '15px',
+        backgroundColor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
+        borderRadius: '6px',
+        border: `1px solid ${theme.palette.divider}`,
         '& fieldset': {
-            borderWidth: '0px',
-            borderColor: isCompact
-                ? darken(theme.palette.divider, 0.1)
-                : theme.palette.primary.dark,
+            border: 'none',
         },
-        '&:hover fieldset': {
-            borderColor: isCompact
-                ? darken(theme.palette.divider, 0.1)
-                : theme.palette.primary.dark,
+        '&:hover': {
+            backgroundColor: theme.palette.action.hover,
         },
-        '&.Mui-focused fieldset': {
-            borderColor: isCompact
-                ? darken(theme.palette.divider, 0.1)
-                : theme.palette.primary.dark,
-            borderWidth: '1px',
+        '&.Mui-focused': {
+            boxShadow: `0 0 0 2px ${theme.palette.primary.main}33`,
         },
         '& .MuiSelect-icon': {
-            color: isCompact ? darken(theme.palette.divider, 0.3) : '#fff',
+            color: theme.palette.text.secondary,
         },
     },
 });
 
 export const inputLabelStyles = (theme: Theme): SxProps<Theme> => ({
-    color: theme.palette.primary.contrastText,
+    fontSize: '15px',
+    color: theme.palette.text.secondary,
+    marginBottom: '0.25rem',
 });
 
 export const selectStyles = (
     theme: Theme,
     borderRadius?: number
 ): SxProps<Theme> => ({
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.background.default,
-    borderRadius: borderRadius || 1,
-    height: '34px',
-    display: 'flex',
-    alignItems: 'center',
-    fontSize: '16px',
     padding: 0,
-    width: '100%',
-    border: `1px solid ${theme.palette.borderLight}`,
+    borderRadius: borderRadius ? `${borderRadius}px` : '0.375rem',
+    fontSize: '16px',
+    backgroundColor: theme.palette.background.paper,
     '& .MuiSelect-select': {
-        paddingRight: '4px !important',
-    },
-    '&:hover': {
-        backgroundColor: darken(theme.palette.action.hover, 0.1),
+        padding: '0.25rem 0',
+        minHeight: 'unset',
+        display: 'flex',
+        alignItems: 'center',
     },
 });
 
 export const menuItemStyles = (theme: Theme): SxProps<Theme> => ({
+    fontSize: '15px',
+    padding: '0.5rem 0.75rem',
     color: theme.palette.text.primary,
+    '&:hover': {
+        backgroundColor: darken(theme.palette.action.hover, 0.05),
+    },
 });

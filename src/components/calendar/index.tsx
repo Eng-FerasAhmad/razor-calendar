@@ -6,7 +6,6 @@ import DetailsAppointment from 'calendar/_dialogs/details-appointment/DetailsApp
 import NewAppointment from 'calendar/_dialogs/new-appointment/NewAppointment';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
 import DisableScrolling from 'calendar/_scrolling/Scrolling';
-import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
 import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
@@ -19,7 +18,6 @@ export interface Props {
     selectedDate: DateTime;
     config: RazorCalendarConfig<CalendarConfig>;
     teamModel: TeamModel;
-    hasCompactToolbar: boolean;
     handleChangeAppointment: (appointment: Appointment[]) => void;
     handleSaveAppointment: (appointment: Appointment) => void;
     handleDeleteAppointment: (appointment: Appointment) => void;
@@ -38,7 +36,6 @@ export function RazorCalendar({
     handleDeleteAppointment,
     onViewChange,
     onChangeDate,
-    hasCompactToolbar,
 }: Props): ReactElement {
     const theme = createDynamicTheme(config);
 
@@ -59,15 +56,6 @@ export function RazorCalendar({
                 <DisableScrolling />
                 <DetailsAppointment />
                 <NewAppointment />
-                {hasCompactToolbar && (
-                    <RazorToolbarCompact
-                        currentView={view}
-                        onViewChange={onViewChange}
-                        currentDate={selectedDate}
-                        onNavigate={onChangeDate}
-                        config={config}
-                    />
-                )}
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}

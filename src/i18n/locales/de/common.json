@@ -46,6 +46,7 @@
     "add": {
         "header": "Neu Termin",
         "title": "Titel",
+        "description": "Füge eine Termin zu dein Kalendar hinzu",
         "startDate": "Start",
         "endDate": "End",
         "startTime": "Zeit von",
@@ -53,7 +54,11 @@
         "fullDay": "Ganzer Tag",
         "save": "Speichern",
         "notes": "Beschreibung",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "errorLaterDate": "Muss später sein als Startdatum",
+        "errorLaterTime": "Muss später sein als Startzeit",
+        "assign": "Zuweisen",
+        "reminder": "Erinnerung"
     },
     "actions": {
         "close": "Schließen",

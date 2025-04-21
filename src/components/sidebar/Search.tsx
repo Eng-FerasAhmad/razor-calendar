@@ -2,8 +2,8 @@ import IconButton from '@mui/material/IconButton';
 import InputBase, { InputBaseProps } from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
+import { CloseOutline } from 'razor-icon-library';
 import React, { ReactElement, useState } from 'react';
-import { ClearIcon } from 'components/shared/icons/clear/ClearIcon';
 
 interface Props {
     submitHandler: () => void;
@@ -18,14 +18,14 @@ export function Search({
     const theme = useTheme();
     const [value, setValue] = useState(props.value || '');
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setValue(event.target.value);
         if (props.onChange) {
             props.onChange(event);
         }
     };
 
-    const handleClear = () => {
+    const handleClear = (): void => {
         setValue('');
         clearHandler();
     };
@@ -77,7 +77,7 @@ export function Search({
                     aria-label="clear"
                     onClick={handleClear}
                 >
-                    <ClearIcon size={20} color={theme.palette.grey['500']} />
+                    <CloseOutline size={20} color={theme.palette.grey['500']} />
                 </IconButton>
             )}
         </Paper>

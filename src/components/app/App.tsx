@@ -6,7 +6,7 @@ import { RazorCalendar } from 'calendar/index';
 import { config } from 'components/app/config';
 import { initAppointments } from 'components/app/mockAppointment';
 import { initialTeamModel } from 'components/app/mockTeam';
-import { AppContainer } from 'components/app/styles';
+import { AppContainer, CalendarContentContainer } from 'components/app/styles';
 import { RazorCalendarSidebar } from 'components/sidebar/CalendarSidebar';
 import { Appointment, ViewType } from 'types/appointment';
 import { TeamModel } from 'types/teamModel';
@@ -87,30 +87,20 @@ export default function App(): ReactElement {
 
     return (
         <AppContainer data-testid="app">
-            <Button onClick={toggleDrawer(!open)}>drawer</Button>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
-                <RazorCalendarSidebar
-                    currentDate={currentDate}
-                    onChangeDate={handleChangeDate}
+            <CalendarContentContainer>
+                <RazorCalendar
+                    appointments={appointments}
+                    handleChangeAppointment={handleChangeAppointment}
+                    handleSaveAppointment={handleSaveAppointment}
+                    handleDeleteAppointment={handleDeleteAppointment}
+                    view={currentView}
+                    onViewChange={handleViewChange}
+                    selectedDate={currentDate}
+                    onChangeDate={onChangeDate}
                     config={config}
                     teamModel={teamModel}
-                    onChangeTeamList={handleChangeTeamList}
                 />
-            </Drawer>
-
-            <RazorCalendar
-                appointments={appointments}
-                handleChangeAppointment={handleChangeAppointment}
-                handleSaveAppointment={handleSaveAppointment}
-                handleDeleteAppointment={handleDeleteAppointment}
-                view={currentView}
-                onViewChange={handleViewChange}
-                selectedDate={currentDate}
-                onChangeDate={onChangeDate}
-                config={config}
-                teamModel={teamModel}
-                hasCompactToolbar={true}
-            />
+            </CalendarContentContainer>
         </AppContainer>
     );
 }

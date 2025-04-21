@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon';
 import { ReactElement, useMemo } from 'react';
 import MonthView from './MonthView';
-import { YearContainer } from 'calendar/year/styles';
+import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
+import { YearContainer, YearContentContainer } from 'calendar/year/styles';
 
 interface Props {
     selectedDate: DateTime;
@@ -17,9 +18,12 @@ export default function YearView({ selectedDate }: Props): ReactElement {
 
     return (
         <YearContainer>
-            {months.map((month) => (
-                <MonthView key={month.month} month={month} />
-            ))}
+            <CalendarToolbar></CalendarToolbar>
+            <YearContentContainer>
+                {months.map((month) => (
+                    <MonthView key={month.month} month={month} />
+                ))}
+            </YearContentContainer>
         </YearContainer>
     );
 }

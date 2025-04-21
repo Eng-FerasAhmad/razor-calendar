@@ -1,34 +1,48 @@
 import { DateTime } from 'luxon';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { ReminderValue } from 'components/shared/reminder-select/types';
 import { Appointment } from 'types/appointment';
 import { TeamMember } from 'types/teamModel';
 
-export interface UseWeekAppointmentReturn {
+export interface UseNewAppointmentDataReturn {
     title: string;
     notes: string;
-    setTitle: (title: string) => void;
-    setNotes: (notes: string) => void;
     fromTime: DateTime;
-    setFromTime: (time: DateTime) => void;
     toTime: DateTime;
-    setToTime: (time: DateTime) => void;
     isFullDay: boolean;
-    setIsFullDay: (isFullDay: boolean) => void;
     color: string;
-    setColor: (color: string) => void;
-    assign: TeamMember[];
-    setAssign: (assign: TeamMember[]) => void;
     is24Hours: boolean;
     dateFormat: string;
-    handleSave: () => void;
     titleRequired: boolean;
     reminder: ReminderValue;
+    assign: TeamMember[];
+
+    setTitle: (title: string) => void;
+    setNotes: (notes: string) => void;
+    setFromTime: (time: DateTime) => void;
+    setToTime: (time: DateTime) => void;
+    setIsFullDay: (value: boolean) => void;
+    setColor: (color: string) => void;
     setReminder: (value: ReminderValue) => void;
+    setAssign: (users: TeamMember[]) => void;
+
+    handleSave: () => void;
+    handleFromTimeChange: (time: DateTime | null) => void;
+    handleToTimeChange: (time: DateTime | null) => void;
+    handleFromDateChange: (date: DateTime | null) => void;
+    handleToDateChange: (date: DateTime | null) => void;
+    handleTitleChange: (value: string) => void;
+    handleNotesChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleAssignChange: (list: TeamMember[]) => void;
+
+    toTimeError: boolean;
+    toDateError: boolean;
+    titleError: boolean;
+    isSaveDisabled: boolean;
 }
 
-export const useNewAppointment = (): UseWeekAppointmentReturn => {
+export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
     const {
         config,
         dialogAppointment,
@@ -58,24 +72,21 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
     const [assign, setAssign] = useState<TeamMember[]>([]);
     const [titleRequired, setTitleRequired] = useState(false);
 
+    const [toTimeError, setToTimeError] = useState(false);
+    const [toDateError, setToDateError] = useState(false);
+    const [titleError, setTitleError] = useState(false);
+
     useEffect(() => {
         if (dialogAppointment?.slotId) {
-            // Extract slotId components
             const [datePart, timePart, userId] =
                 dialogAppointment.slotId.split('$') || [];
             const [year, month, day] = datePart?.split('-').map(Number) || [];
             const [hour, minute] = timePart?.split(':').map(Number) || [0, 0];
 
-            // Find the assigned user from teamModel.users
             const assignedUser = teamModel?.users.find(
                 (user) => user.id === userId
             );
-
-            if (assignedUser) {
-                setAssign([assignedUser]);
-            } else {
-                setAssign([]);
-            }
+            setAssign(assignedUser ? [assignedUser] : []);
 
             if (year && month && day && timePart) {
                 const newFromTime = DateTime.fromObject({
@@ -88,11 +99,7 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
                 setFromTime(newFromTime);
                 setToTime(newFromTime.plus({ minutes: 30 }));
             }
-        } else if (
-            dialogAppointment?.slotId === '' &&
-            dialogAppointment?.appointment
-        ) {
-            // Handle appointment logic
+        } else if (dialogAppointment?.appointment) {
             const {
                 id,
                 title: appointmentTitle,
@@ -121,6 +128,63 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         }
     }, [dialogAppointment, teamModel?.users]);
 
+    const handleFromTimeChange = (newTime: DateTime | null): void => {
+        if (newTime) {
+            setFromTime(
+                fromTime.set({ hour: newTime.hour, minute: newTime.minute })
+            );
+            setToTimeError(toTime <= newTime);
+        }
+    };
+
+    const handleToTimeChange = (newTime: DateTime | null): void => {
+        if (newTime) {
+            setToTime(
+                toTime.set({ hour: newTime.hour, minute: newTime.minute })
+            );
+            setToTimeError(newTime <= fromTime);
+        }
+    };
+
+    const handleFromDateChange = (newDate: DateTime | null): void => {
+        if (newDate) {
+            setFromTime(
+                fromTime.set({
+                    year: newDate.year,
+                    month: newDate.month,
+                    day: newDate.day,
+                })
+            );
+            setToDateError(toTime < newDate.endOf('day'));
+        }
+    };
+
+    const handleToDateChange = (newDate: DateTime | null): void => {
+        if (newDate) {
+            setToTime(
+                toTime.set({
+                    year: newDate.year,
+                    month: newDate.month,
+                    day: newDate.day,
+                })
+            );
+            setToDateError(newDate.startOf('day') <= fromTime);
+        }
+    };
+
+    const handleTitleChange = (value: string): void => {
+        setTitle(value);
+        setTitleError(!value.trim());
+    };
+
+    const handleNotesChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        setNotes(event.target.value);
+    };
+
+    const handleAssignChange = (list: TeamMember[]): void => {
+        setAssign(list);
+    };
+
     const handleSave = (): void => {
         setTitleRequired(!title);
         if (!title) return;
@@ -136,10 +200,10 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
             assign,
             reminder,
         };
-        onSaveAppointment(appointment);
 
-        // reset all values:
+        onSaveAppointment(appointment);
         onDialogAppointment(undefined);
+
         setTitle('');
         setReminder({ amount: 15, unit: 'minutes' });
         setFromTime(DateTime.now());
@@ -151,26 +215,42 @@ export const useNewAppointment = (): UseWeekAppointmentReturn => {
         setColor('#33b679');
     };
 
+    const isSaveDisabled = toTimeError || toDateError || titleError;
+
     return {
         title,
         notes,
-        setTitle,
-        setNotes,
         fromTime,
-        setFromTime,
         toTime,
-        setToTime,
         isFullDay,
-        setIsFullDay,
         color,
-        setColor,
-        assign,
-        setAssign,
         is24Hours,
         dateFormat,
-        handleSave,
         titleRequired,
         reminder,
+        assign,
+
+        setTitle,
+        setNotes,
+        setFromTime,
+        setToTime,
+        setIsFullDay,
+        setColor,
         setReminder,
+        setAssign,
+
+        handleSave,
+        handleFromTimeChange,
+        handleToTimeChange,
+        handleFromDateChange,
+        handleToDateChange,
+        handleTitleChange,
+        handleNotesChange,
+        handleAssignChange,
+
+        toTimeError,
+        toDateError,
+        titleError,
+        isSaveDisabled,
     };
 };

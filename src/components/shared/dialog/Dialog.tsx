@@ -1,17 +1,19 @@
 import { DialogProps } from '@mui/material/Dialog';
+import { CloseOutline } from 'razor-icon-library';
 import React, { PropsWithChildren, ReactElement } from 'react';
 import {
     BootstrapDialog,
+    DialogDescriptionWrapper,
     StyledDialogActions,
     StyledDialogContent,
     StyledDialogTitle,
     StyledIconButton,
 } from './styles';
-import CloseSymbol from 'components/shared/icons/close/CloseSymbol';
 
 interface Props {
     handleClose?: () => void;
     title?: string;
+    description?: string;
     actions?: React.ReactNode;
     open: boolean;
     headerColor?: string;
@@ -21,6 +23,7 @@ interface Props {
 export function DialogCustom({
     handleClose,
     title,
+    description,
     actions,
     open,
     headerColor,
@@ -47,19 +50,25 @@ export function DialogCustom({
                     headerFontColor={headerFontColor}
                 >
                     {title}
+                    {handleClose && (
+                        <StyledIconButton
+                            aria-label="close"
+                            onClick={handleDialogClose}
+                            data-testid="dialog-close-icon"
+                        >
+                            <CloseOutline size={18} />
+                        </StyledIconButton>
+                    )}
                 </StyledDialogTitle>
             )}
-
-            {handleClose && (
-                <StyledIconButton
-                    aria-label="close"
-                    onClick={handleDialogClose}
-                    data-testid="dialog-close-icon"
+            {description && (
+                <DialogDescriptionWrapper
+                    data-testid="dialog-description"
+                    id="dialog-description"
                 >
-                    <CloseSymbol size={24} />
-                </StyledIconButton>
+                    {description}
+                </DialogDescriptionWrapper>
             )}
-
             <StyledDialogContent dividers data-testid="dialog-content">
                 {children}
             </StyledDialogContent>

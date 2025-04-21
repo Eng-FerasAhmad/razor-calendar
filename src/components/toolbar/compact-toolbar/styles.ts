@@ -1,4 +1,4 @@
-import { darken } from '@mui/material';
+import { darken, lighten } from '@mui/material';
 import { styled, SxProps, Theme } from '@mui/material/styles';
 
 interface Props {
@@ -85,21 +85,22 @@ export const TodayButtonWrapper = styled('div', {
 }));
 
 export const TitleCompactWrapper = styled('div')(() => ({
-    fontSize: '18px',
+    fontSize: '17px',
     margin: 0,
 }));
 
 export const buttonStyles = (theme: Theme): SxProps<Theme> => ({
     color: theme.palette.text.primary,
-    backgroundColor: theme.palette.background.default,
-    borderRadius: 20,
+    backgroundColor: '#fff',
+    borderRadius: '6px',
     display: 'flex',
     alignItems: 'center',
     fontSize: '15px',
-    height: '33px',
+    height: '32px',
+    width: '70px',
     padding: '0 40px',
-    border: `1px solid ${theme.palette.borderLight}`,
+    border: `1px solid #d9d9d9`,
     '&:hover': {
-        backgroundColor: darken(theme.palette.action.hover, 0.1),
+        backgroundColor: lighten(theme.palette.action.hover, 0.1),
     },
 });

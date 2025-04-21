@@ -22,7 +22,7 @@ export default function CalendarLayout({
     initView,
     teamModel,
 }: Props): ReactElement {
-    const { view, onViewChange, config } = useCalendarContext();
+    const { view, onViewChange } = useCalendarContext();
 
     useEffect(() => {
         onViewChange(initView);
@@ -56,11 +56,7 @@ export default function CalendarLayout({
     };
 
     return (
-        <LayoutContainer
-            top={config.style.topStartFrom}
-            id="calendar-layout"
-            data-testid="calendar-layout"
-        >
+        <LayoutContainer id="calendar-layout" data-testid="calendar-layout">
             {renderView()}
         </LayoutContainer>
     );

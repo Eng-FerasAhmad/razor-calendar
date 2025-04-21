@@ -1,15 +1,17 @@
 import { CssBaseline, darken, ThemeProvider, Tooltip } from '@mui/material';
 import { DateTime } from 'luxon';
+import {
+    AddOutline,
+    ArrowNextOutline,
+    ArrowPrevOutline,
+    CalendarCheckTwotone,
+} from 'razor-icon-library';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import Button from 'components/shared/button/Button';
-import { AddSquare } from 'components/shared/icons/add-square/AddSquare';
-import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
-import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
-import CalendarCheckSymbol from 'components/shared/icons/calendar-check/CalendarCheck';
 import InputSelect from 'components/shared/input-select/InputSelect';
 import { ToolbarProps } from 'components/toolbar/_config/types';
 import { useToolbar } from 'components/toolbar/_config/useToolbar';
@@ -69,7 +71,7 @@ export function RazorToolbarCompact({
                             today={isToday}
                             onClick={handleClickToday}
                         >
-                            <CalendarCheckSymbol
+                            <CalendarCheckTwotone
                                 size={22}
                                 color={
                                     isToday
@@ -84,7 +86,7 @@ export function RazorToolbarCompact({
                         <NavigationIconsCompactWrapper
                             onClick={handleClickPrev}
                         >
-                            <ArrowPrevSymbol
+                            <ArrowPrevOutline
                                 size={20}
                                 color={darken(theme.palette.border, 0.4)}
                             />
@@ -95,7 +97,7 @@ export function RazorToolbarCompact({
                         <NavigationIconsCompactWrapper
                             onClick={handleClickNext}
                         >
-                            <ArrowNextSymbol
+                            <ArrowNextOutline
                                 size={20}
                                 color={darken(theme.palette.border, 0.4)}
                             />
@@ -109,7 +111,7 @@ export function RazorToolbarCompact({
                     <Button
                         variant={'outlined'}
                         startIcon={
-                            <AddSquare
+                            <AddOutline
                                 size={18}
                                 color={darken(theme.palette.border, 0.4)}
                             />
@@ -125,7 +127,7 @@ export function RazorToolbarCompact({
                         options={options}
                         onChange={onViewChange}
                         isCompact={true}
-                        borderRadius={10}
+                        borderRadius={2}
                     />
                 </ViewCompactWrapper>
             </ToolbarCompactContainer>

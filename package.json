@@ -64,10 +64,10 @@
         "i18next": "^23.16.5",
         "i18next-browser-languagedetector": "^8.0.0",
         "luxon": "^3.5.0",
+        "razor-icon-library": "^0.2.17",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-i18next": "^14.0.0",
-        "recharts": "^2.15.2"
+        "react-i18next": "^14.0.0"
     },
     "devDependencies": {
         "@testing-library/dom": "^9.3.3",
@@ -79,7 +79,6 @@
         "@types/node": "^20.10.6",
         "@types/react": "^18.2.66",
         "@types/react-dom": "^18.2.22",
-        "@types/recharts": "^1.8.29",
         "@typescript-eslint/eslint-plugin": "^7.10.0",
         "@typescript-eslint/parser": "^7.10.0",
         "@vitejs/plugin-react": "^4.1.0",
@@ -108,7 +107,7 @@
         "stylelint-config-standard": "^36.0.0",
         "ts-jest": "^29.1.4",
         "typescript": "^5.2.2",
-        "vite": "^6.2.2",
+        "vite": "^6.3.2",
         "vite-plugin-dts": "^4.2.3",
         "vite-tsconfig-paths": "^4.3.1"
     }

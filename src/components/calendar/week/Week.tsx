@@ -9,6 +9,7 @@ import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
+import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
 import { getDateRange } from 'utils/dates';
 import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 
@@ -35,10 +36,12 @@ export default function Week({ selectedDate }: Props): ReactElement {
 
     return (
         <WeekContainer data-testid="week-container">
-            <WeekHeaderRow
-                days={days}
-                fullDayAppointments={fullDayAppointments}
-            />
+            <CalendarToolbar>
+                <WeekHeaderRow
+                    days={days}
+                    fullDayAppointments={fullDayAppointments}
+                />
+            </CalendarToolbar>
 
             <TimeDayWrapper
                 id="time-day-wrapper"

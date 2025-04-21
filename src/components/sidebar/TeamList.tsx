@@ -5,6 +5,7 @@ import {
     Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { ArrowDownOutline } from 'razor-icon-library';
 import { ChangeEvent, ReactElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -17,7 +18,6 @@ import {
     AccordionWrapper,
 } from './styles';
 import Checkbox from 'components/shared/checkbox/Checkbox';
-import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Search } from 'components/sidebar/Search';
 import { TeamMember, TeamModel } from 'types/teamModel';
 
@@ -74,7 +74,7 @@ export default function TeamList({
                 <Accordion defaultExpanded sx={accordionStyles(theme)}>
                     <AccordionSummary
                         expandIcon={
-                            <ArrowDownSymbol
+                            <ArrowDownOutline
                                 size={16}
                                 color={theme.palette.grey['500']}
                             />

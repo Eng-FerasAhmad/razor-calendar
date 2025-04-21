@@ -1,13 +1,17 @@
 import {
-    TextField,
     MenuItem,
     Select,
     FormControl,
-    Box,
     SelectChangeEvent,
 } from '@mui/material';
 import React, { useState, useEffect, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
+import InputTextLabel from 'components/shared/input-label/InputTextLabel';
+import {
+    RowItemWrapper,
+    RowWrapper,
+    StyledTextField,
+} from 'components/shared/reminder-select/styles';
 import { ReminderValue } from 'components/shared/reminder-select/types';
 
 interface Props {
@@ -43,22 +47,29 @@ export default function ReminderSelect({
     };
 
     return (
-        <Box display="flex" alignItems="center" gap={2}>
-            <TextField
-                type="number"
-                label={t('reminder.amount', { ns: 'common' })}
-                variant="outlined"
-                value={amount}
-                onChange={handleAmountChange}
-                sx={{ width: '135px' }}
-                size="small"
-            />
+        <RowWrapper>
+            <RowItemWrapper>
+                <InputTextLabel text={t('add.reminder', { ns: 'common' })} />
+                <StyledTextField
+                    type="number"
+                    variant="outlined"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    sx={{ width: '100px', fontSize: '14px' }}
+                    size="small"
+                />
+            </RowItemWrapper>
+
             <FormControl
                 variant="outlined"
                 size="small"
                 sx={{ width: '150px' }}
             >
-                <Select value={unit} onChange={handleUnitChange}>
+                <Select
+                    value={unit}
+                    onChange={handleUnitChange}
+                    sx={{ borderRadius: '8px', fontSize: '15px' }}
+                >
                     <MenuItem value="minutes">
                         {t('reminder.minutes', { ns: 'common' })}
                     </MenuItem>
@@ -73,6 +84,6 @@ export default function ReminderSelect({
                     </MenuItem>
                 </Select>
             </FormControl>
-        </Box>
+        </RowWrapper>
     );
 }

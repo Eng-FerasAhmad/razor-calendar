@@ -3,7 +3,11 @@ import { ReactElement, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import AgendaRow from './AgendaRow';
 import { CalendarContext } from 'calendar/_context/CalendarContext';
-import { AgendaContainer } from 'calendar/agenda/styles';
+import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
+import {
+    AgendaContainer,
+    AgendaContentContainer,
+} from 'calendar/agenda/styles';
 import { Appointment } from 'types/appointment';
 
 interface Props {
@@ -43,21 +47,25 @@ export default function Agenda({ selectedDate }: Props): ReactElement {
     }, [monthEvents]);
 
     return (
-        <AgendaContainer data-testid="agenda-container">
-            {Object.keys(eventsByDay).length > 0 ? (
-                Object.entries(eventsByDay).map(([date, dayEvents]) => (
-                    <AgendaRow
-                        key={date}
-                        date={date}
-                        events={dayEvents}
-                        lang={lang}
-                    />
-                ))
-            ) : (
-                <p style={{ textAlign: 'center', marginTop: '20px' }}>
-                    {t('agenda.noAppointments')}
-                </p>
-            )}
+        <AgendaContainer>
+            <CalendarToolbar></CalendarToolbar>
+
+            <AgendaContentContainer data-testid="agenda-container">
+                {Object.keys(eventsByDay).length > 0 ? (
+                    Object.entries(eventsByDay).map(([date, dayEvents]) => (
+                        <AgendaRow
+                            key={date}
+                            date={date}
+                            events={dayEvents}
+                            lang={lang}
+                        />
+                    ))
+                ) : (
+                    <p style={{ textAlign: 'center', marginTop: '20px' }}>
+                        {t('agenda.noAppointments')}
+                    </p>
+                )}
+            </AgendaContentContainer>
         </AgendaContainer>
     );
 }

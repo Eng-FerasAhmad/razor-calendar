@@ -1,6 +1,7 @@
 import { Avatar } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
+import { ArrowDownOutline } from 'razor-icon-library';
 import { ReactElement } from 'react';
 import FullDaysAppointment from 'calendar/_atomic/display-appointment/full-days-appointment/FullDaysAppointment';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
@@ -9,7 +10,6 @@ import {
     TeamDayHeaderWrapper,
     TeamDayNumberWrapper,
 } from 'calendar/team/header-row/styles';
-import ArrowDownSymbol from 'components/shared/icons/arrow-down/ArrowDownSymbol';
 import { Appointment } from 'types/appointment';
 import { TeamModel } from 'types/teamModel';
 import { getFallbackLetters } from 'utils/common';
@@ -56,7 +56,10 @@ export default function TeamHeaderRow({
                             <TeamDayNumberWrapper>
                                 <Avatar
                                     src={user.image}
-                                    sx={{ bgcolor: user.color, fontSize: 16 }}
+                                    sx={{
+                                        bgcolor: user.color,
+                                        fontSize: 16,
+                                    }}
                                 >
                                     {getFallbackLetters(user)}
                                 </Avatar>
@@ -75,7 +78,7 @@ export default function TeamHeaderRow({
                             isOpen={showAllFullDays}
                             onClick={handleToggle}
                         >
-                            <ArrowDownSymbol
+                            <ArrowDownOutline
                                 size={16}
                                 color={theme.palette.text.primary}
                             />

@@ -9,6 +9,7 @@ import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
+import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
 import TeamHeaderRow from 'calendar/team/header-row/TeamHeaderRow';
 import { TeamModel } from 'types/teamModel';
 
@@ -29,11 +30,13 @@ export default function Team({ selectedDate, teamModel }: Props): ReactElement {
 
     return (
         <TeamContainer data-testid="team-container">
-            <TeamHeaderRow
-                selectedDate={selectedDate}
-                fullDayAppointments={fullDayAppointments}
-                teamModel={teamModel}
-            />
+            <CalendarToolbar>
+                <TeamHeaderRow
+                    selectedDate={selectedDate}
+                    fullDayAppointments={fullDayAppointments}
+                    teamModel={teamModel}
+                />
+            </CalendarToolbar>
 
             <TimeDayWrapper
                 id="time-day-wrapper"

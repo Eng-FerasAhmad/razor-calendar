@@ -9,6 +9,8 @@ import { pixelToRem } from 'utils/common';
 export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
+        fontSize: pixelToRem(16),
+        border: 0,
     },
     '& .MuiDialogActions-root': {
         padding: theme.spacing(1),
@@ -16,6 +18,7 @@ export const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialog-paper': {
         maxWidth: 1000,
         borderRadius: theme.shape.borderRadius,
+        boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.1)',
     },
 }));
 
@@ -28,16 +31,29 @@ export const StyledDialogTitle = styled(DialogTitle, {
 }>`
     background-color: ${({ headerColor }) => headerColor || 'transparent'};
     color: ${({ headerFontColor }) => headerFontColor || 'inherit'};
-    padding: ${pixelToRem(16)};
+    padding: 16px 16px 5px 16px;
     font-family: inherit;
-    font-size: 1.25rem;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    gap: 8px;
 `;
 
+export const DialogDescriptionWrapper = styled('div')(({ theme }) => ({
+    color: theme.palette.text.secondary,
+    fontSize: pixelToRem(14),
+    padding: '0 16px',
+    fontFamily: 'inherit',
+}));
+
 export const StyledIconButton = styled(IconButton)`
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    font-family: inherit;
+    padding: 4px;
+    svg {
+        width: 18px;
+        height: 18px;
+    }
 `;
 
 export const StyledDialogContent = styled(DialogContent)`

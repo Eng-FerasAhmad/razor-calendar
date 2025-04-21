@@ -6,7 +6,7 @@ import { ReactElement } from 'react';
 
 interface InputTimepickerProps
     extends Omit<TimePickerProps<DateTime>, 'renderInput'> {
-    label: string;
+    label?: string;
     is24Hours?: boolean;
     error?: boolean;
     helperText?: string;
@@ -35,6 +35,23 @@ export default function InputTimepicker({
                         label,
                         error,
                         helperText,
+                        sx: {
+                            '& .MuiOutlinedInput-root': {
+                                fontSize: '15px',
+                                borderRadius: '8px',
+                                '& input': {
+                                    padding: '11px 10px',
+                                    fontSize: '15px',
+                                },
+                                '& .MuiSvgIcon-root': {
+                                    fontSize: '20px',
+                                    color: '#6B7280',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                fontSize: '15px',
+                            },
+                        },
                         FormHelperTextProps: {
                             sx: {
                                 minHeight: '10px',

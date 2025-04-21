@@ -1,6 +1,12 @@
 import { styled } from '@mui/material/styles';
 
 export const AppContainer = styled('div')({
-    width: '100%',
-    height: '54px',
+    boxSizing: 'border-box',
+});
+
+export const CalendarContentContainer = styled('div')({
+    margin: '20px',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    boxSizing: 'border-box',
 });
