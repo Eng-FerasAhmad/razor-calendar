@@ -4,8 +4,8 @@ export const initAppointments: Appointment[] = [
     {
         id: '1',
         title: 'Meeting at these times are very important',
-        start: '2025-02-23T13:00',
-        end: '2025-02-23T13:10',
+        start: '2025-04-15T13:00',
+        end: '2025-04-15T14:10',
         isFullDay: false,
         color: '#33b679',
         assign: [
@@ -23,8 +23,8 @@ export const initAppointments: Appointment[] = [
     {
         id: '2',
         title: 'Lunch but also long long text',
-        start: '2025-02-22T09:00',
-        end: '2025-02-22T09:05',
+        start: '2025-04-15T09:00',
+        end: '2025-04-15T10:30',
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 3, unit: 'hours' },
@@ -50,8 +50,8 @@ export const initAppointments: Appointment[] = [
     {
         id: '3',
         title: 'Meeting',
-        start: '2025-02-21T13:00',
-        end: '2025-02-21T14:00',
+        start: '2025-04-16T13:00',
+        end: '2025-04-16T14:00',
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 1, unit: 'days' },
@@ -69,8 +69,8 @@ export const initAppointments: Appointment[] = [
     {
         id: '4',
         title: 'Lunch: how about more longer text like this one hier, what you say',
-        start: '2025-02-21T13:00',
-        end: '2025-02-21T15:00',
+        start: '2025-04-21T13:00',
+        end: '2025-04-21T15:00',
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 2, unit: 'weeks' },

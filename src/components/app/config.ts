@@ -15,7 +15,7 @@ export const config: RazorCalendarConfig<CalendarConfig> = {
         showWeekNumbers: true,
     },
     common: {
-        locale: 'de-DE',
+        locale: 'en',
         dateFormat: 'dd.MM.yyyy',
     },
     style: {
