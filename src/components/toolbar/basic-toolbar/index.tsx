@@ -1,11 +1,10 @@
 import { CssBaseline, darken, ThemeProvider, Tooltip } from '@mui/material';
+import { ArrowNextOutline, ArrowPrevOutline } from 'razor-icon-library';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
 import Button from 'components/shared/button/Button';
-import ArrowNextSymbol from 'components/shared/icons/arrow-next/ArrowNextSymbol';
-import ArrowPrevSymbol from 'components/shared/icons/arrow-prev/ArrowPrevSymbol';
 import InputSelect from 'components/shared/input-select/InputSelect';
 import { ToolbarProps } from 'components/toolbar/_config/types';
 import { useToolbar } from 'components/toolbar/_config/useToolbar';
@@ -67,7 +66,7 @@ export function RazorToolbarBasic({
                             onClick={handleClickPrev}
                             color={config.style!.primaryColor}
                         >
-                            <ArrowPrevSymbol size={22} color={'#fff'} />
+                            <ArrowNextOutline size={22} color={'#fff'} />
                         </NavigationIconsWrapper>
                     </Tooltip>
 
@@ -76,7 +75,7 @@ export function RazorToolbarBasic({
                             onClick={handleClickNext}
                             color={'#fff'}
                         >
-                            <ArrowNextSymbol size={22} color={'#fff'} />
+                            <ArrowPrevOutline size={22} color={'#fff'} />
                         </NavigationIconsWrapper>
                     </Tooltip>
 

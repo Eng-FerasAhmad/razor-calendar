@@ -1,4 +1,3 @@
-import { Button, Drawer } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement, useState } from 'react';
 
@@ -7,22 +6,12 @@ import { config } from 'components/app/config';
 import { initAppointments } from 'components/app/mockAppointment';
 import { initialTeamModel } from 'components/app/mockTeam';
 import { AppContainer, CalendarContentContainer } from 'components/app/styles';
-import { RazorCalendarSidebar } from 'components/sidebar/CalendarSidebar';
 import { Appointment, ViewType } from 'types/appointment';
-import { TeamModel } from 'types/teamModel';
 
 export default function App(): ReactElement {
-    const [open, setOpen] = useState(false);
-
-    const toggleDrawer = (newOpen: boolean) => () => {
-        setOpen(newOpen);
-    };
-
     // Initialize appointments from local storage
     const [appointments, setAppointments] =
         useState<Appointment[]>(initAppointments);
-
-    const [teamModel, setTeamModel] = useState<TeamModel>(initialTeamModel);
 
     // State for CalendarToolbar and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('team');
@@ -72,19 +61,6 @@ export default function App(): ReactElement {
         console.log('Appointment Deleted:', appointmentToDelete);
     };
 
-    const handleChangeDate = (newDate: DateTime): void => {
-        setCurrentDate(newDate);
-    };
-
-    const handleChangeTeamList = (userId: string, checked: boolean): void => {
-        setTeamModel((prevTeamModel) => ({
-            ...prevTeamModel,
-            users: prevTeamModel.users.map((team) =>
-                team.id === userId ? { ...team, visible: checked } : team
-            ),
-        }));
-    };
-
     return (
         <AppContainer data-testid="app">
             <CalendarContentContainer>
@@ -98,7 +74,7 @@ export default function App(): ReactElement {
                     selectedDate={currentDate}
                     onChangeDate={onChangeDate}
                     config={config}
-                    teamModel={teamModel}
+                    teamModel={initialTeamModel}
                 />
             </CalendarContentContainer>
         </AppContainer>
