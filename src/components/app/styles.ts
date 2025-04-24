@@ -7,6 +7,6 @@ export const AppContainer = styled('div')({
 export const CalendarContentContainer = styled('div')({
     margin: '20px',
     border: '1px solid #ccc',
-    borderRadius: '8px',
+    borderRadius: '20px',
     boxSizing: 'border-box',
 });

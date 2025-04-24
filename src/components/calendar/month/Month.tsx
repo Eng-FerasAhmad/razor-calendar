@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
+import HeaderTemplate from 'calendar/_header-template/HeaderTemplate';
 import MonthGrid from 'components/calendar/month/month-grid/MonthGrid';
 import MonthHeader from 'components/calendar/month/month-header/MonthHeader';
 import { MonthContainer } from 'month/styles';
@@ -26,9 +26,9 @@ export default function Month({ selectedDate }: Props): React.ReactElement {
 
     return (
         <MonthContainer data-testid="month-container">
-            <CalendarToolbar>
+            <HeaderTemplate>
                 <MonthHeader monthWeekNames={monthWeekNames} />
-            </CalendarToolbar>
+            </HeaderTemplate>
             <MonthGrid weeksRow={getMonthWeeksRow(days)} />
         </MonthContainer>
     );

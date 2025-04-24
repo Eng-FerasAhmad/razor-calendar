@@ -8,14 +8,14 @@ import { ContentContainer, RowReminderWrapper } from './styles';
 import TitleInput from './TitleInput';
 import { useNewAppointmentData } from './useNewAppointmentData';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import AssignLIst from 'calendar/_dialogs/new-appointment/AssignList';
-import FullDaySwitch from 'calendar/_dialogs/new-appointment/FullDaySwitch';
+import AssignLIst from 'calendar/_dialogs/new-event/AssignList';
+import FullDaySwitch from 'calendar/_dialogs/new-event/FullDaySwitch';
 import { DialogCustom } from 'components/shared/dialog/Dialog';
 
 import ReminderSelect from 'components/shared/reminder-select/ReminderSelect';
 import SelectColor from 'components/shared/select-color/SelectColor';
 
-export default function NewAppointment(): ReactElement {
+export default function NewEventIndex(): ReactElement {
     const {
         title,
         notes,

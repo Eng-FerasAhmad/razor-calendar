@@ -7,9 +7,9 @@ import DayColumns from 'calendar/_atomic/day-columns/DayColumns';
 import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
 import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import HeaderTemplate from 'calendar/_header-template/HeaderTemplate';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
-import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
 import { getDateRange } from 'utils/dates';
 import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 
@@ -36,12 +36,12 @@ export default function Week({ selectedDate }: Props): ReactElement {
 
     return (
         <WeekContainer data-testid="week-container">
-            <CalendarToolbar>
+            <HeaderTemplate>
                 <WeekHeaderRow
                     days={days}
                     fullDayAppointments={fullDayAppointments}
                 />
-            </CalendarToolbar>
+            </HeaderTemplate>
 
             <TimeDayWrapper
                 id="time-day-wrapper"

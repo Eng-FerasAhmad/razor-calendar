@@ -6,9 +6,9 @@ import DayColumns from 'calendar/_atomic/day-columns/DayColumns';
 import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
 import TimeColumn from 'calendar/_atomic/time-column/TimeColumn';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import HeaderTemplate from 'calendar/_header-template/HeaderTemplate';
 import useAppointment from 'calendar/_hooks/useAppointment';
 import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
-import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
 import DayHeaderRow from 'day/header-row/DayHeaderRow';
 import { DayContainer, TimeDayWrapper } from 'day/styles';
 
@@ -28,12 +28,12 @@ export default function Day({ selectedDate }: Props): ReactElement {
 
     return (
         <DayContainer data-testid="day-container">
-            <CalendarToolbar>
+            <HeaderTemplate>
                 <DayHeaderRow
                     selectedDate={selectedDate}
                     fullDayAppointments={fullDayAppointments}
                 />
-            </CalendarToolbar>
+            </HeaderTemplate>
 
             <TimeDayWrapper
                 id="time-day-wrapper"

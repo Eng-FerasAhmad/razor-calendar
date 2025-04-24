@@ -7,7 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RowItemWrapper } from 'calendar/_dialogs/new-appointment/styles';
+import { RowItemWrapper } from 'calendar/_dialogs/new-event/styles';
 import {
     standardDarkColor4,
     standardLightColor7,

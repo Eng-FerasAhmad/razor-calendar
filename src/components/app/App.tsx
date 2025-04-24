@@ -13,7 +13,7 @@ export default function App(): ReactElement {
     const [appointments, setAppointments] =
         useState<Appointment[]>(initAppointments);
 
-    // State for CalendarToolbar and Calendar
+    // State for HeaderTemplate and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('team');
     const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
 

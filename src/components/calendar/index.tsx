@@ -2,15 +2,16 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { CalendarProvider } from 'calendar/_context/CalendarContext';
-import DetailsAppointment from 'calendar/_dialogs/details-appointment/DetailsAppointment';
-import NewAppointment from 'calendar/_dialogs/new-appointment/NewAppointment';
+import NewEventIndex from 'calendar/_dialogs/new-event';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
+import PopperEventDetailsIndex from 'calendar/_popper/event-details';
 import DisableScrolling from 'calendar/_scrolling/Scrolling';
 import { createDynamicTheme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
-import '../../i18n/i18n';
 import { TeamModel } from 'types/teamModel';
+
+import '../../i18n/i18n';
 
 export interface Props {
     appointments: Appointment[];
@@ -54,8 +55,8 @@ export function RazorCalendar({
                 onExternalDeleteAppointment={handleDeleteAppointment}
             >
                 <DisableScrolling />
-                <DetailsAppointment />
-                <NewAppointment />
+                <PopperEventDetailsIndex />
+                <NewEventIndex />
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}

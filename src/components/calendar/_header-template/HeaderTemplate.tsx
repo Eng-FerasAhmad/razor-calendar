@@ -1,18 +1,18 @@
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import { CalendarToolbarContainer } from 'calendar/_toolbar/styles';
-import { RazorToolbarCompact } from 'components/toolbar/compact-toolbar';
+import { CalendarToolbarContainer } from 'calendar/_header-template/styles';
+import { Toolbar } from 'src/components/calendar/toolbar';
 
 interface Props {
     children?: ReactElement;
 }
-export default function CalendarToolbar({ children }: Props): ReactElement {
+export default function HeaderTemplate({ children }: Props): ReactElement {
     const { config, onDateChange, onViewChange, selectedDate, view } =
         useCalendarContext();
 
     return (
         <CalendarToolbarContainer>
-            <RazorToolbarCompact
+            <Toolbar
                 currentView={view}
                 onViewChange={onViewChange}
                 currentDate={selectedDate}

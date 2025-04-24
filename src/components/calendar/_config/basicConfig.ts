@@ -42,7 +42,7 @@ export const basicConfig: CalendarConfig = {
         secondaryColor: '#33b679',
         backgroundColor: '#fff',
         fontFamily: 'Roboto',
-        topStartFrom: 35,
+        topStartFrom: 0,
     },
     sidebar: {
         showWeekNumber: false,

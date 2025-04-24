@@ -3,7 +3,7 @@ import { ReactElement, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import AgendaRow from './AgendaRow';
 import { CalendarContext } from 'calendar/_context/CalendarContext';
-import CalendarToolbar from 'calendar/_toolbar/CalendarToolbar';
+import HeaderTemplate from 'calendar/_header-template/HeaderTemplate';
 import {
     AgendaContainer,
     AgendaContentContainer,
@@ -48,7 +48,7 @@ export default function Agenda({ selectedDate }: Props): ReactElement {
 
     return (
         <AgendaContainer>
-            <CalendarToolbar></CalendarToolbar>
+            <HeaderTemplate></HeaderTemplate>
 
             <AgendaContentContainer data-testid="agenda-container">
                 {Object.keys(eventsByDay).length > 0 ? (

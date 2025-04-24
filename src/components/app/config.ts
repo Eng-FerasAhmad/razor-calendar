@@ -20,6 +20,6 @@ export const config: RazorCalendarConfig<CalendarConfig> = {
     },
     style: {
         primaryColor: '#33b679',
-        topStartFrom: 84,
+        topStartFrom: 40,
     },
 };

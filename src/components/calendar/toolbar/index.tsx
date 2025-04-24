@@ -13,8 +13,7 @@ import { mergeConfig } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import Button from 'components/shared/button/Button';
 import InputSelect from 'components/shared/input-select/InputSelect';
-import { ToolbarProps } from 'components/toolbar/_config/types';
-import { useToolbar } from 'components/toolbar/_config/useToolbar';
+import { createDynamicTheme } from 'src/theme/theme';
 import {
     buttonStyles,
     NavigationCompactWrapper,
@@ -23,10 +22,11 @@ import {
     TodayButtonWrapper,
     ToolbarCompactContainer,
     ViewCompactWrapper,
-} from 'components/toolbar/compact-toolbar/styles';
-import { createDynamicTheme } from 'src/theme/theme';
+} from 'toolbar/styles';
+import { ToolbarProps } from 'toolbar/types';
+import { useToolbar } from 'toolbar/useToolbar';
 
-export function RazorToolbarCompact({
+export function Toolbar({
     currentView,
     onViewChange,
     currentDate,
