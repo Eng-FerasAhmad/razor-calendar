@@ -43,7 +43,7 @@ export default defineConfig({
             month: '/src/components/calendar/month',
             week: '/src/components/calendar/week',
             day: '/src/components/calendar/day',
-            toolbar: '/src/components/calendar/toolbar',
+            toolbar: '/src/components/calendar/_toolbar',
             agenda: '/src/components/calendar/agenda',
             style: '/src/style',
             library: '/src/library',

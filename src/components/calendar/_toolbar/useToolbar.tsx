@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ToolbarProps } from 'toolbar/types';
+import { ToolbarProps } from 'calendar/_toolbar/types';
 import { ViewType } from 'types/appointment';
 import { navigate } from 'utils/constants';
 
