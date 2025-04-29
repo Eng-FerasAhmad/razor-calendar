@@ -24,8 +24,6 @@ interface InputSelectProps<T extends string | number> {
     value: T;
     onChange: (value: T) => void;
     label?: string;
-    isCompact?: boolean;
-    borderRadius?: number;
 }
 
 export default function InputSelect<T extends string | number>({
@@ -33,10 +31,8 @@ export default function InputSelect<T extends string | number>({
     value,
     onChange,
     label,
-    isCompact,
-    borderRadius,
 }: InputSelectProps<T>): React.ReactElement {
-    const theme = useTheme(); // Get theme inside the component
+    const theme = useTheme();
 
     const handleChange = (event: SelectChangeEvent<T>): void => {
         onChange(event.target.value as T);
@@ -46,13 +42,10 @@ export default function InputSelect<T extends string | number>({
         <FormControl
             data-testid="form-control"
             fullWidth
-            sx={formControlStyles(theme, isCompact)}
+            sx={formControlStyles(theme)}
         >
             {label && (
-                <InputLabel
-                    data-testid="input-label"
-                    sx={inputLabelStyles(theme)}
-                >
+                <InputLabel data-testid="input-label" sx={inputLabelStyles()}>
                     {label}
                 </InputLabel>
             )}
@@ -63,7 +56,15 @@ export default function InputSelect<T extends string | number>({
                 variant="outlined"
                 size="small"
                 label={label}
-                sx={selectStyles(theme, borderRadius)}
+                sx={selectStyles(theme)}
+                MenuProps={{
+                    MenuListProps: {
+                        sx: {
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                        },
+                    },
+                }}
             >
                 {options.map((option) => (
                     <MenuItem

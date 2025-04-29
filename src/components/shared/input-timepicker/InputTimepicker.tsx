@@ -3,6 +3,7 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import { textFieldSx, helperTextSx, popperSx } from './styles';
 
 interface InputTimepickerProps
     extends Omit<TimePickerProps<DateTime>, 'renderInput'> {
@@ -35,28 +36,14 @@ export default function InputTimepicker({
                         label,
                         error,
                         helperText,
+                        sx: textFieldSx,
+                        FormHelperTextProps: { sx: helperTextSx },
+                    },
+                    popper: { sx: popperSx },
+                    actionBar: {
+                        actions: ['accept'],
                         sx: {
-                            '& .MuiOutlinedInput-root': {
-                                fontSize: '15px',
-                                borderRadius: '8px',
-                                '& input': {
-                                    padding: '11px 10px',
-                                    fontSize: '15px',
-                                },
-                                '& .MuiSvgIcon-root': {
-                                    fontSize: '20px',
-                                    color: '#6B7280',
-                                },
-                            },
-                            '& .MuiInputLabel-root': {
-                                fontSize: '15px',
-                            },
-                        },
-                        FormHelperTextProps: {
-                            sx: {
-                                minHeight: '10px',
-                                fontSize: '11px',
-                            },
+                            justifyContent: 'center',
                         },
                     },
                 }}

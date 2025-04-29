@@ -1,7 +1,8 @@
 import { ReactElement, ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyledTextAreaField, RowItemWrapper } from './styles';
+import { RowItemWrapper } from './styles';
 import InputTextLabel from 'components/shared/input-label/InputTextLabel';
+import TextAreaInput from 'components/shared/textarea/TextAreaInput';
 
 type Props = {
     notes: string;
@@ -11,17 +12,18 @@ type Props = {
 export default function NotesInput({ notes, onChange }: Props): ReactElement {
     const { t } = useTranslation();
 
+    const handleChange = (value: string): void => {
+        onChange({ target: { value } } as ChangeEvent<HTMLInputElement>);
+    };
+
     return (
         <RowItemWrapper>
             <InputTextLabel text={t('add.notes', { ns: 'common' })} />
-            <StyledTextAreaField
-                id="outlined-multiline-flexible"
+            <TextAreaInput
                 value={notes}
-                onChange={onChange}
-                multiline
+                onChange={handleChange}
+                rows={3}
                 maxRows={2}
-                minRows={3}
-                sx={{ width: '100%', borderRadius: '8px' }}
             />
         </RowItemWrapper>
     );

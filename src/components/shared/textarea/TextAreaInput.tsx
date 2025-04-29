@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { ReactElement, ChangeEvent } from 'react';
 
-interface InputTextProps {
+interface TextAreaProps {
     value: string;
     onChange: (value: string) => void;
     label?: string;
@@ -11,19 +11,22 @@ interface InputTextProps {
     focused?: boolean;
     error?: boolean;
     helperText?: string;
+    rows?: number;
+    maxRows?: number;
 }
 
-export default function InputText({
+export default function TextAreaInput({
     value,
     onChange,
-    label,
     placeholder,
     fullWidth = true,
     size = 'medium',
     focused = false,
     error = false,
     helperText,
-}: InputTextProps): ReactElement {
+    rows = 3,
+    maxRows,
+}: TextAreaProps): ReactElement {
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         onChange(e.target.value);
     };
@@ -32,7 +35,6 @@ export default function InputText({
         <TextField
             value={value}
             onChange={handleChange}
-            label={label}
             placeholder={placeholder}
             fullWidth={fullWidth}
             size={size}
@@ -40,6 +42,9 @@ export default function InputText({
             helperText={helperText}
             variant="outlined"
             autoFocus={focused}
+            multiline
+            rows={rows}
+            maxRows={maxRows}
         />
     );
 }

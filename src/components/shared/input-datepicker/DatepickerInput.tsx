@@ -9,7 +9,18 @@ interface Props extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
     dateFormat?: string;
     error?: boolean;
     helperText?: string;
+    weekStartsOn?: 'sunday' | 'monday';
 }
+
+const getLocale = (weekStartsOn?: 'sunday' | 'monday'): 'en-GB' | 'en-US' => {
+    switch (weekStartsOn) {
+        case 'monday':
+            return 'en-GB'; // or 'de', 'fr'
+        case 'sunday':
+        default:
+            return 'en-US';
+    }
+};
 
 export default function DatePickerInput({
     label,
@@ -18,10 +29,14 @@ export default function DatePickerInput({
     dateFormat = 'yyyy-MM-dd',
     error = false,
     helperText,
+    weekStartsOn = 'monday',
     ...props
 }: Props): ReactElement {
     return (
-        <LocalizationProvider dateAdapter={AdapterLuxon}>
+        <LocalizationProvider
+            dateAdapter={AdapterLuxon}
+            adapterLocale={getLocale(weekStartsOn)}
+        >
             <DatePicker
                 {...props}
                 value={value}
@@ -36,35 +51,35 @@ export default function DatePickerInput({
                         helperText,
                         sx: {
                             '& .MuiOutlinedInput-root': {
-                                fontSize: '15px',
                                 borderRadius: '8px',
-                                '& input': {
-                                    padding: '11px 10px',
-                                    fontSize: '15px',
-                                },
                                 '& .MuiSvgIcon-root': {
                                     fontSize: '20px',
                                     color: '#6B7280',
                                 },
                             },
-                            '& .MuiInputLabel-root': {
-                                fontSize: '15px',
-                            },
-                            '& .MuiPickersCalendarHeader-root': {
-                                marginTop: '5px',
-                                marginBottom: '5px',
-                                padding: '0 10px',
-                            },
                         },
                         FormHelperTextProps: {
-                            sx: {
-                                minHeight: '10px',
-                                fontSize: '15px',
-                                '& .MuiPickersCalendarHeader-root': {
-                                    marginTop: '5px',
-                                    marginBottom: '5px',
-                                    padding: '0 10px',
-                                },
+                            sx: { minHeight: '10px' },
+                        },
+                    },
+                    popper: {
+                        sx: {
+                            '& .MuiPaper-root': {
+                                borderRadius: '12px',
+                                padding: '0',
+                                fontSize: '14px',
+                                color: '#1F2937', // text-gray-800
+                            },
+                            '& .MuiPickersCalendarHeader-label': {
+                                fontSize: '16px',
+                                fontWeight: '500',
+                                color: '#374151', // text-gray-700
+                            },
+                            '& .MuiDayCalendar-weekDayLabel': {
+                                fontSize: '13px',
+                            },
+                            '& .MuiPickersDay-root': {
+                                fontSize: '14px',
                             },
                         },
                     },

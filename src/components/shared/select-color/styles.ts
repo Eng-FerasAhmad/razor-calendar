@@ -6,7 +6,7 @@ export const formControlStyles: SxProps<Theme> = {
 };
 
 export const selectStyles: SxProps<Theme> = {
-    height: 44,
+    height: 40,
     borderRadius: '8px',
     '& .MuiSelect-outlined': {
         display: 'flex',

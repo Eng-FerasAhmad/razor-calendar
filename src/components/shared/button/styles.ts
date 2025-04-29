@@ -1,11 +1,10 @@
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const StyledButton = styled(Button)(({ theme }) => ({
+export const StyledButton = styled(Button)({
     borderRadius: '8px',
     display: 'flex',
     alignItems: 'center',
-    fontSize: '15px',
     textTransform: 'none',
     padding: '3px 16px',
-}));
+});

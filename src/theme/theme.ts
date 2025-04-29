@@ -23,6 +23,10 @@ export const borderLight = '#e6e6e6';
 export const hoverColor = '#f8f8f8';
 export const dividerColor = '#d9d9d9';
 
+export const commonFontSize = 16;
+export const inputsFontSize = 15;
+export const inputHoverColor = '#737373';
+
 export const theme = createTheme({
     palette: {
         primary: {
@@ -47,7 +51,7 @@ export const theme = createTheme({
         workTime: '#fff',
     },
     typography: {
-        fontSize: 16,
+        fontSize: commonFontSize,
         body1: {
             fontWeight: 400,
         },
@@ -56,7 +60,7 @@ export const theme = createTheme({
         MuiCssBaseline: {
             styleOverrides: {
                 html: {
-                    fontSize: '16px',
+                    fontSize: commonFontSize,
                     fontFamily: 'Roboto, sans-serif',
                 },
                 body: {
@@ -81,19 +85,49 @@ export const theme = createTheme({
             styleOverrides: {
                 outlined: {
                     color: commonFontColor,
-                    borderColor,
-                    '&:hover': {
-                        borderColor,
+                    borderColor: borderLight,
+                    fontSize: commonFontSize,
+                    '&:not(.Mui-disabled):hover': {
+                        borderColor: borderLight,
                         backgroundColor: hoverColor,
                     },
                 },
                 contained: {
                     backgroundColor: primaryColor,
                     color: '#fff',
+                    fontSize: commonFontSize,
                     border: `1px solid ${primaryColor}`,
-                    '&:hover': {
+                    '&:not(.Mui-disabled):hover': {
                         backgroundColor: primaryColor,
                         border: `1px solid ${primaryColor}`,
+                    },
+                    '&.Mui-disabled': {
+                        borderColor: borderLight,
+                    },
+                },
+            },
+        },
+        MuiSelect: {
+            styleOverrides: {
+                outlined: {
+                    color: commonFontColor,
+                    fontSize: commonFontSize,
+                },
+            },
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 8,
+                    fontSize: inputsFontSize,
+                    color: commonFontColor,
+                    minHeight: 40,
+
+                    '&:not(.Mui-disabled):hover': {
+                        borderColor: inputHoverColor,
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: primaryColor,
                     },
                 },
             },
