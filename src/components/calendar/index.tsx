@@ -6,7 +6,7 @@ import NewEventIndex from 'calendar/_dialogs/new-event';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
 import PopperEventDetailsIndex from 'calendar/_popper/event-details';
 import DisableScrolling from 'calendar/_scrolling/Scrolling';
-import { createDynamicTheme } from 'src/theme/theme';
+import { theme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { TeamModel } from 'types/teamModel';
@@ -38,8 +38,6 @@ export function RazorCalendar({
     onViewChange,
     onChangeDate,
 }: Props): ReactElement {
-    const theme = createDynamicTheme(config);
-
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />

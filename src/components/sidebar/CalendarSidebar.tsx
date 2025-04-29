@@ -6,7 +6,6 @@ import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { dateCalendarStyles } from './styles';
 import TeamList from 'components/sidebar/TeamList';
-import { createDynamicTheme } from 'src/theme/theme';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
 import { TeamModel } from 'types/teamModel';
 
@@ -25,7 +24,7 @@ export function RazorCalendarSidebar({
     teamModel,
     onChangeTeamList,
 }: SidebarProps): ReactElement {
-    const theme = createDynamicTheme(config);
+    const theme = useTheme();
     const { palette } = useTheme();
 
     return (

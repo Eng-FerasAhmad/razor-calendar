@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { CalendarToolbarContainer } from 'calendar/_header-template/styles';
-import { Toolbar } from 'src/components/calendar/toolbar';
+import { Toolbar } from 'src/components/calendar/_toolbar';
 
 interface Props {
     children?: ReactElement;
