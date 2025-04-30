@@ -49,8 +49,8 @@
         "description": "Füge eine Termin zu dein Kalendar hinzu",
         "startDate": "Start",
         "endDate": "End",
-        "startTime": "Zeit von",
-        "endTime": "Zeit bis",
+        "startTime": "Zeit",
+        "endTime": "Zeit",
         "fullDay": "Ganzer Tag",
         "save": "Speichern",
         "notes": "Beschreibung",
@@ -58,7 +58,8 @@
         "errorLaterDate": "Muss später sein als Startdatum",
         "errorLaterTime": "Muss später sein als Startzeit",
         "assign": "Zuweisen",
-        "reminder": "Erinnerung"
+        "reminder": "Erinnerung",
+        "service": "Dienst"
     },
     "actions": {
         "close": "Schließen",

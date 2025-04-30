@@ -2,13 +2,14 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { CalendarProvider } from 'calendar/_context/CalendarContext';
-import NewEventIndex from 'calendar/_dialogs/new-event';
+import AddServiceEventIndex from 'calendar/_dialogs/add-service-event';
 import CalendarLayout from 'calendar/_layout/CalendarLayout';
 import PopperEventDetailsIndex from 'calendar/_popper/event-details';
 import DisableScrolling from 'calendar/_scrolling/Scrolling';
 import { theme } from 'src/theme/theme';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
+import { ServiceViewModel } from 'types/serviceModel';
 import { TeamModel } from 'types/teamModel';
 
 import '../../i18n/i18n';
@@ -19,6 +20,7 @@ export interface Props {
     selectedDate: DateTime;
     config: RazorCalendarConfig<CalendarConfig>;
     teamModel: TeamModel;
+    services?: ServiceViewModel[];
     handleChangeAppointment: (appointment: Appointment[]) => void;
     handleSaveAppointment: (appointment: Appointment) => void;
     handleDeleteAppointment: (appointment: Appointment) => void;
@@ -32,6 +34,7 @@ export function RazorCalendar({
     config,
     selectedDate,
     teamModel,
+    services,
     handleChangeAppointment,
     handleSaveAppointment,
     handleDeleteAppointment,
@@ -45,6 +48,7 @@ export function RazorCalendar({
                 currentView={view}
                 config={config}
                 teamModel={teamModel}
+                services={services || []}
                 incomingAppointments={appointments}
                 onExternalChangeAppointment={handleChangeAppointment}
                 onExternalViewChange={onViewChange}
@@ -54,7 +58,7 @@ export function RazorCalendar({
             >
                 <DisableScrolling />
                 <PopperEventDetailsIndex />
-                <NewEventIndex />
+                <AddServiceEventIndex />
                 <CalendarLayout
                     initView={view}
                     selectedDate={selectedDate}

@@ -49,8 +49,8 @@
         "description": "Add an appointment to your calendar",
         "startDate": "Start",
         "endDate": "End",
-        "startTime": "Time from",
-        "endTime": "Time to",
+        "startTime": "Time",
+        "endTime": "Time",
         "fullDay": "All Day",
         "save": "Save",
         "notes": "Descriptions",
@@ -58,7 +58,8 @@
         "errorLaterDate": "Must be later than start date",
         "errorLaterTime": "Must be later than start time",
         "assign": "Assign",
-        "reminder": "Reminder"
+        "reminder": "Reminder",
+        "service": "Service"
     },
     "actions": {
         "close": "close",

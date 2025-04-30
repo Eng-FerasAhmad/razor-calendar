@@ -4,6 +4,7 @@ import { ReactElement, useState } from 'react';
 import { RazorCalendar } from 'calendar/index';
 import { config } from 'components/app/config';
 import { initAppointments } from 'components/app/mockAppointment';
+import { dummyServices } from 'components/app/mockServices';
 import { initialTeamModel } from 'components/app/mockTeam';
 import { AppContainer, CalendarContentContainer } from 'components/app/styles';
 import { Appointment, ViewType } from 'types/appointment';
@@ -75,6 +76,7 @@ export default function App(): ReactElement {
                     onChangeDate={onChangeDate}
                     config={config}
                     teamModel={initialTeamModel}
+                    services={dummyServices}
                 />
             </CalendarContentContainer>
         </AppContainer>

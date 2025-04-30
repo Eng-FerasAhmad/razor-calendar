@@ -12,12 +12,14 @@ import {
 import { basicConfig } from 'calendar/_config/basicConfig';
 import { mergeConfig } from 'calendar/_config/utils';
 import {
+    AddServiceDialog,
     CalendarContextProps,
     DialogAppointment,
     PopperAppointment,
 } from 'calendar/_context/types';
 import { Appointment, ViewType } from 'types/appointment';
 import { CalendarConfig, RazorCalendarConfig } from 'types/calendarConfig';
+import { ServiceViewModel } from 'types/serviceModel';
 import { TeamModel } from 'types/teamModel';
 
 interface Props {
@@ -25,6 +27,7 @@ interface Props {
     children: ReactNode;
     config: RazorCalendarConfig<CalendarConfig>;
     teamModel: TeamModel | undefined;
+    services: ServiceViewModel[];
     incomingAppointments: Appointment[] | [];
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
@@ -37,14 +40,17 @@ export const CalendarContext = createContext<CalendarContextProps>({
     view: 'week',
     config: basicConfig,
     teamModel: undefined,
+    services: [],
     appointments: [],
     language: 'en',
     selectedDate: DateTime.now(),
     showAllFullDays: false,
     fullDaysCount: 0,
     dialogAppointment: undefined,
-    onDialogAppointment: () => {},
+    addServiceDialog: undefined,
     popperAppointment: undefined,
+    onDialogAppointment: () => {},
+    onAddServiceDialog: () => {},
     onPopperAppointment: () => {},
     onUpdateFullDaysCount: () => {},
     onShowAllFullDays: () => {},
@@ -61,6 +67,7 @@ export function CalendarProvider({
     children,
     config,
     teamModel,
+    services,
     incomingAppointments,
     onExternalViewChange,
     onExternalChangeAppointment,
@@ -81,6 +88,9 @@ export function CalendarProvider({
     const [fullDaysCount, setFullDaysCount] = useState<number>(0);
     const [dialogAppointment, setDialogAppointment] = useState<
         DialogAppointment | undefined
+    >(undefined);
+    const [addServiceDialog, setAddServiceDialog] = useState<
+        AddServiceDialog | undefined
     >(undefined);
     const [popperAppointment, setPopperAppointment] = useState<
         PopperAppointment | undefined
@@ -119,6 +129,13 @@ export function CalendarProvider({
             setDialogAppointment(appointment);
         },
         []
+    );
+
+    const onAddServiceDialog = useCallback(
+        (appointment: AddServiceDialog | undefined) => {
+            setAddServiceDialog(appointment);
+        },
+        [setAddServiceDialog]
     );
 
     const onPopperAppointment = useCallback(
@@ -174,13 +191,16 @@ export function CalendarProvider({
                 view,
                 config: mergedConfig,
                 teamModel,
+                services,
                 selectedDate,
                 language,
                 appointments: filteredAppointments,
                 showAllFullDays,
                 fullDaysCount,
                 dialogAppointment,
+                addServiceDialog,
                 onDialogAppointment,
+                onAddServiceDialog,
                 popperAppointment,
                 onPopperAppointment,
                 onShowAllFullDays,
