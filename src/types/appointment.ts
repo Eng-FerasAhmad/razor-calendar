@@ -1,4 +1,5 @@
 import { ReminderValue } from 'components/shared/reminder-select/types';
+import { CustomerViewModel } from 'types/customer';
 import { ServiceViewModel } from 'types/serviceModel';
 import { TeamMember } from 'types/teamModel';
 
@@ -15,6 +16,7 @@ export interface Appointment {
     status?: string;
     notes?: string;
     services?: ServiceViewModel[];
+    customer: CustomerViewModel;
     stafferId?: string;
     isFullDay?: boolean;
     color?: string;

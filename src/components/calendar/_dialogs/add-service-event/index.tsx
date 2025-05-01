@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import ActionButtons from './ActionButtons';
 import NotesInput from './NotesInput';
 import StartDate from './StartDate';
-import { ContentContainer, RowReminderWrapper } from './styles';
+import { ContentContainer } from './styles';
 import { useAddServiceEvent } from './useAddServiceEvent';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import NameInput from 'calendar/_dialogs/add-service-event/NameInput';
 import ServicesList from 'calendar/_dialogs/add-service-event/services-list/ServicesList';
 import StafferList from 'calendar/_dialogs/add-service-event/StafferList';
 import { DialogCustom } from 'components/shared/dialog/Dialog';
@@ -13,6 +14,8 @@ import { DialogCustom } from 'components/shared/dialog/Dialog';
 export default function AddServiceEventIndex(): ReactElement {
     const {
         notes,
+        firstName,
+        lastName,
         fromTime,
         is24Hours,
         dateFormat,
@@ -23,8 +26,9 @@ export default function AddServiceEventIndex(): ReactElement {
         handleFromTimeChange,
         handleFromDateChange,
         handleNotesChange,
+        handleFirstNameChange,
+        handleLastNameChange,
         handleStafferChange,
-        setFromTime,
         handleChangeService,
     } = useAddServiceEvent();
 
@@ -44,23 +48,28 @@ export default function AddServiceEventIndex(): ReactElement {
             handleClose={handleCloseDialog}
         >
             <ContentContainer data-testid="new-appointment-content">
+                <NameInput
+                    firstName={firstName}
+                    lastName={lastName}
+                    onChangeFirstName={handleFirstNameChange}
+                    onChangeLastName={handleLastNameChange}
+                />
+
                 <ServicesList
                     services={services}
                     selectedServices={selectedServices}
                     onChange={handleChangeService}
                 />
 
-                <RowReminderWrapper>
-                    <StartDate
-                        fromTime={fromTime}
-                        isFullDay={false}
-                        dateFormat={dateFormat}
-                        is24Hours={is24Hours}
-                        setFromTime={setFromTime}
-                        handleFromDateChange={handleFromDateChange}
-                        handleFromTimeChange={handleFromTimeChange}
-                    />
-                </RowReminderWrapper>
+                <StartDate
+                    fromTime={fromTime}
+                    isFullDay={false}
+                    dateFormat={dateFormat}
+                    is24Hours={is24Hours}
+                    setFromTime={handleFromTimeChange}
+                    handleFromDateChange={handleFromDateChange}
+                    handleFromTimeChange={handleFromTimeChange}
+                />
 
                 <StafferList
                     stafferList={teamModel?.users}

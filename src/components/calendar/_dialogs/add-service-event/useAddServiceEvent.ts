@@ -6,19 +6,20 @@ import { ServiceViewModel } from 'types/serviceModel';
 
 export interface UseAddServiceEvent {
     notes: string;
+    firstName: string;
+    lastName: string;
     fromTime: DateTime;
     is24Hours: boolean;
     dateFormat: string;
     staffer: string;
     selectedServices: ServiceViewModel[];
 
-    setNotes: (notes: string) => void;
-    setFromTime: (time: DateTime) => void;
-
     handleSave: () => void;
     handleFromTimeChange: (time: DateTime | null) => void;
     handleFromDateChange: (date: DateTime | null) => void;
     handleNotesChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleFirstNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleLastNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
     handleStafferChange: (stafferId: string) => void;
     handleChangeService: (services: ServiceViewModel[]) => void;
     isSaveDisabled: boolean;
@@ -43,6 +44,8 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         DateTime.now().plus({ minutes: 30 })
     );
     const [notes, setNotes] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [appointmentId, setAppointmentId] = useState('');
     const [staffer, setStaffer] = useState<string>('');
     const [selectedServices, setSelectedServices] = useState<
@@ -117,6 +120,18 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         setNotes(event.target.value);
     };
 
+    const handleFirstNameChange = (
+        event: ChangeEvent<HTMLInputElement>
+    ): void => {
+        setFirstName(event.target.value);
+    };
+
+    const handleLastNameChange = (
+        event: ChangeEvent<HTMLInputElement>
+    ): void => {
+        setLastName(event.target.value);
+    };
+
     const handleStafferChange = (id: string): void => {
         setStaffer(id);
     };
@@ -133,6 +148,11 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
             notes,
             stafferId: staffer,
             services: selectedServices,
+            customer: {
+                id: '',
+                firstName,
+                lastName,
+            },
         };
 
         onSaveAppointment(appointment);
@@ -149,14 +169,16 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
 
     return {
         notes,
+        firstName,
+        lastName,
         fromTime,
         is24Hours,
         dateFormat,
         staffer,
         selectedServices,
 
-        setNotes,
-        setFromTime,
+        handleFirstNameChange,
+        handleLastNameChange,
 
         handleSave,
         handleFromTimeChange,

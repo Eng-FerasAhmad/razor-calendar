@@ -5,7 +5,7 @@ export const ContentContainer = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '1000px',
-    width: '400px',
+    width: '440px',
     margin: '0 auto',
     gap: '14px',
 });
@@ -24,14 +24,15 @@ export const RowItemWrapper = styled(Box)({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     gap: '5px',
+    width: '100%',
 });
 
-export const RowReminderWrapper = styled(Box)({
+export const RowNameWrapper = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    gap: '20px',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    gap: '15px',
 });
 
 export const ActionRowWrapper = styled(Box)({
