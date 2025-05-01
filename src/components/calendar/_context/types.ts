@@ -21,6 +21,8 @@ export interface CalendarContextProps {
     onShowAllFullDays: () => void;
     showAllFullDays: boolean;
     fullDaysCount: number;
+    dialogStaffers: boolean;
+    onDialogStaffers: (open: boolean) => void;
     onUpdateFullDaysCount: (count: number) => void;
     dialogAppointment: DialogAppointment | undefined;
     addServiceDialog: DialogAppointment | undefined;
@@ -28,6 +30,7 @@ export interface CalendarContextProps {
     onAddServiceDialog: (appointment: AddServiceDialog | undefined) => void;
     popperAppointment: PopperAppointment | undefined;
     onPopperAppointment: (appointment: PopperAppointment | undefined) => void;
+    onUpdateTeamModel: (teamModel: TeamModel) => void;
 }
 
 // this dialog content the data that can be edited:

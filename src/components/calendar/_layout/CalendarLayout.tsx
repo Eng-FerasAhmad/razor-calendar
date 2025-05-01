@@ -8,28 +8,25 @@ import YearView from 'calendar/year/Year';
 import Day from 'day/Day';
 import Month from 'month/Month';
 import { ViewType } from 'types/appointment';
-import { TeamModel } from 'types/teamModel';
 import Week from 'week/Week';
 
 interface Props {
     selectedDate: DateTime;
     initView: ViewType;
-    teamModel: TeamModel;
 }
 
 export default function CalendarLayout({
     selectedDate,
     initView,
-    teamModel,
 }: Props): ReactElement {
-    const { view, onViewChange, config } = useCalendarContext();
+    const { view, onViewChange, config, teamModel } = useCalendarContext();
 
     useEffect(() => {
         onViewChange(initView);
     }, [initView, onViewChange]);
 
     const teamsHasVisibleItems = (): boolean => {
-        return teamModel.users.some((user) => user.visible);
+        return teamModel!.users.some((user) => user.visible);
     };
 
     const renderView = (): ReactElement => {
@@ -46,7 +43,7 @@ export default function CalendarLayout({
                 return <YearView selectedDate={selectedDate} />;
             case 'team':
                 return teamsHasVisibleItems() ? (
-                    <Team selectedDate={selectedDate} teamModel={teamModel} />
+                    <Team selectedDate={selectedDate} />
                 ) : (
                     <Day selectedDate={selectedDate} />
                 );

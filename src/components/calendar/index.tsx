@@ -59,11 +59,7 @@ export function RazorCalendar({
                 <DisableScrolling />
                 <PopperEventDetailsIndex />
                 <AddServiceEventIndex />
-                <CalendarLayout
-                    initView={view}
-                    selectedDate={selectedDate}
-                    teamModel={teamModel}
-                />
+                <CalendarLayout initView={view} selectedDate={selectedDate} />
             </CalendarProvider>
         </ThemeProvider>
     );

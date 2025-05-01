@@ -49,6 +49,8 @@ export const CalendarContext = createContext<CalendarContextProps>({
     dialogAppointment: undefined,
     addServiceDialog: undefined,
     popperAppointment: undefined,
+    dialogStaffers: false,
+    onDialogStaffers: () => {},
     onDialogAppointment: () => {},
     onAddServiceDialog: () => {},
     onPopperAppointment: () => {},
@@ -60,6 +62,7 @@ export const CalendarContext = createContext<CalendarContextProps>({
     onChangeAppointments: () => {},
     onSaveAppointment: () => {},
     onDeleteAppointment: () => {},
+    onUpdateTeamModel: () => {},
 });
 
 export function CalendarProvider({
@@ -83,6 +86,9 @@ export function CalendarProvider({
     );
     const [appointments, setAppointments] =
         useState<Appointment[]>(incomingAppointments);
+    const [localTeamModel, setLocalTeamModel] = useState<TeamModel | undefined>(
+        teamModel
+    );
 
     const [showAllFullDays, setShowAllFullDays] = useState<boolean>(false);
     const [fullDaysCount, setFullDaysCount] = useState<number>(0);
@@ -95,6 +101,15 @@ export function CalendarProvider({
     const [popperAppointment, setPopperAppointment] = useState<
         PopperAppointment | undefined
     >(undefined);
+    const [dialogStaffers, setDialogStaffers] = useState<boolean>(false);
+
+    const onUpdateTeamModel = useCallback((updatedTeamModel: TeamModel) => {
+        setLocalTeamModel(updatedTeamModel);
+    }, []);
+
+    const onDialogStaffers = useCallback((open: boolean) => {
+        setDialogStaffers(open);
+    }, []);
 
     const onViewChange = useCallback(
         (newView: ViewType) => {
@@ -151,14 +166,13 @@ export function CalendarProvider({
                 return true;
             }
             return appointment.assign.some((member) =>
-                teamModel?.users.some(
+                localTeamModel?.users.some(
                     (user) => user.id === member.id && user.visible
                 )
             );
         });
-    }, [appointments, teamModel]);
+    }, [appointments, localTeamModel]);
 
-    // user interactions: change (Dra & drop), add, edit and delete:
     const onChangeAppointments = useCallback(
         (newAppointment: Appointment[]) => {
             onExternalChangeAppointment(newAppointment);
@@ -190,7 +204,7 @@ export function CalendarProvider({
             value={{
                 view,
                 config: mergedConfig,
-                teamModel,
+                teamModel: localTeamModel,
                 services,
                 selectedDate,
                 language,
@@ -199,6 +213,8 @@ export function CalendarProvider({
                 fullDaysCount,
                 dialogAppointment,
                 addServiceDialog,
+                dialogStaffers,
+                onDialogStaffers,
                 onDialogAppointment,
                 onAddServiceDialog,
                 popperAppointment,
@@ -211,6 +227,7 @@ export function CalendarProvider({
                 onChangeAppointments,
                 onSaveAppointment,
                 onDeleteAppointment,
+                onUpdateTeamModel,
             }}
         >
             {children}

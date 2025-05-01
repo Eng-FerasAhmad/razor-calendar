@@ -1,5 +1,5 @@
-import { darken } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Box, darken } from '@mui/material';
+import { styled, SxProps, Theme } from '@mui/material/styles';
 
 interface Props {
     color?: string;
@@ -7,7 +7,7 @@ interface Props {
     today?: boolean;
 }
 
-export const ToolbarCompactContainer = styled('div')(({ theme }) => ({
+export const ToolbarContainer = styled('div')(({ theme }) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
@@ -29,7 +29,7 @@ export const NavigationCompactWrapper = styled('div')({
     gap: '8px',
 });
 
-export const ViewCompactWrapper = styled('div')({
+export const ViewWrapper = styled('div')({
     width: 'fit-content',
     display: 'flex',
     flexDirection: 'row',
@@ -88,3 +88,18 @@ export const TitleCompactWrapper = styled('div')(() => ({
     fontSize: '17px',
     margin: 0,
 }));
+
+// staffer menu:
+export const StaffDialogContentContainer = styled(Box)({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '440px',
+    height: '450px',
+    margin: '0 auto',
+    gap: '5px',
+});
+export const chipBoxSx: SxProps<Theme> = {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: 16,
+};

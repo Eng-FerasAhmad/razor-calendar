@@ -71,7 +71,14 @@
         "notAssign": "Noch nicht zugewiesen",
         "search": "Suchen",
         "new": "Neue",
-        "add": "Einfügen"
+        "add": "Einfügen",
+        "save": "Speichern",
+        "cancel": "Abbrechen"
+    },
+    "staffers": {
+        "header": "Mitarbeiter",
+        "description": "Mitarbeiter zum Kalender hinzufügen oder daraus entfernen",
+        "buttonDialog": "Mitarbeiter"
     },
     "reminder" : {
         "amount": "Benachrichtigung",

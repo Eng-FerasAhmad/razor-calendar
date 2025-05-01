@@ -44,7 +44,6 @@ export const ActionRowWrapper = styled(Box)({
 });
 
 // staffer list:
-
 const ITEM_HEIGHT = 45;
 const ITEM_PADDING_TOP = 8;
 export const MenuProps = {

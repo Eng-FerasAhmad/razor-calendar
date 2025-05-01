@@ -6,6 +6,7 @@ import {
     ArrowNextOutline,
     ArrowPrevOutline,
     CalendarCheckTwotone,
+    UsersTwotone,
 } from 'razor-icon-library';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,12 +15,13 @@ import {
     NavigationIconsCompactWrapper,
     TitleCompactWrapper,
     TodayButtonWrapper,
-    ToolbarCompactContainer,
-    ViewCompactWrapper,
+    ToolbarContainer,
+    ViewWrapper,
 } from './styles';
 import { ToolbarProps } from './types';
 import { useToolbar } from './useToolbar';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
+import StafferMenu from 'calendar/_toolbar/StafferMenu';
 import Button from 'components/shared/button/Button';
 import InputSelect from 'components/shared/input-select/InputSelect';
 
@@ -47,7 +49,7 @@ export function Toolbar({
     });
     const { t } = useTranslation();
     const theme = useTheme();
-    const { onDialogAppointment } = useCalendarContext();
+    const { onDialogAppointment, onDialogStaffers } = useCalendarContext();
     const today = DateTime.now();
     const isToday = currentDate.hasSame(today, 'day');
 
@@ -58,8 +60,11 @@ export function Toolbar({
         });
     };
 
+    const openStaffersDialog = (): void => {
+        onDialogStaffers(true);
+    };
     return (
-        <ToolbarCompactContainer>
+        <ToolbarContainer>
             <NavigationCompactWrapper>
                 <Tooltip title={t('buttons.today', { ns: 'common' })}>
                     <TodayButtonWrapper
@@ -98,7 +103,7 @@ export function Toolbar({
                 <TitleCompactWrapper>{getTitle()}</TitleCompactWrapper>
             </NavigationCompactWrapper>
 
-            <ViewCompactWrapper data-testid="view-compact-wrapper">
+            <ViewWrapper data-testid="view-compact-wrapper">
                 <Button
                     variant={'outlined'}
                     startIcon={
@@ -111,14 +116,27 @@ export function Toolbar({
                 >
                     {t('actions.new', { ns: 'common' })}
                 </Button>
+
+                <StafferMenu />
+                <Button
+                    variant={'outlined'}
+                    startIcon={
+                        <UsersTwotone
+                            size={18}
+                            color={darken(theme.palette.border, 0.4)}
+                        />
+                    }
+                    onClick={openStaffersDialog}
+                >
+                    {t('staffers.buttonDialog', { ns: 'common' })}
+                </Button>
+
                 <InputSelect
                     value={currentView}
                     options={options}
                     onChange={onViewChange}
-                    isCompact={true}
-                    borderRadius={2}
                 />
-            </ViewCompactWrapper>
-        </ToolbarCompactContainer>
+            </ViewWrapper>
+        </ToolbarContainer>
     );
 }

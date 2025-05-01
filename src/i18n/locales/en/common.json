@@ -71,7 +71,14 @@
         "notAssign": "Not assign",
         "search": "Search",
         "new": "New",
-        "add": "Add"
+        "add": "Add",
+        "save": "Save",
+        "cancel": "Cancel"
+    },
+    "staffers": {
+        "header": "Manage Staffers",
+        "description": "Add or remove staffers to your calendar",
+        "buttonDialog": "Staffers"
     },
     "reminder" : {
         "amount": "Reminder",

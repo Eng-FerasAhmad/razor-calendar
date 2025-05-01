@@ -12,7 +12,7 @@ import { Appointment } from 'types/appointment';
 interface Props {
     id: string;
     from: string;
-    to: string;
+    to: string | undefined;
     color: string;
     style: { top: string; height: string };
     appointment: Appointment;
@@ -31,7 +31,7 @@ export default function DraggableAppointment({
     const { config } = useCalendarContext();
     const [isDragging, setIsDragging] = useState(false);
     const dragTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const diffInMinutes = DateTime.fromISO(to).diff(
+    const diffInMinutes = DateTime.fromISO(to!).diff(
         DateTime.fromISO(from),
         'minutes'
     ).minutes;
