@@ -85,5 +85,8 @@
         "fullDay": "Full day",
         "noAppointments": "No events this month!"
     },
-    "noItemsFound": "No matches found"
+    "noItemsFound": "No matches found",
+    "unit": {
+        "hour": "h"
+    }
 }

@@ -85,5 +85,8 @@
         "fullDay": "Ganzer Tag",
         "noAppointments": "Keine Termine dieser Monat!"
     },
-    "noItemsFound": "Keine Ergebnis gefunden"
+    "noItemsFound": "Keine Ergebnis gefunden",
+    "unit": {
+        "hour": "std."
+    }
 }

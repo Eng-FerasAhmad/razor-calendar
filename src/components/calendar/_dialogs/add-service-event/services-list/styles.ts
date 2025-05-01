@@ -24,6 +24,26 @@ export const renderTagBoxSx: SxProps<Theme> = {
     gap: 0.5,
 };
 
+export const renderHeaderBoxSx: SxProps<Theme> = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    mb: 0.5,
+};
+
+export const renderItemsBoxSx: SxProps<Theme> = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+};
+
+export const renderMenuItemBoxSx: SxProps<Theme> = {
+    fontSize: 12,
+    color: 'text.secondary',
+    whiteSpace: 'nowrap',
+};
+
 export const chipSx: SxProps<Theme> = {
     height: 24,
     fontSize: 14,
