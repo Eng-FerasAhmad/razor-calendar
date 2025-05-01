@@ -13,6 +13,7 @@ export interface UseAddServiceEvent {
     dateFormat: string;
     staffer: string;
     selectedServices: ServiceViewModel[];
+    isSaveDisabled: boolean;
 
     handleSave: () => void;
     handleFromTimeChange: (time: DateTime | null) => void;
@@ -22,7 +23,7 @@ export interface UseAddServiceEvent {
     handleLastNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
     handleStafferChange: (stafferId: string) => void;
     handleChangeService: (services: ServiceViewModel[]) => void;
-    isSaveDisabled: boolean;
+    resetForm: () => void;
 }
 
 export const useAddServiceEvent = (): UseAddServiceEvent => {
@@ -40,9 +41,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         (config.common.locale === 'de' ? 'dd.MM.yyyy' : 'dd/MM/yyyy');
 
     const [fromTime, setFromTime] = useState<DateTime>(DateTime.now());
-    const [toTime, setToTime] = useState<DateTime>(
-        DateTime.now().plus({ minutes: 30 })
-    );
+    const [toTime, setToTime] = useState<DateTime>(DateTime.now());
     const [notes, setNotes] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -98,22 +97,36 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
 
     const handleFromTimeChange = (newTime: DateTime | null): void => {
         if (newTime) {
-            setFromTime(
-                fromTime.set({ hour: newTime.hour, minute: newTime.minute })
-            );
+            const newFrom = fromTime.set({
+                hour: newTime.hour,
+                minute: newTime.minute,
+            });
+            const diff = newFrom.diff(fromTime);
+            setFromTime(newFrom);
+            setToTime(toTime.plus(diff));
         }
     };
 
     const handleFromDateChange = (newDate: DateTime | null): void => {
         if (newDate) {
-            setFromTime(
-                fromTime.set({
-                    year: newDate.year,
-                    month: newDate.month,
-                    day: newDate.day,
-                })
-            );
+            const newFrom = fromTime.set({
+                year: newDate.year,
+                month: newDate.month,
+                day: newDate.day,
+            });
+            const diff = newFrom.diff(fromTime);
+            setFromTime(newFrom);
+            setToTime(toTime.plus(diff));
         }
+    };
+
+    const handleChangeService = (selectedItems: ServiceViewModel[]): void => {
+        setSelectedServices(selectedItems);
+        const totalDuration = selectedItems.reduce(
+            (sum, s) => sum + (s.duration || 0),
+            0
+        );
+        setToTime(fromTime.plus({ minutes: totalDuration }));
     };
 
     const handleNotesChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -136,15 +149,21 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         setStaffer(id);
     };
 
-    const handleChangeService = (selectedItems: ServiceViewModel[]): void => {
-        setSelectedServices(selectedItems);
+    const resetForm = (): void => {
+        setFromTime(DateTime.now());
+        setNotes('');
+        setFirstName('');
+        setLastName('');
+        setAppointmentId('');
+        setStaffer('');
+        setSelectedServices([]);
     };
 
     const handleSave = (): void => {
         const appointment: Appointment = {
             id: appointmentId,
-            start: fromTime.toISO()!,
-            end: toTime.toISO()!,
+            start: fromTime.toUTC().toISO() || '',
+            end: toTime.toUTC().toISO() || '',
             notes,
             stafferId: staffer,
             services: selectedServices,
@@ -158,14 +177,14 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         onSaveAppointment(appointment);
         onDialogAppointment(undefined);
 
-        setFromTime(DateTime.now());
-        setNotes('');
-        setAppointmentId('');
-        setStaffer('');
-        setSelectedServices([]);
+        resetForm();
     };
 
-    const isSaveDisabled = false; // add your logic here to check the service and time not empty
+    const isSaveDisabled =
+        selectedServices.length === 0 ||
+        firstName === '' ||
+        lastName === '' ||
+        staffer === '';
 
     return {
         notes,
@@ -176,16 +195,16 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         dateFormat,
         staffer,
         selectedServices,
+        isSaveDisabled,
 
         handleFirstNameChange,
         handleLastNameChange,
-
         handleSave,
         handleFromTimeChange,
         handleFromDateChange,
         handleNotesChange,
         handleStafferChange,
         handleChangeService,
-        isSaveDisabled,
+        resetForm,
     };
 };

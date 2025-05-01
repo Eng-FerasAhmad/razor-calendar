@@ -30,6 +30,7 @@ export default function AddServiceEventIndex(): ReactElement {
         handleLastNameChange,
         handleStafferChange,
         handleChangeService,
+        resetForm,
     } = useAddServiceEvent();
 
     const { t } = useTranslation();
@@ -38,6 +39,7 @@ export default function AddServiceEventIndex(): ReactElement {
 
     const handleCloseDialog = (): void => {
         onDialogAppointment(undefined);
+        resetForm();
     };
 
     return (
@@ -66,7 +68,6 @@ export default function AddServiceEventIndex(): ReactElement {
                     isFullDay={false}
                     dateFormat={dateFormat}
                     is24Hours={is24Hours}
-                    setFromTime={handleFromTimeChange}
                     handleFromDateChange={handleFromDateChange}
                     handleFromTimeChange={handleFromTimeChange}
                 />

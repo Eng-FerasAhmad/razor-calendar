@@ -121,7 +121,6 @@ export const theme = createTheme({
                     borderRadius: 8,
                     fontSize: inputsFontSize,
                     color: commonFontColor,
-                    minHeight: 40,
 
                     '&:not(.Mui-disabled):hover': {
                         borderColor: inputHoverColor,

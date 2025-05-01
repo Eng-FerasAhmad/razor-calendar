@@ -11,7 +11,6 @@ type Props = {
     isFullDay: boolean;
     dateFormat: string;
     is24Hours: boolean;
-    setFromTime: (value: DateTime) => void;
     handleFromDateChange: (newDate: DateTime | null) => void;
     handleFromTimeChange: (newTime: DateTime | null) => void;
 };
