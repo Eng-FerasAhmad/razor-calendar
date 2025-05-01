@@ -1,16 +1,21 @@
 import { darken, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import {
     AddOutline,
+    ArrowDownOutline,
     ArrowNextOutline,
     ArrowPrevOutline,
     CalendarCheckTwotone,
     UsersTwotone,
 } from 'razor-icon-library';
-import { ReactElement } from 'react';
+import { ReactElement, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+    DateIconsCompactWrapper,
     NavigationCompactWrapper,
     NavigationIconsCompactWrapper,
     TitleCompactWrapper,
@@ -25,12 +30,23 @@ import StafferMenu from 'calendar/_toolbar/StafferMenu';
 import Button from 'components/shared/button/Button';
 import InputSelect from 'components/shared/input-select/InputSelect';
 
+const getLocale = (weekStartsOn?: 'sunday' | 'monday'): 'en-GB' | 'en-US' => {
+    switch (weekStartsOn) {
+        case 'monday':
+            return 'en-GB'; // or 'de', 'fr'
+        case 'sunday':
+        default:
+            return 'en-US';
+    }
+};
+
 export function Toolbar({
     currentView,
     onViewChange,
     currentDate,
     onNavigate,
     config,
+    weekStartsOn = 'monday',
 }: ToolbarProps): ReactElement {
     const {
         options,
@@ -47,11 +63,16 @@ export function Toolbar({
         onNavigate,
         config,
     });
+
     const { t } = useTranslation();
     const theme = useTheme();
-    const { onDialogAppointment, onDialogStaffers } = useCalendarContext();
+    const { onDialogAppointment, onDialogStaffers, onDateChange } =
+        useCalendarContext();
     const today = DateTime.now();
     const isToday = currentDate.hasSame(today, 'day');
+
+    const [pickerOpen, setPickerOpen] = useState(false);
+    const calendarButtonRef = useRef<HTMLDivElement | null>(null);
 
     const addHandler = (): void => {
         onDialogAppointment({
@@ -63,9 +84,46 @@ export function Toolbar({
     const openStaffersDialog = (): void => {
         onDialogStaffers(true);
     };
+
+    const handleDateChange = (date: DateTime | null): void => {
+        if (date) {
+            onDateChange(date);
+        }
+        setPickerOpen(false);
+    };
+
     return (
         <ToolbarContainer>
             <NavigationCompactWrapper>
+                <LocalizationProvider
+                    dateAdapter={AdapterLuxon}
+                    adapterLocale={getLocale(weekStartsOn)}
+                >
+                    <DatePicker
+                        open={pickerOpen}
+                        onClose={() => setPickerOpen(false)}
+                        value={currentDate}
+                        onChange={handleDateChange}
+                        slotProps={{
+                            textField: {
+                                style: { display: 'none', borderRadius: '8px' },
+                                sx: {
+                                    display: 'none',
+                                    '& .MuiOutlinedInput-root': {
+                                        '& .MuiSvgIcon-root': {
+                                            fontSize: '20px',
+                                            color: '#6B7280',
+                                        },
+                                    },
+                                },
+                            },
+                            popper: {
+                                anchorEl: calendarButtonRef.current,
+                            },
+                        }}
+                    />
+                </LocalizationProvider>
+
                 <Tooltip title={t('buttons.today', { ns: 'common' })}>
                     <TodayButtonWrapper
                         today={isToday}
@@ -101,6 +159,16 @@ export function Toolbar({
                 </Tooltip>
 
                 <TitleCompactWrapper>{getTitle()}</TitleCompactWrapper>
+
+                <DateIconsCompactWrapper
+                    ref={calendarButtonRef}
+                    onClick={() => setPickerOpen(true)}
+                >
+                    <ArrowDownOutline
+                        size={15}
+                        color={darken(theme.palette.border, 0.4)}
+                    />
+                </DateIconsCompactWrapper>
             </NavigationCompactWrapper>
 
             <ViewWrapper data-testid="view-compact-wrapper">

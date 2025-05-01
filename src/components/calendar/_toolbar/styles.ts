@@ -1,5 +1,6 @@
 import { Box, darken } from '@mui/material';
 import { styled, SxProps, Theme } from '@mui/material/styles';
+import { inputHoverColor } from 'src/theme/theme';
 
 interface Props {
     color?: string;
@@ -54,7 +55,27 @@ export const NavigationIconsCompactWrapper = styled('div', {
     backgroundColor: theme.palette.action.hover,
     '&:hover': {
         cursor: 'pointer',
-        backgroundColor: darken(theme.palette.action.hover, 0.2),
+        backgroundColor: darken(theme.palette.action.hover, 0.1),
+        color: theme.palette.common.white,
+    },
+}));
+
+export const DateIconsCompactWrapper = styled('div', {
+    shouldForwardProp: (prop) => prop !== 'color',
+})<Props>(({ theme }) => ({
+    width: '28px',
+    height: '28px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '2px',
+    boxSizing: 'border-box',
+    overflow: 'hidden',
+    borderRadius: '8px',
+    transition: 'background-color 0.3s ease, border-color 0.3s ease',
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: darken(theme.palette.action.hover, 0.1),
         color: theme.palette.common.white,
     },
 }));
@@ -81,6 +102,24 @@ export const TodayButtonWrapper = styled('div', {
             ? darken(theme.palette.action.hover, 0.2)
             : darken(theme.palette.primary.main, 0.2),
         color: theme.palette.common.white,
+    },
+}));
+
+export const CalendarButtonWrapper = styled('div')(() => ({
+    width: '34px',
+    height: '34px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '2px',
+    boxSizing: 'border-box',
+    overflow: 'hidden',
+    borderRadius: '8px',
+    transition: 'background-color 0.3s ease, border-color 0.3s ease',
+    backgroundColor: '#ccc',
+    '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: { inputHoverColor },
     },
 }));
 

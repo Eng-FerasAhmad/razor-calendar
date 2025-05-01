@@ -8,4 +8,5 @@ export interface ToolbarProps {
     currentDate: DateTime;
     onNavigate: (newDate: DateTime) => void;
     config: RazorCalendarConfig<CalendarConfig>;
+    weekStartsOn?: 'sunday' | 'monday';
 }
