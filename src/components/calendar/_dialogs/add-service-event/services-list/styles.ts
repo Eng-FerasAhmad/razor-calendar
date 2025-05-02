@@ -54,10 +54,3 @@ export const chipSx: SxProps<Theme> = {
 export const menuItemSx: SxProps<Theme> = {
     fontSize: 16,
 };
-
-export const categoryHeaderSx: SxProps<Theme> = {
-    fontSize: 14,
-    fontWeight: 600,
-    color: '#666',
-    backgroundColor: '#fafafa',
-};

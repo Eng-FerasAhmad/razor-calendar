@@ -3,18 +3,11 @@ import { commonFontColor, commonFontSize } from 'src/theme/theme';
 
 export const textFieldSx: SxProps = {
     '& .MuiOutlinedInput-root': {
-        fontSize: `${commonFontSize}px`,
         color: commonFontColor,
-        '& input': {
-            fontSize: `${commonFontSize}px`,
-        },
         '& .MuiSvgIcon-root': {
             fontSize: '20px',
             color: '#6B7280',
         },
-    },
-    '& .MuiInputLabel-root': {
-        fontSize: `${commonFontSize}px`,
     },
 };
 

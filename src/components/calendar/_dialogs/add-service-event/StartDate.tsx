@@ -33,7 +33,6 @@ export default function StartDate({
                     value={fromTime}
                     onChange={handleFromDateChange}
                     dateFormat={dateFormat}
-                    sx={{ width: '200px', minHeight: '60px' }}
                 />
             </RowItemWrapper>
 
@@ -44,7 +43,6 @@ export default function StartDate({
                     onChange={handleFromTimeChange}
                     is24Hours={is24Hours}
                     disabled={isFullDay}
-                    sx={{ width: '200px', minHeight: '60px' }}
                 />
             </RowItemWrapper>
         </RowDateWrapper>

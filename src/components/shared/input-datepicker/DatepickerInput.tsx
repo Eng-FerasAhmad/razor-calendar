@@ -3,6 +3,7 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
+import { textFieldStyles, popperStyles, formHelperTextStyles } from './styles';
 
 interface Props extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
     label?: string;
@@ -10,12 +11,15 @@ interface Props extends Omit<DatePickerProps<DateTime>, 'renderInput'> {
     error?: boolean;
     helperText?: string;
     weekStartsOn?: 'sunday' | 'monday';
+    hideTextField?: boolean;
+    anchorEl?: HTMLElement | null;
+    sx?: object;
 }
 
 const getLocale = (weekStartsOn?: 'sunday' | 'monday'): 'en-GB' | 'en-US' => {
     switch (weekStartsOn) {
         case 'monday':
-            return 'en-GB'; // or 'de', 'fr'
+            return 'en-GB';
         case 'sunday':
         default:
             return 'en-US';
@@ -30,8 +34,13 @@ export default function DatePickerInput({
     error = false,
     helperText,
     weekStartsOn = 'monday',
+    hideTextField = false,
+    anchorEl,
+    sx = {},
     ...props
 }: Props): ReactElement {
+    const isCustomAnchor = hideTextField && anchorEl;
+
     return (
         <LocalizationProvider
             dateAdapter={AdapterLuxon}
@@ -43,45 +52,31 @@ export default function DatePickerInput({
                 onChange={onChange}
                 format={dateFormat}
                 slotProps={{
-                    textField: {
-                        fullWidth: true,
-                        size: 'small',
-                        label,
-                        error,
-                        helperText,
-                        sx: {
-                            '& .MuiOutlinedInput-root': {
-                                borderRadius: '8px',
-                                '& .MuiSvgIcon-root': {
-                                    fontSize: '20px',
-                                    color: '#6B7280',
+                    textField: hideTextField
+                        ? { style: { display: 'none' } }
+                        : {
+                              fullWidth: true,
+                              size: 'small',
+                              label,
+                              error,
+                              helperText,
+                              sx: { ...textFieldStyles, ...sx },
+                              FormHelperTextProps: {
+                                  sx: formHelperTextStyles,
+                              },
+                          },
+                    popper: {
+                        sx: (theme) => popperStyles(theme),
+                        disablePortal: false,
+                        ...(isCustomAnchor && { anchorEl }),
+                        modifiers: [
+                            {
+                                name: 'preventOverflow',
+                                options: {
+                                    boundary: 'viewport',
                                 },
                             },
-                        },
-                        FormHelperTextProps: {
-                            sx: { minHeight: '10px' },
-                        },
-                    },
-                    popper: {
-                        sx: {
-                            '& .MuiPaper-root': {
-                                borderRadius: '12px',
-                                padding: '0',
-                                fontSize: '14px',
-                                color: '#1F2937', // text-gray-800
-                            },
-                            '& .MuiPickersCalendarHeader-label': {
-                                fontSize: '16px',
-                                fontWeight: '500',
-                                color: '#374151', // text-gray-700
-                            },
-                            '& .MuiDayCalendar-weekDayLabel': {
-                                fontSize: '13px',
-                            },
-                            '& .MuiPickersDay-root': {
-                                fontSize: '14px',
-                            },
-                        },
+                        ],
                     },
                 }}
             />

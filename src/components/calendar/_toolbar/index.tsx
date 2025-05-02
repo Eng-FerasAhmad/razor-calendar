@@ -1,8 +1,5 @@
 import { darken, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTime } from 'luxon';
 import {
     AddOutline,
@@ -28,17 +25,8 @@ import { useToolbar } from './useToolbar';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import StafferMenu from 'calendar/_toolbar/StafferMenu';
 import Button from 'components/shared/button/Button';
+import DatePickerInput from 'components/shared/input-datepicker/DatepickerInput';
 import InputSelect from 'components/shared/input-select/InputSelect';
-
-const getLocale = (weekStartsOn?: 'sunday' | 'monday'): 'en-GB' | 'en-US' => {
-    switch (weekStartsOn) {
-        case 'monday':
-            return 'en-GB'; // or 'de', 'fr'
-        case 'sunday':
-        default:
-            return 'en-US';
-    }
-};
 
 export function Toolbar({
     currentView,
@@ -75,10 +63,7 @@ export function Toolbar({
     const calendarButtonRef = useRef<HTMLDivElement | null>(null);
 
     const addHandler = (): void => {
-        onDialogAppointment({
-            open: true,
-            slotId: '',
-        });
+        onDialogAppointment({ open: true, slotId: '' });
     };
 
     const openStaffersDialog = (): void => {
@@ -95,34 +80,15 @@ export function Toolbar({
     return (
         <ToolbarContainer>
             <NavigationCompactWrapper>
-                <LocalizationProvider
-                    dateAdapter={AdapterLuxon}
-                    adapterLocale={getLocale(weekStartsOn)}
-                >
-                    <DatePicker
-                        open={pickerOpen}
-                        onClose={() => setPickerOpen(false)}
-                        value={currentDate}
-                        onChange={handleDateChange}
-                        slotProps={{
-                            textField: {
-                                style: { display: 'none', borderRadius: '8px' },
-                                sx: {
-                                    display: 'none',
-                                    '& .MuiOutlinedInput-root': {
-                                        '& .MuiSvgIcon-root': {
-                                            fontSize: '20px',
-                                            color: '#6B7280',
-                                        },
-                                    },
-                                },
-                            },
-                            popper: {
-                                anchorEl: calendarButtonRef.current,
-                            },
-                        }}
-                    />
-                </LocalizationProvider>
+                <DatePickerInput
+                    open={pickerOpen}
+                    onClose={() => setPickerOpen(false)}
+                    value={currentDate}
+                    onChange={handleDateChange}
+                    weekStartsOn={weekStartsOn}
+                    hideTextField
+                    anchorEl={calendarButtonRef.current}
+                />
 
                 <Tooltip title={t('buttons.today', { ns: 'common' })}>
                     <TodayButtonWrapper
@@ -173,7 +139,7 @@ export function Toolbar({
 
             <ViewWrapper data-testid="view-compact-wrapper">
                 <Button
-                    variant={'outlined'}
+                    variant="outlined"
                     startIcon={
                         <AddOutline
                             size={18}
@@ -187,7 +153,7 @@ export function Toolbar({
 
                 <StafferMenu />
                 <Button
-                    variant={'outlined'}
+                    variant="outlined"
                     startIcon={
                         <UsersTwotone
                             size={18}

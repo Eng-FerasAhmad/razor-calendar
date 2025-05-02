@@ -61,6 +61,7 @@ export default function ServicesList({
                         />
                     )}
                     MenuProps={MenuProps}
+                    data-testid="services-list-select"
                 >
                     {services.map((service) => (
                         <MenuItem

@@ -87,6 +87,7 @@ export const theme = createTheme({
                     color: commonFontColor,
                     borderColor: borderLight,
                     fontSize: commonFontSize,
+                    minHeight: 36,
                     '&:not(.Mui-disabled):hover': {
                         borderColor: borderLight,
                         backgroundColor: hoverColor,
@@ -96,6 +97,7 @@ export const theme = createTheme({
                     backgroundColor: primaryColor,
                     color: '#fff',
                     fontSize: commonFontSize,
+                    minHeight: 36,
                     border: `1px solid ${primaryColor}`,
                     '&:not(.Mui-disabled):hover': {
                         backgroundColor: primaryColor,
