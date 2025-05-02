@@ -31,7 +31,7 @@ export const StyledDialogTitle = styled(DialogTitle, {
 }>`
     background-color: ${({ headerColor }) => headerColor || 'transparent'};
     color: ${({ headerFontColor }) => headerFontColor || 'inherit'};
-    padding: 16px 16px 5px 16px;
+    padding: 16px 16px 5px;
     font-family: inherit;
     font-size: 18px;
     display: flex;
@@ -50,6 +50,7 @@ export const DialogDescriptionWrapper = styled('div')(({ theme }) => ({
 
 export const StyledIconButton = styled(IconButton)`
     padding: 4px;
+
     svg {
         width: 18px;
         height: 18px;

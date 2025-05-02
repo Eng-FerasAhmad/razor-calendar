@@ -4,7 +4,6 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RowItemWrapper } from 'calendar/_dialogs/new-event/styles';
@@ -26,14 +25,6 @@ const MenuProps = {
     },
 };
 
-function getStyles(id: string, assign: readonly TeamMember[], theme: Theme) {
-    return {
-        fontWeight: assign.some((item) => item.id === id)
-            ? theme.typography.fontWeightMedium
-            : theme.typography.fontWeightRegular,
-    };
-}
-
 interface Props {
     teamList: TeamMember[] | undefined;
     assign: TeamMember[]; // Array of selected team members
@@ -46,7 +37,6 @@ export default function MultipleSelectChip({
     onChange,
 }: Props): ReactElement {
     const { t } = useTranslation();
-    const theme = useTheme();
 
     const handleChange = (event: SelectChangeEvent<string[]>): void => {
         const {
@@ -116,11 +106,7 @@ export default function MultipleSelectChip({
                     MenuProps={MenuProps}
                 >
                     {teamList?.map((user) => (
-                        <MenuItem
-                            key={user.id}
-                            value={user.id}
-                            style={getStyles(user.id, assign, theme)}
-                        >
+                        <MenuItem key={user.id} value={user.id}>
                             {`${user.firstName} ${user.lastName}`}
                         </MenuItem>
                     ))}

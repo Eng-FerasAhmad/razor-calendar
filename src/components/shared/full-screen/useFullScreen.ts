@@ -54,7 +54,7 @@ export function useFullscreen(
 
         if (isFullscreen) {
             if (element?.requestFullscreen) {
-                void element.requestFullscreen();
+                element.requestFullscreen();
             } else if (
                 element &&
                 isWebkitFullscreenSupportedForElement(element)

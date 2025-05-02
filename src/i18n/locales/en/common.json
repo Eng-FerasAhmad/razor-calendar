@@ -80,7 +80,7 @@
         "description": "Add or remove staffers to your calendar",
         "buttonDialog": "Staffers"
     },
-    "reminder" : {
+    "reminder": {
         "amount": "Reminder",
         "minutes": "Minutes",
         "hours": "Hours",

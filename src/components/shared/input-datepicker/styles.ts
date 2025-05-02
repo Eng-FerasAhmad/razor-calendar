@@ -14,6 +14,7 @@ export const formHelperTextStyles = {
     minHeight: '10px',
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const popperStyles = (theme: Theme) => ({
     '& .MuiPaper-root': {
         borderRadius: '12px',

@@ -7,16 +7,16 @@ export type ViewType = 'team' | 'day' | 'week' | 'month' | 'year' | 'agenda';
 
 export interface Appointment {
     id: string;
-    title?: string;
+    title: string;
     start: string; // ISO string
-    end?: string; // ISO string
+    end: string; // ISO string
     reminder?: ReminderValue;
     assign?: TeamMember[];
     duration?: string;
     status?: string;
     notes?: string;
     services?: ServiceViewModel[];
-    customer: CustomerViewModel;
+    customer?: CustomerViewModel;
     stafferId?: string;
     isFullDay?: boolean;
     color?: string;

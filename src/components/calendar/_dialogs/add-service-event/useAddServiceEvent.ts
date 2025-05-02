@@ -162,6 +162,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
     const handleSave = (): void => {
         const appointment: Appointment = {
             id: appointmentId,
+            title: `${firstName} ${lastName}`,
             start: fromTime.toUTC().toISO() || '',
             end: toTime.toUTC().toISO() || '',
             notes,

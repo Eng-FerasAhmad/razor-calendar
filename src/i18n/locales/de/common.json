@@ -80,7 +80,7 @@
         "description": "Mitarbeiter zum Kalender hinzufügen oder daraus entfernen",
         "buttonDialog": "Mitarbeiter"
     },
-    "reminder" : {
+    "reminder": {
         "amount": "Benachrichtigung",
         "minutes": "Minuten",
         "hours": "Stunden",
