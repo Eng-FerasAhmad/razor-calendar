@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
-import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
 
 interface Props {
@@ -14,7 +13,6 @@ interface Props {
         overlapIndex: number,
         totalOverlaps: number
     ) => { top: string; height: string; width: string; left: string };
-    userId?: string;
 }
 
 export default function DisplayAppointment({
@@ -22,10 +20,7 @@ export default function DisplayAppointment({
     appointments,
     calculatePosition,
     fullDayAppointments,
-    userId,
 }: Props): ReactElement {
-    const { config } = useCalendarContext();
-
     // Filter out full-day appointments
     const filteredAppointments = appointments.filter((item) => {
         return !fullDayAppointments.some((fullDay) => fullDay.id === item.id);
@@ -63,22 +58,6 @@ export default function DisplayAppointment({
         }
     );
 
-    const getColor = (appointment: Appointment): string => {
-        if (userId) {
-            const assignedUser = appointment.assign?.find(
-                (user) => user.id === userId
-            );
-
-            return assignedUser?.color || config.style.primaryColor;
-        }
-
-        if (appointment.assign?.length === 1) {
-            return appointment.assign[0].color;
-        }
-
-        return config.style.primaryColor;
-    };
-
     return (
         <>
             {groupedAppointments.map((appointment) => {
@@ -92,7 +71,7 @@ export default function DisplayAppointment({
                         style={appointment.position}
                         from={start.toString()}
                         to={DateTime.fromISO(appointment.end).toString()}
-                        color={getColor(appointment)}
+                        color={appointment.staffer?.color || ''}
                         appointment={appointment}
                     />
                 );

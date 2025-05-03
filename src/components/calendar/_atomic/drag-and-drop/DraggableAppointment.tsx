@@ -59,8 +59,11 @@ export default function DraggableAppointment({
         dragTimeoutRef.current = setTimeout(() => setIsDragging(false), 150);
     };
     const multiAssignees =
-        Array.isArray(appointment.assign) && appointment.assign.length > 1;
-    const colorSelected = multiAssignees ? color : appointment.assign![0].color;
+        Array.isArray(appointment.teamMember) &&
+        appointment.teamMember.length > 1;
+    const colorSelected = multiAssignees
+        ? color
+        : appointment.teamMember![0].color;
 
     const dragStyle = isOverlay
         ? {

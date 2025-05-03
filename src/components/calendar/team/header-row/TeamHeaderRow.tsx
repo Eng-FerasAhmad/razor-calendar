@@ -92,8 +92,8 @@ export default function TeamHeaderRow({
                         const userFullDayAppointments =
                             fullDayAppointments.filter(
                                 (fullDay) =>
-                                    fullDay.assign &&
-                                    fullDay.assign.some(
+                                    fullDay.teamMember &&
+                                    fullDay.teamMember.some(
                                         (assignee) => assignee.id === user.id
                                     )
                             );
@@ -103,7 +103,6 @@ export default function TeamHeaderRow({
                                 key={user.id}
                                 fullDayAppointments={userFullDayAppointments}
                                 days={[selectedDate]}
-                                userId={user.id}
                             />
                         );
                     })}

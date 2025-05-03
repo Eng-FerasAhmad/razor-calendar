@@ -8,13 +8,11 @@ import { Appointment } from 'types/appointment';
 interface Props {
     days: DateTime<boolean>[];
     fullDayAppointments: Appointment[];
-    userId?: string;
 }
 
 export default function FullDaysAppointment({
     fullDayAppointments,
     days,
-    userId,
 }: Props): ReactElement {
     const { config, onUpdateFullDaysCount, showAllFullDays, fullDaysCount } =
         useCalendarContext();
@@ -102,7 +100,6 @@ export default function FullDaysAppointment({
                     key={index}
                     appointments={row}
                     dayWidth={dayWidth}
-                    userId={userId || ''}
                     days={days.map((day) => day.toJSDate())}
                 />
             ))}

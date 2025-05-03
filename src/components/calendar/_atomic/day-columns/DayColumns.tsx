@@ -114,7 +114,6 @@ export default function DayColumns({
                 appointments={updatedAppointmentsWithPositions}
                 calculatePosition={calculatePosition}
                 fullDayAppointments={fullDayAppointments}
-                userId={userId}
             />
         </DaysColumnsContainer>
     );

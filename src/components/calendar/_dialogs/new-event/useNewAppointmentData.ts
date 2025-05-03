@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { useState, useEffect, ChangeEvent } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { ReminderValue } from 'components/shared/reminder-select/types';
+import { primaryColor } from 'src/theme/theme';
 import { Appointment } from 'types/appointment';
 import { TeamMember } from 'types/teamModel';
 
@@ -16,7 +17,7 @@ export interface UseNewAppointmentDataReturn {
     dateFormat: string;
     titleRequired: boolean;
     reminder: ReminderValue;
-    assign: TeamMember[];
+    teamMember: TeamMember[];
 
     setTitle: (title: string) => void;
     setNotes: (notes: string) => void;
@@ -68,8 +69,8 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
     });
     const [appointmentId, setAppointmentId] = useState('');
     const [isFullDay, setIsFullDay] = useState(false);
-    const [color, setColor] = useState('#33b679');
-    const [assign, setAssign] = useState<TeamMember[]>([]);
+    const [color, setColor] = useState(primaryColor);
+    const [teamMember, setTeamMember] = useState<TeamMember[]>([]);
     const [titleRequired, setTitleRequired] = useState(false);
 
     const [toTimeError, setToTimeError] = useState(false);
@@ -86,7 +87,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
             const assignedUser = teamModel?.users.find(
                 (user) => user.id === userId
             );
-            setAssign(assignedUser ? [assignedUser] : []);
+            setTeamMember(assignedUser ? [assignedUser] : []);
 
             if (year && month && day && timePart) {
                 const newFromTime = DateTime.fromObject({
@@ -108,7 +109,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
                 end,
                 isFullDay: appointmentIsFullDay,
                 color: appointmentColor,
-                assign: appointmentAssign,
+                teamMember: appointmentAssign,
                 reminder: appointmentReminder,
             } = dialogAppointment.appointment;
 
@@ -124,7 +125,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
             );
             setIsFullDay(appointmentIsFullDay || false);
             setColor(appointmentColor || '#33b679');
-            setAssign(appointmentAssign || []);
+            setTeamMember(appointmentAssign || []);
         }
     }, [dialogAppointment, teamModel?.users]);
 
@@ -182,7 +183,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
     };
 
     const handleAssignChange = (list: TeamMember[]): void => {
-        setAssign(list);
+        setTeamMember(list);
     };
 
     const handleSave = (): void => {
@@ -197,7 +198,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
             isFullDay,
             color,
             notes,
-            assign,
+            teamMember,
             reminder,
         };
 
@@ -211,7 +212,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
         setNotes('');
         setAppointmentId('');
         setIsFullDay(false);
-        setAssign([]);
+        setTeamMember([]);
         setColor('#33b679');
     };
 
@@ -228,7 +229,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
         dateFormat,
         titleRequired,
         reminder,
-        assign,
+        teamMember,
 
         setTitle,
         setNotes,
@@ -237,7 +238,7 @@ export const useNewAppointmentData = (): UseNewAppointmentDataReturn => {
         setIsFullDay,
         setColor,
         setReminder,
-        setAssign,
+        setAssign: setTeamMember,
 
         handleSave,
         handleFromTimeChange,

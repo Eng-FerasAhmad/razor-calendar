@@ -7,14 +7,12 @@ interface Props {
     appointments: Appointment[];
     dayWidth: number;
     days: Date[];
-    userId: string;
 }
 
 export default function FullDaysRow({
     appointments,
     dayWidth,
     days,
-    userId,
 }: Props): ReactElement {
     return (
         <FullDaysRowContainer>
@@ -40,7 +38,6 @@ export default function FullDaysRow({
                         dayWidth={dayWidth} // Pass dayWidth down
                         visibleStartIndex={visibleStartIndex}
                         visibleEndIndex={visibleEndIndex}
-                        userId={userId}
                     />
                 );
             })}

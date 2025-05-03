@@ -63,6 +63,9 @@ export function Toolbar({
     const calendarButtonRef = useRef<HTMLDivElement | null>(null);
 
     const addHandler = (): void => {
+        // Blur the currently focused element (e.g. a button in #root) to prevent accessibility warning
+        // when MUI sets aria-hidden="true" on #root while the dialog is open
+        (document.activeElement as HTMLElement)?.blur();
         onDialogAppointment({ open: true, slotId: '' });
     };
 
@@ -100,7 +103,7 @@ export function Toolbar({
                             color={
                                 isToday
                                     ? darken(theme.palette.border, 0.4)
-                                    : '#fff'
+                                    : darken(theme.palette.warning.light, 0.4)
                             }
                         />
                     </TodayButtonWrapper>

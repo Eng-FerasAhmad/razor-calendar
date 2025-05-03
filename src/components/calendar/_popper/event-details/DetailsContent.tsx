@@ -1,36 +1,34 @@
-import { darken, lighten, Tooltip, Typography } from '@mui/material';
-import Chip from '@mui/material/Chip';
+import { Avatar, Tooltip } from '@mui/material';
 import {
-    AddCircleOutline,
-    CalendarCheckTwotone,
     ClockOutline,
+    ClockTwotone,
     CloseOutline,
     DeleteOutline,
     EditOutline,
     MenuOutline,
     TimerBulk,
-    UserCardOutline,
+    WizardTwotone,
 } from 'razor-icon-library';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     DetailsContentContainer,
     IconWrapper,
     HeaderBox,
-    ReminderBox,
-    CalendarBox,
-    TitleBox,
-    DateBox,
     TextBox,
-    TextBoxTitle,
     TimeBoxTitle,
+    ContentBox,
+    TitleTypography,
+    DetailsWrapper,
+    AvatarBox,
+    TitleUpdateDate,
+    ColorBox,
+    CreatedBox,
+    AvatarNameTypography,
 } from './styles';
 import { formatTimeDifference } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
-import {
-    standardDarkColor7,
-    standardLightColor4,
-} from 'calendar/_style/colors';
+
 import { Appointment } from 'types/appointment';
 import { formattedStart } from 'utils/dateFormater';
 
@@ -44,8 +42,18 @@ export default function DetailsContent(): ReactElement {
     } = useCalendarContext();
     const { t } = useTranslation();
     const iconSize = 20;
+    const [showInfo, setShowInfo] = useState(false);
     const { appointment } = popperAppointment || {};
-    const { title, start, end, assign, isFullDay } = appointment || {};
+    const {
+        title,
+        start,
+        end,
+        staffer,
+        isFullDay,
+        created,
+        updated,
+        services,
+    } = appointment || {};
 
     const diffInMinutes = formatTimeDifference(start!, end!, isFullDay!);
 
@@ -62,6 +70,18 @@ export default function DetailsContent(): ReactElement {
         config.hour.is24HourFormat
     );
 
+    const createdDate = formattedStart(
+        created!,
+        config.common.dateFormat,
+        config.hour.is24HourFormat
+    );
+
+    const updatedDate = formattedStart(
+        updated!,
+        config.common.dateFormat,
+        config.hour.is24HourFormat
+    );
+
     const handleClose = (): void => {
         onPopperAppointment(undefined);
     };
@@ -69,13 +89,13 @@ export default function DetailsContent(): ReactElement {
     const onDelete = (): void => {
         if (!appointment) return;
 
-        const updated: Appointment = {
+        const updatedAppointment: Appointment = {
             id: appointment.id,
             title: appointment.title,
             start: appointment.start,
             end: appointment.end,
         };
-        onDeleteAppointment(updated);
+        onDeleteAppointment(updatedAppointment);
     };
 
     const handleEdit = (): void => {
@@ -87,120 +107,102 @@ export default function DetailsContent(): ReactElement {
         });
     };
 
-    const getColor = (): string => {
-        if (assign && assign.length === 1) {
-            return standardLightColor4(assign[0].color);
-        }
-
-        return standardLightColor4(config.style.primaryColor);
-    };
-
     return (
-        <DetailsContentContainer
-            data-testid="details-content-container"
-            color={getColor()}
-        >
-            <HeaderBox data-testid="header-box" color={getColor()}>
+        <DetailsContentContainer data-testid="details-content-container">
+            <HeaderBox data-testid="header-box">
                 <Tooltip title={t('actions.edit', { ns: 'common' })}>
-                    <IconWrapper color={getColor()} onClick={handleEdit}>
-                        <EditOutline
-                            size={18}
-                            color={standardDarkColor7(getColor())}
-                        />
+                    <IconWrapper onClick={handleEdit} color={staffer?.color}>
+                        <EditOutline size={18} />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.delete', { ns: 'common' })}>
-                    <IconWrapper color={getColor()} onClick={onDelete}>
-                        <DeleteOutline
-                            size={18}
-                            color={standardDarkColor7(getColor())}
-                        />
+                    <IconWrapper onClick={onDelete} color={staffer?.color}>
+                        <DeleteOutline size={18} />
                     </IconWrapper>
                 </Tooltip>
 
-                <Tooltip title={t('actions.options', { ns: 'common' })}>
-                    <IconWrapper color={getColor()}>
-                        <MenuOutline
-                            size={18}
-                            color={standardDarkColor7(getColor())}
-                        />
+                <Tooltip title={t('actions.info', { ns: 'common' })}>
+                    <IconWrapper
+                        onClick={() => setShowInfo(!showInfo)}
+                        color={staffer?.color}
+                    >
+                        <MenuOutline size={18} />
                     </IconWrapper>
                 </Tooltip>
 
                 <Tooltip title={t('actions.close', { ns: 'common' })}>
-                    <IconWrapper color={getColor()} onClick={handleClose}>
-                        <CloseOutline
-                            size={18}
-                            color={standardDarkColor7(getColor())}
-                        />
+                    <IconWrapper onClick={handleClose} color={staffer?.color}>
+                        <CloseOutline size={18} />
                     </IconWrapper>
                 </Tooltip>
             </HeaderBox>
-            <TitleBox>
-                <CalendarCheckTwotone size={iconSize} />
-                <Typography sx={{ fontSize: '16px' }} variant="body1" flex={1}>
-                    {title}
-                </Typography>
-            </TitleBox>
-            <DateBox data-testid="date-box">
-                <TextBox>
-                    <ClockOutline size={iconSize} />
-                    <TimeBoxTitle>{startDate}</TimeBoxTitle>
-                </TextBox>
 
+            <ContentBox>
                 <TextBox>
-                    <ClockOutline size={iconSize} />
-                    <TimeBoxTitle>{endDate}</TimeBoxTitle>
+                    <ColorBox color={staffer?.color} />
+                    <TitleTypography variant="body1">{title}</TitleTypography>
                 </TextBox>
-            </DateBox>
-            <ReminderBox>
-                <TextBox>
-                    <TimerBulk size={iconSize} />
-                    <TimeBoxTitle>{diffInMinutes}</TimeBoxTitle>
-                </TextBox>
-            </ReminderBox>
+            </ContentBox>
 
-            {appointment!.reminder && (
-                <ReminderBox>
+            <DetailsWrapper>
+                <ContentBox data-testid="content-box-dates">
+                    {services && (
+                        <TextBox>
+                            <WizardTwotone size={iconSize} />
+                            <TimeBoxTitle>
+                                {services[0].serviceName}
+                            </TimeBoxTitle>
+                        </TextBox>
+                    )}
+
                     <TextBox>
-                        <AddCircleOutline size={iconSize} />
-                        <TimeBoxTitle>
-                            {appointment!.reminder.amount}{' '}
-                            {t(`reminder.${appointment!.reminder.unit}`, {
-                                ns: 'common',
-                            })}
-                        </TimeBoxTitle>
+                        <ClockOutline size={iconSize} />
+                        <TimeBoxTitle>{startDate}</TimeBoxTitle>
                     </TextBox>
-                </ReminderBox>
+
+                    <TextBox>
+                        <ClockTwotone size={iconSize} />
+                        <TimeBoxTitle>{endDate}</TimeBoxTitle>
+                    </TextBox>
+
+                    <TextBox>
+                        <TimerBulk size={iconSize} />
+                        <TimeBoxTitle>{diffInMinutes}</TimeBoxTitle>
+                    </TextBox>
+                </ContentBox>
+
+                <ContentBox data-testid="content-box-avatar">
+                    <AvatarBox>
+                        <Avatar
+                            src={staffer?.image}
+                            alt={`${staffer?.firstName} ${staffer?.lastName}`}
+                            sx={{ width: 45, height: 45 }}
+                        />
+                        <TextBox>
+                            <AvatarNameTypography variant="body1">
+                                {staffer?.firstName}
+                            </AvatarNameTypography>
+                        </TextBox>
+                    </AvatarBox>
+                </ContentBox>
+            </DetailsWrapper>
+
+            {showInfo && (
+                <ContentBox>
+                    <CreatedBox>
+                        <TitleUpdateDate>
+                            {t('actions.created', { ns: 'common' })}:{' '}
+                            {createdDate}
+                        </TitleUpdateDate>
+
+                        <TitleUpdateDate>
+                            {t('actions.updated', { ns: 'common' })}:{' '}
+                            {updatedDate}
+                        </TitleUpdateDate>
+                    </CreatedBox>
+                </ContentBox>
             )}
-            <CalendarBox>
-                <TextBox>
-                    <UserCardOutline size={iconSize} />
-                    <TextBoxTitle>
-                        {assign && assign[0].id === 'id' && (
-                            <>{t('actions.notAssign', { ns: 'common' })}</>
-                        )}
-                        {assign &&
-                            assign[0].id !== 'id' &&
-                            assign.map((user) => {
-                                return (
-                                    <Chip
-                                        key={user.id}
-                                        label={`${user.firstName} ${user.lastName}`}
-                                        size={'small'}
-                                        sx={{
-                                            marginRight: '2px',
-                                            bgcolor: lighten(user.color, 0.6),
-                                            color: darken(user.color, 0.4),
-                                            fontSize: '12px',
-                                        }}
-                                    />
-                                );
-                            })}
-                    </TextBoxTitle>
-                </TextBox>
-            </CalendarBox>
         </DetailsContentContainer>
     );
 }

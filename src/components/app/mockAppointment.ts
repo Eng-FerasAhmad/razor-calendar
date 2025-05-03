@@ -4,11 +4,11 @@ export const initAppointments: Appointment[] = [
     {
         id: '1',
         title: 'Meeting at these times are very important',
-        start: '2025-04-15T13:00',
-        end: '2025-04-15T14:10',
+        start: '2025-05-03T13:00',
+        end: '2025-05-03T14:10',
         isFullDay: false,
         color: '#33b679',
-        assign: [
+        teamMember: [
             {
                 id: 'max-id',
                 firstName: 'Max Hemlmut',
@@ -18,7 +18,31 @@ export const initAppointments: Appointment[] = [
                 visible: true,
             },
         ],
+        staffer: {
+            id: 'max-id',
+            firstName: 'Max Hemlmut',
+            lastName: 'Musterman Bluster',
+            image: 'https://picsum.photos/200/300?grayscale',
+            color: '#6b5b95',
+        },
         reminder: { amount: 30, unit: 'minutes' },
+        services: [
+            {
+                id: 'service-id',
+                serviceName: 'Service Name',
+                price: {
+                    amount: 100,
+                    currency: 0,
+                },
+                categoryId: 1,
+                shopId: 'shop-id',
+                categoryName: 'Category Name',
+                duration: 60,
+                description: 'Service description',
+            },
+        ],
+        created: '2025-05-03T13:00',
+        updated: '2025-05-03T13:00',
     },
     {
         id: '2',
@@ -28,7 +52,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 3, unit: 'hours' },
-        assign: [
+        teamMember: [
             {
                 id: 'martin-id',
                 firstName: 'Martin',
@@ -55,7 +79,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 1, unit: 'days' },
-        assign: [
+        teamMember: [
             {
                 id: 'id',
                 firstName: '',
@@ -74,7 +98,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 2, unit: 'weeks' },
-        assign: [
+        teamMember: [
             {
                 id: 'max-id',
                 firstName: 'Max Hemlmut',
@@ -93,7 +117,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: true,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'max-id',
                 firstName: 'Max Hemlmut',
@@ -118,7 +142,7 @@ export const initAppointments: Appointment[] = [
         visibility: true,
         location: 'id',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'anna-id',
                 firstName: 'Anna',
@@ -145,7 +169,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'id',
                 firstName: '',
@@ -164,7 +188,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: true,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'id',
                 firstName: '',
@@ -183,7 +207,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'ferdi-id',
                 firstName: 'Ferdi',
@@ -202,7 +226,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: true,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'anna-id',
                 firstName: 'Anna',
@@ -221,7 +245,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'jef-id',
                 firstName: 'Jef',
@@ -240,7 +264,7 @@ export const initAppointments: Appointment[] = [
         isFullDay: false,
         color: '#33b679',
         reminder: { amount: 30, unit: 'minutes' },
-        assign: [
+        teamMember: [
             {
                 id: 'muster-id',
                 firstName: 'Muster Kurt',

@@ -59,7 +59,7 @@
         "cancel": "Abbrechen",
         "errorLaterDate": "Muss später sein als Startdatum",
         "errorLaterTime": "Muss später sein als Startzeit",
-        "assign": "Zuweisen",
+        "staffer": "Mitarbeiter",
         "reminder": "Erinnerung",
         "service": "Dienst"
     },
@@ -73,7 +73,10 @@
         "new": "Neue",
         "add": "Einfügen",
         "save": "Speichern",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "created": "Erstellt",
+        "updated": "Aktualisiert",
+        "info": "Info"
     },
     "staffers": {
         "header": "Mitarbeiter",

@@ -34,26 +34,29 @@ export const StandardViewContainer = styled('div')<{
     },
 }));
 
-export const ShortTimerViewWrapper = styled('div')({
+export const ShortTimerViewWrapper = styled('div')(({ theme }) => ({
     boxSizing: 'border-box',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     height: '18px',
-    minHeight: '18px',
+    minHeight: '20px',
     fontSize: '12px',
     paddingLeft: '5px',
     paddingTop: '2px',
-});
+    fontWeight: 600,
+    color: theme.palette.textPrimary,
+}));
 
-export const ShortLabelViewWrapper = styled('div')({
+export const ShortLabelViewWrapper = styled('div')(({ theme }) => ({
     whiteSpace: 'wrap',
     overflow: 'hidden',
     display: 'inline-block',
     fontSize: '13px',
     paddingLeft: '5px',
-});
+    color: theme.palette.textPrimary,
+}));
 
 export const IntervalViewContainer = styled('div')<{
     color?: string;

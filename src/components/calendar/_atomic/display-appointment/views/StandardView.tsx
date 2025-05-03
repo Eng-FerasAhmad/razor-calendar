@@ -41,7 +41,8 @@ export default function StandardView({
         config.hour.is24HourFormat
     );
     const multiAssignees =
-        Array.isArray(appointment.assign) && appointment.assign.length > 1;
+        Array.isArray(appointment.teamMember) &&
+        appointment.teamMember.length > 1;
     return (
         <StandardViewContainer
             color={color}
@@ -58,7 +59,7 @@ export default function StandardView({
             </div>
             <AssigneeWrapper>
                 {multiAssignees &&
-                    appointment.assign?.map((user) => (
+                    appointment.teamMember?.map((user) => (
                         <MultiAssigneeWrapper
                             key={user.id}
                             color={user.color}

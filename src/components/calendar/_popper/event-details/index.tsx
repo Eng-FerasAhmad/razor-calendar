@@ -41,7 +41,7 @@ export default function PopperEventDetailsIndex(): ReactElement {
                         sx={{
                             position: 'relative',
                             padding: 0,
-                            width: '350px',
+                            width: '390px',
                             borderRadius: '10px',
                             overflow: 'hidden',
                         }}

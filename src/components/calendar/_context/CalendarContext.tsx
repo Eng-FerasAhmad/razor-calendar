@@ -30,11 +30,13 @@ interface Props {
     services: ServiceViewModel[];
     selectedDate: DateTime;
     incomingAppointments: Appointment[] | [];
+
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
     onExternalChangeAppointment: (appointment: Appointment[]) => void;
     onExternalSaveAppointment: (appointment: Appointment) => void;
     onExternalDeleteAppointment: (appointment: Appointment) => void;
+    onUpdateTeamModel: (updatedTeamModel: TeamModel) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
@@ -162,10 +164,13 @@ export function CalendarProvider({
 
     const filteredAppointments = useMemo(() => {
         return appointments.filter((appointment) => {
-            if (!appointment.assign || appointment.assign.length === 0) {
+            if (
+                !appointment.teamMember ||
+                appointment.teamMember.length === 0
+            ) {
                 return true;
             }
-            return appointment.assign.some((member) =>
+            return appointment.teamMember.some((member) =>
                 localTeamModel?.users.some(
                     (user) => user.id === member.id && user.visible
                 )
@@ -214,6 +219,7 @@ export function CalendarProvider({
                 dialogAppointment,
                 addServiceDialog,
                 dialogStaffers,
+
                 onDialogStaffers,
                 onDialogAppointment,
                 onAddServiceDialog,

@@ -49,8 +49,8 @@ export default function Team(): ReactElement {
                             .map((user, i) => {
                                 const userAppointments = appointments!.filter(
                                     (appointment) =>
-                                        appointment.assign &&
-                                        appointment.assign.some(
+                                        appointment.teamMember &&
+                                        appointment.teamMember.some(
                                             (assignee) =>
                                                 assignee.id === user.id
                                         )
@@ -59,8 +59,8 @@ export default function Team(): ReactElement {
                                 const userFullDayAppointments =
                                     fullDayAppointments.filter(
                                         (fullDay) =>
-                                            fullDay.assign &&
-                                            fullDay.assign.some(
+                                            fullDay.teamMember &&
+                                            fullDay.teamMember.some(
                                                 (assignee) =>
                                                     assignee.id === user.id
                                             )

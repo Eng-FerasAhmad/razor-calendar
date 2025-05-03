@@ -26,6 +26,7 @@ export interface Props {
     handleDeleteAppointment: (appointment: Appointment) => void;
     onViewChange: (view: ViewType) => void;
     onChangeDate: (date: DateTime) => void;
+    onUpdateTeamModel: (updatedTeamModel: TeamModel) => void;
 }
 
 export function RazorCalendar({
@@ -40,6 +41,7 @@ export function RazorCalendar({
     handleDeleteAppointment,
     onViewChange,
     onChangeDate,
+    onUpdateTeamModel,
 }: Props): ReactElement {
     return (
         <ThemeProvider theme={theme}>
@@ -56,6 +58,7 @@ export function RazorCalendar({
                 onExternalChangeDate={onChangeDate}
                 onExternalSaveAppointment={handleSaveAppointment}
                 onExternalDeleteAppointment={handleDeleteAppointment}
+                onUpdateTeamModel={onUpdateTeamModel}
             >
                 <DisableScrolling />
                 <PopperEventDetailsIndex />

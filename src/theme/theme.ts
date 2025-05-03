@@ -6,12 +6,18 @@ declare module '@mui/material/styles' {
         borderLight: string;
         outOfWork?: string;
         workTime?: string;
+        textPrimary?: string;
+        textSecondary?: string;
+        textLight?: string;
     }
     interface PaletteOptions {
         border?: string;
         borderLight?: string;
         outOfWork?: string;
         workTime?: string;
+        textPrimary?: string;
+        textSecondary?: string;
+        textLight?: string;
     }
 }
 
@@ -49,6 +55,9 @@ export const theme = createTheme({
         borderLight,
         outOfWork: '#fff',
         workTime: '#fff',
+        textPrimary: commonFontColor,
+        textSecondary: '#595959',
+        textLight: '#8c8c8c',
     },
     typography: {
         fontSize: commonFontSize,
@@ -68,6 +77,7 @@ export const theme = createTheme({
                     padding: 0,
                     height: '100%',
                     backgroundColor: '#fff',
+                    color: commonFontColor,
                 },
                 p: {
                     fontWeight: 560,

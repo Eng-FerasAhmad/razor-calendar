@@ -11,7 +11,6 @@ interface Props {
     dayWidth: number;
     visibleStartIndex: number;
     visibleEndIndex: number;
-    userId: string;
 }
 
 export default function FullDaysCell({
@@ -19,9 +18,8 @@ export default function FullDaysCell({
     dayWidth,
     visibleStartIndex,
     visibleEndIndex,
-    userId,
 }: Props): ReactElement {
-    const { onPopperAppointment, view, config } = useCalendarContext();
+    const { onPopperAppointment, view } = useCalendarContext();
     const width = dayWidth * (visibleEndIndex - visibleStartIndex + 1);
     const left = dayWidth * visibleStartIndex;
 
@@ -34,22 +32,6 @@ export default function FullDaysCell({
         });
     };
 
-    const getColor = (): string | undefined => {
-        if (userId) {
-            const assignedUser = appointment.assign?.find(
-                (user) => user.id === userId
-            );
-
-            return assignedUser?.color || config.style.primaryColor;
-        }
-
-        if (appointment.assign?.length === 1) {
-            return appointment.assign[0].color;
-        }
-
-        return config.style.primaryColor;
-    };
-
     return (
         <FullDaysCellContainer
             width={width}
@@ -57,7 +39,7 @@ export default function FullDaysCell({
             left={left}
             onClick={popperHandler}
         >
-            <FullDayTitleWrapper color={getColor() || ''}>
+            <FullDayTitleWrapper color={appointment.staffer?.color || ''}>
                 {appointment.title}
             </FullDayTitleWrapper>
         </FullDaysCellContainer>

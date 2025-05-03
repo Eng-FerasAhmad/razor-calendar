@@ -24,13 +24,6 @@ export default function EventItem({ appointment }: Props): ReactElement {
     const { t } = useTranslation();
     const { onPopperAppointment, config } = useCalendarContext();
 
-    const multiAssignees =
-        Array.isArray(appointment.assign) && appointment.assign.length > 1;
-
-    const color = multiAssignees
-        ? appointment.color
-        : appointment.assign![0].color;
-
     const popperHandler = (event: MouseEvent<HTMLElement>): void => {
         onPopperAppointment({
             open: true,
@@ -57,7 +50,7 @@ export default function EventItem({ appointment }: Props): ReactElement {
             data-testid="event-item-container"
         >
             <LeftSectionWrapper>
-                <EventIndicator color={color || '#445e4'} />
+                <EventIndicator color={appointment.staffer?.color || ''} />
                 <EventTime>
                     {appointment.isFullDay
                         ? t('agenda.fullDay')
@@ -67,7 +60,7 @@ export default function EventItem({ appointment }: Props): ReactElement {
             </LeftSectionWrapper>
             <RightSectionWrapper>
                 <AvatarGroup max={4}>
-                    {appointment.assign!.map((user) => {
+                    {appointment.teamMember!.map((user) => {
                         return (
                             <Avatar
                                 key={user.id}

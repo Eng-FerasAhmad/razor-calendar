@@ -8,6 +8,7 @@ import { dummyServices } from 'components/app/mockServices';
 import { initialTeamModel } from 'components/app/mockTeam';
 import { AppContainer, CalendarContentContainer } from 'components/app/styles';
 import { Appointment, ViewType } from 'types/appointment';
+import { TeamModel } from 'types/teamModel';
 
 export default function App(): ReactElement {
     // Initialize appointments from local storage
@@ -17,6 +18,7 @@ export default function App(): ReactElement {
     // State for HeaderTemplate and Calendar
     const [currentView, setCurrentView] = useState<ViewType>('team');
     const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
+    const [teamModel, setTeamModel] = useState(initialTeamModel);
 
     // Handlers
     const handleViewChange = (view: ViewType): void => {
@@ -62,6 +64,11 @@ export default function App(): ReactElement {
         console.log('Appointment Deleted:', appointmentToDelete);
     };
 
+    const onUpdateTeamModel = (updatedTeamModel: TeamModel): void => {
+        console.log('User ID:', updatedTeamModel);
+        setTeamModel(updatedTeamModel);
+    };
+
     return (
         <AppContainer data-testid="app">
             <CalendarContentContainer>
@@ -75,8 +82,9 @@ export default function App(): ReactElement {
                     selectedDate={currentDate}
                     onChangeDate={onChangeDate}
                     config={config}
-                    teamModel={initialTeamModel}
+                    teamModel={teamModel}
                     services={dummyServices}
+                    onUpdateTeamModel={onUpdateTeamModel}
                 />
             </CalendarContentContainer>
         </AppContainer>

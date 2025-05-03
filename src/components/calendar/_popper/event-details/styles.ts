@@ -1,24 +1,69 @@
-import { darken } from '@mui/material';
+import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const DetailsContentContainer = styled('div')<{ color: string }>(
-    ({ color }) => ({
-        width: '100%',
-        color,
-        borderRadius: '10px',
-    })
-);
+export const DetailsContentContainer = styled('div')(({ theme }) => ({
+    width: '100%',
+    borderRadius: '10px',
+    backgroundColor: theme.palette.background.default,
+}));
 
-export const HeaderBox = styled('div')(({ theme, color }) => ({
+export const DetailsWrapper = styled('div')(() => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    gap: '10px',
+    paddingBottom: '5px',
+}));
+
+export const ContentBox = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: '10px',
+    padding: '10px 15px',
+    color: theme.palette.textPrimary,
+    fontSize: '16px',
+}));
+
+export const TitleTypography = styled(Typography)(({ theme }) => ({
+    ...theme.typography.body1,
+    flex: 1,
+    fontSize: '17px',
+}));
+
+export const AvatarNameTypography = styled(Typography)(({ theme }) => ({
+    ...theme.typography.body1,
+    flex: 1,
+    fontSize: '14px',
+    color: theme.palette.textLight,
+}));
+
+export const TitleUpdateDate = styled(Typography)(({ theme }) => ({
+    ...theme.typography.body1,
+    flex: 1,
+    fontSize: '12px',
+    color: theme.palette.action.disabled,
+}));
+
+export const HeaderBox = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     gap: theme.spacing(1),
     padding: '5px 10px',
-    backgroundColor: color || theme.palette.primary.light,
 }));
 
-export const IconWrapper = styled('div')(({ theme, color }) => ({
+export const ColorBox = styled('div')(({ color }) => ({
+    width: '16px',
+    height: '16px',
+    borderRadius: '5px',
+    marginTop: '5px',
+    backgroundColor: color,
+}));
+
+export const IconWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -28,68 +73,37 @@ export const IconWrapper = styled('div')(({ theme, color }) => ({
     transition: 'background-color 0.2s ease',
     cursor: 'pointer',
     '&:hover': {
-        backgroundColor: color
-            ? darken(color, 0.1)
-            : darken(theme.palette.primary.main, 0.1),
+        backgroundColor: theme.palette.borderLight,
     },
-}));
-
-export const InfoBox = styled('div')(({ theme }) => ({
-    marginTop: theme.spacing(2),
-    color: theme.palette.text.secondary,
-    fontSize: theme.typography.body2.fontSize,
-}));
-
-export const ReminderBox = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    gap: theme.spacing(2),
-    padding: '5px 20px',
-}));
-
-export const CalendarBox = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0px 20px 20px 20px',
-    gap: theme.spacing(2),
-}));
-
-export const TitleBox = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    gap: '10px',
-    color: theme.palette.text.primary,
-    padding: '10px 20px',
-}));
-
-export const DateBox = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    width: '100%',
-    gap: theme.spacing(1),
-    padding: '10px 20px',
-    color: theme.palette.text.primary,
 }));
 
 export const TextBox = styled('span')(({ theme }) => ({
     fontSize: '14px',
-    color: theme.palette.text.secondary,
     width: '100%',
     margin: 0,
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
     flexDirection: 'row',
-    gap: theme.spacing(1),
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: '10px',
+    color: theme.palette.textSecondary,
 }));
 
-export const TextBoxTitle = styled('div')(() => ({
+export const CreatedBox = styled('span')(() => ({
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: '3px',
+}));
+
+export const AvatarBox = styled('span')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: '4px',
+    gap: '5px',
+    color: theme.palette.textSecondary,
 }));
 
 export const TimeBoxTitle = styled('div')(() => ({

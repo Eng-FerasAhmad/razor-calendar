@@ -3,6 +3,7 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import { Appointment } from 'types/appointment';
 import { ServiceViewModel } from 'types/serviceModel';
+import { Staffer } from 'types/staffer';
 
 export interface UseAddServiceEvent {
     notes: string;
@@ -11,7 +12,7 @@ export interface UseAddServiceEvent {
     fromTime: DateTime;
     is24Hours: boolean;
     dateFormat: string;
-    staffer: string;
+    staffer: Staffer | undefined;
     selectedServices: ServiceViewModel[];
     isSaveDisabled: boolean;
 
@@ -46,7 +47,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [appointmentId, setAppointmentId] = useState('');
-    const [staffer, setStaffer] = useState<string>('');
+    const [staffer, setStaffer] = useState<Staffer | undefined>(undefined);
     const [selectedServices, setSelectedServices] = useState<
         ServiceViewModel[]
     >([]);
@@ -61,7 +62,17 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
             const assignedUser = teamModel?.users.find(
                 (user) => user.id === userId
             );
-            setStaffer(assignedUser ? assignedUser.id : '');
+            setStaffer(
+                assignedUser
+                    ? {
+                          id: assignedUser.id,
+                          firstName: assignedUser.firstName,
+                          lastName: assignedUser.lastName,
+                          email: assignedUser.email,
+                          phone: assignedUser.phone,
+                      }
+                    : undefined
+            );
 
             if (year && month && day && timePart) {
                 const newFromTime = DateTime.fromObject({
@@ -80,7 +91,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
                 notes: appointmentNotes,
                 start,
                 end,
-                stafferId: appointmentAssign,
+                staffer: appointmentAssign,
             } = dialogAppointment.appointment;
 
             setAppointmentId(id || '');
@@ -91,7 +102,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
                     ? DateTime.fromISO(end)
                     : DateTime.now().plus({ minutes: 30 })
             );
-            setStaffer(appointmentAssign || '');
+            setStaffer(appointmentAssign);
         }
     }, [dialogAppointment, teamModel?.users]);
 
@@ -146,7 +157,8 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
     };
 
     const handleStafferChange = (id: string): void => {
-        setStaffer(id);
+        const staff = teamModel?.users.find((user) => user.id === id);
+        setStaffer(staff);
     };
 
     const resetForm = (): void => {
@@ -155,7 +167,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         setFirstName('');
         setLastName('');
         setAppointmentId('');
-        setStaffer('');
+        setStaffer(undefined);
         setSelectedServices([]);
     };
 
@@ -166,7 +178,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
             start: fromTime.toUTC().toISO() || '',
             end: toTime.toUTC().toISO() || '',
             notes,
-            stafferId: staffer,
+            staffer,
             services: selectedServices,
             customer: {
                 id: '',
@@ -185,7 +197,7 @@ export const useAddServiceEvent = (): UseAddServiceEvent => {
         selectedServices.length === 0 ||
         firstName === '' ||
         lastName === '' ||
-        staffer === '';
+        staffer === undefined;
 
     return {
         notes,

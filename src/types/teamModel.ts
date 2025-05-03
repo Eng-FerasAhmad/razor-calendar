@@ -4,6 +4,8 @@ export interface TeamMember {
     lastName: string;
     image: string;
     color: string;
+    email?: string;
+    phone?: string;
     visible: boolean;
     isPassive?: boolean;
     notAvailable?: boolean;

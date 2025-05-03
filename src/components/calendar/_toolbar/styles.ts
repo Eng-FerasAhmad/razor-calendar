@@ -1,6 +1,6 @@
-import { Box, darken } from '@mui/material';
+import { Box, darken, lighten } from '@mui/material';
 import { styled, SxProps, Theme } from '@mui/material/styles';
-import { inputHoverColor } from 'src/theme/theme';
+import { commonFontColor, inputHoverColor } from 'src/theme/theme';
 
 interface Props {
     color?: string;
@@ -15,7 +15,7 @@ export const ToolbarContainer = styled('div')(({ theme }) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     boxSizing: 'border-box',
-    color: theme.palette.text.primary,
+    color: commonFontColor,
     borderBottom: `1px solid ${theme.palette.borderLight}`,
     height: '60px',
     padding: '0 20px',
@@ -95,12 +95,12 @@ export const TodayButtonWrapper = styled('div', {
     transition: 'background-color 0.3s ease, border-color 0.3s ease',
     backgroundColor: today
         ? theme.palette.action.hover
-        : theme.palette.primary.light,
+        : lighten(theme.palette.warning.light, 0.6),
     '&:hover': {
         cursor: 'pointer',
         backgroundColor: today
             ? darken(theme.palette.action.hover, 0.2)
-            : darken(theme.palette.primary.main, 0.2),
+            : lighten(theme.palette.warning.light, 0.4),
         color: theme.palette.common.white,
     },
 }));

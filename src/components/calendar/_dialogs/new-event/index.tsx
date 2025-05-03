@@ -27,7 +27,7 @@ export default function NewEventIndex(): ReactElement {
         dateFormat,
         titleRequired,
         reminder,
-        assign,
+        teamMember,
         handleSave,
         handleFromTimeChange,
         handleToTimeChange,
@@ -105,7 +105,7 @@ export default function NewEventIndex(): ReactElement {
 
                 <AssignLIst
                     teamList={teamModel?.users}
-                    assign={assign}
+                    teamMember={teamMember}
                     onChange={handleAssignChange}
                 />
 

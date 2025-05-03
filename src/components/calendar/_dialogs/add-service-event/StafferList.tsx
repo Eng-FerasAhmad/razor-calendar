@@ -9,11 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { MenuProps, formControlSx, menuItemSx, chipBoxSx } from './styles';
 import { RowItemWrapper } from 'calendar/_dialogs/new-event/styles';
 import InputTextLabel from 'components/shared/input-label/InputTextLabel';
+import { Staffer } from 'types/staffer';
 import { TeamMember } from 'types/teamModel';
 
 interface Props {
     stafferList: TeamMember[] | undefined;
-    staffer: string;
+    staffer: Staffer | undefined;
     onChange: (id: string) => void;
 }
 
@@ -30,11 +31,11 @@ export default function StafferList({
 
     return (
         <RowItemWrapper>
-            <InputTextLabel text={t('add.assign', { ns: 'common' })} />
+            <InputTextLabel text={t('add.staffer', { ns: 'common' })} />
             <FormControl sx={formControlSx}>
                 <Select
                     id="single-select-avatar"
-                    value={staffer}
+                    value={staffer ? staffer.id : ''}
                     onChange={handleChange}
                     size="small"
                     input={<OutlinedInput />}

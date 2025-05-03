@@ -27,13 +27,13 @@ const MenuProps = {
 
 interface Props {
     teamList: TeamMember[] | undefined;
-    assign: TeamMember[]; // Array of selected team members
+    teamMember: TeamMember[]; // Array of selected team members
     onChange: (list: TeamMember[]) => void;
 }
 
 export default function MultipleSelectChip({
     teamList,
-    assign,
+    teamMember,
     onChange,
 }: Props): ReactElement {
     const { t } = useTranslation();
@@ -51,7 +51,7 @@ export default function MultipleSelectChip({
 
     return (
         <RowItemWrapper>
-            <InputTextLabel text={t('add.assign', { ns: 'common' })} />
+            <InputTextLabel text={t('add.staffer', { ns: 'common' })} />
             <FormControl
                 sx={{
                     width: '100%',
@@ -65,7 +65,7 @@ export default function MultipleSelectChip({
                 <Select
                     id="multiple-select-chip"
                     multiple
-                    value={assign.map((member) => member.id)}
+                    value={teamMember.map((member) => member.id)}
                     onChange={handleChange}
                     size="small"
                     input={<OutlinedInput id="select-multiple-chip" />}

@@ -47,11 +47,6 @@ export default function DraggableEvent({
         });
     };
 
-    const multiAssignees =
-        Array.isArray(appointment.assign) && appointment.assign.length > 1;
-    const selectedColor = multiAssignees
-        ? appointment.color!
-        : appointment.assign![0].color;
     const start = timeConverter(
         DateTime.fromISO(appointment.start).toString(),
         config.hour.is24HourFormat
@@ -69,7 +64,7 @@ export default function DraggableEvent({
                 {...attributes}
                 {...listeners}
                 data-testid="draggable-zone"
-                color={selectedColor}
+                color={appointment.staffer?.color || ''}
             />
 
             <EventTitleWrapper>

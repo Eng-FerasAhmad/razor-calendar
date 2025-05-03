@@ -59,7 +59,7 @@
         "cancel": "Cancel",
         "errorLaterDate": "Must be later than start date",
         "errorLaterTime": "Must be later than start time",
-        "assign": "Assign",
+        "staffer": "Staffer",
         "reminder": "Reminder",
         "service": "Service"
     },
@@ -73,7 +73,10 @@
         "new": "New",
         "add": "Add",
         "save": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "created": "Created",
+        "updated": "Updated",
+        "info": "Info"
     },
     "staffers": {
         "header": "Manage Staffers",
