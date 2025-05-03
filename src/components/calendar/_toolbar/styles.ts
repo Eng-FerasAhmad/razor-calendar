@@ -36,7 +36,7 @@ export const ViewWrapper = styled('div')({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    gap: '20px',
+    gap: '15px',
 });
 
 export const NavigationIconsCompactWrapper = styled('div', {

@@ -31,13 +31,11 @@ export default function CalendarLayout({ initView }: Props): ReactElement {
             case 'week':
                 return <Week />;
             case 'day':
-                return <Day />;
+                return teamsHasVisibleItems() ? <Team /> : <Day />;
             case 'agenda':
                 return <Agenda />;
             case 'year':
                 return <YearView />;
-            case 'team':
-                return teamsHasVisibleItems() ? <Team /> : <Day />;
             default:
                 return <Month />;
         }

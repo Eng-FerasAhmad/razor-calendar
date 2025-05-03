@@ -1,5 +1,6 @@
 import { Avatar, Tooltip } from '@mui/material';
 import {
+    ArchiveTickOutline,
     ClockOutline,
     ClockTwotone,
     CloseOutline,
@@ -25,6 +26,8 @@ import {
     ColorBox,
     CreatedBox,
     AvatarNameTypography,
+    NotesBoxTitle,
+    NoteContentBox,
 } from './styles';
 import { formatTimeDifference } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
@@ -53,6 +56,7 @@ export default function DetailsContent(): ReactElement {
         created,
         updated,
         services,
+        notes,
     } = appointment || {};
 
     const diffInMinutes = formatTimeDifference(start!, end!, isFullDay!);
@@ -188,20 +192,32 @@ export default function DetailsContent(): ReactElement {
                 </ContentBox>
             </DetailsWrapper>
 
+            <NoteContentBox>
+                <TextBox>
+                    <ArchiveTickOutline size={iconSize} />
+                    <NotesBoxTitle>{notes}</NotesBoxTitle>
+                </TextBox>
+            </NoteContentBox>
             {showInfo && (
-                <ContentBox>
-                    <CreatedBox>
-                        <TitleUpdateDate>
-                            {t('actions.created', { ns: 'common' })}:{' '}
-                            {createdDate}
-                        </TitleUpdateDate>
+                <>
+                    <ContentBox>
+                        <CreatedBox>
+                            {created && (
+                                <TitleUpdateDate>
+                                    {t('actions.created', { ns: 'common' })}:{' '}
+                                    {createdDate}
+                                </TitleUpdateDate>
+                            )}
 
-                        <TitleUpdateDate>
-                            {t('actions.updated', { ns: 'common' })}:{' '}
-                            {updatedDate}
-                        </TitleUpdateDate>
-                    </CreatedBox>
-                </ContentBox>
+                            {updated && (
+                                <TitleUpdateDate>
+                                    {t('actions.updated', { ns: 'common' })}:{' '}
+                                    {updatedDate}
+                                </TitleUpdateDate>
+                            )}
+                        </CreatedBox>
+                    </ContentBox>
+                </>
             )}
         </DetailsContentContainer>
     );

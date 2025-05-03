@@ -16,7 +16,7 @@ export default function App(): ReactElement {
         useState<Appointment[]>(initAppointments);
 
     // State for HeaderTemplate and Calendar
-    const [currentView, setCurrentView] = useState<ViewType>('team');
+    const [currentView, setCurrentView] = useState<ViewType>('day');
     const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now);
     const [teamModel, setTeamModel] = useState(initialTeamModel);
 

@@ -13,7 +13,6 @@ export const DetailsWrapper = styled('div')(() => ({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     gap: '10px',
-    paddingBottom: '5px',
 }));
 
 export const ContentBox = styled('div')(({ theme }) => ({
@@ -23,6 +22,12 @@ export const ContentBox = styled('div')(({ theme }) => ({
     alignItems: 'flex-start',
     gap: '10px',
     padding: '10px 15px',
+    color: theme.palette.textPrimary,
+    fontSize: '16px',
+}));
+
+export const NoteContentBox = styled('div')(({ theme }) => ({
+    padding: '0px 15px 17px 15px',
     color: theme.palette.textPrimary,
     fontSize: '16px',
 }));
@@ -87,6 +92,9 @@ export const TextBox = styled('span')(({ theme }) => ({
     alignItems: 'flex-start',
     gap: '10px',
     color: theme.palette.textSecondary,
+    '& > *:first-of-type': {
+        flexShrink: 0,
+    },
 }));
 
 export const CreatedBox = styled('span')(() => ({
@@ -109,4 +117,10 @@ export const AvatarBox = styled('span')(({ theme }) => ({
 export const TimeBoxTitle = styled('div')(() => ({
     display: 'flex',
     alignItems: 'center',
+}));
+
+export const NotesBoxTitle = styled('div')(() => ({
+    display: 'flex',
+    alignItems: 'center',
+    width: 'calc(100% - 24px)',
 }));

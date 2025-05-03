@@ -38,12 +38,15 @@ export default function PopperEventDetailsIndex(): ReactElement {
                 <Fade {...TransitionProps} timeout={350}>
                     <Paper
                         ref={popperRef}
+                        elevation={4}
                         sx={{
                             position: 'relative',
                             padding: 0,
                             width: '390px',
                             borderRadius: '10px',
                             overflow: 'hidden',
+                            boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+                            border: '1px solid #ccc',
                         }}
                     >
                         {popperAppointment && <DetailsContent />}

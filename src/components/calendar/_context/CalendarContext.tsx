@@ -40,7 +40,7 @@ interface Props {
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
-    view: 'week',
+    view: 'day',
     config: basicConfig,
     teamModel: undefined,
     services: [],

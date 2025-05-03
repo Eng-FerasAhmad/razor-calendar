@@ -3,17 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { RowItemWrapper, RowNameWrapper } from './styles';
 import InputTextLabel from 'components/shared/input-label/InputTextLabel';
 import InputText from 'components/shared/input-text/InputText';
+import { CustomerViewModel } from 'types/customer';
 
 type Props = {
-    firstName: string;
-    lastName: string;
+    customer?: CustomerViewModel;
     onChangeFirstName: (event: ChangeEvent<HTMLInputElement>) => void;
     onChangeLastName: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function NameInput({
-    firstName,
-    lastName,
+    customer,
     onChangeFirstName,
     onChangeLastName,
 }: Props): ReactElement {
@@ -36,7 +35,7 @@ export default function NameInput({
             <RowItemWrapper>
                 <InputTextLabel text={t('add.firstName', { ns: 'common' })} />
                 <InputText
-                    value={firstName}
+                    value={customer?.firstName || ''}
                     onChange={handleChangeFirstName}
                     size="small"
                 />
@@ -45,7 +44,7 @@ export default function NameInput({
             <RowItemWrapper>
                 <InputTextLabel text={t('add.lastName', { ns: 'common' })} />
                 <InputText
-                    value={lastName}
+                    value={customer?.lastName || ''}
                     onChange={handleChangeLastName}
                     size="small"
                 />

@@ -70,6 +70,7 @@ export function Toolbar({
     };
 
     const openStaffersDialog = (): void => {
+        (document.activeElement as HTMLElement)?.blur();
         onDialogStaffers(true);
     };
 

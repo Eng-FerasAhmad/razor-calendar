@@ -25,7 +25,15 @@ export const initAppointments: Appointment[] = [
             image: 'https://picsum.photos/200/300?grayscale',
             color: '#6b5b95',
         },
+        customer: {
+            id: 'customer-id',
+            firstName: 'John',
+            lastName: 'Doe',
+            email: '',
+            phone: '',
+        },
         reminder: { amount: 30, unit: 'minutes' },
+        notes: 'This is a note Meeting at these times are very important. Lunch but also long long text ',
         services: [
             {
                 id: 'service-id',

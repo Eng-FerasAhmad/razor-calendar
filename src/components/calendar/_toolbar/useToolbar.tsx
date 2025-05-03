@@ -123,7 +123,6 @@ export const useToolbar = ({
     };
 
     const options: { value: ViewType; label: string }[] = [
-        { value: 'team', label: t('views.team', { ns: 'common' }) },
         { value: 'day', label: t('views.day', { ns: 'common' }) },
         { value: 'week', label: t('views.week', { ns: 'common' }) },
         { value: 'month', label: t('views.month', { ns: 'common' }) },

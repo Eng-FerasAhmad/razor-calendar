@@ -14,12 +14,11 @@ import { DialogCustom } from 'components/shared/dialog/Dialog';
 export default function AddServiceEventIndex(): ReactElement {
     const {
         notes,
-        firstName,
-        lastName,
         fromTime,
         is24Hours,
         dateFormat,
         staffer,
+        customer,
         selectedServices,
         isSaveDisabled,
         handleSave,
@@ -51,8 +50,7 @@ export default function AddServiceEventIndex(): ReactElement {
         >
             <ContentContainer data-testid="new-appointment-content">
                 <NameInput
-                    firstName={firstName}
-                    lastName={lastName}
+                    customer={customer}
                     onChangeFirstName={handleFirstNameChange}
                     onChangeLastName={handleLastNameChange}
                 />
