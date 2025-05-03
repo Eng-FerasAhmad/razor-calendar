@@ -28,6 +28,7 @@ interface Props {
     config: RazorCalendarConfig<CalendarConfig>;
     teamModel: TeamModel | undefined;
     services: ServiceViewModel[];
+    selectedDate: DateTime;
     incomingAppointments: Appointment[] | [];
     onExternalViewChange: (view: ViewType) => void;
     onExternalChangeDate: (date: DateTime) => void;
@@ -43,9 +44,9 @@ export const CalendarContext = createContext<CalendarContextProps>({
     services: [],
     appointments: [],
     language: 'en',
-    selectedDate: DateTime.now(),
     showAllFullDays: false,
     fullDaysCount: 0,
+    selectedDate: DateTime.now(),
     dialogAppointment: undefined,
     addServiceDialog: undefined,
     popperAppointment: undefined,
@@ -71,6 +72,7 @@ export function CalendarProvider({
     config,
     teamModel,
     services,
+    selectedDate,
     incomingAppointments,
     onExternalViewChange,
     onExternalChangeAppointment,
@@ -80,7 +82,6 @@ export function CalendarProvider({
 }: Props): ReactElement {
     const mergedConfig = mergeConfig(basicConfig, config);
     const [view, setView] = useState<ViewType>(currentView);
-    const [selectedDate, setSelectedDate] = useState<DateTime>(DateTime.now());
     const [language, setLanguage] = useState<string>(
         mergedConfig.common.locale
     );
@@ -121,7 +122,6 @@ export function CalendarProvider({
 
     const onDateChange = useCallback(
         (newDate: DateTime) => {
-            setSelectedDate(newDate);
             onExternalChangeDate(newDate);
         },
         [onExternalChangeDate]

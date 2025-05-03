@@ -48,6 +48,7 @@ export function RazorCalendar({
                 currentView={view}
                 config={config}
                 teamModel={teamModel}
+                selectedDate={selectedDate}
                 services={services || []}
                 incomingAppointments={appointments}
                 onExternalChangeAppointment={handleChangeAppointment}
@@ -59,7 +60,7 @@ export function RazorCalendar({
                 <DisableScrolling />
                 <PopperEventDetailsIndex />
                 <AddServiceEventIndex />
-                <CalendarLayout initView={view} selectedDate={selectedDate} />
+                <CalendarLayout initView={view} />
             </CalendarProvider>
         </ThemeProvider>
     );

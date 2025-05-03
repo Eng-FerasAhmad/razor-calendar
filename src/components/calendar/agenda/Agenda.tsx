@@ -10,13 +10,9 @@ import {
 } from 'calendar/agenda/styles';
 import { Appointment } from 'types/appointment';
 
-interface Props {
-    selectedDate: DateTime;
-}
-
-export default function Agenda({ selectedDate }: Props): ReactElement {
+export default function Agenda(): ReactElement {
     const { t } = useTranslation();
-    const { appointments, config } = useContext(CalendarContext);
+    const { appointments, config, selectedDate } = useContext(CalendarContext);
 
     const lang = config.common.locale;
     const startOfMonth = selectedDate.startOf('month');

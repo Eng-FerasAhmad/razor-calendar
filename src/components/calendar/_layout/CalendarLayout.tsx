@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { ReactElement, useEffect } from 'react';
 import Agenda from 'agenda/Agenda';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
@@ -11,14 +10,10 @@ import { ViewType } from 'types/appointment';
 import Week from 'week/Week';
 
 interface Props {
-    selectedDate: DateTime;
     initView: ViewType;
 }
 
-export default function CalendarLayout({
-    selectedDate,
-    initView,
-}: Props): ReactElement {
+export default function CalendarLayout({ initView }: Props): ReactElement {
     const { view, onViewChange, config, teamModel } = useCalendarContext();
 
     useEffect(() => {
@@ -32,23 +27,19 @@ export default function CalendarLayout({
     const renderView = (): ReactElement => {
         switch (view) {
             case 'month':
-                return <Month selectedDate={selectedDate} />;
+                return <Month />;
             case 'week':
-                return <Week selectedDate={selectedDate} />;
+                return <Week />;
             case 'day':
-                return <Day selectedDate={selectedDate} />;
+                return <Day />;
             case 'agenda':
-                return <Agenda selectedDate={selectedDate} />;
+                return <Agenda />;
             case 'year':
-                return <YearView selectedDate={selectedDate} />;
+                return <YearView />;
             case 'team':
-                return teamsHasVisibleItems() ? (
-                    <Team selectedDate={selectedDate} />
-                ) : (
-                    <Day selectedDate={selectedDate} />
-                );
+                return teamsHasVisibleItems() ? <Team /> : <Day />;
             default:
-                return <Month selectedDate={selectedDate} />;
+                return <Month />;
         }
     };
 

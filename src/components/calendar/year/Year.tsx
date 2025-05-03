@@ -1,14 +1,12 @@
 import { DateTime } from 'luxon';
 import { ReactElement, useMemo } from 'react';
 import MonthView from './MonthView';
+import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import HeaderTemplate from 'calendar/_header-template/HeaderTemplate';
 import { YearContainer, YearContentContainer } from 'calendar/year/styles';
 
-interface Props {
-    selectedDate: DateTime;
-}
-
-export default function YearView({ selectedDate }: Props): ReactElement {
+export default function YearView(): ReactElement {
+    const { selectedDate } = useCalendarContext();
     const months = useMemo(() => {
         const { year } = selectedDate;
         return Array.from({ length: 12 }, (_, i) =>

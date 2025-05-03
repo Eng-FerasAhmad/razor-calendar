@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import React from 'react';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 import HeaderTemplate from 'calendar/_header-template/HeaderTemplate';
@@ -8,12 +7,8 @@ import { MonthContainer } from 'month/styles';
 import { getMonthWeekNames, getMonthWeeksRow } from 'month/utils';
 import { getDateRange } from 'utils/dates';
 
-interface Props {
-    selectedDate: DateTime;
-}
-
-export default function Month({ selectedDate }: Props): React.ReactElement {
-    const { config } = useCalendarContext();
+export default function Month(): React.ReactElement {
+    const { config, selectedDate } = useCalendarContext();
 
     const monthWeekNames = getMonthWeekNames(config.common.locale);
     const startOfMonth = selectedDate.startOf('month');

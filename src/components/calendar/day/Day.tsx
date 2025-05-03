@@ -1,6 +1,5 @@
 import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
-import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import DayColumns from 'calendar/_atomic/day-columns/DayColumns';
 import DraggableAppointment from 'calendar/_atomic/drag-and-drop/DraggableAppointment';
@@ -12,12 +11,8 @@ import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import DayHeaderRow from 'day/header-row/DayHeaderRow';
 import { DayContainer, TimeDayWrapper } from 'day/styles';
 
-interface Props {
-    selectedDate: DateTime;
-}
-
-export default function Day({ selectedDate }: Props): ReactElement {
-    const { config, appointments } = useCalendarContext();
+export default function Day(): ReactElement {
+    const { config, appointments, selectedDate } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
     const { handleDragStart, handleDragEnd, activeDrag } =
         useDragAndDropHandler();

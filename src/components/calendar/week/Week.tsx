@@ -1,6 +1,5 @@
 import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
-import { DateTime } from 'luxon';
 import { ReactElement } from 'react';
 import { WeekContainer, TimeDayWrapper } from './styles';
 import DayColumns from 'calendar/_atomic/day-columns/DayColumns';
@@ -13,12 +12,8 @@ import useDragAndDropHandler from 'calendar/_hooks/useDragAndDropHandler';
 import { getDateRange } from 'utils/dates';
 import WeekHeaderRow from 'week/header-row/WeekHeaderRow';
 
-interface Props {
-    selectedDate: DateTime;
-}
-
-export default function Week({ selectedDate }: Props): ReactElement {
-    const { config, appointments } = useCalendarContext();
+export default function Week(): ReactElement {
+    const { config, appointments, selectedDate } = useCalendarContext();
     const { fullDayAppointments } = useAppointment(appointments!, selectedDate);
     const { handleDragStart, handleDragEnd, activeDrag } =
         useDragAndDropHandler();
