@@ -21,7 +21,7 @@ export const ContentBox = styled('div')(({ theme }) => ({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    gap: '10px',
+    gap: '14px',
     padding: '10px 15px',
     color: theme.palette.textPrimary,
     fontSize: '16px',
@@ -33,12 +33,12 @@ export const ServiceContentBox = styled('div')(({ theme }) => ({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     gap: '10px',
-    padding: '0 15px',
+    padding: '5px 15px',
     color: theme.palette.textPrimary,
 }));
 
 export const NoteContentBox = styled('div')(({ theme }) => ({
-    padding: '0px 15px 17px 15px',
+    padding: '15px 15px 17px 15px',
     color: theme.palette.textPrimary,
     fontSize: '16px',
 }));
@@ -46,7 +46,7 @@ export const NoteContentBox = styled('div')(({ theme }) => ({
 export const TitleTypography = styled(Typography)(({ theme }) => ({
     ...theme.typography.body1,
     flex: 1,
-    fontSize: '17px',
+    fontSize: '18px',
     width: 'calc(100% - 24px)',
     color: theme.palette.textDark,
 }));
