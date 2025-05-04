@@ -9,6 +9,7 @@ declare module '@mui/material/styles' {
         textPrimary?: string;
         textSecondary?: string;
         textLight?: string;
+        textDark?: string;
     }
     interface PaletteOptions {
         border?: string;
@@ -18,6 +19,7 @@ declare module '@mui/material/styles' {
         textPrimary?: string;
         textSecondary?: string;
         textLight?: string;
+        textDark?: string;
     }
 }
 
@@ -58,6 +60,7 @@ export const theme = createTheme({
         textPrimary: commonFontColor,
         textSecondary: '#595959',
         textLight: '#8c8c8c',
+        textDark: '#333333',
     },
     typography: {
         fontSize: commonFontSize,

@@ -7,7 +7,7 @@ import {
     ArrowNextOutline,
     ArrowPrevOutline,
     CalendarCheckTwotone,
-    UsersTwotone,
+    UserOutline,
 } from 'razor-icon-library';
 import { ReactElement, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -159,7 +159,7 @@ export function Toolbar({
                 <Button
                     variant="outlined"
                     startIcon={
-                        <UsersTwotone
+                        <UserOutline
                             size={18}
                             color={darken(theme.palette.border, 0.4)}
                         />

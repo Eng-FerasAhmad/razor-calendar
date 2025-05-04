@@ -5,6 +5,7 @@ export const DetailsContentContainer = styled('div')(({ theme }) => ({
     width: '100%',
     borderRadius: '10px',
     backgroundColor: theme.palette.background.default,
+    paddingBottom: '10px',
 }));
 
 export const DetailsWrapper = styled('div')(() => ({
@@ -26,6 +27,16 @@ export const ContentBox = styled('div')(({ theme }) => ({
     fontSize: '16px',
 }));
 
+export const ServiceContentBox = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: '10px',
+    padding: '0 15px',
+    color: theme.palette.textPrimary,
+}));
+
 export const NoteContentBox = styled('div')(({ theme }) => ({
     padding: '0px 15px 17px 15px',
     color: theme.palette.textPrimary,
@@ -36,6 +47,8 @@ export const TitleTypography = styled(Typography)(({ theme }) => ({
     ...theme.typography.body1,
     flex: 1,
     fontSize: '17px',
+    width: 'calc(100% - 24px)',
+    color: theme.palette.textDark,
 }));
 
 export const AvatarNameTypography = styled(Typography)(({ theme }) => ({
@@ -117,6 +130,12 @@ export const AvatarBox = styled('span')(({ theme }) => ({
 export const TimeBoxTitle = styled('div')(() => ({
     display: 'flex',
     alignItems: 'center',
+}));
+
+export const ServiceBoxTitle = styled('div')(() => ({
+    display: 'flex',
+    alignItems: 'center',
+    width: 'calc(100% - 24px)',
 }));
 
 export const NotesBoxTitle = styled('div')(() => ({

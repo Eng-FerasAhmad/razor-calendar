@@ -31,7 +31,7 @@ export default function PopperEventDetailsIndex(): ReactElement {
             sx={{ zIndex: 1200 }}
             open={popperAppointment?.open || false}
             anchorEl={popperAppointment?.anchorEl || null}
-            placement="auto"
+            placement="bottom-end"
             transition
         >
             {({ TransitionProps }) => (
@@ -42,7 +42,7 @@ export default function PopperEventDetailsIndex(): ReactElement {
                         sx={{
                             position: 'relative',
                             padding: 0,
-                            width: '390px',
+                            maxWidth: '420px',
                             borderRadius: '10px',
                             overflow: 'hidden',
                             boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',

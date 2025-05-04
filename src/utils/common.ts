@@ -1,3 +1,4 @@
+import { Staffer } from 'types/staffer';
 import { TeamMember } from 'types/teamModel';
 
 const exchangeToRem = (pixel: number, base = 16): string =>
@@ -6,7 +7,7 @@ const exchangeToRem = (pixel: number, base = 16): string =>
 export const pixelToRem = (...pixel: Array<number>): string =>
     pixel.map((px: number) => exchangeToRem(px)).join(' ');
 
-export const getFallbackLetters = (user: TeamMember): string => {
+export const getFallbackLetters = (user: TeamMember | Staffer): string => {
     const f = user.firstName?.trim() || '';
     const l = user.lastName?.trim() || '';
     const firstLetter = f.charAt(0).toUpperCase();

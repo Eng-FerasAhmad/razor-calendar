@@ -1,14 +1,14 @@
 import { Avatar, Tooltip } from '@mui/material';
 import {
-    ArchiveTickOutline,
     ClockOutline,
     ClockTwotone,
     CloseOutline,
+    CoffeeOutline,
     DeleteOutline,
     EditOutline,
     MenuOutline,
-    TimerBulk,
-    WizardTwotone,
+    NotesOutline,
+    TimerOutline,
 } from 'razor-icon-library';
 import { ReactElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,11 +28,14 @@ import {
     AvatarNameTypography,
     NotesBoxTitle,
     NoteContentBox,
+    ServiceBoxTitle,
+    ServiceContentBox,
 } from './styles';
 import { formatTimeDifference } from 'calendar/_config/utils';
 import { useCalendarContext } from 'calendar/_context/CalendarContext';
 
 import { Appointment } from 'types/appointment';
+import { getFallbackLetters } from 'utils/common';
 import { formattedStart } from 'utils/dateFormater';
 
 export default function DetailsContent(): ReactElement {
@@ -149,29 +152,31 @@ export default function DetailsContent(): ReactElement {
                 </TextBox>
             </ContentBox>
 
+            <ServiceContentBox>
+                {services && (
+                    <TextBox>
+                        <CoffeeOutline size={iconSize} color={staffer?.color} />
+                        <ServiceBoxTitle>
+                            {services[0].serviceName}
+                        </ServiceBoxTitle>
+                    </TextBox>
+                )}
+            </ServiceContentBox>
+
             <DetailsWrapper>
                 <ContentBox data-testid="content-box-dates">
-                    {services && (
-                        <TextBox>
-                            <WizardTwotone size={iconSize} />
-                            <TimeBoxTitle>
-                                {services[0].serviceName}
-                            </TimeBoxTitle>
-                        </TextBox>
-                    )}
-
                     <TextBox>
-                        <ClockOutline size={iconSize} />
+                        <ClockOutline size={iconSize} color={staffer?.color} />
                         <TimeBoxTitle>{startDate}</TimeBoxTitle>
                     </TextBox>
 
                     <TextBox>
-                        <ClockTwotone size={iconSize} />
+                        <ClockTwotone size={iconSize} color={staffer?.color} />
                         <TimeBoxTitle>{endDate}</TimeBoxTitle>
                     </TextBox>
 
                     <TextBox>
-                        <TimerBulk size={iconSize} />
+                        <TimerOutline size={iconSize} color={staffer?.color} />
                         <TimeBoxTitle>{diffInMinutes}</TimeBoxTitle>
                     </TextBox>
                 </ContentBox>
@@ -181,8 +186,15 @@ export default function DetailsContent(): ReactElement {
                         <Avatar
                             src={staffer?.image}
                             alt={`${staffer?.firstName} ${staffer?.lastName}`}
-                            sx={{ width: 45, height: 45 }}
-                        />
+                            sx={{
+                                width: 45,
+                                height: 45,
+                                bgcolor: staffer?.color,
+                                fontSize: 16,
+                            }}
+                        >
+                            {getFallbackLetters(staffer!)}
+                        </Avatar>
                         <TextBox>
                             <AvatarNameTypography variant="body1">
                                 {staffer?.firstName}
@@ -192,32 +204,33 @@ export default function DetailsContent(): ReactElement {
                 </ContentBox>
             </DetailsWrapper>
 
-            <NoteContentBox>
-                <TextBox>
-                    <ArchiveTickOutline size={iconSize} />
-                    <NotesBoxTitle>{notes}</NotesBoxTitle>
-                </TextBox>
-            </NoteContentBox>
-            {showInfo && (
-                <>
-                    <ContentBox>
-                        <CreatedBox>
-                            {created && (
-                                <TitleUpdateDate>
-                                    {t('actions.created', { ns: 'common' })}:{' '}
-                                    {createdDate}
-                                </TitleUpdateDate>
-                            )}
+            {notes && (
+                <NoteContentBox>
+                    <TextBox>
+                        <NotesOutline size={iconSize} color={staffer?.color} />
+                        <NotesBoxTitle>{notes}</NotesBoxTitle>
+                    </TextBox>
+                </NoteContentBox>
+            )}
 
-                            {updated && (
-                                <TitleUpdateDate>
-                                    {t('actions.updated', { ns: 'common' })}:{' '}
-                                    {updatedDate}
-                                </TitleUpdateDate>
-                            )}
-                        </CreatedBox>
-                    </ContentBox>
-                </>
+            {showInfo && (
+                <ContentBox>
+                    <CreatedBox>
+                        {created && (
+                            <TitleUpdateDate>
+                                {t('actions.created', { ns: 'common' })}:{' '}
+                                {createdDate}
+                            </TitleUpdateDate>
+                        )}
+
+                        {updated && (
+                            <TitleUpdateDate>
+                                {t('actions.updated', { ns: 'common' })}:{' '}
+                                {updatedDate}
+                            </TitleUpdateDate>
+                        )}
+                    </CreatedBox>
+                </ContentBox>
             )}
         </DetailsContentContainer>
     );
