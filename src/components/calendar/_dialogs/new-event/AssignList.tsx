@@ -7,10 +7,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RowItemWrapper } from 'calendar/_dialogs/new-event/styles';
-import {
-    standardDarkColor4,
-    standardLightColor7,
-} from 'calendar/_style/colors';
 import InputTextLabel from 'components/shared/input-label/InputTextLabel';
 import { TeamMember } from 'types/teamModel';
 
@@ -87,16 +83,8 @@ export default function MultipleSelectChip({
                                             height: '24px',
                                             marginTop: '2px',
                                             fontSize: '14px',
-                                            backgroundColor: user!.color
-                                                ? standardLightColor7(
-                                                      user!.color
-                                                  )
-                                                : '',
-                                            color: user!.color
-                                                ? standardDarkColor4(
-                                                      user!.color
-                                                  )
-                                                : '',
+                                            backgroundColor: user!.color,
+                                            color: user!.color,
                                         }}
                                     />
                                 );

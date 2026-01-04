@@ -1,9 +1,5 @@
-import { darken } from '@mui/material';
+import { darken, lighten } from '@mui/material';
 import { styled, Theme } from '@mui/material/styles';
-import {
-    standardLightColor6,
-    standardLightColor7,
-} from 'calendar/_style/colors';
 
 interface Props {
     color: string;
@@ -17,12 +13,12 @@ interface FullDaysCellProps {
 
 const calcBackgroundHoverColor = (props: Props, theme: Theme): string =>
     props.color
-        ? standardLightColor7(props.color)
+        ? lighten(props.color, 0.7)
         : darken(theme.palette.action.hover, 0.1);
 
 const calcHoverColor = (props: Props, theme: Theme): string =>
     props.color
-        ? standardLightColor6(props.color)
+        ? lighten(props.color, 0.6)
         : darken(theme.palette.action.hover, 0.3);
 
 export const FullDaysCellContainer = styled('div')<FullDaysCellProps>(

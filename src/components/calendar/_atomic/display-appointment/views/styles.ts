@@ -1,17 +1,14 @@
+import { lighten } from '@mui/material';
 import { styled, Theme } from '@mui/material/styles';
-import {
-    standardLightColor6,
-    standardLightColor7,
-} from 'calendar/_style/colors';
 
 const getBackgroundColor = (theme: Theme, color?: string): string => {
     const baseColor = color || theme.palette.primary.light;
-    return standardLightColor7(baseColor);
+    return lighten(baseColor, 0.7);
 };
 
 const getHoverColor = (theme: Theme, color?: string): string => {
     const baseColor = color || theme.palette.primary.light;
-    return standardLightColor6(baseColor);
+    return lighten(baseColor, 0.6);
 };
 
 // Standard view
